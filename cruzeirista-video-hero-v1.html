@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruzeirista — O Cruzeiro dos Seus Sonhos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --dark:   #1a2535;
+            --darker: #0f1822;
+            --white:  #ffffff;
+            --gray:   #6b7280;
+            --badge:  #e05c2a;
+            --teal:   #0891b2;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a1628;
+            overflow-x: hidden;
+        }
+
+        /* ══ SCROLL RUNWAY ══════════════════════════════════════════ */
+        #hero-wrapper { position: relative; height: 300vh; }
+
+        /* ══ HERO (sticky) ══════════════════════════════════════════ */
+        #hero {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #050e1a;
+        }
+
+        /* ── Vídeo único ── */
+        #bg-video {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        /* overlay sutil */
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 50% 50%, rgba(5,14,26,.28) 0%, transparent 70%),
+                linear-gradient(
+                    to bottom,
+                    rgba(5,14,26,.08)  0%,
+                    rgba(5,14,26,.02) 40%,
+                    rgba(5,14,26,.30) 100%
+                );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 50;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 28px 48px;
+        }
+        .nav-side { display: flex; gap: 32px; }
+        .nav-link {
+            font-size: 13px; font-weight: 500;
+            color: rgba(255,255,255,.80); text-decoration: none;
+            letter-spacing: .06em; text-transform: uppercase;
+            transition: color .2s;
+        }
+        .nav-link:hover { color: #fff; }
+        .nav-brand {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            height: 38px; width: auto;
+            display: block;
+        }
+        .nav-mobile-btn {
+            display: none; background: none;
+            border: none; cursor: pointer; padding: 8px;
+        }
+        @media (max-width: 768px) {
+            .nav-side { display: none; }
+            .nav-mobile-btn { display: flex; }
+        }
+
+        /* ── HERO UI ── */
+        #hero-ui {
+            position: absolute; inset: 0;
+            z-index: 10;
+            pointer-events: none;
+        }
+        #hero-ui > * { pointer-events: auto; }
+
+        /* Título centralizado */
+        .hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            pointer-events: none;
+            padding-bottom: 32vh;
+        }
+
+        .hero-label {
+            font-size: 12px; font-weight: 600;
+            color: rgba(255,255,255,.55); letter-spacing: .24em;
+            text-transform: uppercase; margin-bottom: 18px;
+            animation: fadeUp .7s ease both .3s;
+        }
+
+        .hero-title {
+            line-height: .88;
+            letter-spacing: .05em;
+            margin-bottom: 24px;
+            animation: fadeUp .8s ease both .5s;
+        }
+        .hero-title .line1 {
+            display: block;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            font-size: clamp(36px, 5.6vw, 86px);
+            color: #fff;
+            line-height: 1.1;
+            white-space: nowrap;
+            letter-spacing: .01em;
+        }
+
+        .hero-sub {
+            font-size: clamp(14px, 1.4vw, 17px);
+            color: rgba(255,255,255,.90);
+            margin-bottom: 28px;
+            animation: fadeUp .7s ease both .75s;
+        }
+        .hero-buttons {
+            display: flex; gap: 12px; justify-content: center;
+            animation: fadeUp .7s ease both .95s;
+            pointer-events: auto;
+        }
+        .btn {
+            font-size: 13px; font-weight: 500;
+            padding: 11px 26px; border-radius: 999px;
+            text-decoration: none; letter-spacing: .03em;
+            transition: all .25s ease; border: none; cursor: pointer;
+        }
+        .btn-glass {
+            background: rgba(255,255,255,.12); color: rgba(255,255,255,.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.18);
+        }
+        .btn-glass:hover { background: rgba(255,255,255,.22); transform: translateY(-1px); }
+        .btn-teal { background: var(--teal); color: var(--white); }
+        .btn-teal:hover { background: #0780a0; transform: translateY(-1px); }
+
+        /* ── FLOATING DESTINATION CARDS ── */
+        .cards-left {
+            position: absolute; left: max(16px, calc(50% - 500px));
+            top: 18vh; height: 72vh;
+            z-index: 20; display: flex; flex-direction: column; gap: 8px;
+            opacity: 0; will-change: transform, opacity;
+        }
+        .cards-right {
+            position: absolute; right: max(16px, calc(50% - 500px));
+            top: 18vh; height: 72vh;
+            z-index: 20; display: flex; flex-direction: column; gap: 8px;
+            opacity: 0; will-change: transform, opacity;
+        }
+        .dest-float-card {
+            background: rgba(255,255,255,.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            overflow: hidden;
+            width: 196px;
+            flex: 1; min-height: 0;
+            display: flex; flex-direction: column;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+        /* 3-D tilt — esquerda inclina para dentro */
+        .cards-left .dest-float-card {
+            transform: perspective(900px) rotateY(20deg);
+            transform-origin: right center;
+            box-shadow: 14px 20px 54px rgba(0,0,0,.22), -4px 0 16px rgba(0,0,0,.07);
+        }
+        /* 3-D tilt — direita inclina para dentro */
+        .cards-right .dest-float-card {
+            transform: perspective(900px) rotateY(-20deg);
+            transform-origin: left center;
+            box-shadow: -14px 20px 54px rgba(0,0,0,.22), 4px 0 16px rgba(0,0,0,.07);
+        }
+        @keyframes floatCard {
+            0%,100% { translate: 0 0; }
+            50%      { translate: 0 -8px; }
+        }
+        .dest-float-thumb {
+            width: 100%; flex: 1; min-height: 0;
+            object-fit: cover; display: block;
+            background: #cce8f0;
+        }
+        .dest-float-info { flex-shrink: 0; padding: 11px 13px 13px; }
+        .dest-float-name { font-size: 13px; font-weight: 700; color: var(--darker); line-height: 1.2; }
+        .dest-float-tag  { font-size: 10px; color: var(--gray); margin-top: 3px; }
+        .dest-float-btn {
+            display: block; margin-top: 9px;
+            font-size: 11px; font-weight: 600;
+            color: var(--teal); text-decoration: none;
+            letter-spacing: .03em;
+            transition: color .18s;
+            pointer-events: all;
+        }
+        .dest-float-btn:hover { color: #0ac0e0; }
+
+        /* ── HERO CARDS TITLE ── */
+        .hero-cards-title {
+            position: absolute; left: 50%; top: 8%;
+            transform: translateX(-50%);
+            text-align: center; z-index: 20;
+            opacity: 0; will-change: opacity;
+            pointer-events: none; white-space: nowrap;
+        }
+        .hero-cards-label {
+            font-size: 11px; font-weight: 600;
+            color: rgba(255,255,255,.72); letter-spacing: .24em;
+            text-transform: uppercase; margin-bottom: 10px;
+            text-shadow: 0 1px 8px rgba(0,0,0,.32);
+        }
+        .hero-cards-heading {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(26px, 3.2vw, 46px);
+            font-weight: 700; color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,.22), 0 8px 32px rgba(0,0,0,.28), 0 0 60px rgba(0,0,0,.18);
+        }
+
+        /* ── SCROLL CUE ── */
+        .scroll-cue {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 20; font-size: 11px; font-weight: 500;
+            color: rgba(255,255,255,.40); letter-spacing: .14em;
+            text-transform: uppercase;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            animation: scrollBounce 2s ease-in-out infinite, fadeUp .6s ease both 1.5s;
+        }
+        .scroll-cue::after {
+            content: ''; width: 1px; height: 28px;
+            background: rgba(255,255,255,.25);
+        }
+        @keyframes scrollBounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(5px); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ══ BELOW HERO ═════════════════════════════════════════════ */
+        .below-hero { background: #f8f8f6; min-height: 100vh; padding: 80px 48px; }
+        .section-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 52px); font-weight: 700;
+            color: var(--darker); line-height: 1.15;
+            letter-spacing: -.02em; max-width: 640px; margin-bottom: 48px;
+        }
+        .section-title span { color: var(--teal); }
+        .cards-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-top: 48px; }
+        @media (max-width: 1200px) { .cards-grid { grid-template-columns: repeat(2,1fr); } }
+        .dest-card {
+            border-radius: 16px; overflow: hidden;
+            background: white; box-shadow: 0 2px 16px rgba(0,0,0,.06);
+            transition: transform .3s, box-shadow .3s; cursor: pointer;
+        }
+        .dest-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,.1); }
+        .dest-card-img { width: 100%; height: 180px; object-fit: cover; background: #cce8f0; display: block; }
+        .dest-card-body { padding: 20px 22px; }
+        .dest-card-tag { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+        .dest-card-name { font-size: 18px; font-weight: 700; color: var(--darker); margin-bottom: 6px; }
+        .dest-card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+        .dest-card-footer { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; border-top: 1px solid #f0f0ee; }
+        .dest-card-price { font-size: 15px; font-weight: 700; color: var(--darker); }
+        .dest-card-link  { font-size: 12px; font-weight: 600; color: var(--teal); text-decoration: none; }
+
+        /* ══ TEMÁTICOS ═════════════════════════════════════════════ */
+        .tematicos {
+            background: #fff;
+            padding: 80px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .tematicos-header { padding: 0 48px; margin-bottom: 40px; }
+        .tematicos-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 52px);
+            font-weight: 700;
+            color: var(--darker);
+        }
+        .tematicos-header .section-label { color: var(--teal); }
+        .carousel-outer {
+            position: relative;
+            padding: 0 56px;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            transition: transform .45s cubic-bezier(.4,0,.2,1);
+            will-change: transform;
+        }
+        .tematico-card {
+            flex: 0 0 calc(25% - 12px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,.40);
+            cursor: pointer;
+            transition: transform .25s, box-shadow .25s;
+        }
+        .tematico-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0,0,0,.55);
+        }
+        .tematico-card img {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            display: block;
+        }
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: var(--teal); color: #fff;
+            border: none; border-radius: 50%;
+            width: 44px; height: 44px;
+            font-size: 26px; line-height: 1;
+            cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,.35);
+            transition: background .2s, transform .2s;
+        }
+        .carousel-btn:hover { background: #0780a0; transform: translateY(-50%) scale(1.08); }
+        .carousel-prev { left: 6px; }
+        .carousel-next { right: 6px; }
+        .carousel-dots {
+            display: flex; justify-content: center;
+            gap: 8px; margin-top: 28px;
+        }
+        .carousel-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #d1d5db; cursor: pointer;
+            transition: background .25s; border: none; padding: 0;
+        }
+        .carousel-dot.active { background: var(--teal); }
+        .tematicos-cta { margin-top: 40px; }
+        @media (max-width: 900px) {
+            .tematico-card { flex: 0 0 calc(50% - 8px); }
+            .carousel-outer { padding: 0 20px; }
+            .tematicos-header { padding: 0 24px; }
+        }
+        @media (max-width: 560px) {
+            .tematico-card { flex: 0 0 72%; }
+        }
+
+        /* ── LIGHTBOX ── */
+        .lightbox-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.88);
+            z-index: 1000;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(6px);
+        }
+        .lightbox-overlay.open { display: flex; }
+        .lightbox-img {
+            max-height: 90vh;
+            max-width: 80vw;
+            width: auto;
+            border-radius: 18px;
+            box-shadow: 0 24px 80px rgba(0,0,0,.7);
+            transition: opacity .18s ease;
+        }
+        .lightbox-img.fading { opacity: 0; }
+        .lightbox-close {
+            position: fixed; top: 20px; right: 24px;
+            background: rgba(255,255,255,.12); border: none;
+            color: #fff; font-size: 24px; line-height: 1;
+            width: 44px; height: 44px; border-radius: 50%;
+            cursor: pointer; z-index: 1001;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,.28); }
+        .lightbox-nav {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,.12); border: none;
+            color: #fff; font-size: 32px; line-height: 1;
+            width: 52px; height: 52px; border-radius: 50%;
+            cursor: pointer; z-index: 1001;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,.28); }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        .lightbox-counter {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,.55); font-size: 13px; letter-spacing: .06em;
+        }
+
+        /* ══ FORMULÁRIO 3 ETAPAS ═══════════════════════════════════ */
+        .forms-section {
+            background: #f5f6f8;
+            padding: 96px 24px;
+            display: flex; justify-content: center;
+        }
+        .forms-wrapper {
+            display: grid;
+            grid-template-columns: 1fr minmax(0, 540px);
+            gap: 72px;
+            max-width: 1100px;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* ── copy lateral esquerda ── */
+        .forms-copy-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .2em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 20px; display: block;
+        }
+        .forms-copy-heading {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 3.2vw, 44px);
+            font-weight: 700;
+            color: var(--darker); line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .forms-copy-text {
+            font-size: 16px; color: var(--gray);
+            line-height: 1.75; margin-bottom: 40px;
+            max-width: 400px;
+        }
+        .forms-trust { display: flex; flex-direction: column; gap: 16px; }
+        .forms-trust-item {
+            display: flex; align-items: flex-start; gap: 12px;
+        }
+        .forms-trust-check {
+            width: 22px; height: 22px; flex-shrink: 0;
+            background: var(--teal); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+        }
+        .forms-trust-check svg { width: 12px; height: 12px; color: #fff; }
+        .forms-trust-text {
+            font-size: 15px; font-weight: 500; color: var(--darker); line-height: 1.4;
+        }
+        .forms-trust-sub {
+            font-size: 13px; font-weight: 400; color: var(--gray); margin-top: 2px;
+        }
+
+        /* ── card direita ── */
+        .forms-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 24px;
+            padding: 48px;
+            width: 100%;
+            box-shadow: 0 8px 40px rgba(0,0,0,.06);
+        }
+        /* barra de progresso */
+        .form-progress {
+            display: flex; gap: 6px; margin-bottom: 28px;
+        }
+        .form-progress-seg {
+            flex: 1; height: 4px; border-radius: 2px;
+            background: #e5e7eb;
+            transition: background .35s;
+        }
+        .form-progress-seg.done  { background: var(--darker); }
+        .form-progress-seg.active { background: var(--teal); }
+        /* passo label */
+        .form-step-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .2em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 10px;
+        }
+        .form-step-title {
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 700; color: var(--darker);
+            margin-bottom: 28px; line-height: 1.2;
+        }
+        /* grupo */
+        .form-group { margin-bottom: 24px; }
+        .form-group-label {
+            font-size: 14px; font-weight: 600; color: var(--darker);
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+        }
+        .form-group-hint {
+            font-size: 12px; font-weight: 400;
+            color: var(--gray);
+        }
+        /* chips de seleção */
+        .form-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .form-chip {
+            padding: 8px 18px; border-radius: 100px;
+            border: 1.5px solid #d1d5db;
+            font-size: 13px; font-weight: 500; color: var(--darker);
+            cursor: pointer; background: #fff;
+            transition: border-color .18s, background .18s, color .18s;
+            user-select: none;
+        }
+        .form-chip:hover { border-color: var(--teal); }
+        .form-chip.selected {
+            background: var(--darker); border-color: var(--darker); color: #fff;
+        }
+        /* selects */
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-select, .form-input, .form-textarea {
+            width: 100%; padding: 12px 16px;
+            border: 1.5px solid #d1d5db; border-radius: 12px;
+            font-size: 14px; font-family: 'Inter', sans-serif;
+            color: var(--darker); background: #fff;
+            outline: none; transition: border-color .18s;
+            appearance: none;
+        }
+        .form-select-wrap { position: relative; }
+        .form-select-wrap::after {
+            content: '⌄'; position: absolute; right: 14px; top: 50%;
+            transform: translateY(-52%); pointer-events: none;
+            color: var(--gray); font-size: 16px;
+        }
+        .form-select:focus, .form-input:focus, .form-textarea:focus {
+            border-color: var(--teal);
+        }
+        .form-textarea {
+            resize: vertical; min-height: 96px; line-height: 1.55;
+        }
+        .form-textarea::placeholder, .form-input::placeholder { color: #9ca3af; }
+        /* divisor */
+        .form-divider { border: none; border-top: 1px solid #e5e7eb; margin: 28px 0; }
+        /* navegação */
+        .form-nav {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .form-back {
+            font-size: 14px; font-weight: 500; color: var(--gray);
+            background: none; border: none; cursor: pointer;
+            display: flex; align-items: center; gap: 4px;
+            transition: color .18s;
+        }
+        .form-back:hover { color: var(--darker); }
+        .btn-form-next {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--darker); color: #fff;
+            border: none; border-radius: 100px;
+            padding: 14px 28px; font-size: 15px; font-weight: 600;
+            cursor: pointer; transition: background .2s, transform .15s;
+        }
+        .btn-form-next:hover { background: #0f2c5f; transform: translateY(-1px); }
+        .btn-form-submit {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--teal); color: #fff;
+            border: none; border-radius: 100px;
+            padding: 14px 28px; font-size: 15px; font-weight: 600;
+            cursor: pointer; transition: background .2s, transform .15s;
+        }
+        .btn-form-submit:hover { background: #0e7490; transform: translateY(-1px); }
+        /* erro de validação */
+        .form-error-msg {
+            font-size: 12px; color: #e05c2a; font-weight: 500;
+            margin-top: 8px; display: none; align-items: center; gap: 5px;
+        }
+        .form-error-msg.visible { display: flex; }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%      { transform: translateX(-5px); }
+            40%      { transform: translateX(5px); }
+            60%      { transform: translateX(-3px); }
+            80%      { transform: translateX(3px); }
+        }
+        .form-chips.shake { animation: shake .35s ease; }
+        /* step visibilidade */
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+        /* sucesso */
+        .form-success {
+            display: none; text-align: center; padding: 24px 0;
+        }
+        .form-success.active { display: block; }
+        .form-success-icon { font-size: 48px; margin-bottom: 16px; }
+        .form-success h3 {
+            font-size: 22px; font-weight: 700; color: var(--darker); margin-bottom: 10px;
+        }
+        .form-success p { font-size: 15px; color: var(--gray); line-height: 1.6; }
+        @media (max-width: 900px) {
+            .forms-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                max-width: 540px;
+            }
+            .forms-copy-text { max-width: none; }
+        }
+        @media (max-width: 640px) {
+            .forms-card { padding: 32px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* ══ QUEM SOMOS ════════════════════════════════════════════ */
+        .quem-somos {
+            background: #0f1822;
+            padding: 80px 48px;
+            text-align: center;
+        }
+        .qs-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .quem-somos .section-label {
+            display: block;
+            font-size: 13px;
+            letter-spacing: .28em;
+        }
+        .qs-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(32px, 4vw, 58px);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            letter-spacing: -.01em;
+            max-width: 680px;
+            margin: 0 auto 24px;
+        }
+        .qs-text {
+            font-size: clamp(15px, 1.4vw, 18px);
+            color: rgba(255,255,255,.65);
+            line-height: 1.75;
+            max-width: 580px;
+            margin: 0 auto 64px;
+        }
+        .qs-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .qs-pillar {
+            border-top: 1px solid rgba(255,255,255,.12);
+            padding-top: 28px;
+            display: flex; flex-direction: column;
+        }
+        .qs-pillar-icon {
+            font-size: 22px;
+            margin-bottom: 14px;
+            display: block;
+        }
+        .qs-pillar h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: -.01em;
+        }
+        .qs-pillar p {
+            font-size: 14px;
+            color: rgba(255,255,255,.55);
+            line-height: 1.7;
+            flex: 1;
+        }
+        .qs-pillar-cta {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 20px;
+            font-size: 13px; font-weight: 600;
+            color: var(--teal);
+            text-decoration: none;
+            letter-spacing: .01em;
+            transition: gap .2s, color .2s;
+        }
+        .qs-pillar-cta::after {
+            content: '→';
+            transition: transform .2s;
+        }
+        .qs-pillar-cta:hover {
+            color: #0ac0e0;
+            gap: 10px;
+        }
+        .qs-pillar-cta:hover::after {
+            transform: translateX(2px);
+        }
+        @media (max-width: 900px) {
+            .quem-somos { padding: 72px 24px; }
+            .qs-pillars { grid-template-columns: 1fr; gap: 28px; }
+        }
+
+        .cta-section { background: #002860; padding: 80px 48px; text-align: center; }
+        .cta-label { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+        .cta-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px,4vw,52px); font-weight: 700; color: var(--white); letter-spacing: -.02em; margin-bottom: 16px; }
+        .cta-sub   { font-size: 16px; color: rgba(255,255,255,.55); margin-bottom: 36px; }
+
+        footer {
+            background: #002860;
+            padding: 28px 48px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .ft-brand { height: 26px; width: auto; display: block; opacity: .9; }
+        .ft-copy  { font-size: 12px; color: rgba(255,255,255,.4); }
+
+        @media (max-width: 900px) {
+            nav { padding: 20px 24px; }
+            .cards-left, .cards-right, .hero-cards-title { display: none; }
+            .cta-section { padding: 60px 24px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="hero-wrapper">
+    <section id="hero">
+
+        <!-- Único vídeo — keyint=1, scrubbing suave -->
+        <video id="bg-video" muted playsinline preload="auto">
+            <source src="hero_scrub.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+
+        <!-- NAV -->
+        <nav>
+            <div class="nav-side">
+                <a href="#quem-somos" class="nav-link">Quem Somos</a>
+                <a href="#destinos" class="nav-link">Destinos</a>
+            </div>
+            <svg class="nav-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
+              <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>
+              <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>
+              <path fill="#ffffff" d="M258.08,61.92l.03-1.18-2.61.81-.03,1.18,2.61-.81ZM138.98,75.01l4.88-11.18-1.23-.38-3.65,8.67-3.63-8.67-1.24.38,4.88,11.18ZM147,74.83h1.23v-11.39l-1.23.38v11.01ZM158.26,71.22h-4.14l2.06-4.91,2.08,4.91ZM159.77,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.06l1.05,2.5ZM173.3,73.23v-3.63h-3.79l-.38,1.12h2.92v2.08c-.52.46-1.56,1.16-3.03,1.16-2.58,0-4.62-2.15-4.62-4.75s2-4.75,4.58-4.75c2.38,0,3.59,1.7,3.59,1.7v-1.63c-1.7-1.32-3.59-1.2-3.59-1.2-3.24,0-5.84,2.64-5.84,5.88s2.64,5.88,5.88,5.88c0,0,2.45.11,4.28-1.85M178.15,73.72v-3.95h4.29l.38-1.1h-4.67v-4.01h5.28l.38-1.12h-6.89v11.29h6.51l.38-1.12h-5.66ZM196.3,75.01v-11.53l-1.23.38v8.23l-8.27-8.67v11.42h1.23v-8.43l8.27,8.6ZM201.06,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.59-1.46v1.38c.71.63,1.93,1.24,3.59,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.7-.94-2.7-2.05M223.14,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM239.19,71.22h-4.14l2.06-4.91,2.08,4.91ZM240.7,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM248.39,63.59h-3.32v11.24h1.24v-4.95h2.34l3.43,5.13.94-.77-3.07-4.5c1.42-.3,2.45-1.1,2.45-3.01,0-2.56-1.89-3.14-4.03-3.14M246.32,64.7h2.08c1.53,0,2.77.44,2.77,2.03s-1.24,2.03-2.77,2.03h-2.08v-4.06ZM256.18,74.83h1.23v-11.39l-1.23.38v11.01ZM269.27,64.7l.38-1.12h-8.56l-.38,1.12h3.85v10.13h1.23v-10.13h3.48ZM272.95,74.83h1.23v-11.39l-1.23.38v11.01ZM284.3,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM300.36,71.22h-4.14l2.06-4.91,2.08,4.91ZM301.87,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM306.95,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.58-1.46v1.38c.71.63,1.93,1.24,3.58,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.71-.94-2.71-2.05"/>
+            </svg>
+            <div class="nav-side" style="justify-content:flex-end">
+                <a href="#tematicos" class="nav-link">Temáticos</a>
+                <a href="#forms" class="nav-link">Cotação</a>
+            </div>
+            <button class="nav-mobile-btn" id="menu-btn" aria-label="Menu">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6"  x2="19" y2="6"/>
+                    <line x1="3" y1="12" x2="19" y2="12"/>
+                    <line x1="3" y1="18" x2="19" y2="18"/>
+                </svg>
+            </button>
+        </nav>
+
+        <!-- UI LAYER -->
+        <div id="hero-ui">
+
+            <div class="hero-content" id="hero-body">
+                <h1 class="hero-title">
+                    <span class="line1">O Cruzeiro dos Seus Sonhos</span>
+                </h1>
+                <p class="hero-sub">Consultoria de cruzeiros por quem conhece cada navio por dentro.</p>
+                <div class="hero-buttons">
+                    <a href="#destinos" class="btn btn-glass">Explorar destinos</a>
+                    <a href="#contato"  class="btn btn-teal">Quero uma cotação</a>
+                </div>
+            </div>
+
+            <!-- Título do estado final -->
+            <div class="hero-cards-title">
+                <p class="hero-cards-label">Escolha seu destino</p>
+                <h2 class="hero-cards-heading">Para onde nós vamos?</h2>
+            </div>
+
+            <!-- Cards esquerda: Brasil, Alasca, Caribe, Dubai -->
+            <div class="cards-left">
+                <div class="dest-float-card" style="animation-duration:4s;animation-delay:0s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=300&q=80" alt="Brasil">
+                    <div class="dest-float-info"><p class="dest-float-name">Brasil</p><p class="dest-float-tag">Nacional</p><a href="destinos/brasil.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+                <div class="dest-float-card" style="animation-duration:4.5s;animation-delay:-1.5s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=300&q=80" alt="Alasca">
+                    <div class="dest-float-info"><p class="dest-float-name">Alasca</p><p class="dest-float-tag">América do Norte</p><a href="destinos/alasca.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+                <div class="dest-float-card" style="animation-duration:3.8s;animation-delay:-0.8s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=300&q=80" alt="Caribe">
+                    <div class="dest-float-info"><p class="dest-float-name">Caribe</p><p class="dest-float-tag">América Central</p><a href="destinos/caribe.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+                <div class="dest-float-card" style="animation-duration:4.2s;animation-delay:-2.4s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=300&q=80" alt="Dubai">
+                    <div class="dest-float-info"><p class="dest-float-name">Dubai</p><p class="dest-float-tag">Oriente Médio</p><a href="destinos/dubai.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+            </div>
+
+            <!-- Cards direita: Europa, Ilhas Gregas, Mediterrâneo, Norte da Europa -->
+            <div class="cards-right">
+                <div class="dest-float-card" style="animation-duration:4.1s;animation-delay:-0.5s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=300&q=80" alt="Europa">
+                    <div class="dest-float-info"><p class="dest-float-name">Europa</p><p class="dest-float-tag">Europa</p><a href="destinos/europa.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+                <div class="dest-float-card" style="animation-duration:4.6s;animation-delay:-1.8s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=300&q=80" alt="Ilhas Gregas">
+                    <div class="dest-float-info"><p class="dest-float-name">Ilhas Gregas</p><p class="dest-float-tag">Grécia</p><a href="destinos/ilhas-gregas.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+                <div class="dest-float-card" style="animation-duration:3.9s;animation-delay:-2.5s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=300&q=80" alt="Mediterrâneo">
+                    <div class="dest-float-info"><p class="dest-float-name">Mediterrâneo</p><p class="dest-float-tag">Europa</p><a href="destinos/mediterraneo.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+                <div class="dest-float-card" style="animation-duration:4.3s;animation-delay:-1.1s">
+                    <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=300&q=80" alt="Norte da Europa">
+                    <div class="dest-float-info"><p class="dest-float-name">Norte da Europa</p><p class="dest-float-tag">Escandinávia</p><a href="destinos/norte-europa.html" class="dest-float-btn">Saiba mais →</a></div>
+                </div>
+            </div>
+
+            <div class="scroll-cue">Scroll para explorar</div>
+
+        </div>
+    </section>
+</div>
+
+
+<!-- ══ LIGHTBOX ══════════════════════════════════════════════════ -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&#10005;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8249;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">&#8250;</button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+</div>
+
+<!-- ══ TEMÁTICOS ════════════════════════════════════════════════ -->
+<section class="tematicos" id="tematicos">
+    <div class="tematicos-header">
+        <p class="section-label">A bordo com sua música</p>
+        <h2 class="tematicos-title">Cruzeiros Temáticos</h2>
+    </div>
+    <div class="carousel-outer">
+        <button class="carousel-btn carousel-prev" id="temPrev">&#8249;</button>
+        <div class="carousel-track" id="tematicosTrack">
+            <div class="tematico-card">
+                <img src="tematicos/navio bell marques.jpg" alt="Vumbora Pro Mar 2026 — Bell Marques">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio cabare.jpg" alt="Navio Cabaré — Leonardo">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio 89 rock boat.jpg" alt="89 Rock Boat — 40 Anos Rádio Rock">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio embaixador.jpg" alt="Embaixador em Alto Mar — Gusttavo Lima">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/Navio dominguinho.jpg" alt="Dominguinho em Alto-Mar">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio ws on board.png" alt="WS on Board — Wesley Safadão">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio daniel.jpg" alt="Navio Daniel 2027">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/reveillon em alto mar.png" alt="Réveillon em Alto-Mar 2027">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio roberto carlos.jpg" alt="Navio Roberto Carlos">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/navio chitaozinho e xororo.png" alt="Navio ChX 2026 — Chitãozinho & Xororó">
+            </div>
+            <div class="tematico-card">
+                <img src="tematicos/Navio zeca e alcione.jpg" alt="Zeca & Alcione & Aragão — Samba em Alto-Mar">
+            </div>
+        </div>
+        <button class="carousel-btn carousel-next" id="temNext">&#8250;</button>
+    </div>
+    <div class="carousel-dots" id="tematicoDots"></div>
+    <div class="tematicos-cta">
+        <a href="#forms" class="btn btn-teal">Encontrar meu cruzeiro →</a>
+    </div>
+</section>
+
+<!-- ══ FORMULÁRIO ═══════════════════════════════════════════════ -->
+<section class="forms-section" id="forms">
+  <div class="forms-wrapper">
+
+    <!-- ── coluna esquerda: copy ── -->
+    <div class="forms-copy">
+        <span class="forms-copy-label">Cotação personalizada</span>
+        <h2 class="forms-copy-heading">Conta pra gente o cruzeiro que você quer fazer.</h2>
+        <p class="forms-copy-text">Cada viagem começa com uma conversa. Preencha em 3 passos rápidos e nossa equipe monta uma proposta com os melhores navios, roteiros e cabines para o que você está buscando. Sem enrolação.</p>
+        <div class="forms-trust">
+            <div class="forms-trust-item">
+                <div class="forms-trust-check">
+                    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5L5 9.5L10 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                    <div class="forms-trust-text">Consultoria especializada em cruzeiros</div>
+                    <div class="forms-trust-sub">Só falamos de cruzeiros. Nada de pacotes genéricos.</div>
+                </div>
+            </div>
+            <div class="forms-trust-item">
+                <div class="forms-trust-check">
+                    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5L5 9.5L10 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                    <div class="forms-trust-text">Proposta sob medida para o seu perfil</div>
+                    <div class="forms-trust-sub">Caribe, Brasil, Mediterrâneo e roteiros exclusivos.</div>
+                </div>
+            </div>
+            <div class="forms-trust-item">
+                <div class="forms-trust-check">
+                    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5L5 9.5L10 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div>
+                    <div class="forms-trust-text">Sem compromisso para conversar</div>
+                    <div class="forms-trust-sub">Tire suas dúvidas antes de decidir qualquer coisa.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── coluna direita: formulário ── -->
+    <div class="forms-card">
+
+        <!-- Barra de progresso -->
+        <div class="form-progress">
+            <div class="form-progress-seg active" id="prog1"></div>
+            <div class="form-progress-seg" id="prog2"></div>
+            <div class="form-progress-seg" id="prog3"></div>
+        </div>
+
+        <!-- ── ETAPA 1 ── -->
+        <div class="form-step active" id="step1">
+            <p class="form-step-label">Passo 1 de 3</p>
+            <h2 class="form-step-title">Que tipo de cruzeiro você quer?</h2>
+
+            <div class="form-group">
+                <p class="form-group-label">Categoria <span class="form-group-hint">(escolha uma)</span></p>
+                <div class="form-chips" id="chips-categoria">
+                    <button class="form-chip" data-value="caribe">Caribe sem visto</button>
+                    <button class="form-chip" data-value="brasil">Cruzeiros no Brasil</button>
+                    <button class="form-chip" data-value="internacional">Internacional</button>
+                    <button class="form-chip" data-value="tematico">Temático / show</button>
+                    <button class="form-chip" data-value="naosei">Ainda não sei</button>
+                </div>
+                <p class="form-error-msg" id="err-categoria">⚠ Selecione pelo menos uma opção para continuar.</p>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p class="form-group-label">Janela ideal de embarque</p>
+                    <div class="form-select-wrap">
+                        <select class="form-select" id="sel-periodo" onchange="this.style.borderColor='';document.getElementById('err-periodo')?.classList.remove('visible')">
+                            <option value="">Selecione…</option>
+                            <option>Próximos 3 meses</option>
+                            <option>4 a 6 meses</option>
+                            <option>6 meses a 1 ano</option>
+                            <option>Mais de 1 ano</option>
+                            <option>Ainda não sei</option>
+                        </select>
+                    </div>
+                    <p class="form-error-msg" id="err-periodo">⚠ Selecione uma janela de embarque.</p>
+                </div>
+                <div class="form-group">
+                    <p class="form-group-label">Quantas pessoas</p>
+                    <div class="form-select-wrap">
+                        <select class="form-select" id="sel-pessoas" onchange="this.style.borderColor='';document.getElementById('err-pessoas')?.classList.remove('visible')">
+                            <option value="">Selecione…</option>
+                            <option>1 pessoa</option>
+                            <option>2 pessoas</option>
+                            <option>3 a 4 pessoas</option>
+                            <option>5 ou mais</option>
+                        </select>
+                    </div>
+                    <p class="form-error-msg" id="err-pessoas">⚠ Informe quantas pessoas vão embarcar.</p>
+                </div>
+            </div>
+
+            <hr class="form-divider">
+            <div class="form-nav">
+                <span></span>
+                <button class="btn-form-next" onclick="formGoTo(2)">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- ── ETAPA 2 ── -->
+        <div class="form-step" id="step2">
+            <p class="form-step-label">Passo 2 de 3</p>
+            <h2 class="form-step-title">Conta um pouco mais.</h2>
+
+            <div class="form-group">
+                <p class="form-group-label">É a primeira vez ou já embarcou?</p>
+                <div class="form-chips" id="chips-experiencia">
+                    <button class="form-chip" data-value="primeira">Primeira vez</button>
+                    <button class="form-chip" data-value="antes">Já embarquei antes</button>
+                    <button class="form-chip" data-value="varias">Várias vezes</button>
+                </div>
+                <p class="form-error-msg" id="err-experiencia">⚠ Selecione uma opção para continuar.</p>
+            </div>
+
+            <div class="form-group">
+                <p class="form-group-label">O que importa mais nessa viagem? <span class="form-group-hint">(pode marcar mais de uma)</span></p>
+                <div class="form-chips multi" id="chips-prioridade">
+                    <button class="form-chip" data-value="preco">Preço justo</button>
+                    <button class="form-chip" data-value="conforto">Conforto</button>
+                    <button class="form-chip" data-value="roteiro">Roteiro</button>
+                    <button class="form-chip" data-value="festa">Festa / energia a bordo</button>
+                    <button class="form-chip" data-value="familia">Bom pra família</button>
+                    <button class="form-chip" data-value="romantico">Romântico</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="form-group-label">Tem alguma dúvida ou medo principal? <span class="form-group-hint">(opcional, mas ajuda muito)</span></p>
+                <textarea class="form-textarea" id="txt-duvida" placeholder="Ex.: tenho medo de enjoo, não sei se vou gostar de cabine interna, é minha primeira vez fora do Brasil…"></textarea>
+            </div>
+
+            <hr class="form-divider">
+            <div class="form-nav">
+                <button class="form-back" onclick="formGoTo(1)">← Voltar</button>
+                <button class="btn-form-next" onclick="formGoTo(3)">Continuar →</button>
+            </div>
+        </div>
+
+        <!-- ── ETAPA 3 ── -->
+        <div class="form-step" id="step3">
+            <p class="form-step-label">Passo 3 de 3</p>
+            <h2 class="form-step-title">Para a gente te responder.</h2>
+
+            <div class="form-group">
+                <p class="form-group-label">Como você se chama?</p>
+                <input class="form-input" id="inp-nome" type="text" placeholder="Seu nome">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p class="form-group-label">WhatsApp</p>
+                    <input class="form-input" id="inp-whats" type="tel" placeholder="(11) 99999-9999">
+                </div>
+                <div class="form-group">
+                    <p class="form-group-label">E-mail</p>
+                    <input class="form-input" id="inp-email" type="email" placeholder="voce@email.com">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="form-group-label">Cidade de origem <span class="form-group-hint">(para coordenarmos voo / transfer)</span></p>
+                <input class="form-input" id="inp-cidade" type="text" placeholder="Ex.: São Paulo, SP" oninput="this.style.borderColor='';document.getElementById('err-cidade')?.classList.remove('visible')">
+                <p class="form-error-msg" id="err-cidade">⚠ Informe sua cidade de origem.</p>
+            </div>
+
+            <p class="form-error-msg" id="err-contato">⚠ Preencha seu nome e WhatsApp para enviar.</p>
+            <hr class="form-divider">
+            <div class="form-nav">
+                <button class="form-back" onclick="formGoTo(2)">← Voltar</button>
+                <button class="btn-form-submit" onclick="formSubmit()">Enviar cotação →</button>
+            </div>
+        </div>
+
+        <!-- ── SUCESSO ── -->
+        <div class="form-success" id="formSuccess">
+            <div class="form-success-icon">🚢</div>
+            <h3>Recebemos seu interesse!</h3>
+            <p>Em breve, um consultor do Cruzeirista vai te ajudar com as melhores opções para o seu embarque.</p>
+        </div>
+
+    </div><!-- /forms-card -->
+  </div><!-- /forms-wrapper -->
+</section>
+
+<!-- ══ QUEM SOMOS ════════════════════════════════════════════════ -->
+<section class="quem-somos" id="quem-somos">
+    <div class="qs-inner">
+        <p class="section-label">Quem somos</p>
+        <h2 class="qs-title">Navegue com quem realmente ama o mar.</h2>
+        <p class="qs-text">O Cruzeirista não é uma agência genérica de turismo. Somos uma consultoria especializada em cruzeiros, criada por pessoas que vivem e respiram esse universo e acreditam que a melhor viagem começa com a orientação certa.</p>
+        <div class="qs-pillars">
+            <div class="qs-pillar">
+                <h4>Conhecemos por dentro</h4>
+                <p>Recomendamos porque já estivemos a bordo. Nosso time viaja, avalia e conhece cada navio que indica.</p>
+            </div>
+            <div class="qs-pillar">
+                <h4>Atendimento de verdade</h4>
+                <p>Você fala com quem entende de cruzeiros, não com um formulário. Do primeiro contato até o embarque.</p>
+            </div>
+            <div class="qs-pillar">
+                <h4>Clareza para decidir</h4>
+                <p>Cruzeiro tem muita variável. A gente simplifica o que importa pra você escolher com confiança.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ CTA ══════════════════════════════════════════════════════ -->
+<section class="cta-section" id="contato">
+    <p class="cta-label">Pronto para zarpar?</p>
+    <h2 class="cta-title">Está quase na hora do seu embarque</h2>
+    <p class="cta-sub">Fale com um consultor e encontre o cruzeiro ideal para você.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn btn-glass">Quero uma cotação</a>
+        <a href="#" class="btn btn-teal">Ver cruzeiros disponíveis</a>
+    </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+<footer>
+    <svg class="ft-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
+        <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>
+        <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>
+        <path fill="#ffffff" d="M258.08,61.92l.03-1.18-2.61.81-.03,1.18,2.61-.81ZM138.98,75.01l4.88-11.18-1.23-.38-3.65,8.67-3.63-8.67-1.24.38,4.88,11.18ZM147,74.83h1.23v-11.39l-1.23.38v11.01ZM158.26,71.22h-4.14l2.06-4.91,2.08,4.91ZM159.77,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.06l1.05,2.5ZM173.3,73.23v-3.63h-3.79l-.38,1.12h2.92v2.08c-.52.46-1.56,1.16-3.03,1.16-2.58,0-4.62-2.15-4.62-4.75s2-4.75,4.58-4.75c2.38,0,3.59,1.7,3.59,1.7v-1.63c-1.7-1.32-3.59-1.2-3.59-1.2-3.24,0-5.84,2.64-5.84,5.88s2.64,5.88,5.88,5.88c0,0,2.45.11,4.28-1.85M178.15,73.72v-3.95h4.29l.38-1.1h-4.67v-4.01h5.28l.38-1.12h-6.89v11.29h6.51l.38-1.12h-5.66ZM196.3,75.01v-11.53l-1.23.38v8.23l-8.27-8.67v11.42h1.23v-8.43l8.27,8.6ZM201.06,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.59-1.46v1.38c.71.63,1.93,1.24,3.59,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.7-.94-2.7-2.05M223.14,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM239.19,71.22h-4.14l2.06-4.91,2.08,4.91ZM240.7,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM248.39,63.59h-3.32v11.24h1.24v-4.95h2.34l3.43,5.13.94-.77-3.07-4.5c1.42-.3,2.45-1.1,2.45-3.01,0-2.56-1.89-3.14-4.03-3.14M246.32,64.7h2.08c1.53,0,2.77.44,2.77,2.03s-1.24,2.03-2.77,2.03h-2.08v-4.06ZM256.18,74.83h1.23v-11.39l-1.23.38v11.01ZM269.27,64.7l.38-1.12h-8.56l-.38,1.12h3.85v10.13h1.23v-10.13h3.48ZM272.95,74.83h1.23v-11.39l-1.23.38v11.01ZM284.3,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM300.36,71.22h-4.14l2.06-4.91,2.08,4.91ZM301.87,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM306.95,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.58-1.46v1.38c.71.63,1.93,1.24,3.58,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.71-.94-2.71-2.05"/>
+    </svg>
+    <span class="ft-copy">© 2026 Cruzeirista · Todos os direitos reservados</span>
+</footer>
+
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   SCROLL-SCRUBBING — vídeo único, keyint=1
+════════════════════════════════════════════════════════════════ */
+const wrapper  = document.getElementById('hero-wrapper');
+const hero     = document.getElementById('hero');
+const vid      = document.getElementById('bg-video');
+const heroBody = document.getElementById('hero-body');
+const cardsLeft      = document.querySelector('.cards-left');
+const cardsRight     = document.querySelector('.cards-right');
+const heroCardsTitle = document.querySelector('.hero-cards-title');
+const scrollCue      = document.querySelector('.scroll-cue');
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+let targetTime = 0;
+let smoothTime = 0;
+
+vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
+
+window.addEventListener('scroll', () => {
+    const runway   = wrapper.offsetHeight - window.innerHeight;
+    const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
+
+    if (vid.duration) targetTime = vid.duration * progress;
+
+    // Texto: fade-out nos primeiros 30%
+    const textOpacity = Math.max(0, 1 - progress / 0.30);
+    if (heroBody)  heroBody.style.opacity  = textOpacity;
+    if (scrollCue) scrollCue.style.opacity = textOpacity;
+
+    // Cards destinos + título: fade-in de 60% → 90%
+    const cardsP = Math.max(0, Math.min(1, (progress - 0.60) / 0.30));
+    const cardsY = (1 - cardsP) * 30;
+
+    if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
+    if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
+    if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
+
+}, { passive: true });
+
+function scrubLoop() {
+    if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
+        smoothTime = lerp(smoothTime, targetTime, 0.1);
+        vid.currentTime = smoothTime;
+    }
+    requestAnimationFrame(scrubLoop);
+}
+scrubLoop();
+
+
+/* ════════════════════════════════════════════════════════════════
+   MOUSE PARALLAX
+════════════════════════════════════════════════════════════════ */
+let mx = 0, my = 0, cx = 0, cy = 0;
+
+hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    mx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+    my = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+});
+hero.addEventListener('mouseleave', () => { mx = 0; my = 0; });
+
+[vid, heroBody, cardsLeft, cardsRight].forEach(el => {
+    if (el) el.style.willChange = 'transform';
+});
+
+function parallaxLoop() {
+    cx = lerp(cx, mx, 0.055);
+    cy = lerp(cy, my, 0.055);
+
+    if (vid)       vid.style.transform      = `translate(${cx*22}px,${cy*14}px) scale(1.08)`;
+    if (heroBody)  heroBody.style.transform  = `translate(${cx*-7}px,${cy*-5}px)`;
+
+    const leftY  = cardsLeft?._extraY  || 0;
+    const rightY = cardsRight?._extraY || 0;
+    if (cardsLeft)  cardsLeft.style.transform  = `translate(${cx*-26}px,${cy*-16 + leftY}px)`;
+    if (cardsRight) cardsRight.style.transform = `translate(${cx* 26}px,${cy*-16 + rightY}px)`;
+    if (scrollCue)  scrollCue.style.transform  = `translateX(-50%) translate(${cx*-8}px,${cy*-5}px)`;
+
+    requestAnimationFrame(parallaxLoop);
+}
+parallaxLoop();
+
+
+/* ════════════════════════════════════════════════════════════════
+   UTILITÁRIOS
+════════════════════════════════════════════════════════════════ */
+const menuBtn = document.getElementById('menu-btn');
+if (menuBtn) menuBtn.addEventListener('click', () =>
+    menuBtn.closest('nav').classList.toggle('open'));
+
+document.querySelectorAll('a[href^="#"]').forEach(a =>
+    a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    })
+);
+
+vid.addEventListener('error', () => vid.style.display = 'none');
+
+
+/* ════════════════════════════════════════════════════════════════
+   CARROSSEL TEMÁTICOS
+════════════════════════════════════════════════════════════════ */
+(function(){
+    const track    = document.getElementById('tematicosTrack');
+    if (!track) return;
+    const cards    = Array.from(track.querySelectorAll('.tematico-card'));
+    const dotsWrap = document.getElementById('tematicoDots');
+    const prevBtn  = document.getElementById('temPrev');
+    const nextBtn  = document.getElementById('temNext');
+    let current = 0;
+
+    function visCount() {
+        if (window.innerWidth <= 560) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 4;
+    }
+    function maxIdx()    { return Math.max(0, cards.length - visCount()); }
+    function totalPages(){ return Math.ceil(cards.length / visCount()); }
+
+    function buildDots() {
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i < totalPages(); i++) {
+            const d = document.createElement('button');
+            d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            d.addEventListener('click', () => goTo(i * visCount()));
+            dotsWrap.appendChild(d);
+        }
+    }
+    function updateDots() {
+        dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) =>
+            d.classList.toggle('active', i === Math.floor(current / visCount())));
+    }
+    function goTo(idx) {
+        current = Math.max(0, Math.min(idx, maxIdx()));
+        const cw = cards[0].offsetWidth + 16;
+        track.style.transform = `translateX(-${current * cw}px)`;
+        updateDots();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    window.addEventListener('resize', () => { buildDots(); goTo(0); });
+    buildDots();
+})();
+
+/* ════════════════════════════════════════════════════════════════
+   LIGHTBOX
+════════════════════════════════════════════════════════════════ */
+(function(){
+    const overlay   = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lightboxImg');
+    const closeBtn  = document.getElementById('lightboxClose');
+    const prevBtn   = document.getElementById('lightboxPrev');
+    const nextBtn   = document.getElementById('lightboxNext');
+    const counter   = document.getElementById('lightboxCounter');
+    if (!overlay) return;
+
+    let images = [];
+    let current = 0;
+
+    function updateCounter() {
+        counter.textContent = (current + 1) + ' / ' + images.length;
+    }
+
+    function showImage(idx, direction) {
+        current = (idx + images.length) % images.length;
+        lbImg.classList.add('fading');
+        setTimeout(() => {
+            lbImg.src = images[current].src;
+            lbImg.alt = images[current].alt;
+            lbImg.classList.remove('fading');
+            updateCounter();
+        }, 160);
+    }
+
+    function open(idx) {
+        images = Array.from(document.querySelectorAll('.tematico-card img'));
+        current = idx;
+        lbImg.src = images[current].src;
+        lbImg.alt = images[current].alt;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        updateCounter();
+    }
+
+    function close() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.tematico-card img').forEach((img, idx) => {
+        img.addEventListener('click', () => open(idx));
+    });
+
+    prevBtn.addEventListener('click', e => { e.stopPropagation(); showImage(current - 1); });
+    nextBtn.addEventListener('click', e => { e.stopPropagation(); showImage(current + 1); });
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape')      close();
+        if (e.key === 'ArrowLeft')   showImage(current - 1);
+        if (e.key === 'ArrowRight')  showImage(current + 1);
+    });
+})();
+/* ════════════════════════════════════════════════════════════════
+   FORMULÁRIO 3 ETAPAS
+════════════════════════════════════════════════════════════════ */
+// Chips — single select
+document.querySelectorAll('.form-chips:not(.multi)').forEach(group => {
+    group.querySelectorAll('.form-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            group.querySelectorAll('.form-chip').forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+            // limpa erro ao selecionar
+            const errId = 'err-' + (group.id === 'chips-categoria' ? 'categoria' : group.id === 'chips-experiencia' ? 'experiencia' : '');
+            if (errId !== 'err-') document.getElementById(errId)?.classList.remove('visible');
+        });
+    });
+});
+// Chips — multi select
+document.querySelectorAll('.form-chips.multi').forEach(group => {
+    group.querySelectorAll('.form-chip').forEach(chip => {
+        chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+});
+
+function formShake(chipsId, errId) {
+    const chips = document.getElementById(chipsId);
+    const err   = document.getElementById(errId);
+    if (chips) {
+        chips.classList.remove('shake');
+        void chips.offsetWidth; // reflow to restart animation
+        chips.classList.add('shake');
+        setTimeout(() => chips.classList.remove('shake'), 400);
+    }
+    if (err) err.classList.add('visible');
+}
+
+function formGoTo(step) {
+    // ── Validação antes de avançar ──
+    const currentStep = [1,2,3].find(n => document.getElementById('step'+n)?.classList.contains('active')) || 1;
+
+    if (step > currentStep) {
+        // Avançando: validar step atual
+        if (currentStep === 1 && step === 2) {
+            const selected = document.querySelector('#chips-categoria .form-chip.selected');
+            const periodo  = document.getElementById('sel-periodo')?.value;
+            const pessoas  = document.getElementById('sel-pessoas')?.value;
+            let ok = true;
+            if (!selected) { formShake('chips-categoria', 'err-categoria'); ok = false; }
+            else document.getElementById('err-categoria')?.classList.remove('visible');
+            if (!periodo)  { document.getElementById('sel-periodo').style.borderColor = '#e05c2a'; document.getElementById('err-periodo')?.classList.add('visible'); ok = false; }
+            else           { document.getElementById('sel-periodo').style.borderColor = ''; document.getElementById('err-periodo')?.classList.remove('visible'); }
+            if (!pessoas)  { document.getElementById('sel-pessoas').style.borderColor = '#e05c2a'; document.getElementById('err-pessoas')?.classList.add('visible'); ok = false; }
+            else           { document.getElementById('sel-pessoas').style.borderColor = ''; document.getElementById('err-pessoas')?.classList.remove('visible'); }
+            if (!ok) return;
+        }
+        if (currentStep === 2 && step === 3) {
+            const selected = document.querySelector('#chips-experiencia .form-chip.selected');
+            if (!selected) { formShake('chips-experiencia', 'err-experiencia'); return; }
+            document.getElementById('err-experiencia')?.classList.remove('visible');
+        }
+    }
+
+    [1,2,3].forEach(n => {
+        document.getElementById('step' + n)?.classList.toggle('active', n === step);
+        const seg = document.getElementById('prog' + n);
+        if (!seg) return;
+        seg.classList.remove('done','active');
+        if (n < step)  seg.classList.add('done');
+        if (n === step) seg.classList.add('active');
+    });
+    document.querySelector('.forms-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function formSubmit() {
+    const nome   = document.getElementById('inp-nome')?.value.trim();
+    const whats  = document.getElementById('inp-whats')?.value.trim();
+    const cidade = document.getElementById('inp-cidade')?.value.trim();
+    const nomeInput   = document.getElementById('inp-nome');
+    const whatsInput  = document.getElementById('inp-whats');
+    const cidadeInput = document.getElementById('inp-cidade');
+    let valid = true;
+    if (!nome)   { nomeInput.style.borderColor   = '#e05c2a'; valid = false; }
+    else         { nomeInput.style.borderColor   = ''; }
+    if (!whats)  { whatsInput.style.borderColor  = '#e05c2a'; valid = false; }
+    else         { whatsInput.style.borderColor  = ''; }
+    if (!cidade) { cidadeInput.style.borderColor = '#e05c2a'; document.getElementById('err-cidade')?.classList.add('visible'); valid = false; }
+    else         { cidadeInput.style.borderColor = ''; document.getElementById('err-cidade')?.classList.remove('visible'); }
+    if (!valid) {
+        if (!nome || !whats) document.getElementById('err-contato')?.classList.add('visible');
+        return;
+    }
+    document.getElementById('err-contato')?.classList.remove('visible');
+    [1,2,3].forEach(n => {
+        document.getElementById('step' + n)?.classList.remove('active');
+        const seg = document.getElementById('prog' + n);
+        if (seg) { seg.classList.remove('active'); seg.classList.add('done'); }
+    });
+    document.getElementById('formSuccess')?.classList.add('active');
+}
+</script>
+</body>
+</html>
