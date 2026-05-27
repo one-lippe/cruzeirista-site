@@ -193,13 +193,13 @@
         .cards-left .dest-float-card {
             transform: perspective(900px) rotateY(20deg);
             transform-origin: right center;
-            box-shadow: 14px 20px 54px rgba(0,0,0,.42), -4px 0 16px rgba(0,0,0,.14);
+            box-shadow: 14px 20px 54px rgba(0,0,0,.22), -4px 0 16px rgba(0,0,0,.07);
         }
         /* 3-D tilt — direita inclina para dentro */
         .cards-right .dest-float-card {
             transform: perspective(900px) rotateY(-20deg);
             transform-origin: left center;
-            box-shadow: -14px 20px 54px rgba(0,0,0,.42), 4px 0 16px rgba(0,0,0,.14);
+            box-shadow: -14px 20px 54px rgba(0,0,0,.22), 4px 0 16px rgba(0,0,0,.07);
         }
         @keyframes floatCard {
             0%,100% { translate: 0 0; }
@@ -230,18 +230,21 @@
             text-align: center; z-index: 20;
             opacity: 0; will-change: opacity;
             pointer-events: none; white-space: nowrap;
+            background: radial-gradient(ellipse 90% 100% at 50% 50%, rgba(5,14,26,.45) 0%, transparent 100%);
+            padding: 24px 56px 28px;
+            border-radius: 24px;
         }
         .hero-cards-label {
             font-size: 11px; font-weight: 600;
             color: rgba(255,255,255,.72); letter-spacing: .24em;
             text-transform: uppercase; margin-bottom: 10px;
-            text-shadow: 0 1px 12px rgba(0,0,0,.6);
+            text-shadow: 0 1px 8px rgba(0,0,0,.32);
         }
         .hero-cards-heading {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(26px, 3.2vw, 46px);
             font-weight: 700; color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,.5), 0 8px 32px rgba(0,0,0,.6), 0 0 80px rgba(0,0,0,.4);
+            text-shadow: 0 2px 4px rgba(0,0,0,.22), 0 8px 32px rgba(0,0,0,.28), 0 0 60px rgba(0,0,0,.18);
         }
 
         /* ── SCROLL CUE ── */
@@ -622,7 +625,7 @@
 
         /* ══ QUEM SOMOS ════════════════════════════════════════════ */
         .quem-somos {
-            background: var(--dark);
+            background: #0f1822;
             padding: 80px 48px;
             text-align: center;
         }
@@ -632,6 +635,8 @@
         }
         .quem-somos .section-label {
             display: block;
+            font-size: 13px;
+            letter-spacing: .28em;
         }
         .qs-title {
             font-family: 'Playfair Display', Georgia, serif;
@@ -703,7 +708,7 @@
             .qs-pillars { grid-template-columns: 1fr; gap: 28px; }
         }
 
-        .cta-section { background: var(--darker); padding: 80px 48px; text-align: center; }
+        .cta-section { background: #002860; padding: 80px 48px; text-align: center; }
         .cta-label { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
         .cta-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px,4vw,52px); font-weight: 700; color: var(--white); letter-spacing: -.02em; margin-bottom: 16px; }
         .cta-sub   { font-size: 16px; color: rgba(255,255,255,.55); margin-bottom: 36px; }
@@ -775,27 +780,27 @@
 
             <!-- Título do estado final -->
             <div class="hero-cards-title">
-                <p class="hero-cards-label">Para onde você quer ir?</p>
-                <h2 class="hero-cards-heading">Escolha seu destino</h2>
+                <p class="hero-cards-label">Escolha seu destino</p>
+                <h2 class="hero-cards-heading">Para onde nós vamos?</h2>
             </div>
 
             <!-- Cards esquerda: Brasil, Alasca, Caribe, Dubai -->
             <div class="cards-left">
                 <div class="dest-float-card" style="animation-duration:4s;animation-delay:0s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=300&q=80" alt="Brasil">
-                    <div class="dest-float-info"><p class="dest-float-name">Brasil</p><p class="dest-float-tag">Nacional</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Brasil</p><p class="dest-float-tag">Nacional</p><a href="destinos/brasil.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
                 <div class="dest-float-card" style="animation-duration:4.5s;animation-delay:-1.5s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=300&q=80" alt="Alasca">
-                    <div class="dest-float-info"><p class="dest-float-name">Alasca</p><p class="dest-float-tag">América do Norte</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Alasca</p><p class="dest-float-tag">América do Norte</p><a href="destinos/alasca.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
                 <div class="dest-float-card" style="animation-duration:3.8s;animation-delay:-0.8s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=300&q=80" alt="Caribe">
-                    <div class="dest-float-info"><p class="dest-float-name">Caribe</p><p class="dest-float-tag">América Central</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Caribe</p><p class="dest-float-tag">América Central</p><a href="destinos/caribe.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
                 <div class="dest-float-card" style="animation-duration:4.2s;animation-delay:-2.4s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=300&q=80" alt="Dubai">
-                    <div class="dest-float-info"><p class="dest-float-name">Dubai</p><p class="dest-float-tag">Oriente Médio</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Dubai</p><p class="dest-float-tag">Oriente Médio</p><a href="destinos/dubai.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
             </div>
 
@@ -803,19 +808,19 @@
             <div class="cards-right">
                 <div class="dest-float-card" style="animation-duration:4.1s;animation-delay:-0.5s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=300&q=80" alt="Europa">
-                    <div class="dest-float-info"><p class="dest-float-name">Europa</p><p class="dest-float-tag">Europa</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Europa</p><p class="dest-float-tag">Europa</p><a href="destinos/europa.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
                 <div class="dest-float-card" style="animation-duration:4.6s;animation-delay:-1.8s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=300&q=80" alt="Ilhas Gregas">
-                    <div class="dest-float-info"><p class="dest-float-name">Ilhas Gregas</p><p class="dest-float-tag">Grécia</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Ilhas Gregas</p><p class="dest-float-tag">Grécia</p><a href="destinos/ilhas-gregas.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
                 <div class="dest-float-card" style="animation-duration:3.9s;animation-delay:-2.5s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=300&q=80" alt="Mediterrâneo">
-                    <div class="dest-float-info"><p class="dest-float-name">Mediterrâneo</p><p class="dest-float-tag">Europa</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Mediterrâneo</p><p class="dest-float-tag">Europa</p><a href="destinos/mediterraneo.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
                 <div class="dest-float-card" style="animation-duration:4.3s;animation-delay:-1.1s">
                     <img class="dest-float-thumb" src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=300&q=80" alt="Norte da Europa">
-                    <div class="dest-float-info"><p class="dest-float-name">Norte da Europa</p><p class="dest-float-tag">Escandinávia</p><a href="#contato" class="dest-float-btn">Saiba mais →</a></div>
+                    <div class="dest-float-info"><p class="dest-float-name">Norte da Europa</p><p class="dest-float-tag">Escandinávia</p><a href="destinos/norte-europa.html" class="dest-float-btn">Saiba mais →</a></div>
                 </div>
             </div>
 
@@ -894,7 +899,7 @@
     <div class="forms-copy">
         <span class="forms-copy-label">Cotação personalizada</span>
         <h2 class="forms-copy-heading">Conta pra gente o cruzeiro que você quer fazer.</h2>
-        <p class="forms-copy-text">Cada viagem começa com uma conversa. Preencha em 3 passos rápidos e nossa equipe monta uma proposta com os melhores navios, roteiros e cabines para o que você está buscando — sem enrolação.</p>
+        <p class="forms-copy-text">Cada viagem começa com uma conversa. Preencha em 3 passos rápidos e nossa equipe monta uma proposta com os melhores navios, roteiros e cabines para o que você está buscando. Sem enrolação.</p>
         <div class="forms-trust">
             <div class="forms-trust-item">
                 <div class="forms-trust-check">

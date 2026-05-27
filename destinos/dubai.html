@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai & Emirados — Cruzeirista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --dark:   #1a2535;
+            --darker: #0f1822;
+            --white:  #ffffff;
+            --gray:   #6b7280;
+            --teal:   #0891b2;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #fff; overflow-x: hidden; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 22px 48px;
+            background: linear-gradient(to bottom, rgba(5,14,26,.72) 0%, transparent 100%);
+            backdrop-filter: blur(0px);
+            transition: background .3s, backdrop-filter .3s;
+        }
+        nav.scrolled {
+            background: #0f1822;
+            backdrop-filter: blur(12px);
+        }
+        .nav-side { display: flex; gap: 32px; }
+        .nav-link {
+            font-size: 13px; font-weight: 500;
+            color: rgba(255,255,255,.80); text-decoration: none;
+            letter-spacing: .06em; text-transform: uppercase;
+            transition: color .2s;
+        }
+        .nav-link:hover { color: #fff; }
+        .nav-brand {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            height: 32px; width: auto; display: block;
+        }
+
+        /* HERO BANNER */
+        .dest-hero {
+            position: relative; width: 100%; height: 88vh; min-height: 480px;
+            overflow: hidden;
+        }
+        .dest-hero-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transform: scale(1.04);
+            transition: transform 8s ease;
+        }
+        .dest-hero-img.loaded { transform: scale(1); }
+        .dest-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(5,14,26,.22) 0%,
+                rgba(5,14,26,.08) 40%,
+                rgba(5,14,26,.65) 100%
+            );
+        }
+        .dest-hero-content {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 0 64px 56px;
+        }
+        .dest-hero-region {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 12px; display: block;
+        }
+        .dest-hero-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 700; color: #fff;
+            text-shadow: 0 2px 16px rgba(0,0,0,.3);
+            line-height: 1.05; margin-bottom: 16px;
+        }
+        .dest-hero-tagline {
+            font-size: clamp(15px, 1.6vw, 18px);
+            color: rgba(255,255,255,.82);
+            max-width: 560px; line-height: 1.6;
+            text-shadow: 0 1px 8px rgba(0,0,0,.3);
+        }
+        .dest-hero-back {
+            position: absolute; top: 96px; left: 48px;
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 13px; font-weight: 500;
+            color: rgba(255,255,255,.75); text-decoration: none;
+            transition: color .2s;
+        }
+        .dest-hero-back:hover { color: #fff; }
+
+        /* SHIPS SECTION */
+        .ships-section {
+            background: #fff;
+            padding: 72px 48px 96px;
+        }
+        .ships-header {
+            max-width: 1140px; margin: 0 auto 48px;
+        }
+        .ships-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 12px; display: block;
+        }
+        .ships-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(26px, 3vw, 40px);
+            font-weight: 700; color: var(--darker);
+        }
+        .ships-grid {
+            max-width: 1140px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        /* SHIP CARD */
+        .ship-card {
+            border-radius: 18px; overflow: hidden;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+            box-shadow: 0 2px 16px rgba(0,0,0,.05);
+            transition: transform .3s, box-shadow .3s;
+            display: flex; flex-direction: column;
+        }
+        .ship-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,.10);
+        }
+        .ship-card-img-wrap {
+            position: relative; overflow: hidden;
+        }
+        .ship-card-img {
+            width: 100%; height: 220px; object-fit: cover;
+            display: block;
+            transition: transform .5s;
+            background: #cce8f0;
+        }
+        .ship-card:hover .ship-card-img { transform: scale(1.04); }
+        .ship-card-badge {
+            position: absolute; top: 14px; right: 14px;
+            background: rgba(8,145,178,.92);
+            color: #fff; font-size: 12px; font-weight: 600;
+            padding: 5px 12px; border-radius: 100px;
+            backdrop-filter: blur(6px);
+        }
+        .ship-card-body {
+            padding: 22px 24px 16px;
+            flex: 1;
+        }
+        .ship-card-tag {
+            font-size: 11px; font-weight: 600; letter-spacing: .14em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 8px;
+        }
+        .ship-card-name {
+            font-size: 20px; font-weight: 700; color: var(--darker);
+            margin-bottom: 8px; line-height: 1.2;
+        }
+        .ship-card-itinerary {
+            font-size: 13px; color: var(--gray); line-height: 1.6;
+        }
+        .ship-card-footer {
+            padding: 16px 24px 22px;
+            border-top: 1px solid #f0f0ee;
+            display: flex; align-items: center;
+            justify-content: space-between; gap: 12px;
+        }
+        .ship-card-price {
+            font-size: 13px; color: var(--gray); font-weight: 500;
+        }
+        .btn-ship-cta {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--darker); color: #fff;
+            border-radius: 100px; padding: 10px 20px;
+            font-size: 13px; font-weight: 600;
+            text-decoration: none;
+            transition: background .2s, transform .15s;
+            white-space: nowrap;
+        }
+        .btn-ship-cta:hover { background: #0f2c5f; transform: translateY(-1px); }
+
+        /* PLACEHOLDER NOTE */
+        .ships-placeholder-note {
+            max-width: 1140px; margin: 40px auto 0;
+            padding: 20px 24px;
+            background: #f5f6f8; border-radius: 12px;
+            font-size: 14px; color: var(--gray);
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #002860;
+            padding: 28px 48px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .ft-brand { height: 26px; width: auto; display: block; opacity: .9; }
+        .ft-copy { font-size: 12px; color: rgba(255,255,255,.4); }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px 24px; }
+            .nav-side { display: none; }
+            .dest-hero-content { padding: 0 24px 40px; }
+            .dest-hero-back { left: 24px; }
+            .ships-section { padding: 48px 20px 72px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="main-nav">
+    <div class="nav-side">
+        <a href="../index.html" class="nav-link">Início</a>
+        <a href="../index.html#destinos" class="nav-link">Destinos</a>
+    </div>
+    <svg class="nav-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
+              <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>
+              <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>
+              <path fill="#ffffff" d="M258.08,61.92l.03-1.18-2.61.81-.03,1.18,2.61-.81ZM138.98,75.01l4.88-11.18-1.23-.38-3.65,8.67-3.63-8.67-1.24.38,4.88,11.18ZM147,74.83h1.23v-11.39l-1.23.38v11.01ZM158.26,71.22h-4.14l2.06-4.91,2.08,4.91ZM159.77,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.06l1.05,2.5ZM173.3,73.23v-3.63h-3.79l-.38,1.12h2.92v2.08c-.52.46-1.56,1.16-3.03,1.16-2.58,0-4.62-2.15-4.62-4.75s2-4.75,4.58-4.75c2.38,0,3.59,1.7,3.59,1.7v-1.63c-1.7-1.32-3.59-1.2-3.59-1.2-3.24,0-5.84,2.64-5.84,5.88s2.64,5.88,5.88,5.88c0,0,2.45.11,4.28-1.85M178.15,73.72v-3.95h4.29l.38-1.1h-4.67v-4.01h5.28l.38-1.12h-6.89v11.29h6.51l.38-1.12h-5.66ZM196.3,75.01v-11.53l-1.23.38v8.23l-8.27-8.67v11.42h1.23v-8.43l8.27,8.6ZM201.06,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.59-1.46v1.38c.71.63,1.93,1.24,3.59,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.7-.94-2.7-2.05M223.14,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM239.19,71.22h-4.14l2.06-4.91,2.08,4.91ZM240.7,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM248.39,63.59h-3.32v11.24h1.24v-4.95h2.34l3.43,5.13.94-.77-3.07-4.5c1.42-.3,2.45-1.1,2.45-3.01,0-2.56-1.89-3.14-4.03-3.14M246.32,64.7h2.08c1.53,0,2.77.44,2.77,2.03s-1.24,2.03-2.77,2.03h-2.08v-4.06ZM256.18,74.83h1.23v-11.39l-1.23.38v11.01ZM269.27,64.7l.38-1.12h-8.56l-.38,1.12h3.85v10.13h1.23v-10.13h3.48ZM272.95,74.83h1.23v-11.39l-1.23.38v11.01ZM284.3,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM300.36,71.22h-4.14l2.06-4.91,2.08,4.91ZM301.87,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM306.95,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.58-1.46v1.38c.71.63,1.93,1.24,3.58,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.71-.94-2.71-2.05"/>
+            </svg>
+    <div class="nav-side" style="justify-content:flex-end">
+        <a href="../index.html#tematicos" class="nav-link">Temáticos</a>
+        <a href="../index.html#forms" class="nav-link" style="color:var(--teal)">Cotação</a>
+    </div>
+</nav>
+
+<!-- BANNER HERO -->
+<section class="dest-hero">
+    <img class="dest-hero-img" id="hero-img"
+         src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1600&q=85"
+         alt="Skyline de Dubai"
+         loading="eager">
+    <div class="dest-hero-overlay"></div>
+    <a href="../index.html#destinos" class="dest-hero-back">
+        ← Todos os destinos
+    </a>
+    <div class="dest-hero-content">
+        <span class="dest-hero-region">Oriente Médio</span>
+        <h1 class="dest-hero-title">Dubai & Emirados</h1>
+        <p class="dest-hero-tagline">Luxo, modernidade e mistério árabe em uma das rotas mais exóticas do mundo.</p>
+    </div>
+</section>
+
+<!-- NAVIOS -->
+<section class="ships-section">
+    <div class="ships-header">
+        <span class="ships-label">Navios disponíveis</span>
+        <h2 class="ships-title">Escolha a sua travessia</h2>
+    </div>
+    <div class="ships-grid">
+        
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Virtuosa" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
+                <h3 class="ship-card-name">MSC Virtuosa</h3>
+                <p class="ship-card-itinerary">Abu Dhabi · Sir Bani Yas · Khasab · Muscat</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="Costa Luminosa" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">10 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
+                <h3 class="ship-card-name">Costa Luminosa</h3>
+                <p class="ship-card-itinerary">Abu Dhabi · Muscat · Salalah · Aqaba</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Splendida" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
+                <h3 class="ship-card-name">MSC Splendida</h3>
+                <p class="ship-card-itinerary">Fujairah · Khor Fakkan · Muscat · Abu Dhabi</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+    </div>
+    <div class="ships-placeholder-note">
+        <span>🚢</span>
+        <span>Mais navios, datas e cabines disponíveis. Fale com nossa equipe para opções completas e condições especiais.</span>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <svg class="ft-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
+              <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>
+              <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>
+              <path fill="#ffffff" d="M258.08,61.92l.03-1.18-2.61.81-.03,1.18,2.61-.81ZM138.98,75.01l4.88-11.18-1.23-.38-3.65,8.67-3.63-8.67-1.24.38,4.88,11.18ZM147,74.83h1.23v-11.39l-1.23.38v11.01ZM158.26,71.22h-4.14l2.06-4.91,2.08,4.91ZM159.77,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.06l1.05,2.5ZM173.3,73.23v-3.63h-3.79l-.38,1.12h2.92v2.08c-.52.46-1.56,1.16-3.03,1.16-2.58,0-4.62-2.15-4.62-4.75s2-4.75,4.58-4.75c2.38,0,3.59,1.7,3.59,1.7v-1.63c-1.7-1.32-3.59-1.2-3.59-1.2-3.24,0-5.84,2.64-5.84,5.88s2.64,5.88,5.88,5.88c0,0,2.45.11,4.28-1.85M178.15,73.72v-3.95h4.29l.38-1.1h-4.67v-4.01h5.28l.38-1.12h-6.89v11.29h6.51l.38-1.12h-5.66ZM196.3,75.01v-11.53l-1.23.38v8.23l-8.27-8.67v11.42h1.23v-8.43l8.27,8.6ZM201.06,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.59-1.46v1.38c.71.63,1.93,1.24,3.59,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.7-.94-2.7-2.05M223.14,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM239.19,71.22h-4.14l2.06-4.91,2.08,4.91ZM240.7,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM248.39,63.59h-3.32v11.24h1.24v-4.95h2.34l3.43,5.13.94-.77-3.07-4.5c1.42-.3,2.45-1.1,2.45-3.01,0-2.56-1.89-3.14-4.03-3.14M246.32,64.7h2.08c1.53,0,2.77.44,2.77,2.03s-1.24,2.03-2.77,2.03h-2.08v-4.06ZM256.18,74.83h1.23v-11.39l-1.23.38v11.01ZM269.27,64.7l.38-1.12h-8.56l-.38,1.12h3.85v10.13h1.23v-10.13h3.48ZM272.95,74.83h1.23v-11.39l-1.23.38v11.01ZM284.3,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM300.36,71.22h-4.14l2.06-4.91,2.08,4.91ZM301.87,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM306.95,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.58-1.46v1.38c.71.63,1.93,1.24,3.58,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.71-.94-2.71-2.05"/>
+            </svg>
+    <p class="ft-copy">© 2025 Cruzeirista. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+    // Scroll nav
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    // Slight parallax on hero img
+    const img = document.getElementById('hero-img');
+    img.addEventListener('load', () => img.classList.add('loaded'));
+    if (img.complete) img.classList.add('loaded');
+</script>
+</body>
+</html>
