@@ -750,7 +750,7 @@
             </svg>
             <div class="nav-side" style="justify-content:flex-end">
                 <a href="#tematicos" class="nav-link">Temáticos</a>
-                <a href="#forms" class="nav-link">Cotação</a>
+                <a href="#forms" class="nav-link">Faça uma cotação</a>
             </div>
             <button class="nav-mobile-btn" id="menu-btn" aria-label="Menu">
                 <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
@@ -771,7 +771,7 @@
                 <p class="hero-sub">Consultoria de cruzeiros por quem conhece cada navio por dentro.</p>
                 <div class="hero-buttons">
                     <a href="#destinos" class="btn btn-glass">Explorar destinos</a>
-                    <a href="#contato"  class="btn btn-teal">Quero uma cotação</a>
+                    <a href="#forms"    class="btn btn-teal">Quero uma cotação</a>
                 </div>
             </div>
 
@@ -1349,6 +1349,16 @@ document.querySelectorAll('.form-chips:not(.multi)').forEach(group => {
 document.querySelectorAll('.form-chips.multi').forEach(group => {
     group.querySelectorAll('.form-chip').forEach(chip => {
         chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+});
+
+// Âncora #destinos: scroll para 90% do runway (cards totalmente visíveis, tematicos fora da tela)
+document.querySelectorAll('a[href="#destinos"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const hw     = document.getElementById('hero-wrapper');
+        const runway = hw.offsetHeight - window.innerHeight;
+        window.scrollTo({ top: hw.offsetTop + runway * 0.90, behavior: 'smooth' });
     });
 });
 
