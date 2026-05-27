@@ -446,7 +446,7 @@
         .forms-copy-heading {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(28px, 3.2vw, 44px);
-            font-weight: 700; font-style: italic;
+            font-weight: 700;
             color: var(--darker); line-height: 1.2;
             margin-bottom: 20px;
         }
@@ -957,7 +957,7 @@
                 <div class="form-group">
                     <p class="form-group-label">Janela ideal de embarque</p>
                     <div class="form-select-wrap">
-                        <select class="form-select" id="sel-periodo">
+                        <select class="form-select" id="sel-periodo" onchange="this.style.borderColor='';document.getElementById('err-periodo')?.classList.remove('visible')">
                             <option value="">Selecione…</option>
                             <option>Próximos 3 meses</option>
                             <option>4 a 6 meses</option>
@@ -966,11 +966,12 @@
                             <option>Ainda não sei</option>
                         </select>
                     </div>
+                    <p class="form-error-msg" id="err-periodo">⚠ Selecione uma janela de embarque.</p>
                 </div>
                 <div class="form-group">
                     <p class="form-group-label">Quantas pessoas</p>
                     <div class="form-select-wrap">
-                        <select class="form-select" id="sel-pessoas">
+                        <select class="form-select" id="sel-pessoas" onchange="this.style.borderColor='';document.getElementById('err-pessoas')?.classList.remove('visible')">
                             <option value="">Selecione…</option>
                             <option>1 pessoa</option>
                             <option>2 pessoas</option>
@@ -978,6 +979,7 @@
                             <option>5 ou mais</option>
                         </select>
                     </div>
+                    <p class="form-error-msg" id="err-pessoas">⚠ Informe quantas pessoas vão embarcar.</p>
                 </div>
             </div>
 
@@ -1050,7 +1052,8 @@
 
             <div class="form-group">
                 <p class="form-group-label">Cidade de origem <span class="form-group-hint">(para coordenarmos voo / transfer)</span></p>
-                <input class="form-input" id="inp-cidade" type="text" placeholder="Ex.: São Paulo, SP">
+                <input class="form-input" id="inp-cidade" type="text" placeholder="Ex.: São Paulo, SP" oninput="this.style.borderColor='';document.getElementById('err-cidade')?.classList.remove('visible')">
+                <p class="form-error-msg" id="err-cidade">⚠ Informe sua cidade de origem.</p>
             </div>
 
             <p class="form-error-msg" id="err-contato">⚠ Preencha seu nome e WhatsApp para enviar.</p>
@@ -1367,8 +1370,16 @@ function formGoTo(step) {
         // Avançando: validar step atual
         if (currentStep === 1 && step === 2) {
             const selected = document.querySelector('#chips-categoria .form-chip.selected');
-            if (!selected) { formShake('chips-categoria', 'err-categoria'); return; }
-            document.getElementById('err-categoria')?.classList.remove('visible');
+            const periodo  = document.getElementById('sel-periodo')?.value;
+            const pessoas  = document.getElementById('sel-pessoas')?.value;
+            let ok = true;
+            if (!selected) { formShake('chips-categoria', 'err-categoria'); ok = false; }
+            else document.getElementById('err-categoria')?.classList.remove('visible');
+            if (!periodo)  { document.getElementById('sel-periodo').style.borderColor = '#e05c2a'; document.getElementById('err-periodo')?.classList.add('visible'); ok = false; }
+            else           { document.getElementById('sel-periodo').style.borderColor = ''; document.getElementById('err-periodo')?.classList.remove('visible'); }
+            if (!pessoas)  { document.getElementById('sel-pessoas').style.borderColor = '#e05c2a'; document.getElementById('err-pessoas')?.classList.add('visible'); ok = false; }
+            else           { document.getElementById('sel-pessoas').style.borderColor = ''; document.getElementById('err-pessoas')?.classList.remove('visible'); }
+            if (!ok) return;
         }
         if (currentStep === 2 && step === 3) {
             const selected = document.querySelector('#chips-experiencia .form-chip.selected');
@@ -1389,17 +1400,21 @@ function formGoTo(step) {
 }
 
 function formSubmit() {
-    const nome  = document.getElementById('inp-nome')?.value.trim();
-    const whats = document.getElementById('inp-whats')?.value.trim();
-    const nomeInput  = document.getElementById('inp-nome');
-    const whatsInput = document.getElementById('inp-whats');
+    const nome   = document.getElementById('inp-nome')?.value.trim();
+    const whats  = document.getElementById('inp-whats')?.value.trim();
+    const cidade = document.getElementById('inp-cidade')?.value.trim();
+    const nomeInput   = document.getElementById('inp-nome');
+    const whatsInput  = document.getElementById('inp-whats');
+    const cidadeInput = document.getElementById('inp-cidade');
     let valid = true;
-    if (!nome)  { nomeInput.style.borderColor  = '#e05c2a'; valid = false; }
-    else        { nomeInput.style.borderColor  = ''; }
-    if (!whats) { whatsInput.style.borderColor = '#e05c2a'; valid = false; }
-    else        { whatsInput.style.borderColor = ''; }
+    if (!nome)   { nomeInput.style.borderColor   = '#e05c2a'; valid = false; }
+    else         { nomeInput.style.borderColor   = ''; }
+    if (!whats)  { whatsInput.style.borderColor  = '#e05c2a'; valid = false; }
+    else         { whatsInput.style.borderColor  = ''; }
+    if (!cidade) { cidadeInput.style.borderColor = '#e05c2a'; document.getElementById('err-cidade')?.classList.add('visible'); valid = false; }
+    else         { cidadeInput.style.borderColor = ''; document.getElementById('err-cidade')?.classList.remove('visible'); }
     if (!valid) {
-        document.getElementById('err-contato')?.classList.add('visible');
+        if (!nome || !whats) document.getElementById('err-contato')?.classList.add('visible');
         return;
     }
     document.getElementById('err-contato')?.classList.remove('visible');
