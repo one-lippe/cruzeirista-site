@@ -50,12 +50,18 @@
             position: relative; width: 100%; height: 88vh; min-height: 480px;
             overflow: hidden;
         }
+        .dest-hero-video,
         .dest-hero-img {
+            position: absolute; inset: 0;
             width: 100%; height: 100%; object-fit: cover;
-            transform: scale(1.04);
-            transition: transform 8s ease;
         }
-        .dest-hero-img.loaded { transform: scale(1); }
+        .dest-hero-video {
+            /* vídeo autoplay — ocupa todo o hero */
+        }
+        .dest-hero-img {
+            /* fallback: visível só se o vídeo não carregar */
+            z-index: 0;
+        }
         .dest-hero-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(
@@ -71,7 +77,7 @@
         }
         .dest-hero-region {
             font-size: 11px; font-weight: 600; letter-spacing: .22em;
-            text-transform: uppercase; color: var(--teal);
+            text-transform: uppercase; color: rgba(255,255,255,.90);
             margin-bottom: 12px; display: block;
         }
         .dest-hero-title {
@@ -229,12 +235,19 @@
             </svg>
     <div class="nav-side" style="justify-content:flex-end">
         <a href="../index.html#tematicos" class="nav-link">Temáticos</a>
-        <a href="../index.html#forms" class="nav-link" style="color:var(--teal)">Cotação</a>
+        <a href="../index.html#forms" class="nav-link">Faça uma cotação</a>
     </div>
 </nav>
 
 <!-- BANNER HERO -->
 <section class="dest-hero">
+    <!-- Vídeo autoplay — coloque o arquivo em ../videos/dubai.mp4 -->
+    <video class="dest-hero-video" id="hero-video"
+           autoplay muted loop playsinline preload="metadata"
+           aria-hidden="true">
+        <source src="../videos/dubai.mp4" type="video/mp4">
+    </video>
+    <!-- Fallback: exibido até o vídeo carregar -->
     <img class="dest-hero-img" id="hero-img"
          src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1600&q=85"
          alt="Skyline de Dubai"
@@ -257,46 +270,60 @@
         <h2 class="ships-title">Escolha a sua travessia</h2>
     </div>
     <div class="ships-grid">
-        
         <div class="ship-card">
             <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Virtuosa" class="ship-card-img" loading="lazy">
+                <img src="../img/navios/msc-bellissima.jpg" alt="MSC Bellissima" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
+                <h3 class="ship-card-name">MSC Bellissima</h3>
+                <p class="ship-card-itinerary">Abu Dhabi · Muscat · Sir Bani Yas</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/msc-splendida.jpg" alt="MSC Splendida" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">5 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
+                <h3 class="ship-card-name">MSC Splendida</h3>
+                <p class="ship-card-itinerary">Abu Dhabi · Khasab · Muscat</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/jewel-of-the-seas.jpg" alt="Jewel of the Seas" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
+                <h3 class="ship-card-name">Jewel of the Seas</h3>
+                <p class="ship-card-itinerary">Abu Dhabi · Bahrain · Doha</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/msc-virtuosa.jpg" alt="MSC Virtuosa" class="ship-card-img" loading="lazy">
                 <span class="ship-card-badge">7 noites</span>
             </div>
             <div class="ship-card-body">
                 <p class="ship-card-tag">Embarque em Dubai, EAU</p>
                 <h3 class="ship-card-name">MSC Virtuosa</h3>
                 <p class="ship-card-itinerary">Abu Dhabi · Sir Bani Yas · Khasab · Muscat</p>
-            </div>
-            <div class="ship-card-footer">
-                <span class="ship-card-price">Consulte disponibilidade</span>
-                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
-            </div>
-        </div>
-        <div class="ship-card">
-            <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="Costa Luminosa" class="ship-card-img" loading="lazy">
-                <span class="ship-card-badge">10 noites</span>
-            </div>
-            <div class="ship-card-body">
-                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
-                <h3 class="ship-card-name">Costa Luminosa</h3>
-                <p class="ship-card-itinerary">Abu Dhabi · Muscat · Salalah · Aqaba</p>
-            </div>
-            <div class="ship-card-footer">
-                <span class="ship-card-price">Consulte disponibilidade</span>
-                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
-            </div>
-        </div>
-        <div class="ship-card">
-            <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Splendida" class="ship-card-img" loading="lazy">
-                <span class="ship-card-badge">7 noites</span>
-            </div>
-            <div class="ship-card-body">
-                <p class="ship-card-tag">Embarque em Dubai, EAU</p>
-                <h3 class="ship-card-name">MSC Splendida</h3>
-                <p class="ship-card-itinerary">Fujairah · Khor Fakkan · Muscat · Abu Dhabi</p>
             </div>
             <div class="ship-card-footer">
                 <span class="ship-card-price">Consulte disponibilidade</span>
@@ -326,10 +353,12 @@
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 60);
     });
-    // Slight parallax on hero img
+    // Oculta imagem fallback assim que o vídeo começa a reproduzir
+    const vid = document.getElementById('hero-video');
     const img = document.getElementById('hero-img');
-    img.addEventListener('load', () => img.classList.add('loaded'));
-    if (img.complete) img.classList.add('loaded');
+    if (vid) {
+        vid.addEventListener('playing', () => { if (img) img.style.display = 'none'; });
+    }
 </script>
 </body>
 </html>

@@ -50,12 +50,18 @@
             position: relative; width: 100%; height: 88vh; min-height: 480px;
             overflow: hidden;
         }
+        .dest-hero-video,
         .dest-hero-img {
+            position: absolute; inset: 0;
             width: 100%; height: 100%; object-fit: cover;
-            transform: scale(1.04);
-            transition: transform 8s ease;
         }
-        .dest-hero-img.loaded { transform: scale(1); }
+        .dest-hero-video {
+            /* vídeo autoplay — ocupa todo o hero */
+        }
+        .dest-hero-img {
+            /* fallback: visível só se o vídeo não carregar */
+            z-index: 0;
+        }
         .dest-hero-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(
@@ -71,7 +77,7 @@
         }
         .dest-hero-region {
             font-size: 11px; font-weight: 600; letter-spacing: .22em;
-            text-transform: uppercase; color: var(--teal);
+            text-transform: uppercase; color: rgba(255,255,255,.90);
             margin-bottom: 12px; display: block;
         }
         .dest-hero-title {
@@ -196,6 +202,127 @@
             display: flex; align-items: center; gap: 10px;
         }
 
+        /* PORTS SECTION */
+        .ports-section {
+            background: #f5f6f8;
+            padding: 88px 48px;
+        }
+        .ports-header {
+            max-width: 1140px; margin: 0 auto 52px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            gap: 24px;
+        }
+        .ports-header-left {}
+        .ports-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 12px; display: block;
+        }
+        .ports-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(26px, 3vw, 40px);
+            font-weight: 700; color: var(--darker);
+            max-width: 500px; line-height: 1.2;
+        }
+        .ports-grid {
+            max-width: 1140px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .port-card {
+            border-radius: 16px; overflow: hidden;
+            position: relative; height: 320px;
+            cursor: default;
+        }
+        .port-card-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .5s ease;
+            display: block;
+        }
+        .port-card:hover .port-card-img { transform: scale(1.06); }
+        .port-card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(5,14,26,.78) 100%);
+        }
+        .port-card-info {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 22px 22px 24px;
+        }
+        .port-card-name {
+            font-size: 20px; font-weight: 700; color: #fff;
+            margin-bottom: 5px; line-height: 1.2;
+        }
+        .port-card-desc {
+            font-size: 13px; color: rgba(255,255,255,.72); line-height: 1.5;
+        }
+        .port-card-tag {
+            display: inline-block;
+            background: rgba(8,145,178,.85);
+            color: #fff; font-size: 11px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            padding: 4px 10px; border-radius: 100px;
+            margin-bottom: 10px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* HIGHLIGHT STRIP */
+        .highlight-strip {
+            background: var(--darker);
+            padding: 72px 48px;
+        }
+        .highlight-strip-inner {
+            max-width: 1140px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .highlight-item {
+            text-align: center;
+        }
+        .highlight-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 48px; font-weight: 700;
+            color: var(--teal); line-height: 1;
+            margin-bottom: 10px;
+        }
+        .highlight-label {
+            font-size: 13px; color: rgba(255,255,255,.65);
+            line-height: 1.5; max-width: 140px; margin: 0 auto;
+        }
+
+        /* DEST CTA */
+        .dest-cta {
+            background: #002860;
+            padding: 88px 48px;
+            text-align: center;
+        }
+        .dest-cta-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: rgba(255,255,255,.5);
+            margin-bottom: 16px; display: block;
+        }
+        .dest-cta-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700; color: #fff;
+            margin-bottom: 20px; line-height: 1.15;
+        }
+        .dest-cta-sub {
+            font-size: 16px; color: rgba(255,255,255,.65);
+            max-width: 520px; margin: 0 auto 36px;
+            line-height: 1.6;
+        }
+        .btn-dest-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--teal); color: #fff;
+            border-radius: 100px; padding: 16px 36px;
+            font-size: 15px; font-weight: 600;
+            text-decoration: none;
+            transition: background .2s, transform .15s;
+        }
+        .btn-dest-cta:hover { background: #0e7490; transform: translateY(-2px); }
+
         /* FOOTER */
         footer {
             background: #002860;
@@ -205,12 +332,20 @@
         .ft-brand { height: 26px; width: auto; display: block; opacity: .9; }
         .ft-copy { font-size: 12px; color: rgba(255,255,255,.4); }
 
+        @media (max-width: 900px) {
+            .highlight-strip-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
         @media (max-width: 768px) {
             nav { padding: 20px 24px; }
             .nav-side { display: none; }
             .dest-hero-content { padding: 0 24px 40px; }
             .dest-hero-back { left: 24px; }
             .ships-section { padding: 48px 20px 72px; }
+            .ports-section { padding: 56px 20px; }
+            .ports-header { flex-direction: column; align-items: flex-start; }
+            .highlight-strip { padding: 56px 24px; }
+            .highlight-strip-inner { grid-template-columns: 1fr 1fr; }
+            .dest-cta { padding: 64px 24px; }
             footer { flex-direction: column; gap: 12px; text-align: center; }
         }
     </style>
@@ -229,12 +364,19 @@
             </svg>
     <div class="nav-side" style="justify-content:flex-end">
         <a href="../index.html#tematicos" class="nav-link">Temáticos</a>
-        <a href="../index.html#forms" class="nav-link" style="color:var(--teal)">Cotação</a>
+        <a href="../index.html#forms" class="nav-link">Faça uma cotação</a>
     </div>
 </nav>
 
 <!-- BANNER HERO -->
 <section class="dest-hero">
+    <!-- Vídeo autoplay — coloque o arquivo em ../videos/brasil.mp4 -->
+    <video class="dest-hero-video" id="hero-video"
+           autoplay muted loop playsinline preload="metadata"
+           aria-hidden="true">
+        <source src="../videos/brasil.mp4" type="video/mp4">
+    </video>
+    <!-- Fallback: exibido até o vídeo carregar -->
     <img class="dest-hero-img" id="hero-img"
          src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1600&q=85"
          alt="Costa brasileira"
@@ -257,10 +399,9 @@
         <h2 class="ships-title">Escolha a sua travessia</h2>
     </div>
     <div class="ships-grid">
-        
         <div class="ship-card">
             <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Armonia" class="ship-card-img" loading="lazy">
+                <img src="../img/navios/msc-armonia.jpg" alt="MSC Armonia" class="ship-card-img" loading="lazy">
                 <span class="ship-card-badge">7 noites</span>
             </div>
             <div class="ship-card-body">
@@ -275,7 +416,7 @@
         </div>
         <div class="ship-card">
             <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="Costa Fascinosa" class="ship-card-img" loading="lazy">
+                <img src="../img/navios/costa-fascinosa.jpg" alt="Costa Fascinosa" class="ship-card-img" loading="lazy">
                 <span class="ship-card-badge">9 noites</span>
             </div>
             <div class="ship-card-body">
@@ -290,7 +431,7 @@
         </div>
         <div class="ship-card">
             <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Preziosa" class="ship-card-img" loading="lazy">
+                <img src="../img/navios/msc-preziosa.jpg" alt="MSC Preziosa" class="ship-card-img" loading="lazy">
                 <span class="ship-card-badge">5 noites</span>
             </div>
             <div class="ship-card-body">
@@ -303,11 +444,59 @@
                 <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
             </div>
         </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/costa-diadema.jpg" alt="Costa Diadema" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">8 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Santos, SP</p>
+                <h3 class="ship-card-name">Costa Diadema</h3>
+                <p class="ship-card-itinerary">Salvador · Recife · Fortaleza</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
     </div>
     <div class="ships-placeholder-note">
         <span>🚢</span>
         <span>Mais navios, datas e cabines disponíveis. Fale com nossa equipe para opções completas e condições especiais.</span>
     </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="highlight-strip">
+    <div class="highlight-strip-inner">
+        <div class="highlight-item">
+            <div class="highlight-number">7+</div>
+            <div class="highlight-label">portos brasileiros nos roteiros</div>
+        </div>
+        <div class="highlight-item">
+            <div class="highlight-number">5</div>
+            <div class="highlight-label">armadoras operando no Brasil</div>
+        </div>
+        <div class="highlight-item">
+            <div class="highlight-number">5–14</div>
+            <div class="highlight-label">noites de travessia disponíveis</div>
+        </div>
+        <div class="highlight-item">
+            <div class="highlight-number">100%</div>
+            <div class="highlight-label">de acompanhamento personalizado</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="dest-cta">
+    <span class="dest-cta-label">Pronto para zarpar?</span>
+    <h2 class="dest-cta-title">Monte o roteiro ideal<br>para você e sua família</h2>
+    <p class="dest-cta-sub">Nossa equipe conhece cada porto, cada navio e cada detalhe que faz diferença na sua viagem. Peça uma cotação sem compromisso.</p>
+    <a href="../index.html#forms" class="btn-dest-cta">
+        Quero uma cotação
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
 </section>
 
 <!-- FOOTER -->
@@ -326,10 +515,12 @@
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 60);
     });
-    // Slight parallax on hero img
+    // Oculta imagem fallback assim que o vídeo começa a reproduzir
+    const vid = document.getElementById('hero-video');
     const img = document.getElementById('hero-img');
-    img.addEventListener('load', () => img.classList.add('loaded'));
-    if (img.complete) img.classList.add('loaded');
+    if (vid) {
+        vid.addEventListener('playing', () => { if (img) img.style.display = 'none'; });
+    }
 </script>
 </body>
 </html>

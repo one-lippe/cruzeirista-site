@@ -3,7 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cruzeirista — O Cruzeiro dos Seus Sonhos</title>
+
+    <!-- ══ SEO PRIMÁRIO ══════════════════════════════════════════════ -->
+    <title>Cruzeirista | Consultoria Especializada em Cruzeiros — Caribe, Brasil, Mediterrâneo</title>
+    <meta name="description" content="Consultoria boutique especializada em cruzeiros. Encontre o cruzeiro ideal no Caribe sem visto, Brasil, Mediterrâneo, Alasca e mais. Cotação personalizada, atendimento especializado.">
+    <meta name="keywords" content="cruzeiros, consultoria de cruzeiros, cruzeiro caribe, cruzeiro brasil, cruzeiro mediterrâneo, cruzeiro alasca, agência de cruzeiros, pacotes de cruzeiro, cruzeiro sem visto">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Cruzeirista">
+    <link rel="canonical" href="https://one-lippe.github.io/cruzeirista-site/">
+
+    <!-- ══ OPEN GRAPH (Facebook / WhatsApp / LinkedIn) ═════════════ -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://one-lippe.github.io/cruzeirista-site/">
+    <meta property="og:title"       content="Cruzeirista | Consultoria Especializada em Cruzeiros">
+    <meta property="og:description" content="Encontre o cruzeiro ideal para você. Caribe sem visto, Brasil, Mediterrâneo, Alasca e muito mais. Cotação personalizada e atendimento especializado.">
+    <meta property="og:image"       content="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80">
+    <meta property="og:locale"      content="pt_BR">
+    <meta property="og:site_name"   content="Cruzeirista">
+
+    <!-- ══ TWITTER CARD ════════════════════════════════════════════ -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Cruzeirista | Consultoria Especializada em Cruzeiros">
+    <meta name="twitter:description" content="Encontre o cruzeiro ideal. Caribe, Brasil, Mediterrâneo e mais. Cotação personalizada.">
+    <meta name="twitter:image"       content="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80">
+
+    <!-- ══ JSON-LD SCHEMA ══════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "Cruzeirista",
+      "description": "Consultoria boutique especializada em cruzeiros. Atendimento personalizado para encontrar o cruzeiro ideal — Caribe, Brasil, Mediterrâneo, Alasca e mais.",
+      "url": "https://one-lippe.github.io/cruzeirista-site/",
+      "logo": "https://one-lippe.github.io/cruzeirista-site/logo.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brasil"
+      },
+      "serviceType": "Consultoria de Cruzeiros",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Destinos de Cruzeiro",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cruzeiro Caribe sem visto" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cruzeiro no Brasil" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cruzeiro Mediterrâneo" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cruzeiro Alasca" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cruzeiros Temáticos" } }
+        ]
+      },
+      "sameAs": []
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
@@ -233,15 +285,13 @@
         }
         .hero-cards-label {
             font-size: 11px; font-weight: 600;
-            color: rgba(255,255,255,.72); letter-spacing: .24em;
+            color: rgba(255,255,255,.95); letter-spacing: .24em;
             text-transform: uppercase; margin-bottom: 10px;
-            text-shadow: 0 1px 8px rgba(0,0,0,.32);
         }
         .hero-cards-heading {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(26px, 3.2vw, 46px);
             font-weight: 700; color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,.22), 0 8px 32px rgba(0,0,0,.28), 0 0 60px rgba(0,0,0,.18);
         }
 
         /* ── SCROLL CUE ── */
@@ -727,18 +777,21 @@
 </head>
 <body>
 
+<!-- Skip navigation para leitores de tela -->
+<a href="#conteudo-principal" class="skip-nav" style="position:absolute;left:-9999px;top:4px;z-index:9999;background:#002860;color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;">Ir para o conteúdo</a>
+
 <div id="hero-wrapper">
     <section id="hero">
 
         <!-- Único vídeo — keyint=1, scrubbing suave -->
-        <video id="bg-video" muted playsinline preload="auto">
+        <video id="bg-video" muted playsinline preload="auto" aria-hidden="true" role="presentation">
             <source src="hero_scrub.mp4" type="video/mp4">
         </video>
 
         <div class="hero-overlay"></div>
 
         <!-- NAV -->
-        <nav>
+        <nav role="navigation" aria-label="Menu principal">
             <div class="nav-side">
                 <a href="#quem-somos" class="nav-link">Quem Somos</a>
                 <a href="#destinos" class="nav-link">Destinos</a>
@@ -762,9 +815,9 @@
         </nav>
 
         <!-- UI LAYER -->
-        <div id="hero-ui">
+        <div id="hero-ui" id="conteudo-principal">
 
-            <div class="hero-content" id="hero-body">
+            <div class="hero-content" id="hero-body" role="banner">
                 <h1 class="hero-title">
                     <span class="line1">O Cruzeiro dos Seus Sonhos</span>
                 </h1>
@@ -829,19 +882,19 @@
 
 
 <!-- ══ LIGHTBOX ══════════════════════════════════════════════════ -->
-<div class="lightbox-overlay" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose">&#10005;</button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8249;</button>
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizar imagem em tamanho grande">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&#10005;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Imagem anterior">&#8249;</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="">
-    <button class="lightbox-nav lightbox-next" id="lightboxNext">&#8250;</button>
-    <span class="lightbox-counter" id="lightboxCounter"></span>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Próxima imagem">&#8250;</button>
+    <span class="lightbox-counter" id="lightboxCounter" aria-live="polite"></span>
 </div>
 
 <!-- ══ TEMÁTICOS ════════════════════════════════════════════════ -->
-<section class="tematicos" id="tematicos">
+<section class="tematicos" id="tematicos" aria-labelledby="tematicos-titulo">
     <div class="tematicos-header">
         <p class="section-label">A bordo com sua música</p>
-        <h2 class="tematicos-title">Cruzeiros Temáticos</h2>
+        <h2 class="tematicos-title" id="tematicos-titulo">Cruzeiros Temáticos</h2>
     </div>
     <div class="carousel-outer">
         <button class="carousel-btn carousel-prev" id="temPrev">&#8249;</button>
@@ -889,13 +942,13 @@
 </section>
 
 <!-- ══ FORMULÁRIO ═══════════════════════════════════════════════ -->
-<section class="forms-section" id="forms">
+<section class="forms-section" id="forms" aria-labelledby="forms-titulo" role="region">
   <div class="forms-wrapper">
 
     <!-- ── coluna esquerda: copy ── -->
     <div class="forms-copy">
         <span class="forms-copy-label">Cotação personalizada</span>
-        <h2 class="forms-copy-heading">Conta pra gente o cruzeiro que você quer fazer.</h2>
+        <h2 class="forms-copy-heading" id="forms-titulo">Conta pra gente o cruzeiro que você quer fazer.</h2>
         <p class="forms-copy-text">Cada viagem começa com uma conversa. Preencha em 3 passos rápidos e nossa equipe monta uma proposta com os melhores navios, roteiros e cabines para o que você está buscando. Sem enrolação.</p>
         <div class="forms-trust">
             <div class="forms-trust-item">
@@ -959,7 +1012,7 @@
                 <div class="form-group">
                     <p class="form-group-label">Janela ideal de embarque</p>
                     <div class="form-select-wrap">
-                        <select class="form-select" id="sel-periodo" onchange="this.style.borderColor='';document.getElementById('err-periodo')?.classList.remove('visible')">
+                        <select class="form-select" id="sel-periodo" aria-required="true" aria-describedby="err-periodo" onchange="this.style.borderColor='';document.getElementById('err-periodo')?.classList.remove('visible')">
                             <option value="">Selecione…</option>
                             <option>Próximos 3 meses</option>
                             <option>4 a 6 meses</option>
@@ -973,7 +1026,7 @@
                 <div class="form-group">
                     <p class="form-group-label">Quantas pessoas</p>
                     <div class="form-select-wrap">
-                        <select class="form-select" id="sel-pessoas" onchange="this.style.borderColor='';document.getElementById('err-pessoas')?.classList.remove('visible')">
+                        <select class="form-select" id="sel-pessoas" aria-required="true" aria-describedby="err-pessoas" onchange="this.style.borderColor='';document.getElementById('err-pessoas')?.classList.remove('visible')">
                             <option value="">Selecione…</option>
                             <option>1 pessoa</option>
                             <option>2 pessoas</option>
@@ -1038,23 +1091,23 @@
 
             <div class="form-group">
                 <p class="form-group-label">Como você se chama?</p>
-                <input class="form-input" id="inp-nome" type="text" placeholder="Seu nome">
+                <input class="form-input" id="inp-nome" type="text" placeholder="Seu nome" aria-required="true" autocomplete="given-name">
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <p class="form-group-label">WhatsApp</p>
-                    <input class="form-input" id="inp-whats" type="tel" placeholder="(11) 99999-9999">
+                    <p class="form-group-label"><label for="inp-whats">WhatsApp</label></p>
+                    <input class="form-input" id="inp-whats" type="tel" placeholder="(11) 99999-9999" aria-required="true" autocomplete="tel">
                 </div>
                 <div class="form-group">
-                    <p class="form-group-label">E-mail</p>
-                    <input class="form-input" id="inp-email" type="email" placeholder="voce@email.com">
+                    <p class="form-group-label"><label for="inp-email">E-mail</label></p>
+                    <input class="form-input" id="inp-email" type="email" placeholder="voce@email.com" autocomplete="email">
                 </div>
             </div>
 
             <div class="form-group">
-                <p class="form-group-label">Cidade de origem <span class="form-group-hint">(para coordenarmos voo / transfer)</span></p>
-                <input class="form-input" id="inp-cidade" type="text" placeholder="Ex.: São Paulo, SP" oninput="this.style.borderColor='';document.getElementById('err-cidade')?.classList.remove('visible')">
+                <p class="form-group-label"><label for="inp-cidade">Cidade de origem</label> <span class="form-group-hint">(para coordenarmos voo / transfer)</span></p>
+                <input class="form-input" id="inp-cidade" type="text" placeholder="Ex.: São Paulo, SP" aria-required="true" aria-describedby="err-cidade" oninput="this.style.borderColor='';document.getElementById('err-cidade')?.classList.remove('visible')" autocomplete="address-level2">
                 <p class="form-error-msg" id="err-cidade">⚠ Informe sua cidade de origem.</p>
             </div>
 
@@ -1078,10 +1131,10 @@
 </section>
 
 <!-- ══ QUEM SOMOS ════════════════════════════════════════════════ -->
-<section class="quem-somos" id="quem-somos">
+<section class="quem-somos" id="quem-somos" aria-labelledby="quem-somos-titulo">
     <div class="qs-inner">
         <p class="section-label">Quem somos</p>
-        <h2 class="qs-title">Navegue com quem realmente ama o mar.</h2>
+        <h2 class="qs-title" id="quem-somos-titulo">Navegue com quem realmente ama o mar.</h2>
         <p class="qs-text">O Cruzeirista não é uma agência genérica de turismo. Somos uma consultoria especializada em cruzeiros, criada por pessoas que vivem e respiram esse universo e acreditam que a melhor viagem começa com a orientação certa.</p>
         <div class="qs-pillars">
             <div class="qs-pillar">
@@ -1112,7 +1165,7 @@
 </section>
 
 <!-- ══ FOOTER ════════════════════════════════════════════════════ -->
-<footer>
+<footer role="contentinfo" aria-label="Rodapé">
     <svg class="ft-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
         <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>
         <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>

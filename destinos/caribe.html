@@ -50,12 +50,18 @@
             position: relative; width: 100%; height: 88vh; min-height: 480px;
             overflow: hidden;
         }
+        .dest-hero-video,
         .dest-hero-img {
+            position: absolute; inset: 0;
             width: 100%; height: 100%; object-fit: cover;
-            transform: scale(1.04);
-            transition: transform 8s ease;
         }
-        .dest-hero-img.loaded { transform: scale(1); }
+        .dest-hero-video {
+            /* vídeo autoplay — ocupa todo o hero */
+        }
+        .dest-hero-img {
+            /* fallback: visível só se o vídeo não carregar */
+            z-index: 0;
+        }
         .dest-hero-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(
@@ -71,7 +77,7 @@
         }
         .dest-hero-region {
             font-size: 11px; font-weight: 600; letter-spacing: .22em;
-            text-transform: uppercase; color: var(--teal);
+            text-transform: uppercase; color: rgba(255,255,255,.90);
             margin-bottom: 12px; display: block;
         }
         .dest-hero-title {
@@ -196,6 +202,127 @@
             display: flex; align-items: center; gap: 10px;
         }
 
+
+        /* SHIP GROUP DIVIDER */
+        .ships-group-divider {
+            max-width: 1140px; margin: 56px auto 32px;
+            display: flex; align-items: center; gap: 20px;
+        }
+        .ships-group-divider-line { flex: 1; height: 1px; background: #e5e7eb; }
+        .ships-group-label {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 20px; border-radius: 100px;
+            font-size: 12px; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; white-space: nowrap;
+        }
+        .ships-group-label.visa { background: #f0f9ff; color: var(--teal); border: 1px solid #bae6fd; }
+        .ships-group-label.no-visa { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+        .ship-card-badge.no-visa { background: rgba(22,163,74,.92); }
+        .semvisto-callout {
+            max-width: 1140px; margin: 0 auto 32px;
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            border-radius: 14px; padding: 18px 24px;
+            display: flex; align-items: flex-start; gap: 14px;
+        }
+        .semvisto-callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+        .semvisto-callout-text { font-size: 14px; color: #166534; line-height: 1.6; }
+        .semvisto-callout-text strong { font-weight: 700; }
+
+        /* PORTS SECTION */
+        .ports-section {
+            background: #f5f6f8;
+            padding: 88px 48px;
+        }
+        .ports-header {
+            max-width: 1140px; margin: 0 auto 52px;
+        }
+        .ports-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: var(--teal);
+            margin-bottom: 12px; display: block;
+        }
+        .ports-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(26px, 3vw, 40px);
+            font-weight: 700; color: var(--darker);
+        }
+        .ports-grid {
+            max-width: 1140px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .port-card {
+            border-radius: 16px; overflow: hidden;
+            position: relative; height: 300px;
+        }
+        .port-card-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .5s ease; display: block;
+        }
+        .port-card:hover .port-card-img { transform: scale(1.06); }
+        .port-card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, transparent 35%, rgba(5,14,26,.80) 100%);
+        }
+        .port-card-info {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 20px 22px 24px;
+        }
+        .port-card-name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .port-card-desc { font-size: 13px; color: rgba(255,255,255,.70); line-height: 1.5; }
+        .port-card-tag {
+            display: inline-block;
+            background: rgba(8,145,178,.85); color: #fff;
+            font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+            padding: 4px 10px; border-radius: 100px; margin-bottom: 10px;
+        }
+
+        /* HIGHLIGHT STRIP */
+        .highlight-strip { background: var(--darker); padding: 72px 48px; }
+        .highlight-strip-inner {
+            max-width: 1140px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+        }
+        .highlight-item { text-align: center; }
+        .highlight-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 48px; font-weight: 700; color: var(--teal);
+            line-height: 1; margin-bottom: 10px;
+        }
+        .highlight-label { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+
+        /* DEST CTA */
+        .dest-cta { background: #002860; padding: 88px 48px; text-align: center; }
+        .dest-cta-label {
+            font-size: 11px; font-weight: 600; letter-spacing: .22em;
+            text-transform: uppercase; color: rgba(255,255,255,.5);
+            margin-bottom: 16px; display: block;
+        }
+        .dest-cta-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 700; color: #fff;
+            margin-bottom: 20px; line-height: 1.15;
+        }
+        .dest-cta-sub {
+            font-size: 16px; color: rgba(255,255,255,.65);
+            max-width: 520px; margin: 0 auto 36px; line-height: 1.6;
+        }
+        .btn-dest-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--teal); color: #fff;
+            border-radius: 100px; padding: 16px 36px;
+            font-size: 15px; font-weight: 600; text-decoration: none;
+            transition: background .2s, transform .15s;
+        }
+        .btn-dest-cta:hover { background: #0e7490; transform: translateY(-2px); }
+
+        @media (max-width: 900px) {
+            
+            .highlight-strip-inner { grid-template-columns: 1fr 1fr; }
+        }
+
         /* FOOTER */
         footer {
             background: #002860;
@@ -229,12 +356,19 @@
             </svg>
     <div class="nav-side" style="justify-content:flex-end">
         <a href="../index.html#tematicos" class="nav-link">Temáticos</a>
-        <a href="../index.html#forms" class="nav-link" style="color:var(--teal)">Cotação</a>
+        <a href="../index.html#forms" class="nav-link">Faça uma cotação</a>
     </div>
 </nav>
 
 <!-- BANNER HERO -->
 <section class="dest-hero">
+    <!-- Vídeo autoplay — coloque o arquivo em ../videos/caribe.mp4 -->
+    <video class="dest-hero-video" id="hero-video"
+           autoplay muted loop playsinline preload="metadata"
+           aria-hidden="true">
+        <source src="../videos/caribe.mp4" type="video/mp4">
+    </video>
+    <!-- Fallback: exibido até o vídeo carregar -->
     <img class="dest-hero-img" id="hero-img"
          src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=1600&q=85"
          alt="Praia do Caribe"
@@ -257,16 +391,15 @@
         <h2 class="ships-title">Escolha a sua travessia</h2>
     </div>
     <div class="ships-grid">
-        
         <div class="ship-card">
             <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="MSC Seashore" class="ship-card-img" loading="lazy">
+                <img src="../img/navios/wonder-of-the-seas.jpg" alt="Wonder of the Seas" class="ship-card-img" loading="lazy">
                 <span class="ship-card-badge">7 noites</span>
             </div>
             <div class="ship-card-body">
                 <p class="ship-card-tag">Embarque em Miami, EUA</p>
-                <h3 class="ship-card-name">MSC Seashore</h3>
-                <p class="ship-card-itinerary">Nassau · Ocean Cay · Costa Maya · Cozumel</p>
+                <h3 class="ship-card-name">Wonder of the Seas</h3>
+                <p class="ship-card-itinerary">Cozumel · Roatan · Costa Maya · Nassau</p>
             </div>
             <div class="ship-card-footer">
                 <span class="ship-card-price">Consulte disponibilidade</span>
@@ -275,28 +408,101 @@
         </div>
         <div class="ship-card">
             <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="Costa Pacifica" class="ship-card-img" loading="lazy">
-                <span class="ship-card-badge">10 noites</span>
-            </div>
-            <div class="ship-card-body">
-                <p class="ship-card-tag">Embarque em Cartagena, COL</p>
-                <h3 class="ship-card-name">Costa Pacifica</h3>
-                <p class="ship-card-itinerary">Aruba · Curaçao · Barbados · St. Lucia</p>
-            </div>
-            <div class="ship-card-footer">
-                <span class="ship-card-price">Consulte disponibilidade</span>
-                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
-            </div>
-        </div>
-        <div class="ship-card">
-            <div class="ship-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=75" alt="Norwegian Pearl" class="ship-card-img" loading="lazy">
+                <img src="../img/navios/msc-seascape.jpg" alt="MSC Seascape" class="ship-card-img" loading="lazy">
                 <span class="ship-card-badge">7 noites</span>
             </div>
             <div class="ship-card-body">
-                <p class="ship-card-tag">Embarque em San Juan, PR</p>
-                <h3 class="ship-card-name">Norwegian Pearl</h3>
-                <p class="ship-card-itinerary">St. Thomas · St. Maarten · Tortola · Nassau</p>
+                <p class="ship-card-tag">Embarque em Miami, EUA</p>
+                <h3 class="ship-card-name">MSC Seascape</h3>
+                <p class="ship-card-itinerary">Jamaica · Ilhas Cayman · Cozumel</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/norwegian-escape.jpg" alt="Norwegian Escape" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Miami, EUA</p>
+                <h3 class="ship-card-name">Norwegian Escape</h3>
+                <p class="ship-card-itinerary">St. Thomas · Tortola · Nassau</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/carnival-celebration.jpg" alt="Carnival Celebration" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge">7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Miami, EUA</p>
+                <h3 class="ship-card-name">Carnival Celebration</h3>
+                <p class="ship-card-itinerary">Nassau · Amber Cove · Grand Turk</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- DIVISOR SEM VISTO -->
+    <div class="ships-group-divider">
+        <div class="ships-group-divider-line"></div>
+        <span class="ships-group-label no-visa">🏝️ Caribe sem visto · embarque em Cartagena</span>
+        <div class="ships-group-divider-line"></div>
+    </div>
+    <div class="semvisto-callout">
+        <span class="semvisto-callout-icon">🛡️</span>
+        <p class="semvisto-callout-text"><strong>Sem visto americano.</strong> Esses roteiros embarcam em Cartagena, Colômbia, e visitam ilhas que não exigem visto dos EUA. Brasileiros entram apenas com passaporte válido.</p>
+    </div>
+    <div class="ships-grid">
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/serenade-of-the-seas.jpg" alt="Serenade of the Seas" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge no-visa">Sem visto · 7 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Cartagena, COL</p>
+                <h3 class="ship-card-name">Serenade of the Seas</h3>
+                <p class="ship-card-itinerary">Willemstad (Curaçao) · Oranjestad (Aruba) · Kralendijk (Bonaire) · Colón</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/costa-fascinosa.jpg" alt="Costa Fascinosa" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge no-visa">Sem visto · 10 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Cartagena, COL</p>
+                <h3 class="ship-card-name">Costa Fascinosa</h3>
+                <p class="ship-card-itinerary">Aruba · Curaçao · Bonaire · Barbados · St. Lucia</p>
+            </div>
+            <div class="ship-card-footer">
+                <span class="ship-card-price">Consulte disponibilidade</span>
+                <a href="../index.html#forms" class="btn-ship-cta">Pedir cotação</a>
+            </div>
+        </div>
+        <div class="ship-card">
+            <div class="ship-card-img-wrap">
+                <img src="../img/navios/costa-diadema.jpg" alt="Costa Diadema" class="ship-card-img" loading="lazy">
+                <span class="ship-card-badge no-visa">Sem visto · 8 noites</span>
+            </div>
+            <div class="ship-card-body">
+                <p class="ship-card-tag">Embarque em Cartagena, COL</p>
+                <h3 class="ship-card-name">Costa Diadema</h3>
+                <p class="ship-card-itinerary">Aruba · Curaçao · Bonaire · Colón (Panamá)</p>
             </div>
             <div class="ship-card-footer">
                 <span class="ship-card-price">Consulte disponibilidade</span>
@@ -308,6 +514,76 @@
         <span>🚢</span>
         <span>Mais navios, datas e cabines disponíveis. Fale com nossa equipe para opções completas e condições especiais.</span>
     </div>
+</section>
+
+<!-- PORTOS -->
+<section class="ports-section">
+    <div class="ports-header">
+        <span class="ports-label">Roteiros</span>
+        <h2 class="ports-title">Os destinos mais sonhados do Caribe</h2>
+    </div>
+    <div class="ports-grid">
+        <div class="port-card">
+            <img src="../img/portos/aruba.jpg" alt="Aruba" class="port-card-img" loading="lazy">
+            <div class="port-card-overlay"></div>
+            <div class="port-card-info">
+                <span class="port-card-tag">Sem visto</span>
+                <h3 class="port-card-name">Aruba</h3>
+                <p class="port-card-desc">Praias de areia branca, águas turquesa e sol 365 dias por ano.</p>
+            </div>
+        </div>
+        <div class="port-card">
+            <img src="../img/portos/curacao.jpg" alt="Curaçao" class="port-card-img" loading="lazy">
+            <div class="port-card-overlay"></div>
+            <div class="port-card-info">
+                <span class="port-card-tag">Sem visto</span>
+                <h3 class="port-card-name">Curaçao</h3>
+                <p class="port-card-desc">O charme colorido de Willemstad e recifes de coral únicos.</p>
+            </div>
+        </div>
+        <div class="port-card">
+            <img src="../img/portos/bonaire.jpg" alt="Bonaire" class="port-card-img" loading="lazy">
+            <div class="port-card-overlay"></div>
+            <div class="port-card-info">
+                <span class="port-card-tag">Sem visto</span>
+                <h3 class="port-card-name">Bonaire</h3>
+                <p class="port-card-desc">Paraíso do mergulho com flamingos e as águas mais cristalinas do Caribe.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="highlight-strip">
+    <div class="highlight-strip-inner">
+        <div class="highlight-item">
+            <div class="highlight-number">15+</div>
+            <div class="highlight-label">ilhas caribenhas nos roteiros</div>
+        </div>
+        <div class="highlight-item">
+            <div class="highlight-number">0</div>
+            <div class="highlight-label">visto necessário nos roteiros sem visto</div>
+        </div>
+        <div class="highlight-item">
+            <div class="highlight-number">7–14</div>
+            <div class="highlight-label">noites de travessia disponíveis</div>
+        </div>
+        <div class="highlight-item">
+            <div class="highlight-number">100%</div>
+            <div class="highlight-label">de suporte especializado</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="dest-cta">
+    <span class="dest-cta-label">Pronto para zarpar?</span>
+    <h2 class="dest-cta-title">Seu Caribe começa com<br>uma conversa</h2>
+    <p class="dest-cta-sub">Visto americano ou sem visto, Caribe Norte ou Sul — nossa equipe monta o roteiro certo para o seu perfil e orçamento.</p>
+    <a href="../index.html#forms" class="btn-dest-cta">
+        Quero uma cotação
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
 </section>
 
 <!-- FOOTER -->
@@ -326,10 +602,12 @@
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 60);
     });
-    // Slight parallax on hero img
+    // Oculta imagem fallback assim que o vídeo começa a reproduzir
+    const vid = document.getElementById('hero-video');
     const img = document.getElementById('hero-img');
-    img.addEventListener('load', () => img.classList.add('loaded'));
-    if (img.complete) img.classList.add('loaded');
+    if (vid) {
+        vid.addEventListener('playing', () => { if (img) img.style.display = 'none'; });
+    }
 </script>
 </body>
 </html>
