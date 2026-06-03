@@ -92,10 +92,49 @@
             background: #050e1a;
         }
 
-        /* Mobile: remove o runway — hero ocupa 1 tela só */
+        /* Mobile: runway menor (200vh), hero continua sticky */
         @media (max-width: 768px) {
-            #hero-wrapper { height: 100vh; }
-            #hero { position: relative; }
+            #hero-wrapper { height: 200vh; }
+        }
+
+        /* ── MOBILE DEST GRID (aparece na fase final do hero) ── */
+        .mobile-dest-grid {
+            display: none;
+        }
+        @media (max-width: 900px) {
+            .mobile-dest-grid {
+                display: block;
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 20;
+                opacity: 0;
+                width: 94%;
+                text-align: center;
+                pointer-events: none;
+                will-change: opacity;
+            }
+            .mobile-dest-grid.visible { pointer-events: auto; }
+            .mobile-dest-items {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+                margin-top: 14px;
+            }
+            .mobile-dest-item {
+                display: flex; flex-direction: column;
+                align-items: center; gap: 5px;
+                text-decoration: none; color: #fff;
+            }
+            .mobile-dest-item img {
+                width: 100%; aspect-ratio: 1;
+                object-fit: cover; border-radius: 10px;
+                border: 1.5px solid rgba(255,255,255,.25);
+            }
+            .mobile-dest-item span {
+                font-size: 10px; font-weight: 600;
+                color: rgba(255,255,255,.9); line-height: 1.2;
+            }
         }
 
         /* ── Vídeo único ── */
@@ -796,7 +835,13 @@
         ══════════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
             /* Hero */
-            .hero-title { white-space: normal; line-height: 1.08; }
+            .hero-title {
+                font-family: 'Playfair Display', Georgia, serif;
+                font-size: clamp(30px, 8vw, 52px);
+                white-space: normal;
+                line-height: 1.1;
+                letter-spacing: .01em;
+            }
             .hero-sub   { font-size: 14px; padding: 0 8px; }
             .hero-buttons { flex-direction: column; align-items: center; gap: 10px; }
             .hero-buttons .btn { width: 200px; text-align: center; }
@@ -922,6 +967,21 @@
                 <div class="hero-buttons">
                     <a href="#destinos" class="btn btn-glass">Explorar destinos</a>
                     <a href="#forms"    class="btn btn-teal">Quero uma cotação</a>
+                </div>
+            </div>
+
+            <!-- Grid de destinos para mobile (fase final do hero) -->
+            <div class="mobile-dest-grid" id="mobileDestGrid">
+                <p class="hero-cards-label">Para onde nós vamos?</p>
+                <div class="mobile-dest-items">
+                    <a href="destinos/brasil.html" class="mobile-dest-item"><img src="img/brasil-card.jpg" alt="Brasil"><span>Brasil</span></a>
+                    <a href="destinos/alasca.html" class="mobile-dest-item"><img src="img/alasca-card.jpg" alt="Alasca"><span>Alasca</span></a>
+                    <a href="destinos/caribe.html" class="mobile-dest-item"><img src="img/caribe-card.jpg" alt="Caribe"><span>Caribe</span></a>
+                    <a href="destinos/dubai.html" class="mobile-dest-item"><img src="img/dubai-card.jpg" alt="Dubai"><span>Dubai</span></a>
+                    <a href="destinos/europa.html" class="mobile-dest-item"><img src="img/europa-card.jpg" alt="Europa"><span>Europa</span></a>
+                    <a href="destinos/ilhas-gregas.html" class="mobile-dest-item"><img src="img/grecias-card.jpg" alt="Ilhas Gregas"><span>Ilhas Gregas</span></a>
+                    <a href="destinos/mediterraneo.html" class="mobile-dest-item"><img src="img/mediterraneo-card.jpg" alt="Mediterrâneo"><span>Mediterrâneo</span></a>
+                    <a href="destinos/norte-europa.html" class="mobile-dest-item"><img src="img/norte-europa-card.jpg" alt="Norte Europa"><span>Norte Europa</span></a>
                 </div>
             </div>
 
@@ -1291,62 +1351,59 @@ const scrollCue      = document.querySelector('.scroll-cue');
 
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-const isMobile = window.matchMedia('(max-width: 768px)').matches
-             || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const mobileDestGrid = document.getElementById('mobileDestGrid');
 
-if (isMobile) {
-    /* ── MOBILE: autoplay loop simples, sem scrubbing ── */
-    vid.setAttribute('autoplay', '');
-    vid.setAttribute('loop', '');
-    vid.setAttribute('playsinline', '');
-    vid.removeAttribute('preload');
-    vid.load();
-    vid.play().catch(() => {});
-
-    /* Fade-out do texto ao scroll no mobile */
-    window.addEventListener('scroll', () => {
-        const runway = wrapper.offsetHeight - window.innerHeight;
-        const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
-        const textOpacity = Math.max(0, 1 - progress / 0.30);
-        if (heroBody)  heroBody.style.opacity  = textOpacity;
-        if (scrollCue) scrollCue.style.opacity = textOpacity;
-    }, { passive: true });
-
-} else {
-    /* ── DESKTOP: scroll-scrubbing original ── */
-    let targetTime = 0;
-    let smoothTime = 0;
-
-    vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
-
-    window.addEventListener('scroll', () => {
-        const runway   = wrapper.offsetHeight - window.innerHeight;
-        const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
-
-        if (vid.duration) targetTime = vid.duration * progress;
-
-        const textOpacity = Math.max(0, 1 - progress / 0.30);
-        if (heroBody)  heroBody.style.opacity  = textOpacity;
-        if (scrollCue) scrollCue.style.opacity = textOpacity;
-
-        const cardsP = Math.max(0, Math.min(1, (progress - 0.60) / 0.30));
-        const cardsY = (1 - cardsP) * 30;
-
-        if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
-        if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
-        if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
-
-    }, { passive: true });
-
-    function scrubLoop() {
-        if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
-            smoothTime = lerp(smoothTime, targetTime, 0.1);
-            vid.currentTime = smoothTime;
-        }
-        requestAnimationFrame(scrubLoop);
-    }
-    scrubLoop();
+/* ── iOS/Android: unlock do vídeo no primeiro toque ── */
+let videoUnlocked = false;
+function unlockVideo() {
+    if (videoUnlocked) return;
+    videoUnlocked = true;
+    vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
 }
+document.addEventListener('touchstart', unlockVideo, { once: true, passive: true });
+document.addEventListener('click',      unlockVideo, { once: true });
+
+/* ── Scroll-scrubbing (desktop + mobile) ── */
+let targetTime = 0;
+let smoothTime = 0;
+
+vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
+
+window.addEventListener('scroll', () => {
+    const runway   = wrapper.offsetHeight - window.innerHeight;
+    const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
+
+    if (vid.duration) targetTime = vid.duration * progress;
+
+    // Texto: fade-out nos primeiros 30%
+    const textOpacity = Math.max(0, 1 - progress / 0.30);
+    if (heroBody)  heroBody.style.opacity  = textOpacity;
+    if (scrollCue) scrollCue.style.opacity = textOpacity;
+
+    // Cards destinos + título: fade-in de 60% → 90%
+    const cardsP = Math.max(0, Math.min(1, (progress - 0.60) / 0.30));
+    const cardsY = (1 - cardsP) * 30;
+
+    if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
+    if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
+    if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
+
+    // Mobile: grid de destinos
+    if (mobileDestGrid) {
+        mobileDestGrid.style.opacity = cardsP;
+        mobileDestGrid.classList.toggle('visible', cardsP > 0.5);
+    }
+
+}, { passive: true });
+
+function scrubLoop() {
+    if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
+        smoothTime = lerp(smoothTime, targetTime, 0.1);
+        vid.currentTime = smoothTime;
+    }
+    requestAnimationFrame(scrubLoop);
+}
+scrubLoop();
 
 
 /* ════════════════════════════════════════════════════════════════
