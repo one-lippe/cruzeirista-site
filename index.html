@@ -837,13 +837,13 @@
            MOBILE — 768px
         ══════════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
-            /* Hero — mantém Playfair, só quebra o nowrap */
-            .hero-title {
+            /* Hero — o font-size e white-space vivem em .line1 */
+            .hero-title .line1 {
                 font-family: 'Playfair Display', Georgia, serif;
                 font-weight: 700;
-                font-size: clamp(36px, 9vw, 64px);
+                font-size: clamp(32px, 9vw, 64px);
                 white-space: normal;
-                line-height: 1.08;
+                line-height: 1.1;
                 letter-spacing: .01em;
             }
             .hero-sub   { font-size: clamp(14px, 3.5vw, 17px); padding: 0 8px; }
@@ -889,7 +889,7 @@
             .nav-brand { height: 26px; }
 
             /* Hero */
-            .hero-title { font-size: clamp(32px, 9.5vw, 56px); }
+            .hero-title .line1 { font-size: clamp(28px, 10vw, 48px); }
             .hero-content { padding-bottom: 24vh; }
 
             /* Below hero */
@@ -927,7 +927,7 @@
     <section id="hero">
 
         <!-- Único vídeo — keyint=1, scrubbing suave -->
-        <video id="bg-video" muted playsinline preload="auto" aria-hidden="true" role="presentation">
+        <video id="bg-video" muted playsinline preload="auto" poster="hero-poster.jpg" aria-hidden="true" role="presentation">
             <source src="hero_scrub.mp4" type="video/mp4">
         </video>
 
