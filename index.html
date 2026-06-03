@@ -838,15 +838,19 @@
         ══════════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
             /* Hero — o font-size e white-space vivem em .line1 */
+            .hero-content { padding: 0 24px 32vh; }
+            .hero-title { width: 100%; }
             .hero-title .line1 {
+                display: block;
                 font-family: 'Playfair Display', Georgia, serif;
                 font-weight: 700;
-                font-size: clamp(32px, 9vw, 64px);
-                white-space: normal;
+                font-size: clamp(32px, 9vw, 56px);
+                white-space: normal !important;
                 line-height: 1.1;
                 letter-spacing: .01em;
+                word-break: break-word;
             }
-            .hero-sub   { font-size: clamp(14px, 3.5vw, 17px); padding: 0 8px; }
+            .hero-sub   { font-size: clamp(14px, 3.5vw, 17px); padding: 0 4px; }
             .hero-buttons { flex-direction: column; align-items: center; gap: 10px; }
             .hero-buttons .btn { width: 220px; text-align: center; }
             .scroll-cue { bottom: 20px; }
@@ -866,7 +870,7 @@
 
             /* Quem somos */
             .quem-somos { padding: 56px 20px; }
-            .qs-title { font-size: clamp(28px, 7vw, 58px); }
+            .qs-title { font-size: clamp(36px, 9vw, 58px); font-weight: 700; }
             .qs-pillars { display: flex; flex-direction: column; gap: 24px; }
             .qs-pillar { padding: 24px 20px; }
             .qs-watermark { width: 72px; bottom: 16px; right: 20px; }
@@ -1354,57 +1358,81 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 
 const mobileDestGrid = document.getElementById('mobileDestGrid');
 
-/* ── iOS/Android: unlock do vídeo no primeiro toque ── */
-let videoUnlocked = false;
-function unlockVideo() {
-    if (videoUnlocked) return;
-    videoUnlocked = true;
-    vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
-}
-document.addEventListener('touchstart', unlockVideo, { once: true, passive: true });
-document.addEventListener('click',      unlockVideo, { once: true });
+const isAndroid = /Android/i.test(navigator.userAgent);
+const isIOS     = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-/* ── Scroll-scrubbing (desktop + mobile) ── */
-let targetTime = 0;
-let smoothTime = 0;
-
-vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
-
-window.addEventListener('scroll', () => {
+/* ── Scroll handler comum (fade textos + cards) ── */
+function handleScroll() {
     const runway   = wrapper.offsetHeight - window.innerHeight;
     const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
 
-    if (vid.duration) targetTime = vid.duration * progress;
-
-    // Texto: fade-out nos primeiros 30%
     const textOpacity = Math.max(0, 1 - progress / 0.30);
     if (heroBody)  heroBody.style.opacity  = textOpacity;
     if (scrollCue) scrollCue.style.opacity = textOpacity;
 
-    // Cards destinos + título: fade-in de 60% → 90%
     const cardsP = Math.max(0, Math.min(1, (progress - 0.60) / 0.30));
     const cardsY = (1 - cardsP) * 30;
-
     if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
     if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
     if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
-
-    // Mobile: grid de destinos
     if (mobileDestGrid) {
         mobileDestGrid.style.opacity = cardsP;
         mobileDestGrid.classList.toggle('visible', cardsP > 0.5);
     }
 
-}, { passive: true });
-
-function scrubLoop() {
-    if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
-        smoothTime = lerp(smoothTime, targetTime, 0.1);
-        vid.currentTime = smoothTime;
-    }
-    requestAnimationFrame(scrubLoop);
+    return progress;
 }
-scrubLoop();
+window.addEventListener('scroll', handleScroll, { passive: true });
+
+if (isAndroid) {
+    /* ── ANDROID: seeking é lento, usa autoplay loop ── */
+    vid.setAttribute('autoplay', '');
+    vid.setAttribute('loop', '');
+    vid.load();
+    vid.play().catch(() => {});
+
+} else if (isIOS) {
+    /* ── iOS: scrubbing com unlock no primeiro toque ── */
+    let unlocked = false;
+    function unlockIOS() {
+        if (unlocked) return;
+        unlocked = true;
+        vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
+    }
+    document.addEventListener('touchstart', unlockIOS, { once: true, passive: true });
+
+    let targetTime = 0, smoothTime = 0;
+    vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
+    window.addEventListener('scroll', () => {
+        const progress = handleScroll();
+        if (vid.duration) targetTime = vid.duration * progress;
+    }, { passive: true });
+    function scrubLoop() {
+        if (vid.duration && unlocked && Math.abs(smoothTime - targetTime) > 0.0005) {
+            smoothTime = lerp(smoothTime, targetTime, 0.1);
+            vid.currentTime = smoothTime;
+        }
+        requestAnimationFrame(scrubLoop);
+    }
+    scrubLoop();
+
+} else {
+    /* ── DESKTOP: scroll-scrubbing completo ── */
+    let targetTime = 0, smoothTime = 0;
+    vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
+    window.addEventListener('scroll', () => {
+        const progress = handleScroll();
+        if (vid.duration) targetTime = vid.duration * progress;
+    }, { passive: true });
+    function scrubLoop() {
+        if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
+            smoothTime = lerp(smoothTime, targetTime, 0.1);
+            vid.currentTime = smoothTime;
+        }
+        requestAnimationFrame(scrubLoop);
+    }
+    scrubLoop();
+}
 
 
 /* ════════════════════════════════════════════════════════════════
