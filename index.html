@@ -675,6 +675,17 @@
             background: #0f1822;
             padding: 80px 48px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .qs-watermark {
+            position: absolute;
+            bottom: 28px;
+            right: 36px;
+            width: 110px;
+            opacity: 0.09;
+            pointer-events: none;
+            user-select: none;
         }
         .qs-inner {
             max-width: 1100px;
@@ -772,6 +783,86 @@
             .cards-left, .cards-right, .hero-cards-title { display: none; }
             .cta-section { padding: 60px 24px; }
             footer { flex-direction: column; gap: 12px; text-align: center; }
+        }
+
+        /* ══════════════════════════════════════════════════════════
+           MOBILE — 768px
+        ══════════════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            /* Hero */
+            .hero-title { white-space: normal; line-height: 1.08; }
+            .hero-sub   { font-size: 14px; padding: 0 8px; }
+            .hero-buttons { flex-direction: column; align-items: center; gap: 10px; }
+            .hero-buttons .btn { width: 200px; text-align: center; }
+            .scroll-cue { bottom: 20px; }
+
+            /* Below hero / destinos */
+            .below-hero { padding: 56px 20px; }
+            .section-title { font-size: clamp(24px, 6vw, 36px); margin-bottom: 28px; }
+            .cards-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
+
+            /* Temáticos */
+            .tematicos { padding: 56px 0; }
+            .tematicos-header { padding: 0 20px; margin-bottom: 28px; }
+
+            /* Forms */
+            .forms-section { padding: 56px 20px; }
+
+            /* Quem somos */
+            .quem-somos { padding: 56px 20px; }
+            .qs-pillars { display: flex; flex-direction: column; gap: 24px; }
+            .qs-pillar { padding: 24px 20px; }
+            .qs-watermark { width: 72px; bottom: 16px; right: 20px; }
+
+            /* CTA */
+            .cta-section { padding: 56px 20px; }
+            .cta-title { font-size: clamp(24px, 6vw, 36px); }
+
+            /* Footer */
+            footer { padding: 24px 20px; }
+            .ft-brand { height: 22px; }
+        }
+
+        /* ══════════════════════════════════════════════════════════
+           MOBILE — 480px
+        ══════════════════════════════════════════════════════════ */
+        @media (max-width: 480px) {
+            /* Nav */
+            nav { padding: 16px 20px; }
+            .nav-brand { height: 26px; }
+
+            /* Hero */
+            .hero-label { font-size: 10px; letter-spacing: .16em; }
+            .hero-title { font-size: clamp(28px, 9vw, 44px); }
+            .hero-content { padding-bottom: 24vh; }
+
+            /* Below hero */
+            .below-hero { padding: 44px 16px; min-height: unset; }
+            .section-label { font-size: 10px; }
+            .dest-card-name { font-size: 16px; }
+
+            /* Carousel */
+            .tematico-card { flex: 0 0 80%; }
+            .carousel-outer { padding: 0 16px; }
+            .carousel-btn { width: 36px; height: 36px; font-size: 20px; }
+
+            /* Forms */
+            .forms-card { padding: 28px 16px; }
+            .form-row { grid-template-columns: 1fr; }
+            .forms-section { padding: 44px 16px; }
+
+            /* Quem somos / pillars */
+            .quem-somos { padding: 44px 16px; }
+            .qs-title { font-size: clamp(24px, 7vw, 36px); }
+            .qs-watermark { width: 56px; opacity: 0.07; }
+
+            /* CTA */
+            .cta-section { padding: 44px 16px; }
+            .cta-sub { font-size: 14px; }
+
+            /* Footer */
+            footer { padding: 20px 16px; }
+            .ft-copy { font-size: 11px; }
         }
     </style>
 </head>
@@ -1151,6 +1242,10 @@
             </div>
         </div>
     </div>
+    <!-- Watermark símbolo Cruzeirista -->
+    <svg class="qs-watermark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63.96 75.09" aria-hidden="true">
+        <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>
+    </svg>
 </section>
 
 <!-- ══ CTA ══════════════════════════════════════════════════════ -->
