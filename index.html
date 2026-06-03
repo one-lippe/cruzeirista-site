@@ -92,6 +92,12 @@
             background: #050e1a;
         }
 
+        /* Mobile: remove o runway — hero ocupa 1 tela só */
+        @media (max-width: 768px) {
+            #hero-wrapper { height: 100vh; }
+            #hero { position: relative; }
+        }
+
         /* ── Vídeo único ── */
         #bg-video {
             position: absolute;
