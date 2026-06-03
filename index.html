@@ -1285,40 +1285,62 @@ const scrollCue      = document.querySelector('.scroll-cue');
 
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-let targetTime = 0;
-let smoothTime = 0;
+const isMobile = window.matchMedia('(max-width: 768px)').matches
+             || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
+if (isMobile) {
+    /* ── MOBILE: autoplay loop simples, sem scrubbing ── */
+    vid.setAttribute('autoplay', '');
+    vid.setAttribute('loop', '');
+    vid.setAttribute('playsinline', '');
+    vid.removeAttribute('preload');
+    vid.load();
+    vid.play().catch(() => {});
 
-window.addEventListener('scroll', () => {
-    const runway   = wrapper.offsetHeight - window.innerHeight;
-    const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
+    /* Fade-out do texto ao scroll no mobile */
+    window.addEventListener('scroll', () => {
+        const runway = wrapper.offsetHeight - window.innerHeight;
+        const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
+        const textOpacity = Math.max(0, 1 - progress / 0.30);
+        if (heroBody)  heroBody.style.opacity  = textOpacity;
+        if (scrollCue) scrollCue.style.opacity = textOpacity;
+    }, { passive: true });
 
-    if (vid.duration) targetTime = vid.duration * progress;
+} else {
+    /* ── DESKTOP: scroll-scrubbing original ── */
+    let targetTime = 0;
+    let smoothTime = 0;
 
-    // Texto: fade-out nos primeiros 30%
-    const textOpacity = Math.max(0, 1 - progress / 0.30);
-    if (heroBody)  heroBody.style.opacity  = textOpacity;
-    if (scrollCue) scrollCue.style.opacity = textOpacity;
+    vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
 
-    // Cards destinos + título: fade-in de 60% → 90%
-    const cardsP = Math.max(0, Math.min(1, (progress - 0.60) / 0.30));
-    const cardsY = (1 - cardsP) * 30;
+    window.addEventListener('scroll', () => {
+        const runway   = wrapper.offsetHeight - window.innerHeight;
+        const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
 
-    if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
-    if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
-    if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
+        if (vid.duration) targetTime = vid.duration * progress;
 
-}, { passive: true });
+        const textOpacity = Math.max(0, 1 - progress / 0.30);
+        if (heroBody)  heroBody.style.opacity  = textOpacity;
+        if (scrollCue) scrollCue.style.opacity = textOpacity;
 
-function scrubLoop() {
-    if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
-        smoothTime = lerp(smoothTime, targetTime, 0.1);
-        vid.currentTime = smoothTime;
+        const cardsP = Math.max(0, Math.min(1, (progress - 0.60) / 0.30));
+        const cardsY = (1 - cardsP) * 30;
+
+        if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
+        if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
+        if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
+
+    }, { passive: true });
+
+    function scrubLoop() {
+        if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
+            smoothTime = lerp(smoothTime, targetTime, 0.1);
+            vid.currentTime = smoothTime;
+        }
+        requestAnimationFrame(scrubLoop);
     }
-    requestAnimationFrame(scrubLoop);
+    scrubLoop();
 }
-scrubLoop();
 
 
 /* ════════════════════════════════════════════════════════════════
