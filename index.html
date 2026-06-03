@@ -77,6 +77,9 @@
             font-family: 'Inter', sans-serif;
             background: #0a1628;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         /* ══ SCROLL RUNWAY ══════════════════════════════════════════ */
@@ -834,40 +837,43 @@
            MOBILE — 768px
         ══════════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
-            /* Hero */
+            /* Hero — mantém Playfair, só quebra o nowrap */
             .hero-title {
                 font-family: 'Playfair Display', Georgia, serif;
-                font-size: clamp(30px, 8vw, 52px);
+                font-weight: 700;
+                font-size: clamp(36px, 9vw, 64px);
                 white-space: normal;
-                line-height: 1.1;
+                line-height: 1.08;
                 letter-spacing: .01em;
             }
-            .hero-sub   { font-size: 14px; padding: 0 8px; }
+            .hero-sub   { font-size: clamp(14px, 3.5vw, 17px); padding: 0 8px; }
             .hero-buttons { flex-direction: column; align-items: center; gap: 10px; }
-            .hero-buttons .btn { width: 200px; text-align: center; }
+            .hero-buttons .btn { width: 220px; text-align: center; }
             .scroll-cue { bottom: 20px; }
 
             /* Below hero / destinos */
             .below-hero { padding: 56px 20px; }
-            .section-title { font-size: clamp(24px, 6vw, 36px); margin-bottom: 28px; }
+            .section-title { font-size: clamp(28px, 6vw, 52px); margin-bottom: 28px; }
             .cards-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
 
             /* Temáticos */
             .tematicos { padding: 56px 0; }
             .tematicos-header { padding: 0 20px; margin-bottom: 28px; }
+            .tematicos-title { font-size: clamp(28px, 6vw, 52px); }
 
             /* Forms */
             .forms-section { padding: 56px 20px; }
 
             /* Quem somos */
             .quem-somos { padding: 56px 20px; }
+            .qs-title { font-size: clamp(28px, 7vw, 58px); }
             .qs-pillars { display: flex; flex-direction: column; gap: 24px; }
             .qs-pillar { padding: 24px 20px; }
             .qs-watermark { width: 72px; bottom: 16px; right: 20px; }
 
             /* CTA */
             .cta-section { padding: 56px 20px; }
-            .cta-title { font-size: clamp(24px, 6vw, 36px); }
+            .cta-title { font-size: clamp(28px, 6vw, 52px); }
 
             /* Footer */
             footer { padding: 24px 20px; }
@@ -883,14 +889,11 @@
             .nav-brand { height: 26px; }
 
             /* Hero */
-            .hero-label { font-size: 10px; letter-spacing: .16em; }
-            .hero-title { font-size: clamp(28px, 9vw, 44px); }
+            .hero-title { font-size: clamp(32px, 9.5vw, 56px); }
             .hero-content { padding-bottom: 24vh; }
 
             /* Below hero */
             .below-hero { padding: 44px 16px; min-height: unset; }
-            .section-label { font-size: 10px; }
-            .dest-card-name { font-size: 16px; }
 
             /* Carousel */
             .tematico-card { flex: 0 0 80%; }
@@ -904,12 +907,10 @@
 
             /* Quem somos / pillars */
             .quem-somos { padding: 44px 16px; }
-            .qs-title { font-size: clamp(24px, 7vw, 36px); }
             .qs-watermark { width: 56px; opacity: 0.07; }
 
             /* CTA */
             .cta-section { padding: 44px 16px; }
-            .cta-sub { font-size: 14px; }
 
             /* Footer */
             footer { padding: 20px 16px; }
