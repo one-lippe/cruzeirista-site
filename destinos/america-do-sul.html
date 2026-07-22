@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cruzeiros na América do Sul — Cruzeirista</title>
+<style>
+@font-face {
+    font-family: 'Geist';
+    src: url('../fonts/Geist-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Geist';
+    src: url('../fonts/Geist-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--dark:#1a2535;--darker:#0f1822;--white:#fff;--gray:#6b7280;--teal:#0891b2}
+html{scroll-behavior:smooth}
+body{font-family:'Geist',sans-serif;background:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;background:linear-gradient(to bottom,rgba(5,14,26,.72) 0%,transparent 100%);transition:background .3s}
+nav.scrolled{background:#0f1822;backdrop-filter:blur(12px)}
+.nav-side{display:flex;gap:32px}
+.nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.80);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-link:hover{color:#fff}
+.nav-brand{position:absolute;left:50%;transform:translateX(-50%);height:32px;width:auto;display:block}
+.dest-hero{position:relative;width:100%;height:88vh;min-height:480px;overflow:hidden}
+.dest-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.dest-hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(5,14,26,.22) 0%,rgba(5,14,26,.08) 40%,rgba(5,14,26,.65) 100%)}
+.dest-hero-content{position:absolute;bottom:0;left:0;right:0;padding:0 64px 56px;z-index:3}
+.dest-hero-region{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.90);margin-bottom:12px;display:block}
+.dest-hero-title{font-family:'Geist',sans-serif;font-size:clamp(40px,6vw,80px);font-weight:700;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.3);line-height:1.05;margin-bottom:16px}
+.dest-hero-tagline{font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.82);max-width:560px;line-height:1.6}
+.dest-hero-back{position:absolute;top:96px;left:48px;z-index:3;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s}
+.dest-hero-back:hover{color:#fff}
+.routes-section{background:#fff;padding:72px 48px 96px}
+.routes-header{max-width:1140px;margin:0 auto 48px}
+.routes-label{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:block}
+.routes-title{font-family:'Geist',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:700;color:var(--darker)}
+.routes-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px}
+.route-card{border-radius:18px;overflow:hidden;border:1px solid #e5e7eb;background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.route-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.10)}
+.route-card-hero{position:relative;height:160px;background:var(--darker);overflow:hidden;display:flex;align-items:flex-end;padding:22px 24px}
+.route-card-gradient{position:absolute;inset:0;background:linear-gradient(135deg,#0f1822 0%,#0891b2 100%);opacity:.88}
+.route-card-nights{font-size:52px;font-weight:700;color:rgba(255,255,255,.12);position:absolute;bottom:8px;right:14px;line-height:1;font-family:'Geist',sans-serif;pointer-events:none}
+.route-card-title{font-family:'Geist',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:4px;position:relative;z-index:2}
+.route-card-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);position:relative;z-index:2}
+.route-card-body{padding:20px 24px 14px;flex:1}
+.route-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
+.route-meta-item{font-size:12px;color:var(--gray)}
+.route-meta-item strong{color:var(--darker)}
+.route-card-highlight{font-size:13px;color:var(--gray);line-height:1.6}
+.route-card-footer{padding:14px 24px 20px;border-top:1px solid #f0f0ee;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.route-price{font-size:13px;color:var(--gray);font-weight:500}
+.btn-cta-sm{display:inline-flex;align-items:center;background:var(--darker);color:#fff;border-radius:100px;padding:9px 18px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s,transform .15s;white-space:nowrap}
+.btn-cta-sm:hover{background:#0f2c5f;transform:translateY(-1px)}
+.cta-section{background:#002860;padding:80px 48px;text-align:center}
+.cta-title{font-family:'Geist',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:700;color:#fff;margin-bottom:16px}
+.cta-sub{font-size:17px;color:rgba(255,255,255,.72);margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+.btn-cta-main{display:inline-flex;align-items:center;gap:8px;background:#0891b2;color:#fff;border-radius:100px;padding:16px 36px;font-size:15px;font-weight:600;text-decoration:none;transition:background .2s,transform .15s}
+.btn-cta-main:hover{background:#0780a0;transform:translateY(-2px)}
+@media(max-width:768px){nav{padding:16px 20px}.nav-side{display:none}.dest-hero-content{padding:0 24px 40px}.dest-hero-back{top:76px;left:20px}.routes-section{padding:44px 20px 64px}.cta-section{padding:56px 24px}}</style>
+</head>
+<body>
+<nav id="nav">
+<div class="nav-side"><a href="../index.html" class="nav-link">Início</a><a href="../index.html#destinos" class="nav-link">Destinos</a></div>
+<svg class="nav-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista"><path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/><path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/></svg>
+<div class="nav-side" style="justify-content:flex-end"><a href="../index.html#tematicos" class="nav-link">Temáticos</a><a href="../index.html#forms" class="nav-link">Faça uma cotação</a></div>
+</nav>
+<section class="dest-hero">
+<img class="dest-hero-img" src="../img/secoes/america-do-sul-card.jpg" alt="América do Sul">
+<div class="dest-hero-overlay"></div>
+<a href="../index.html#destinos" class="dest-hero-back">← Todos os destinos</a>
+<div class="dest-hero-content"><span class="dest-hero-region">América do Sul · Com aéreo</span><h1 class="dest-hero-title">América do Sul</h1><p class="dest-hero-tagline">Da Antártica às Ilhas do Fogo: roteiros de tirar o fôlego pelo extremo sul do continente.</p></div>
+</section>
+<section class="routes-section">
+<div class="routes-header"><span class="routes-label">Temporada 2026–2027</span><h2 class="routes-title">Roteiros disponíveis</h2></div>
+<div class="routes-grid"><div class="route-card">
+<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">14n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Antártica — Península, Cabo Horn e Ushuaia</h3><p class="route-card-tag">14–17 noites</p></div></div>
+<div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Buenos Aires / Ushuaia</span><span class="route-meta-item"><strong>Armadora:</strong> Princess / Celebrity / Hurtigruten</span></div><p class="route-card-highlight">Bucket-list por excelência. Ticket altíssimo, temporada set/2026–mar/2027.</p></div>
+<div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
+</div><div class="route-card">
+<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">10n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Fim do Mundo — Patagônia e Fiordes Chilenos</h3><p class="route-card-tag">10–14 noites</p></div></div>
+<div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Buenos Aires / Valparaíso</span><span class="route-meta-item"><strong>Armadora:</strong> Princess / Celebrity</span></div><p class="route-card-highlight">Glaciares, Punta Arenas e o Estreito de Magalhães. Paisagens incomparáveis.</p></div>
+<div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
+</div><div class="route-card">
+<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">12n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Chile & Peru — Pacífico Sul-Americano</h3><p class="route-card-tag">12–15 noites</p></div></div>
+<div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Valparaíso / Lima</span><span class="route-meta-item"><strong>Armadora:</strong> Oceania / Norwegian</span></div><p class="route-card-highlight">Combina com pacote Machu Picchu. Cultura andina encontra o Pacífico.</p></div>
+<div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
+</div><div class="route-card">
+<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Contorno Sul-Americano — Rio a Buenos Aires</h3><p class="route-card-tag">7–10 noites</p></div></div>
+<div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Rio / Santos → Buenos Aires</span><span class="route-meta-item"><strong>Armadora:</strong> MSC</span></div><p class="route-card-highlight">Sem aéreo intercontinental. Ponte entre as temporadas brasileira e argentina.</p></div>
+<div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
+</div></div>
+</section>
+<section class="cta-section">
+<h2 class="cta-title">Pronto para embarcar?</h2>
+<p class="cta-sub">Nossa equipe monta a proposta ideal com os melhores navios, roteiros e cabines para você.</p>
+<a href="../index.html#forms" class="btn-cta-main">Faça sua cotação gratuita →</a>
+</section>
+<script>window.addEventListener('scroll',()=>{document.querySelector('nav')?.classList.toggle('scrolled',window.scrollY>60)});</script>
+</body>
+</html>

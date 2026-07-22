@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cruzeiros no Brasil — Cruzeirista</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+@font-face {
+    font-family: 'Geist';
+    src: url('../fonts/Geist-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Geist';
+    src: url('../fonts/Geist-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
             --dark:   #1a2535;
@@ -17,7 +28,7 @@
             --teal:   #0891b2;
         }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; background: #fff; overflow-x: hidden; }
+        body { font-family: 'Geist', sans-serif; background: #fff; overflow-x: hidden; }
 
         /* NAV */
         nav {
@@ -81,7 +92,7 @@
             margin-bottom: 12px; display: block;
         }
         .dest-hero-title {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Geist', sans-serif;
             font-size: clamp(40px, 6vw, 80px);
             font-weight: 700; color: #fff;
             text-shadow: 0 2px 16px rgba(0,0,0,.3);
@@ -116,7 +127,7 @@
             margin-bottom: 12px; display: block;
         }
         .ships-title {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Geist', sans-serif;
             font-size: clamp(26px, 3vw, 40px);
             font-weight: 700; color: var(--darker);
         }
@@ -219,7 +230,7 @@
             margin-bottom: 12px; display: block;
         }
         .ports-title {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Geist', sans-serif;
             font-size: clamp(26px, 3vw, 40px);
             font-weight: 700; color: var(--darker);
             max-width: 500px; line-height: 1.2;
@@ -281,7 +292,7 @@
             text-align: center;
         }
         .highlight-number {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Geist', sans-serif;
             font-size: 48px; font-weight: 700;
             color: var(--teal); line-height: 1;
             margin-bottom: 10px;
@@ -303,7 +314,7 @@
             margin-bottom: 16px; display: block;
         }
         .dest-cta-title {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Geist', sans-serif;
             font-size: clamp(28px, 4vw, 48px);
             font-weight: 700; color: #fff;
             margin-bottom: 20px; line-height: 1.15;
