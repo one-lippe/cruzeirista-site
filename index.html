@@ -1424,36 +1424,38 @@ function handleScroll() {
 }
 window.addEventListener('scroll', handleScroll, { passive: true });
 
-if (isAndroid || isIOS) {
-    /* ── MOBILE (Android + iOS): seeking em vídeo grande é lento/instável
-       em conexão de celular — em vez de tentar acompanhar o scroll frame
-       a frame (o que trava no primeiro frame quando o buffer não acompanha),
-       toca o vídeo em loop normal, só como fundo animado. O scroll ainda
-       controla o fade dos textos/cards via handleScroll(). ── */
-    vid.setAttribute('autoplay', '');
-    vid.setAttribute('loop', '');
-    vid.load();
-    const tryPlay = () => vid.play().catch(() => {});
-    tryPlay();
-    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
-
-} else {
-    /* ── DESKTOP: scroll-scrubbing completo ── */
-    let targetTime = 0, smoothTime = 0;
-    vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
-    window.addEventListener('scroll', () => {
-        const progress = handleScroll();
-        if (vid.duration) targetTime = vid.duration * progress;
-    }, { passive: true });
-    function scrubLoop() {
-        if (vid.duration && Math.abs(smoothTime - targetTime) > 0.0005) {
-            smoothTime = lerp(smoothTime, targetTime, 0.1);
-            vid.currentTime = smoothTime;
-        }
-        requestAnimationFrame(scrubLoop);
-    }
-    scrubLoop();
+/* ── SCROLL-SCRUBBING (desktop e mobile) ──────────────────────────
+   Em touch (iOS/Android), o Safari/Chrome mobile só deixa fazer seek
+   de verdade em um <video> depois de um play()+pause() disparado por
+   gesto do usuário — por isso o "unlock" no primeiro touchstart. Até
+   lá o vídeo fica parado no poster/primeiro frame (sem autoplay).
+   Em conexão ruim o vídeo pode não acompanhar 1:1 (é um arquivo
+   grande) — mas não trava mais, porque só faz seek quando `duration`
+   já está disponível. ── */
+let unlocked = !(isAndroid || isIOS);
+function unlockScrub() {
+    if (unlocked) return;
+    unlocked = true;
+    vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
 }
+if (isAndroid || isIOS) {
+    document.addEventListener('touchstart', unlockScrub, { once: true, passive: true });
+}
+
+let targetTime = 0, smoothTime = 0;
+vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
+window.addEventListener('scroll', () => {
+    const progress = handleScroll();
+    if (vid.duration) targetTime = vid.duration * progress;
+}, { passive: true });
+function scrubLoop() {
+    if (vid.duration && unlocked && Math.abs(smoothTime - targetTime) > 0.0005) {
+        smoothTime = lerp(smoothTime, targetTime, 0.1);
+        vid.currentTime = smoothTime;
+    }
+    requestAnimationFrame(scrubLoop);
+}
+scrubLoop();
 
 
 /* ════════════════════════════════════════════════════════════════
