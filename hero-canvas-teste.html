@@ -3,92 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Teste — Hero em canvas (calibração) — Cruzeirista</title>
+<title>Teste — Hero em canvas (calibração v3) — Cruzeirista</title>
 <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-        background:#050e1a; color:#fff;
+    body { background:#050e1a; color:#fff;
         font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-        -webkit-font-smoothing:antialiased;
-    }
+        -webkit-font-smoothing:antialiased; }
 
-    #hero-wrapper { position:relative; }         /* altura definida pelo JS */
-    #hero {
-        position:sticky; top:0; width:100%; height:100vh; overflow:hidden;
-        background:#050e1a url('hero/poster-d.jpg') center center / cover no-repeat;
-    }
+    #hero-wrapper { position:relative; }
+    #hero { position:sticky; top:0; width:100%; height:100vh; overflow:hidden;
+        background:#050e1a url('hero/poster-d.jpg') center center / cover no-repeat; }
     @media (max-width:768px) { #hero { background-image:url('hero/poster-m.jpg'); } }
 
-    #hero-canvas {
-        position:absolute; inset:0; width:100%; height:100%;
-        object-fit:cover; display:block; z-index:0;
-        opacity:0; transition:opacity .4s ease;
-    }
-    #hero-canvas.pronto { opacity:1; }
+    .camada { position:absolute; inset:0; width:100%; height:100%;
+        object-fit:cover; display:block; will-change:opacity; }
+    #cv-a { z-index:0; }
+    #cv-b { z-index:1; opacity:0; }          /* camada de mesclagem */
+    #hero.pronto .camada { }
+    #hero .camada { opacity:0; }
+    #hero.pronto #cv-a { opacity:1; transition:opacity .4s ease; }
 
-    .hero-overlay {
-        position:absolute; inset:0; z-index:1; pointer-events:none;
+    .hero-overlay { position:absolute; inset:0; z-index:1; pointer-events:none;
         background:
             radial-gradient(ellipse 70% 50% at 50% 50%, rgba(5,14,26,.28) 0%, transparent 70%),
-            linear-gradient(to bottom, rgba(5,14,26,.08) 0%, rgba(5,14,26,.02) 40%, rgba(5,14,26,.30) 100%);
-    }
-    .hero-body {
-        position:absolute; top:46%; left:50%; transform:translate(-50%,-50%);
-        z-index:10; text-align:center; width:90%; max-width:720px;
-    }
-    .hero-body h1 { font-size:clamp(1.8rem,5.5vw,3.8rem); font-weight:800; line-height:1.06;
+            linear-gradient(to bottom, rgba(5,14,26,.08) 0%, rgba(5,14,26,.02) 40%, rgba(5,14,26,.30) 100%); }
+    .hero-body { position:absolute; top:42%; left:50%; transform:translate(-50%,-50%);
+        z-index:10; text-align:center; width:90%; max-width:700px; }
+    .hero-body h1 { font-size:clamp(1.7rem,5vw,3.4rem); font-weight:800; line-height:1.06;
         letter-spacing:-.02em; text-shadow:0 2px 30px rgba(0,0,0,.5); }
-    .hero-body p { margin-top:16px; font-size:clamp(.9rem,2vw,1.15rem); opacity:.86;
+    .hero-body p { margin-top:14px; font-size:clamp(.85rem,1.9vw,1.05rem); opacity:.85;
         text-shadow:0 2px 20px rgba(0,0,0,.5); }
 
-    /* ══ PAINEL DE CALIBRAÇÃO ══ */
-    #painel {
-        position:fixed; left:10px; right:10px; bottom:10px; z-index:100;
-        max-width:390px; margin:0 auto;
-        background:rgba(5,14,26,.9); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    #painel { position:fixed; left:10px; right:10px; bottom:10px; z-index:100;
+        max-width:400px; margin:0 auto;
+        background:rgba(5,14,26,.92); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
         border:1px solid rgba(255,255,255,.18); border-radius:14px;
-        padding:12px 14px; font-size:12px; line-height:1.5;
-    }
-    #painel.min { padding:8px 12px; }
+        padding:11px 13px; font-size:12px; }
     #painel.min .corpo { display:none; }
-    .linha { display:flex; justify-content:space-between; align-items:center; gap:10px;
-        font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; }
-    .linha b { color:#67d0ff; font-weight:600; }
+
+    .stats { display:flex; flex-wrap:wrap; gap:3px 12px;
+        font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:10.5px; opacity:.92; }
+    .stats b { color:#67d0ff; font-weight:600; }
+    .barra { height:4px; border-radius:2px; background:rgba(255,255,255,.14); margin-top:7px; overflow:hidden; }
+    .barra i { display:block; height:100%; width:0; background:#67d0ff; transition:width .2s ease; }
+
     .ctrl { margin-top:11px; }
-    .ctrl label { display:flex; justify-content:space-between; font-size:11.5px;
-        margin-bottom:5px; opacity:.9; }
+    .ctrl label { display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:4px; }
     .ctrl label b { color:#67d0ff; font-family:ui-monospace,Menlo,monospace; }
     .ctrl input[type=range] { width:100%; accent-color:#67d0ff; height:22px; }
-    .dica { font-size:10.5px; opacity:.55; margin-top:3px; line-height:1.45; }
-    .botoes { display:flex; gap:7px; margin-top:12px; }
-    .botoes button {
-        flex:1; background:rgba(255,255,255,.1); color:#fff;
-        border:1px solid rgba(255,255,255,.22); border-radius:8px;
-        padding:8px 4px; font-size:11px; font-family:inherit; cursor:pointer;
-    }
+    .dica { font-size:10px; opacity:.55; margin-top:2px; line-height:1.45; }
+
+    .segs { display:flex; gap:6px; margin-top:4px; }
+    .segs button { flex:1; background:rgba(255,255,255,.08); color:#fff;
+        border:1px solid rgba(255,255,255,.18); border-radius:7px; padding:7px 2px;
+        font-size:10.5px; font-family:ui-monospace,Menlo,monospace; cursor:pointer; line-height:1.35; }
+    .segs button.on { background:rgba(103,208,255,.26); border-color:#67d0ff; }
+    .segs button span { display:block; font-size:9px; opacity:.65; }
+
+    .botoes { display:flex; gap:6px; margin-top:11px; }
+    .botoes button { flex:1; background:rgba(255,255,255,.1); color:#fff;
+        border:1px solid rgba(255,255,255,.22); border-radius:8px; padding:8px 3px;
+        font-size:11px; font-family:inherit; cursor:pointer; }
     .botoes button:active { background:rgba(103,208,255,.28); }
-    .barra { height:4px; border-radius:2px; background:rgba(255,255,255,.14); margin-top:8px; overflow:hidden; }
-    .barra i { display:block; height:100%; width:0; background:#67d0ff; transition:width .2s ease; }
-    #resumo { margin-top:10px; font-size:10.5px; font-family:ui-monospace,Menlo,monospace;
+    #resumo { margin-top:9px; font-size:10px; font-family:ui-monospace,Menlo,monospace;
         background:rgba(103,208,255,.1); border:1px dashed rgba(103,208,255,.35);
-        border-radius:7px; padding:7px 9px; color:#a9e4ff; display:none; word-break:break-all; }
+        border-radius:7px; padding:7px 9px; color:#a9e4ff; display:none; word-break:break-word; }
 
     .depois { min-height:100vh; display:flex; align-items:center; justify-content:center;
-        text-align:center; padding:60px 22px 180px; background:#02182f; }
-    .depois div { max-width:600px; }
-    .depois h2 { font-size:clamp(1.4rem,4vw,2.2rem); margin-bottom:12px; }
-    .depois p { opacity:.7; font-size:14.5px; line-height:1.75; }
+        text-align:center; padding:60px 22px 220px; background:#02182f; }
+    .depois div { max-width:580px; }
+    .depois h2 { font-size:clamp(1.3rem,4vw,2rem); margin-bottom:12px; }
+    .depois p { opacity:.7; font-size:14px; line-height:1.75; }
 </style>
 </head>
 <body>
 
 <div id="hero-wrapper">
     <section id="hero">
-        <canvas id="hero-canvas"></canvas>
-        <div class="hero-overlay"></div>
+        <canvas id="cv-a" class="camada"></canvas>
+        <canvas id="cv-b" class="camada"></canvas>
+        <div class="hero-overlay" style="z-index:2"></div>
         <div class="hero-body" id="hero-body">
-            <h1>Calibração do hero</h1>
-            <p>Mexa nos dois controles até ficar do jeito que você quer. Depois toque em "copiar ajuste" e me manda o texto.</p>
+            <h1>Calibração v3</h1>
+            <p>Agora com todos os quadros do vídeo e mesclagem entre eles. Ache o ajuste que parecer o vídeo e toque em "copiar ajuste".</p>
         </div>
     </section>
 </div>
@@ -96,38 +93,54 @@
 <div class="depois">
     <div>
         <h2>Fim da pista</h2>
-        <p>Role de volta para cima e teste de novo com outro ajuste. Nada aqui altera o site em produção.</p>
+        <p>Volte ao topo e teste outra combinação. O site em produção não foi alterado.</p>
     </div>
 </div>
 
 <div id="painel">
-    <div class="linha">
-        <span>conjunto: <b id="h-set">—</b></span>
-        <span><b id="h-frames">0</b></span>
+    <div class="stats">
+        <span id="h-set">—</span>
+        <span>carreg <b id="h-frames">0</b></span>
+        <span><b id="h-ms">0.00</b>ms</span>
+        <span><b id="h-fps">0</b>fps</span>
+        <span>quadro <b id="h-idx">0</b></span>
     </div>
+    <div class="barra"><i id="h-bar"></i></div>
+
     <div class="corpo">
-        <div class="linha" style="margin-top:3px">
-            <span>desenho: <b id="h-ms">0.0</b> ms</span>
-            <span><b id="h-fps">0</b> fps</span>
-            <span>quadro <b id="h-idx">0</b></span>
-        </div>
-        <div class="barra"><i id="h-bar"></i></div>
-
         <div class="ctrl">
-            <label>Rolagem por quadro <b><span id="v-px">8</span> px</b></label>
-            <input type="range" id="s-px" min="2" max="24" step="1" value="8">
-            <div class="dica">Menor = a animação inteira acontece com menos rolagem. Pista atual: <b id="v-pista">—</b>.</div>
+            <label>Densidade de quadros <b id="v-dens">—</b></label>
+            <div class="segs">
+                <button data-passo="1">todos<span id="p1">—</span></button>
+                <button data-passo="2">1 de 2<span id="p2">—</span></button>
+                <button data-passo="3">1 de 3<span id="p3">—</span></button>
+            </div>
+            <div class="dica">O vídeo tinha 241 quadros. Quanto mais quadros, mais suave — e mais pesado.</div>
         </div>
 
         <div class="ctrl">
-            <label>Suavização <b><span id="v-sm">0.15</span></b></label>
-            <input type="range" id="s-sm" min="0" max="60" step="1" value="15">
-            <div class="dica">0 = quadro colado no scroll (pula em rolagem rápida). Maior = passa por todos os quadros, com leve atraso.</div>
+            <label>Mesclar quadros vizinhos <b id="v-mescla">ligado</b></label>
+            <div class="segs">
+                <button data-mescla="1">ligado</button>
+                <button data-mescla="0">desligado</button>
+            </div>
+            <div class="dica">Sobrepõe o quadro seguinte com transparência proporcional. Dá movimento contínuo entre os quadros sem baixar imagem nenhuma a mais.</div>
+        </div>
+
+        <div class="ctrl">
+            <label>Rolagem por quadro <b><span id="v-px">10</span> px</b></label>
+            <input type="range" id="s-px" min="2" max="30" step="1" value="10">
+            <div class="dica">Pista total: <b id="v-pista">—</b></div>
+        </div>
+
+        <div class="ctrl">
+            <label>Suavização <b><span id="v-sm">0.13</span></b></label>
+            <input type="range" id="s-sm" min="0" max="60" step="1" value="13">
         </div>
 
         <div class="botoes">
             <button id="b-copiar">copiar ajuste</button>
-            <button id="b-topo">voltar ao topo</button>
+            <button id="b-topo">ao topo</button>
             <button id="b-min">−</button>
         </div>
         <div id="resumo"></div>
@@ -139,110 +152,105 @@
 'use strict';
 
 /* ════════════════════════════════════════════════════════════════
-   HERO EM SEQUÊNCIA DE FRAMES — versão de calibração
+   HERO EM SEQUÊNCIA DE QUADROS — calibração v3
 
-   Dois parâmetros ficam ajustáveis porque só dá pra decidir olhando
-   no aparelho de verdade:
+   Por que a v2 ainda parecia menos fluida que o vídeo: ela usava 121
+   quadros, e o vídeo tinha 241 (24 fps × 10 s). Metade da densidade.
+   Aqui o conjunto do desktop passa a ter os 241, e um controle deixa
+   comparar densidades na hora.
 
-   1) PX POR QUADRO — define o tamanho da pista de rolagem.
-      pista = (nº de quadros − 1) × px  →  wrapper = 100vh + pista.
-      É isso que responde "preciso rolar demais".
-
-   2) SUAVIZAÇÃO — interpolação do índice do quadro.
-      Sem ela, uma rolagem rápida salta 20 quadros de uma vez e o
-      olho lê como travamento. Com ela, o canvas percorre os quadros
-      intermediários a 60 fps e a mesma rolagem vira movimento.
+   Além disso entra a MESCLAGEM: em vez de trocar de quadro de forma
+   seca, desenha o quadro N e por cima o N+1 com opacidade igual à
+   parte fracionária do índice. Isso produz posições intermediárias
+   que não existem em imagem nenhuma — suavidade sub-quadro de graça,
+   sem baixar mais nada. É algo que o <video> não fazia.
 ════════════════════════════════════════════════════════════════ */
 
 var CONJUNTOS = {
-    desktop: { dir:'d', n:121, w:1440, h:810,  kb:99 },
-    mobile:  { dir:'m', n:61,  w:496,  h:1080, kb:68 }
+    desktop: { dir:'d', n:241, w:1440, h:810,  kb:102 },
+    mobile:  { dir:'m', n:121, w:496,  h:1080, kb:68  }
 };
 
 var ehMobile = window.matchMedia('(max-width: 768px)').matches;
-var C        = ehMobile ? CONJUNTOS.mobile : CONJUNTOS.desktop;
+var C = ehMobile ? CONJUNTOS.mobile : CONJUNTOS.desktop;
 
-var wrapper = document.getElementById('hero-wrapper');
-var canvas  = document.getElementById('hero-canvas');
-var ctx     = canvas.getContext('2d', { alpha:false, desynchronized:true });
+var wrapper  = document.getElementById('hero-wrapper');
+var hero     = document.getElementById('hero');
+var cvA      = document.getElementById('cv-a');
+var cvB      = document.getElementById('cv-b');
+var ctxA     = cvA.getContext('2d', { alpha:false });
+var ctxB     = cvB.getContext('2d', { alpha:false });
 var heroBody = document.getElementById('hero-body');
+cvA.width = cvB.width = C.w; cvA.height = cvB.height = C.h;
 
-canvas.width = C.w; canvas.height = C.h;
-
-var quadros    = new Array(C.n);   // Image ou ImageBitmap por índice
+var quadros    = new Array(C.n);
 var carregados = 0;
 var pronto     = false;
 
-var pxPorQuadro = 8;
-var suavizacao  = 0.15;
+var passo       = 1;        // 1 = todos os quadros
+var mesclar     = true;
+var pxPorQuadro = 10;
+var suavizacao  = 0.13;
 
-/* ── Pista de rolagem ────────────────────────────────────────────
-   O wrapper precisa ter 100vh (o sticky) + a distância de scrub. */
+function nEfetivo() { return Math.floor((C.n - 1) / passo) + 1; }
+
 function aplicarPista() {
-    var pista = (C.n - 1) * pxPorQuadro;
+    var pista = (nEfetivo() - 1) * pxPorQuadro;
     wrapper.style.height = (window.innerHeight + pista) + 'px';
     document.getElementById('v-pista').textContent =
         pista + ' px (' + Math.round(pista / window.innerHeight * 100) + 'vh)';
+    document.getElementById('v-dens').textContent =
+        nEfetivo() + ' quadros · ' + (nEfetivo() * C.kb / 1024).toFixed(1) + ' MB';
 }
 
-/* ── Detecção de AVIF ── */
+/* ── AVIF ── */
 var AVIF_1X1 = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAABoaWluZgAAAAAAAQAAABphbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAMAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgABogQEDQgMgkQAAAAB8dSLfI=';
 function temAVIF() {
     return new Promise(function (ok) {
         var i = new Image();
-        i.onload  = function () { ok(i.width === 1); };
+        i.onload = function () { ok(i.width === 1); };
         i.onerror = function () { ok(false); };
         i.src = AVIF_1X1;
     });
 }
 
-/* ── Ordem progressiva: passos decrescentes ── */
 function ordem(n) {
-    var v = {}, o = [], passos = [16, 8, 4, 2, 1];
-    for (var p = 0; p < passos.length; p++)
-        for (var i = 0; i < n; i += passos[p])
-            if (!v[i]) { v[i] = 1; o.push(i); }
+    var v = {}, o = [], p = [32, 16, 8, 4, 2, 1];
+    for (var k = 0; k < p.length; k++)
+        for (var i = 0; i < n; i += p[k]) if (!v[i]) { v[i] = 1; o.push(i); }
     return o;
 }
 
-/* ── Carregamento ─────────────────────────────────────────────────
-   No mobile converte para ImageBitmap: o bitmap fica decodificado e
-   fixo na memória, então drawImage nunca precisa redecodificar no
-   meio da rolagem (fonte clássica de engasgo no Safari). São 61
-   quadros de 496×1080 ≈ 130 MB, que o iPhone segura. No desktop
-   ficam Images normais — 121 quadros de 1440×810 como bitmap fixo
-   passariam de 500 MB. */
 function carregar(ext, aoPrimeiro) {
-    var seq = ordem(C.n), fila = 0, MAX = 10;
+    var seq = ordem(C.n), fila = 0, MAX = 12;
     function proximo() {
         if (fila >= seq.length) return;
         var i = seq[fila++];
         var img = new Image();
         img.decoding = 'async';
         img.onload = function () {
-            var guardar = function (obj) {
-                quadros[i] = obj; carregados++;
-                atualizarBarra();
+            var guardar = function () {
+                quadros[i] = img; carregados++;
+                document.getElementById('h-frames').textContent = carregados + '/' + C.n;
+                document.getElementById('h-bar').style.width = (carregados / C.n * 100) + '%';
                 if (!pronto) { pronto = true; aoPrimeiro(); }
                 proximo();
             };
-            if (ehMobile && window.createImageBitmap) {
-                createImageBitmap(img).then(guardar).catch(function () { guardar(img); });
-            } else if (img.decode) {
-                img.decode().then(function () { guardar(img); }).catch(function () { guardar(img); });
-            } else { guardar(img); }
+            if (img.decode) img.decode().then(guardar).catch(guardar); else guardar();
         };
-        img.onerror = function () { proximo(); };
+        img.onerror = proximo;
         img.src = 'hero/' + C.dir + '-' + ext + '/' + String(i + 1).padStart(4, '0') + '.' + ext;
     }
     for (var k = 0; k < MAX; k++) proximo();
 }
 
-function maisProximo(alvo) {
-    if (quadros[alvo]) return quadros[alvo];
+/* Recebe índice EFETIVO, devolve o quadro real mais próximo já carregado */
+function pegar(iEf) {
+    var real = Math.min(iEf * passo, C.n - 1);
+    if (quadros[real]) return quadros[real];
     for (var d = 1; d <= C.n; d++) {
-        if (quadros[alvo - d]) return quadros[alvo - d];
-        if (quadros[alvo + d]) return quadros[alvo + d];
+        if (quadros[real - d]) return quadros[real - d];
+        if (quadros[real + d]) return quadros[real + d];
     }
     return null;
 }
@@ -253,60 +261,78 @@ function progresso() {
     return Math.min(Math.max(window.scrollY, 0) / pista, 1);
 }
 
-/* ── Loop ── */
-var indiceSuave = 0, ultimo = -1, cont = 0, marco = 0, somaMs = 0, amostras = 0;
+var indiceSuave = 0, ultimoDesenho = -1, cont = 0, marco = 0, somaMs = 0, amostras = 0;
 
 function loop(t) {
     var p    = progresso();
-    var alvo = p * (C.n - 1);
+    var alvo = p * (nEfetivo() - 1);
 
-    if (suavizacao <= 0) {
-        indiceSuave = alvo;
-    } else {
+    if (suavizacao <= 0) indiceSuave = alvo;
+    else {
         indiceSuave += (alvo - indiceSuave) * suavizacao;
-        if (Math.abs(alvo - indiceSuave) < 0.02) indiceSuave = alvo;
+        if (Math.abs(alvo - indiceSuave) < 0.005) indiceSuave = alvo;
     }
+    if (indiceSuave < 0) indiceSuave = 0;
+    if (indiceSuave > nEfetivo() - 1) indiceSuave = nEfetivo() - 1;
 
-    var idx = Math.round(indiceSuave);
-    if (idx !== ultimo) {
-        var q = maisProximo(idx);
-        if (q) {
+    /* Duas camadas: a base recebe o quadro i0 e a de cima o i0+1.
+       Só há repintura de canvas quando i0 MUDA — a cada quadro de tela
+       o que muda é apenas a opacidade da camada de cima, que o browser
+       resolve no compositor (GPU), sem repintar nada. Foi o que tirou
+       o fps de 23 de volta pra 60. */
+    var i0 = Math.floor(indiceSuave);
+    var fr = indiceSuave - i0;
+
+    if (i0 !== ultimoDesenho) {
+        var a = pegar(i0);
+        if (a) {
             var t0 = performance.now();
-            ctx.drawImage(q, 0, 0, C.w, C.h);
+            ctxA.drawImage(a, 0, 0, C.w, C.h);
+            var b = pegar(Math.min(i0 + 1, nEfetivo() - 1));
+            if (b) ctxB.drawImage(b, 0, 0, C.w, C.h);
             somaMs += performance.now() - t0; amostras++;
-            ultimo = idx;
+            ultimoDesenho = i0;
         }
     }
+    cvB.style.opacity = mesclar ? fr.toFixed(3) : 0;
 
-    var op = Math.max(0, 1 - p / 0.32);
-    heroBody.style.opacity = op;
+    heroBody.style.opacity = Math.max(0, 1 - p / 0.32);
 
     cont++;
     if (t - marco > 500) {
         document.getElementById('h-fps').textContent = Math.round(cont * 1000 / (t - marco));
-        document.getElementById('h-idx').textContent = idx;
+        document.getElementById('h-idx').textContent = i0 + '/' + (nEfetivo() - 1);
         document.getElementById('h-ms').textContent  = amostras ? (somaMs / amostras).toFixed(2) : '0.00';
         cont = 0; marco = t; somaMs = 0; amostras = 0;
     }
     requestAnimationFrame(loop);
 }
 
-function atualizarBarra() {
-    document.getElementById('h-frames').textContent = carregados + '/' + C.n;
-    document.getElementById('h-bar').style.width = (carregados / C.n * 100) + '%';
-}
-
 /* ── Controles ── */
-var sPx = document.getElementById('s-px'), sSm = document.getElementById('s-sm');
-sPx.value = pxPorQuadro;
-document.getElementById('v-px').textContent = pxPorQuadro;
-
-sPx.addEventListener('input', function () {
+function marcar(grupo, valor) {
+    var bs = document.querySelectorAll('[data-' + grupo + ']');
+    for (var i = 0; i < bs.length; i++)
+        bs[i].classList.toggle('on', bs[i].getAttribute('data-' + grupo) === String(valor));
+}
+document.querySelectorAll('[data-passo]').forEach(function (b) {
+    b.addEventListener('click', function () {
+        passo = +this.getAttribute('data-passo');
+        marcar('passo', passo); aplicarPista(); ultimoDesenho = -1;
+    });
+});
+document.querySelectorAll('[data-mescla]').forEach(function (b) {
+    b.addEventListener('click', function () {
+        mesclar = this.getAttribute('data-mescla') === '1';
+        marcar('mescla', mesclar ? 1 : 0); ultimoDesenho = -1;
+        document.getElementById('v-mescla').textContent = mesclar ? 'ligado' : 'desligado';
+    });
+});
+document.getElementById('s-px').addEventListener('input', function () {
     pxPorQuadro = +this.value;
     document.getElementById('v-px').textContent = pxPorQuadro;
     aplicarPista();
 });
-sSm.addEventListener('input', function () {
+document.getElementById('s-sm').addEventListener('input', function () {
     suavizacao = +this.value / 100;
     document.getElementById('v-sm').textContent = suavizacao.toFixed(2);
 });
@@ -318,29 +344,34 @@ document.getElementById('b-min').addEventListener('click', function () {
 });
 document.getElementById('b-copiar').addEventListener('click', function () {
     var txt = 'AJUSTE ' + (ehMobile ? 'MOBILE' : 'DESKTOP') +
-              ' | px por quadro: ' + pxPorQuadro +
-              ' | suavizacao: ' + suavizacao.toFixed(2) +
-              ' | pista: ' + document.getElementById('v-pista').textContent +
-              ' | quadros: ' + C.n +
-              ' | desenho: ' + document.getElementById('h-ms').textContent + 'ms' +
-              ' | fps: ' + document.getElementById('h-fps').textContent;
+        ' | densidade: 1 de ' + passo + ' (' + nEfetivo() + ' quadros, ' +
+        (nEfetivo() * C.kb / 1024).toFixed(1) + ' MB)' +
+        ' | mesclagem: ' + (mesclar ? 'ligada' : 'desligada') +
+        ' | px por quadro: ' + pxPorQuadro +
+        ' | suavizacao: ' + suavizacao.toFixed(2) +
+        ' | pista: ' + document.getElementById('v-pista').textContent +
+        ' | desenho: ' + document.getElementById('h-ms').textContent + 'ms' +
+        ' | fps: ' + document.getElementById('h-fps').textContent;
     var el = document.getElementById('resumo');
     el.style.display = 'block'; el.textContent = txt;
-    if (navigator.clipboard) navigator.clipboard.writeText(txt).catch(function(){});
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).catch(function () {});
 });
 
 /* ── Partida ── */
+marcar('passo', passo); marcar('mescla', 1);
+document.getElementById('p1').textContent = C.n + 'q';
+document.getElementById('p2').textContent = (Math.floor((C.n - 1) / 2) + 1) + 'q';
+document.getElementById('p3').textContent = (Math.floor((C.n - 1) / 3) + 1) + 'q';
 aplicarPista();
 window.addEventListener('resize', function () {
     if (window.matchMedia('(max-width: 768px)').matches !== ehMobile) { location.reload(); return; }
     aplicarPista();
 });
-
 temAVIF().then(function (ok) {
     var ext = ok ? 'avif' : 'webp';
     document.getElementById('h-set').textContent =
-        (ehMobile ? 'mobile' : 'desktop') + ' ' + ext + ' ' + C.w + '×' + C.h;
-    carregar(ext, function () { canvas.classList.add('pronto'); });
+        (ehMobile ? 'mob' : 'desk') + ' ' + ext + ' ' + C.w + '×' + C.h;
+    carregar(ext, function () { hero.classList.add('pronto'); });
     requestAnimationFrame(loop);
 });
 
