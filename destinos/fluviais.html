@@ -28,7 +28,7 @@ nav.scrolled{background:#0f1822;backdrop-filter:blur(12px)}
 .nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.80);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
 .nav-link:hover{color:#fff}
 .nav-brand{position:absolute;left:50%;transform:translateX(-50%);height:32px;width:auto;display:block}
-.dest-hero{position:relative;width:100%;height:88vh;min-height:480px;overflow:hidden}
+.dest-hero{position:relative;width:100%;height:88vh;min-height:480px;overflow:hidden;background:#0f1822}
 .dest-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .dest-hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(5,14,26,.22) 0%,rgba(5,14,26,.08) 40%,rgba(5,14,26,.65) 100%)}
 .dest-hero-content{position:absolute;bottom:0;left:0;right:0;padding:0 64px 56px;z-index:3}
@@ -45,7 +45,8 @@ nav.scrolled{background:#0f1822;backdrop-filter:blur(12px)}
 .route-card{border-radius:18px;overflow:hidden;border:1px solid #e5e7eb;background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
 .route-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.10)}
 .route-card-hero{position:relative;height:160px;background:var(--darker);overflow:hidden;display:flex;align-items:flex-end;padding:22px 24px}
-.route-card-gradient{position:absolute;inset:0;background:linear-gradient(135deg,#0f1822 0%,#0891b2 100%);opacity:.88}
+.route-card-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.route-card-gradient{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,24,34,.15) 0%,rgba(15,24,34,.35) 55%,rgba(15,24,34,.88) 100%);z-index:1}
 .route-card-nights{font-size:52px;font-weight:700;color:rgba(255,255,255,.12);position:absolute;bottom:8px;right:14px;line-height:1;font-family:'Geist',sans-serif;pointer-events:none}
 .route-card-title{font-family:'Geist',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:4px;position:relative;z-index:2}
 .route-card-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);position:relative;z-index:2}
@@ -72,7 +73,7 @@ nav.scrolled{background:#0f1822;backdrop-filter:blur(12px)}
 <div class="nav-side" style="justify-content:flex-end"><a href="../index.html#tematicos" class="nav-link">Temáticos</a><a href="../index.html#forms" class="nav-link">Faça uma cotação</a></div>
 </nav>
 <section class="dest-hero">
-<img class="dest-hero-img" src="../img/secoes/fluviais-card.jpg" alt="Fluviais">
+<video class="dest-hero-img" autoplay muted loop playsinline poster="../img/secoes/fluviais-hero-poster.jpg"><source src="../img/secoes/fluviais-hero.mp4" type="video/mp4"></video>
 <div class="dest-hero-overlay"></div>
 <a href="../index.html#destinos" class="dest-hero-back">← Todos os destinos</a>
 <div class="dest-hero-content"><span class="dest-hero-region">Rios da Europa · Amazônia</span><h1 class="dest-hero-title">Fluviais</h1><p class="dest-hero-tagline">Navios pequenos, paisagens que passam devagar e o coração das cidades e florestas vistos direto da água.</p></div>
@@ -80,19 +81,19 @@ nav.scrolled{background:#0f1822;backdrop-filter:blur(12px)}
 <section class="routes-section">
 <div class="routes-header"><span class="routes-label">Produto especial</span><h2 class="routes-title">Roteiros fluviais disponíveis</h2></div>
 <div class="routes-grid"><div class="route-card">
-<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Danúbio Clássico — Budapeste, Viena e Bratislava</h3><p class="route-card-tag">7 noites</p></div></div>
+<div class="route-card-hero"><img class="route-card-photo" src="../img/secoes/fluviais-danubio-ship.jpg" alt="Navio fluvial no Danúbio"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Danúbio Clássico — Budapeste, Viena e Bratislava</h3><p class="route-card-tag">7 noites</p></div></div>
 <div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Budapeste / Viena</span><span class="route-meta-item"><strong>Armadoras:</strong> Viking · AmaWaterways · CroisiEurope</span></div><p class="route-card-highlight">O roteiro fluvial mais procurado da Europa. Palácios iluminados à noite, castelos e a Curva do Danúbio sem trocar de hotel.</p></div>
 <div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
 </div><div class="route-card">
-<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Reno Romântico — Basileia a Amsterdã</h3><p class="route-card-tag">7–8 noites</p></div></div>
+<div class="route-card-hero"><img class="route-card-photo" src="../img/secoes/fluviais-reno-ship.jpg" alt="Navio fluvial no Reno"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Reno Romântico — Basileia a Amsterdã</h3><p class="route-card-tag">7–8 noites</p></div></div>
 <div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Basileia / Amsterdã</span><span class="route-meta-item"><strong>Armadoras:</strong> Viking · Emerald · Scenic</span></div><p class="route-card-highlight">Vale de castelos e vinhedos entre Suíça, França, Alemanha e Holanda. Ótima porta de entrada para quem nunca fez fluvial.</p></div>
 <div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
 </div><div class="route-card">
-<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Douro Encantado — Porto ao interior de Portugal</h3><p class="route-card-tag">7 noites</p></div></div>
+<div class="route-card-hero"><img class="route-card-photo" src="../img/secoes/fluviais-douro-ship.jpg" alt="Navio fluvial no Douro"><div class="route-card-gradient"></div><div class="route-card-nights">7n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Douro Encantado — Porto ao interior de Portugal</h3><p class="route-card-tag">7 noites</p></div></div>
 <div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Porto</span><span class="route-meta-item"><strong>Armadoras:</strong> CroisiEurope · Uniworld</span></div><p class="route-card-highlight">Terraços de vinhedos Patrimônio da Humanidade, degustação de vinho do Porto e paisagem que muda a cada curva do rio.</p></div>
 <div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
 </div><div class="route-card">
-<div class="route-card-hero"><div class="route-card-gradient"></div><div class="route-card-nights">4-8n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Amazônia — Manaus, Encontro das Águas e Parintins</h3><p class="route-card-tag">4–8 noites</p></div></div>
+<div class="route-card-hero"><img class="route-card-photo" src="../img/secoes/fluviais-amazonia-ship.jpg" alt="Barco fluvial na Amazônia"><div class="route-card-gradient"></div><div class="route-card-nights">4-8n</div><div style="position:relative;z-index:2"><h3 class="route-card-title">Amazônia — Manaus, Encontro das Águas e Parintins</h3><p class="route-card-tag">4–8 noites</p></div></div>
 <div class="route-card-body"><div class="route-meta"><span class="route-meta-item"><strong>Embarque:</strong> Manaus</span><span class="route-meta-item"><strong>Armadoras:</strong> Amazon Clipper · Iberostar · Holland America / Oceania (grandes navios, trechos combinados com Caribe)</span></div><p class="route-card-highlight">Passeios de canoa pela floresta, observação de botos-cor-de-rosa e o famoso Encontro das Águas — a Amazônia vivida de dentro do rio.</p></div>
 <div class="route-card-footer"><span class="route-price">Consulte disponibilidade</span><a href="../index.html#forms" class="btn-cta-sm">Pedir cotação</a></div>
 </div></div>
