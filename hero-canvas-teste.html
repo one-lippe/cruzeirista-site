@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teste — Hero em canvas (sequência de frames) — Cruzeirista</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:auto; }
+    body {
+        background:#050e1a; color:#fff;
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+        -webkit-font-smoothing:antialiased;
+    }
+
+    /* ══ MESMA GEOMETRIA DO index.html ══ */
+    #hero-wrapper { position:relative; height:300vh; }
+    #hero {
+        position:sticky; top:0; width:100%; height:100vh; overflow:hidden;
+        background:#050e1a url('hero/poster-d.jpg') center center / cover no-repeat;
+    }
+    @media (max-width:768px) {
+        #hero-wrapper { height:200vh; }
+        #hero { background-image:url('hero/poster-m.jpg'); }
+    }
+
+    /* O canvas tem o tamanho NATIVO do frame; o object-fit:cover faz
+       exatamente o mesmo enquadramento que o <video> fazia antes. */
+    #hero-canvas {
+        position:absolute; inset:0;
+        width:100%; height:100%;
+        object-fit:cover;
+        display:block; z-index:0;
+        opacity:0; transition:opacity .45s ease;
+    }
+    #hero-canvas.pronto { opacity:1; }
+
+    .hero-overlay {
+        position:absolute; inset:0; z-index:1; pointer-events:none;
+        background:
+            radial-gradient(ellipse 70% 50% at 50% 50%, rgba(5,14,26,.28) 0%, transparent 70%),
+            linear-gradient(to bottom, rgba(5,14,26,.08) 0%, rgba(5,14,26,.02) 40%, rgba(5,14,26,.30) 100%);
+    }
+
+    .hero-body {
+        position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+        z-index:10; text-align:center; width:90%; max-width:760px;
+        will-change:opacity;
+    }
+    .hero-body h1 {
+        font-size:clamp(2rem,6vw,4.4rem); font-weight:800; line-height:1.05;
+        letter-spacing:-.02em; text-shadow:0 2px 30px rgba(0,0,0,.45);
+    }
+    .hero-body p {
+        margin-top:18px; font-size:clamp(.95rem,2vw,1.25rem);
+        opacity:.88; text-shadow:0 2px 20px rgba(0,0,0,.5);
+    }
+    .scroll-cue {
+        position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+        z-index:10; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+        opacity:.7; display:flex; flex-direction:column; align-items:center; gap:8px;
+    }
+    .scroll-cue span { display:block; width:1px; height:38px;
+        background:linear-gradient(to bottom,rgba(255,255,255,.9),transparent); }
+
+    /* ══ HUD DE DIAGNÓSTICO ══ */
+    #hud {
+        position:fixed; left:12px; bottom:12px; z-index:100;
+        background:rgba(5,14,26,.86); backdrop-filter:blur(10px);
+        border:1px solid rgba(255,255,255,.16); border-radius:12px;
+        padding:11px 14px; font-size:11.5px; line-height:1.65;
+        font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+        max-width:min(300px,calc(100vw - 24px));
+    }
+    #hud b { color:#67d0ff; font-weight:600; }
+    #hud .barra { height:5px; border-radius:3px; background:rgba(255,255,255,.14); margin-top:7px; overflow:hidden; }
+    #hud .barra i { display:block; height:100%; width:0; background:#67d0ff; transition:width .18s ease; }
+    #hud button {
+        margin-top:9px; width:100%; background:rgba(255,255,255,.1); color:#fff;
+        border:1px solid rgba(255,255,255,.2); border-radius:7px;
+        padding:6px; font-size:11px; font-family:inherit; cursor:pointer;
+    }
+    #hud.oculto > *:not(button) { display:none; }
+
+    /* ══ CONTEÚDO DEPOIS DO HERO (só pra ter pra onde rolar) ══ */
+    .depois {
+        min-height:100vh; display:flex; align-items:center; justify-content:center;
+        text-align:center; padding:40px 22px; background:#02182f;
+    }
+    .depois div { max-width:620px; }
+    .depois h2 { font-size:clamp(1.5rem,4vw,2.4rem); margin-bottom:14px; }
+    .depois p  { opacity:.72; font-size:15px; line-height:1.75; }
+    .depois code { background:rgba(255,255,255,.1); padding:2px 6px; border-radius:4px; font-size:13px; }
+</style>
+</head>
+<body>
+
+<div id="hero-wrapper">
+    <section id="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-body" id="hero-body">
+            <h1>Teste do hero em canvas</h1>
+            <p>Role a página. O quadro do navio deve seguir o seu dedo em tempo real, sem precisar tocar antes, sem travar no primeiro frame.</p>
+        </div>
+
+        <div class="scroll-cue" id="scroll-cue">
+            <span></span>
+            Role para testar
+        </div>
+    </section>
+</div>
+
+<div class="depois">
+    <div>
+        <h2>Fim da pista de rolagem</h2>
+        <p>Se você chegou aqui e a animação acompanhou o scroll do começo ao fim, sem pausa e sem pulo, o teste passou. Compare com o hero atual em <code>/cruzeirista-site/</code>, que ainda usa o vídeo.</p>
+    </div>
+</div>
+
+<div id="hud">
+    <div>conjunto: <b id="h-set">—</b></div>
+    <div>frames: <b id="h-frames">0</b> · baixado: <b id="h-mb">0.0</b> MB</div>
+    <div>quadro atual: <b id="h-idx">0</b> · fps de desenho: <b id="h-fps">0</b></div>
+    <div class="barra"><i id="h-bar"></i></div>
+    <button id="h-toggle">ocultar</button>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+/* ════════════════════════════════════════════════════════════════
+   HERO EM SEQUÊNCIA DE FRAMES (canvas)
+
+   Substitui o <video> + video.currentTime por imagens desenhadas em
+   canvas. Sem política de autoplay, sem unlock por gesto, sem espera
+   de decoder: desenhar um frame já carregado é síncrono e instantâneo,
+   igual em iOS, Android e desktop.
+════════════════════════════════════════════════════════════════ */
+
+var CONJUNTOS = {
+    desktop: { dir:'d', n:121, w:1440, h:810,  kb:99 },
+    mobile:  { dir:'m', n:61,  w:496,  h:1080, kb:68 }
+};
+
+var ehMobile  = window.matchMedia('(max-width: 768px)').matches;
+var conjunto  = ehMobile ? CONJUNTOS.mobile : CONJUNTOS.desktop;
+
+var wrapper = document.getElementById('hero-wrapper');
+var canvas  = document.getElementById('hero-canvas');
+var ctx     = canvas.getContext('2d', { alpha:false });
+var heroBody  = document.getElementById('hero-body');
+var scrollCue = document.getElementById('scroll-cue');
+
+canvas.width  = conjunto.w;
+canvas.height = conjunto.h;
+
+var frames      = new Array(conjunto.n);   // Image por índice, undefined = não carregado
+var carregados  = 0;
+var bytesEstim  = 0;
+var primeiroOk  = false;
+
+/* ── Detecção de AVIF (1x1 pixel em base64) ── */
+var AVIF_TESTE = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAABoaWluZgAAAAAAAQAAABphbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAMAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgABogQEDQgMgkQAAAAB8dSLfI=';
+
+function detectarAVIF() {
+    return new Promise(function (ok) {
+        var img = new Image();
+        img.onload  = function () { ok(img.width === 1 && img.height === 1); };
+        img.onerror = function () { ok(false); };
+        img.src = AVIF_TESTE;
+    });
+}
+
+/* ── Ordem progressiva de download ────────────────────────────────
+   Passadas de passo decrescente: primeiro o frame 0, depois de 16 em
+   16, 8 em 8, 4, 2 e por fim todos. O usuário vê movimento com ~7% do
+   conjunto baixado; o resto entra preenchendo os buracos. Impossível
+   fazer isso com <video>: sem um bloco contíguo de bytes o seek não
+   vai a lugar nenhum. */
+function ordemProgressiva(n) {
+    var vistos = {}, ordem = [], passos = [16, 8, 4, 2, 1];
+    for (var p = 0; p < passos.length; p++) {
+        for (var i = 0; i < n; i += passos[p]) {
+            if (!vistos[i]) { vistos[i] = 1; ordem.push(i); }
+        }
+    }
+    return ordem;
+}
+
+/* ── Carregador com limite de concorrência ── */
+function carregar(ext, aoTerminarPrimeiro) {
+    var ordem = ordemProgressiva(conjunto.n);
+    var fila  = 0;
+    var MAX   = 10;
+
+    function proximo() {
+        if (fila >= ordem.length) return;
+        var i = ordem[fila++];
+        var img = new Image();
+        img.decoding = 'async';
+        img.onload = function () {
+            var aplicar = function () {
+                frames[i] = img;
+                carregados++;
+                bytesEstim += conjunto.kb * 1024;   // média medida por frame
+                atualizarHUD();
+                if (!primeiroOk) { primeiroOk = true; aoTerminarPrimeiro(); }
+                proximo();
+            };
+            if (img.decode) { img.decode().then(aplicar).catch(aplicar); }
+            else { aplicar(); }
+        };
+        img.onerror = function () { atualizarHUD(); proximo(); };
+        img.src = 'hero/' + conjunto.dir + '-' + ext + '/' +
+                  String(i + 1).padStart(4, '0') + '.' + ext;
+    }
+
+    for (var k = 0; k < MAX; k++) proximo();
+}
+
+/* ── Busca o frame carregado mais próximo do índice pedido ── */
+function maisProximo(alvo) {
+    if (frames[alvo]) return frames[alvo];
+    for (var d = 1; d <= conjunto.n; d++) {
+        if (frames[alvo - d]) return frames[alvo - d];
+        if (frames[alvo + d]) return frames[alvo + d];
+    }
+    return null;
+}
+
+/* ── Progresso do scroll (mesma conta do index.html) ── */
+function progresso() {
+    var pista = wrapper.offsetHeight - window.innerHeight;
+    if (pista <= 0) return 0;
+    return Math.min(Math.max(window.scrollY, 0) / pista, 1);
+}
+
+/* ── Loop de desenho ──────────────────────────────────────────────
+   Mapeamento DIRETO: sem lerp. O lerp existia no vídeo pra disfarçar
+   a latência do seek; aqui desenhar é instantâneo, então suavizar só
+   introduziria atraso em relação ao dedo. */
+var ultimoDesenhado = -1, quadros = 0, marcoFPS = 0;
+
+function loop(agora) {
+    var p   = progresso();
+    var idx = Math.round(p * (conjunto.n - 1));
+
+    if (idx !== ultimoDesenhado) {
+        var img = maisProximo(idx);
+        if (img) { ctx.drawImage(img, 0, 0, conjunto.w, conjunto.h); ultimoDesenhado = idx; }
+    }
+
+    /* fade dos textos, igual ao index.html */
+    var op = Math.max(0, 1 - p / 0.30);
+    heroBody.style.opacity  = op;
+    scrollCue.style.opacity = op * 0.7;
+
+    quadros++;
+    if (agora - marcoFPS > 500) {
+        document.getElementById('h-fps').textContent = Math.round(quadros * 1000 / (agora - marcoFPS));
+        document.getElementById('h-idx').textContent = idx;
+        quadros = 0; marcoFPS = agora;
+    }
+
+    requestAnimationFrame(loop);
+}
+
+/* ── HUD ── */
+function atualizarHUD() {
+    document.getElementById('h-frames').textContent = carregados + '/' + conjunto.n;
+    document.getElementById('h-mb').textContent     = (bytesEstim / 1048576).toFixed(1);
+    document.getElementById('h-bar').style.width    = (carregados / conjunto.n * 100) + '%';
+}
+document.getElementById('h-toggle').addEventListener('click', function () {
+    var hud = document.getElementById('hud');
+    hud.classList.toggle('oculto');
+    this.textContent = hud.classList.contains('oculto') ? 'mostrar' : 'ocultar';
+});
+
+/* ── Partida ── */
+detectarAVIF().then(function (temAVIF) {
+    var ext = temAVIF ? 'avif' : 'webp';
+    document.getElementById('h-set').textContent =
+        (ehMobile ? 'mobile' : 'desktop') + ' · ' + ext.toUpperCase() +
+        ' · ' + conjunto.w + '×' + conjunto.h;
+    carregar(ext, function () { canvas.classList.add('pronto'); });
+    requestAnimationFrame(loop);
+});
+
+/* Se a largura cruzar o breakpoint (girar o celular, redimensionar a
+   janela), recarrega — o conjunto certo muda. */
+var larguraInicial = ehMobile;
+window.addEventListener('resize', function () {
+    var agora = window.matchMedia('(max-width: 768px)').matches;
+    if (agora !== larguraInicial) location.reload();
+});
+
+})();
+</script>
+</body>
+</html>
