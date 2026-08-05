@@ -102,7 +102,7 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background: #050e1a;
+            background: #050e1a url('hero-poster.jpg') center center / cover no-repeat;
         }
 
         /* Mobile: runway menor (200vh), hero continua sticky */
@@ -122,16 +122,24 @@
                 transform: translate(-50%, -50%);
                 z-index: 20;
                 opacity: 0;
-                width: 94%;
+                width: 92%;
+                max-width: 420px;
                 text-align: center;
                 pointer-events: none;
                 will-change: opacity;
+                background: rgba(5, 14, 26, .62);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border: 1px solid rgba(255,255,255,.12);
+                border-radius: 20px;
+                padding: 22px 16px 20px;
+                box-shadow: 0 20px 60px rgba(0,0,0,.45);
             }
             .mobile-dest-grid.visible { pointer-events: auto; }
             .mobile-dest-items {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
+                gap: 10px 8px;
                 margin-top: 14px;
             }
             .mobile-dest-item {
@@ -494,7 +502,10 @@
             .tematicos-header { padding: 0 24px; }
         }
         @media (max-width: 560px) {
-            .tematico-card { flex: 0 0 72%; }
+            .tematico-card { flex: 0 0 58%; }
+            .tematico-card img { aspect-ratio: 3 / 4; }
+            .carousel-track { cursor: grab; }
+            .carousel-track.dragging { cursor: grabbing; transition: none; }
         }
 
         /* ── LIGHTBOX ── */
@@ -917,7 +928,7 @@
             .hero-content { padding-bottom: 24vh; }
 
             /* Carousel */
-            .tematico-card { flex: 0 0 80%; }
+            .tematico-card { flex: 0 0 64%; }
             .carousel-outer { padding: 0 16px; }
             .carousel-btn { width: 36px; height: 36px; font-size: 20px; }
 
@@ -1413,37 +1424,18 @@ function handleScroll() {
 }
 window.addEventListener('scroll', handleScroll, { passive: true });
 
-if (isAndroid) {
-    /* ── ANDROID: seeking é lento, usa autoplay loop ── */
+if (isAndroid || isIOS) {
+    /* ── MOBILE (Android + iOS): seeking em vídeo grande é lento/instável
+       em conexão de celular — em vez de tentar acompanhar o scroll frame
+       a frame (o que trava no primeiro frame quando o buffer não acompanha),
+       toca o vídeo em loop normal, só como fundo animado. O scroll ainda
+       controla o fade dos textos/cards via handleScroll(). ── */
     vid.setAttribute('autoplay', '');
     vid.setAttribute('loop', '');
     vid.load();
-    vid.play().catch(() => {});
-
-} else if (isIOS) {
-    /* ── iOS: scrubbing com unlock no primeiro toque ── */
-    let unlocked = false;
-    function unlockIOS() {
-        if (unlocked) return;
-        unlocked = true;
-        vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
-    }
-    document.addEventListener('touchstart', unlockIOS, { once: true, passive: true });
-
-    let targetTime = 0, smoothTime = 0;
-    vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
-    window.addEventListener('scroll', () => {
-        const progress = handleScroll();
-        if (vid.duration) targetTime = vid.duration * progress;
-    }, { passive: true });
-    function scrubLoop() {
-        if (vid.duration && unlocked && Math.abs(smoothTime - targetTime) > 0.0005) {
-            smoothTime = lerp(smoothTime, targetTime, 0.1);
-            vid.currentTime = smoothTime;
-        }
-        requestAnimationFrame(scrubLoop);
-    }
-    scrubLoop();
+    const tryPlay = () => vid.play().catch(() => {});
+    tryPlay();
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
 
 } else {
     /* ── DESKTOP: scroll-scrubbing completo ── */
@@ -1565,6 +1557,41 @@ vid.addEventListener('error', () => vid.style.display = 'none');
     nextBtn.addEventListener('click', () => goTo(currentPage + 1));
     window.addEventListener('resize', () => { buildDots(); goTo(0); });
     buildDots();
+
+    /* ── Swipe / arraste com o dedo (mobile) ── */
+    let dragging   = false;
+    let startX     = 0;
+    let baseOffset = 0;
+    let dragOffset = 0;
+
+    function currentOffsetPx() {
+        const m = /translateX\((-?[\d.]+)px\)/.exec(track.style.transform || '');
+        return m ? parseFloat(m[1]) : 0;
+    }
+
+    track.addEventListener('touchstart', e => {
+        dragging   = true;
+        startX     = e.touches[0].clientX;
+        baseOffset = currentOffsetPx();
+        track.classList.add('dragging');
+    }, { passive: true });
+
+    track.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        dragOffset = e.touches[0].clientX - startX;
+        track.style.transform = `translateX(${baseOffset + dragOffset}px)`;
+    }, { passive: true });
+
+    track.addEventListener('touchend', () => {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('dragging');
+        const threshold = cards[0].offsetWidth * 0.18;
+        if (dragOffset < -threshold)      goTo(currentPage + 1);
+        else if (dragOffset > threshold)  goTo(currentPage - 1);
+        else                               goTo(currentPage);
+        dragOffset = 0;
+    });
 })();
 
 /* ════════════════════════════════════════════════════════════════
