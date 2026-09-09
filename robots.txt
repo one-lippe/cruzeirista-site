@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /painel/
+Disallow: /media/
+Sitemap: https://www.cruzeirista.com.br/sitemap.xml

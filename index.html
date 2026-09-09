@@ -10,14 +10,20 @@
     <meta name="keywords" content="cruzeiros, consultoria de cruzeiros, cruzeiro caribe, cruzeiro brasil, cruzeiro mediterrâneo, cruzeiro alasca, agência de cruzeiros, pacotes de cruzeiro, cruzeiro sem visto">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Cruzeirista">
-    <link rel="canonical" href="https://one-lippe.github.io/cruzeirista-site/">
+    <link rel="canonical" href="https://www.cruzeirista.com.br/">
+
+    <!-- ══ HERO — poster e primeiro quadro entram antes de tudo ═════ -->
+    <link rel="preload" as="image" href="hero/poster-d.jpg" media="(min-width: 769px)">
+    <link rel="preload" as="image" href="hero/poster-m.jpg" media="(max-width: 768px)">
+    <link rel="preload" as="image" href="hero/d/0001.avif" type="image/avif" media="(min-width: 769px)">
+    <link rel="preload" as="image" href="hero/m/0001.avif" type="image/avif" media="(max-width: 768px)">
 
     <!-- ══ OPEN GRAPH (Facebook / WhatsApp / LinkedIn) ═════════════ -->
     <meta property="og:type"        content="website">
-    <meta property="og:url"         content="https://one-lippe.github.io/cruzeirista-site/">
+    <meta property="og:url"         content="https://www.cruzeirista.com.br/">
     <meta property="og:title"       content="Cruzeirista | Consultoria Especializada em Cruzeiros">
     <meta property="og:description" content="Encontre o cruzeiro ideal para você. Caribe sem visto, Brasil, Mediterrâneo, Alasca e muito mais. Cotação personalizada e atendimento especializado.">
-    <meta property="og:image"       content="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80">
+    <meta property="og:image"       content="https://www.cruzeirista.com.br/hero/poster-d.jpg">
     <meta property="og:locale"      content="pt_BR">
     <meta property="og:site_name"   content="Cruzeirista">
 
@@ -25,7 +31,7 @@
     <meta name="twitter:card"        content="summary_large_image">
     <meta name="twitter:title"       content="Cruzeirista | Consultoria Especializada em Cruzeiros">
     <meta name="twitter:description" content="Encontre o cruzeiro ideal. Caribe, Brasil, Mediterrâneo e mais. Cotação personalizada.">
-    <meta name="twitter:image"       content="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80">
+    <meta name="twitter:image"       content="https://www.cruzeirista.com.br/hero/poster-d.jpg">
 
     <!-- ══ JSON-LD SCHEMA ══════════════════════════════════════════ -->
     <script type="application/ld+json">
@@ -34,8 +40,8 @@
       "@type": "TravelAgency",
       "name": "Cruzeirista",
       "description": "Consultoria boutique especializada em cruzeiros. Atendimento personalizado para encontrar o cruzeiro ideal — Caribe, Brasil, Mediterrâneo, Alasca e mais.",
-      "url": "https://one-lippe.github.io/cruzeirista-site/",
-      "logo": "https://one-lippe.github.io/cruzeirista-site/logo.png",
+      "url": "https://www.cruzeirista.com.br/",
+      "logo": "https://www.cruzeirista.com.br/img/logo.svg",
       "areaServed": {
         "@type": "Country",
         "name": "Brasil"
@@ -102,12 +108,13 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background: #050e1a url('hero-poster.jpg') center center / cover no-repeat;
+            background: #050e1a url('hero/poster-d.jpg') center center / cover no-repeat;
         }
 
         /* Mobile: runway menor (200vh), hero continua sticky */
         @media (max-width: 768px) {
             #hero-wrapper { height: 200vh; }
+            #hero { background-image: url('hero/poster-m.jpg'); }
         }
 
         /* ── MOBILE DEST GRID (aparece na fase final do hero) ── */
@@ -158,15 +165,31 @@
             }
         }
 
-        /* ── Vídeo único ── */
-        #bg-video {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
+        /* ── Sequência de quadros (dois canvas, mescla entre vizinhos) ──
+           As duas camadas moram juntas em #quadros para o borrão de
+           movimento e o parallax valerem para a imagem inteira. ── */
+        #quadros {
+            position: absolute; inset: 0;
             z-index: 0;
+            opacity: 0;
+            transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1);
             transform-origin: center center;
-            will-change: transform;
+            will-change: transform, filter;
+        }
+        #hero.pronto #quadros { opacity: 1; }
+        .quadro {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            will-change: opacity;
+        }
+        #cv-b { opacity: 0; }
+
+        /* Movimento reduzido: o hero vira um quadro parado. A pista de
+           rolagem continua (é o que leva aos cards de destino), mas sem
+           scrubbing, sem borrão e sem parallax. */
+        @media (prefers-reduced-motion: reduce) {
+            #quadros { transition: opacity 200ms ease; }
         }
 
         /* overlay sutil */
@@ -989,10 +1012,11 @@
 <div id="hero-wrapper">
     <section id="hero">
 
-        <!-- Único vídeo — keyint=1, scrubbing suave -->
-        <video id="bg-video" muted playsinline preload="auto" poster="hero-poster.jpg" aria-hidden="true" role="presentation">
-            <source src="hero_scrub.mp4" type="video/mp4">
-        </video>
+        <!-- Sequência de quadros AVIF (WebP como plano B), desenhada em canvas -->
+        <div id="quadros" aria-hidden="true">
+            <canvas id="cv-a" class="quadro"></canvas>
+            <canvas id="cv-b" class="quadro"></canvas>
+        </div>
 
         <div class="hero-overlay"></div>
 
@@ -1027,7 +1051,7 @@
                 <h1 class="hero-title">
                     <span class="line1">O Cruzeiro dos Seus Sonhos</span>
                 </h1>
-                <p class="hero-sub">Consultoria de cruzeiros por quem conhece cada navio por dentro.</p>
+                <p class="hero-sub">Consultoria de cruzeiros por quem ama estar a bordo.</p>
                 <div class="hero-buttons">
                     <a href="#destinos" class="btn btn-glass">Explorar destinos</a>
                     <a href="#forms"    class="btn btn-teal">Quero uma cotação</a>
@@ -1360,11 +1384,11 @@
         <div class="qs-pillars">
             <div class="qs-pillar">
                 <h4>Conhecemos por dentro</h4>
-                <p>Recomendamos porque já estivemos a bordo. Nosso time viaja, avalia e conhece cada navio que indica.</p>
+                <p>Nosso time traz experiências a bordo para ajudar você a escolher seu próximo cruzeiro.</p>
             </div>
             <div class="qs-pillar">
                 <h4>Atendimento de verdade</h4>
-                <p>Você fala com quem entende de cruzeiros, não com um formulário. Do primeiro contato até o embarque.</p>
+                <p>Você fala com quem entende de cruzeiros. Do primeiro contato até o embarque.</p>
             </div>
             <div class="qs-pillar">
                 <h4>Clareza para decidir</h4>
@@ -1384,8 +1408,8 @@
     <h2 class="cta-title">Está quase na hora do seu embarque</h2>
     <p class="cta-sub">Fale com um consultor e encontre o cruzeiro ideal para você.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn btn-glass">Quero uma cotação</a>
-        <a href="#" class="btn btn-teal">Ver cruzeiros disponíveis</a>
+        <a href="#forms" class="btn btn-glass">Quero uma cotação</a>
+        <a href="#destinos" class="btn btn-teal">Ver cruzeiros disponíveis</a>
     </div>
 </section>
 
@@ -1397,8 +1421,8 @@
         <path fill="#ffffff" d="M258.08,61.92l.03-1.18-2.61.81-.03,1.18,2.61-.81ZM138.98,75.01l4.88-11.18-1.23-.38-3.65,8.67-3.63-8.67-1.24.38,4.88,11.18ZM147,74.83h1.23v-11.39l-1.23.38v11.01ZM158.26,71.22h-4.14l2.06-4.91,2.08,4.91ZM159.77,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.06l1.05,2.5ZM173.3,73.23v-3.63h-3.79l-.38,1.12h2.92v2.08c-.52.46-1.56,1.16-3.03,1.16-2.58,0-4.62-2.15-4.62-4.75s2-4.75,4.58-4.75c2.38,0,3.59,1.7,3.59,1.7v-1.63c-1.7-1.32-3.59-1.2-3.59-1.2-3.24,0-5.84,2.64-5.84,5.88s2.64,5.88,5.88,5.88c0,0,2.45.11,4.28-1.85M178.15,73.72v-3.95h4.29l.38-1.1h-4.67v-4.01h5.28l.38-1.12h-6.89v11.29h6.51l.38-1.12h-5.66ZM196.3,75.01v-11.53l-1.23.38v8.23l-8.27-8.67v11.42h1.23v-8.43l8.27,8.6ZM201.06,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.59-1.46v1.38c.71.63,1.93,1.24,3.59,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.7-.94-2.7-2.05M223.14,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM239.19,71.22h-4.14l2.06-4.91,2.08,4.91ZM240.7,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM248.39,63.59h-3.32v11.24h1.24v-4.95h2.34l3.43,5.13.94-.77-3.07-4.5c1.42-.3,2.45-1.1,2.45-3.01,0-2.56-1.89-3.14-4.03-3.14M246.32,64.7h2.08c1.53,0,2.77.44,2.77,2.03s-1.24,2.03-2.77,2.03h-2.08v-4.06ZM256.18,74.83h1.23v-11.39l-1.23.38v11.01ZM269.27,64.7l.38-1.12h-8.56l-.38,1.12h3.85v10.13h1.23v-10.13h3.48ZM272.95,74.83h1.23v-11.39l-1.23.38v11.01ZM284.3,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM300.36,71.22h-4.14l2.06-4.91,2.08,4.91ZM301.87,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM306.95,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.58-1.46v1.38c.71.63,1.93,1.24,3.58,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.71-.94-2.71-2.05"/>
     </svg>
     <div class="ft-links" role="navigation" aria-label="Links institucionais">
-        <a href="https://www.cruzeirista.com.br/privacidade.html" class="ft-link" target="_blank" rel="noopener">Política de Privacidade</a>
-        <a href="https://www.cruzeirista.com.br/termos.html" class="ft-link" target="_blank" rel="noopener">Termos de Uso</a>
+        <a href="privacidade.html" class="ft-link">Política de Privacidade</a>
+        <a href="termos.html" class="ft-link">Termos de Uso</a>
     </div>
     <div class="ft-right">
         <div class="ft-social">
@@ -1416,11 +1440,28 @@
 
 <script>
 /* ════════════════════════════════════════════════════════════════
-   SCROLL-SCRUBBING — vídeo único, keyint=1
+   SCROLL-SCRUBBING — sequência de quadros em canvas
+
+   Herdado do hero do site da OFB (03/09/2026), onde cada regra foi
+   medida no Safari — o navegador em que o Lippe aprova:
+
+   · Sequência AVIF em vez de <video>: seek exato, carga progressiva
+     e nenhum gesto para destravar no iOS.
+   · Quadros carregados EM ORDEM e decodificados UM POR VEZ. O gargalo
+     é decodificar, não baixar: o Safari adia a decodificação até o
+     primeiro desenho (18 ms num quadro, mais que uma tela de 60 Hz).
+     Em ordem, a decodificação anda mais rápido que a rolagem de
+     leitura e nunca é alcançada.
+   · Dois canvas com mescla por opacidade entre quadros vizinhos.
+   · Suavização corrigida por tempo: mesma sensação a 60 e 120 Hz.
+   · Borrão proporcional à velocidade da rolagem; zero quando parado.
+   · prefers-reduced-motion: um quadro parado, sem scrubbing.
 ════════════════════════════════════════════════════════════════ */
 const wrapper  = document.getElementById('hero-wrapper');
 const hero     = document.getElementById('hero');
-const vid      = document.getElementById('bg-video');
+const camadas  = document.getElementById('quadros');
+const cvA      = document.getElementById('cv-a');
+const cvB      = document.getElementById('cv-b');
 const heroBody = document.getElementById('hero-body');
 const cardsLeft      = document.querySelector('.cards-left');
 const cardsRight     = document.querySelector('.cards-right');
@@ -1431,13 +1472,13 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 
 const mobileDestGrid = document.getElementById('mobileDestGrid');
 
-const isAndroid = /Android/i.test(navigator.userAgent);
-const isIOS     = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ehMobile = window.matchMedia('(max-width: 768px)').matches;
 
 /* ── Scroll handler comum (fade textos + cards) ── */
 function handleScroll() {
     const runway   = wrapper.offsetHeight - window.innerHeight;
-    const progress = Math.min(Math.max(window.scrollY, 0) / runway, 1);
+    const progress = runway > 0 ? Math.min(Math.max(window.scrollY, 0) / runway, 1) : 0;
 
     const textOpacity = Math.max(0, 1 - progress / 0.30);
     if (heroBody)  heroBody.style.opacity  = textOpacity;
@@ -1448,6 +1489,8 @@ function handleScroll() {
     if (cardsLeft)      { cardsLeft.style.opacity      = cardsP; cardsLeft._extraY      = cardsY; }
     if (cardsRight)     { cardsRight.style.opacity     = cardsP; cardsRight._extraY     = cardsY; }
     if (heroCardsTitle) { heroCardsTitle.style.opacity = cardsP; }
+    const zap = document.querySelector('.zap-flutuante');
+    if (zap) zap.classList.toggle('zap-recolhido', cardsP > 0);
     if (mobileDestGrid) {
         mobileDestGrid.style.opacity = cardsP;
         mobileDestGrid.classList.toggle('visible', cardsP > 0.5);
@@ -1457,38 +1500,222 @@ function handleScroll() {
 }
 window.addEventListener('scroll', handleScroll, { passive: true });
 
-/* ── SCROLL-SCRUBBING (desktop e mobile) ──────────────────────────
-   Em touch (iOS/Android), o Safari/Chrome mobile só deixa fazer seek
-   de verdade em um <video> depois de um play()+pause() disparado por
-   gesto do usuário — por isso o "unlock" no primeiro touchstart. Até
-   lá o vídeo fica parado no poster/primeiro frame (sem autoplay).
-   Em conexão ruim o vídeo pode não acompanhar 1:1 (é um arquivo
-   grande) — mas não trava mais, porque só faz seek quando `duration`
-   já está disponível. ── */
-let unlocked = !(isAndroid || isIOS);
-function unlockScrub() {
-    if (unlocked) return;
-    unlocked = true;
-    vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
-}
-if (isAndroid || isIOS) {
-    document.addEventListener('touchstart', unlockScrub, { once: true, passive: true });
+/* ── Conjunto de quadros ──
+   479 quadros a 48 fps, interpolados do master de 24 fps (aprovado pelo
+   Lippe em 09/09/2026: a 24 fps o navio saltava entre quadros vizinhos).
+   d  · 1920×1080 AVIF crf 36 (desktop)      dw · 1440×810 WebP
+   m  ·  720×1080 AVIF crf 36 (celular, 2:3)  mw ·  540×810 WebP
+   Gerados por _gerar_hero.sh a partir do master cruzeirista-hero.mp4. ── */
+const N = 479;
+const CONJ = ehMobile
+    ? { dir: 'm', w: 720,  h: 1080 }
+    : { dir: 'd', w: 1920, h: 1080 };
+let EXT = 'avif';
+
+function detectarAvif(depois) {
+    const img = new Image();
+    let respondeu = false;
+    function fim(tem) {
+        if (respondeu) return;
+        respondeu = true;
+        if (!tem) { EXT = 'webp'; CONJ.dir += 'w'; }
+        depois();
+    }
+    img.onload  = () => fim(img.width > 0);
+    img.onerror = () => fim(false);
+    setTimeout(() => fim(true), 800);
+    img.src = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
 }
 
-let targetTime = 0, smoothTime = 0;
-vid.addEventListener('loadedmetadata', () => { vid.pause(); vid.currentTime = 0; });
-window.addEventListener('scroll', () => {
-    const progress = handleScroll();
-    if (vid.duration) targetTime = vid.duration * progress;
-}, { passive: true });
-function scrubLoop() {
-    if (vid.duration && unlocked && Math.abs(smoothTime - targetTime) > 0.0005) {
-        smoothTime = lerp(smoothTime, targetTime, 0.1);
-        vid.currentTime = smoothTime;
-    }
-    requestAnimationFrame(scrubLoop);
+function caminho(i) {
+    return 'hero/' + CONJ.dir + '/' + String(i + 1).padStart(4, '0') + '.' + EXT;
 }
-scrubLoop();
+
+const quadros = new Array(N);
+let carregados = 0, pronto = false;
+
+/* Fila de decodificação: um por vez. Concorrentes competem entre si e
+   nenhum termina primeiro; enfileirado, os primeiros ficam prontos antes
+   dos últimos — que é exatamente a ordem em que o olho pede. */
+const filaDecode = [];
+let decodificando = false;
+function enfileirarDecode(img) {
+    filaDecode.push(img);
+    if (!decodificando) girarDecode();
+}
+function girarDecode() {
+    const img = filaDecode.shift();
+    if (!img) { decodificando = false; return; }
+    decodificando = true;
+    let seguiu = false;
+    const seguir = () => { if (seguiu) return; seguiu = true; girarDecode(); };
+    if (img.decode) {
+        const t0 = performance.now();
+        img.decode().then(() => { decSomaMs += performance.now() - t0; decAmostras++; seguir(); }, seguir);
+        setTimeout(seguir, 500);
+    } else {
+        seguir();
+    }
+}
+
+function carregar(aoPrimeiro) {
+    /* Em ordem, do primeiro ao último. Movimento reduzido baixa um só. */
+    const seq = [];
+    if (reduzido) seq.push(Math.floor(N * 0.42));
+    else for (let q = 0; q < N; q++) seq.push(q);
+
+    let fila = 0;
+    const SIMULTANEOS = 10;
+    function proximo() {
+        if (fila >= seq.length) return;
+        const i = seq[fila++];
+        const img = new Image();
+        img.decoding = 'async';
+        img.onload = () => {
+            quadros[i] = img;
+            carregados++;
+            if (!pronto) { pronto = true; aoPrimeiro(); }
+            proximo();
+            enfileirarDecode(img);
+        };
+        img.onerror = proximo;
+        img.src = caminho(i);
+    }
+    for (let k = 0; k < SIMULTANEOS; k++) proximo();
+}
+
+/* Quadro pedido, ou o vizinho mais próximo já carregado. */
+function pegar(i) {
+    i = Math.max(0, Math.min(Math.round(i), N - 1));
+    if (quadros[i]) return quadros[i];
+    for (let d = 1; d < N; d++) {
+        if (quadros[i - d]) return quadros[i - d];
+        if (quadros[i + d]) return quadros[i + d];
+    }
+    return null;
+}
+
+function progresso() {
+    const runway = wrapper.offsetHeight - window.innerHeight;
+    if (runway <= 0) return 0;
+    return Math.min(Math.max(window.scrollY, 0) / runway, 1);
+}
+
+const ctxA = cvA.getContext('2d', { alpha: false });
+const ctxB = cvB.getContext('2d', { alpha: false });
+cvA.width = cvB.width = CONJ.w;
+cvA.height = cvB.height = CONJ.h;
+
+/* Chaves de calibração pela URL, para comparar no navegador de quem aprova:
+   ?mescla=1  liga a mescla entre quadros vizinhos (desligada: no mar aberto
+              o navio muda demais de um quadro para o outro e a mescla vira
+              imagem dupla — o "ghosting")
+   ?borrao=0  desliga o borrão por velocidade
+   ?parallax=0 desliga o parallax do mouse sobre a imagem
+   ?suav=0.16  fator de suavização (0 = sem suavização)
+   ?medir=1   mostra decodificação/desenho por quadro e fps no canto */
+const PARAM = new URLSearchParams(location.search);
+const MESCLAR      = PARAM.get('mescla') === '1';
+const BORRAR       = PARAM.get('borrao') !== '0';
+const PARALLAX     = PARAM.get('parallax') !== '0';
+const MEDIR        = PARAM.get('medir') === '1';
+const SUAVIZACAO   = PARAM.has('suav') ? Math.max(0, Math.min(0.9, parseFloat(PARAM.get('suav')))) : 0.16;
+const BORRAO_MAX   = 2.4;    /* px — acima disso fica caro no Safari */
+const BORRAO_GANHO = 0.5;    /* px de borrão por quadro/frame de velocidade */
+
+let indiceSuave = 0, anterior = 0, ultimoDesenho = -1, blurAtual = -1, tPrev = 0;
+
+function pintar(t) {
+    const dt = tPrev ? Math.min(t - tPrev, 100) : 16.667;
+    tPrev = t;
+
+    const alvo = progresso() * (N - 1);
+
+    /* 1 − (1 − k)^(dt/16.667): mesma sensação em tela de 60 e de 120 Hz. */
+    if (SUAVIZACAO <= 0) indiceSuave = alvo;
+    else {
+        const k = 1 - Math.pow(1 - SUAVIZACAO, dt / 16.667);
+        indiceSuave += (alvo - indiceSuave) * k;
+        if (Math.abs(alvo - indiceSuave) < 0.01) indiceSuave = alvo;
+    }
+
+    /* Sem mescla, o quadro mostrado é o mais próximo (não o piso), para
+       o passo entre quadros cair no meio do caminho e não no fim. */
+    const i0 = MESCLAR ? Math.floor(indiceSuave) : Math.round(indiceSuave);
+    const fr = MESCLAR ? indiceSuave - i0 : 0;
+
+    /* Repinta o canvas só quando o índice inteiro muda. A cada quadro
+       de tela mexe apenas em opacity e filter, que ficam no compositor. */
+    if (i0 !== ultimoDesenho) {
+        const a = pegar(i0);
+        if (a) {
+            const t0 = MEDIR ? performance.now() : 0;
+            ctxA.drawImage(a, 0, 0, CONJ.w, CONJ.h);
+            if (MESCLAR) { const b = pegar(i0 + 1); if (b) ctxB.drawImage(b, 0, 0, CONJ.w, CONJ.h); }
+            if (MEDIR) { medSomaMs += performance.now() - t0; medAmostras++; }
+            ultimoDesenho = i0;
+        }
+    }
+    if (MESCLAR) cvB.style.opacity = fr.toFixed(3);
+
+    const vel = Math.abs(indiceSuave - anterior) * (16.667 / dt);
+    anterior = indiceSuave;
+    let blur = BORRAR ? Math.min(vel * BORRAO_GANHO, BORRAO_MAX) : 0;
+    if (blur < 0.08) blur = 0;
+    if (Math.abs(blur - blurAtual) > 0.06 || (blur === 0 && blurAtual !== 0)) {
+        camadas.style.filter = blur ? 'blur(' + blur.toFixed(2) + 'px)' : '';
+        blurAtual = blur;
+    }
+
+    if (MEDIR) medir(t, i0);
+    requestAnimationFrame(pintar);
+}
+
+/* Painel de medição (?medir=1): decodificação por quadro, desenho e fps.
+   Serve para ler números no Safari, onde o Cowork não enxerga. */
+let medSomaMs = 0, medAmostras = 0, medCont = 0, medMarco = 0, medEl = null;
+let decSomaMs = 0, decAmostras = 0;
+function medir(t, i0) {
+    if (!medEl) {
+        medEl = document.createElement('pre');
+        medEl.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:9000;margin:0;padding:10px 12px;background:rgba(5,14,26,.88);color:#67d0ff;font:11px/1.5 ui-monospace,Menlo,monospace;border-radius:10px;pointer-events:none';
+        document.body.appendChild(medEl);
+    }
+    medCont++;
+    if (t - medMarco > 500) {
+        medEl.textContent =
+            'conjunto ' + CONJ.dir + ' · ' + EXT + ' · ' + CONJ.w + '×' + CONJ.h + '\n' +
+            'carregados ' + carregados + '/' + N + ' · decodificados ' + decAmostras + '\n' +
+            'decode ' + (decAmostras ? (decSomaMs / decAmostras).toFixed(1) : '–') + ' ms/quadro\n' +
+            'desenho ' + (medAmostras ? (medSomaMs / medAmostras).toFixed(2) : '–') + ' ms\n' +
+            'fps ' + Math.round(medCont * 1000 / (t - medMarco)) + ' · quadro ' + i0 + '\n' +
+            'mescla ' + (MESCLAR ? 'on' : 'off') + ' · borrão ' + (BORRAR ? 'on' : 'off') + ' · parallax ' + (PARALLAX ? 'on' : 'off') + ' · suav ' + SUAVIZACAO;
+        medCont = 0; medMarco = t; medSomaMs = 0; medAmostras = 0;
+    }
+}
+
+/* O navegador devolve a posição anterior ao recarregar e o hero voltava
+   no meio da pista. Forçar o topo — exceto quando a URL traz âncora. */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) {
+    window.scrollTo(0, 0);
+    window.addEventListener('load', () => { if (!location.hash) window.scrollTo(0, 0); });
+}
+
+window.addEventListener('resize', () => {
+    if (window.matchMedia('(max-width: 768px)').matches !== ehMobile) location.reload();
+});
+
+detectarAvif(() => {
+    carregar(() => {
+        if (reduzido) { const q = pegar(0); if (q) ctxA.drawImage(q, 0, 0, CONJ.w, CONJ.h); }
+        hero.classList.add('pronto');
+        document.dispatchEvent(new CustomEvent('hero-pronto'));
+    });
+});
+
+handleScroll();
+if (!reduzido) requestAnimationFrame(pintar);
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -1503,15 +1730,16 @@ hero.addEventListener('mousemove', e => {
 });
 hero.addEventListener('mouseleave', () => { mx = 0; my = 0; });
 
-[vid, heroBody, cardsLeft, cardsRight].forEach(el => {
+[heroBody, cardsLeft, cardsRight].forEach(el => {
     if (el) el.style.willChange = 'transform';
 });
 
 function parallaxLoop() {
+    if (reduzido || !PARALLAX) return;
     cx = lerp(cx, mx, 0.055);
     cy = lerp(cy, my, 0.055);
 
-    if (vid)       vid.style.transform      = `translate(${cx*22}px,${cy*14}px) scale(1.08)`;
+    if (camadas)   camadas.style.transform  = `translate(${cx*22}px,${cy*14}px) scale(1.08)`;
     if (heroBody)  heroBody.style.transform  = `translate(${cx*-7}px,${cy*-5}px)`;
 
     const leftY  = cardsLeft?._extraY  || 0;
@@ -1534,12 +1762,12 @@ if (menuBtn) menuBtn.addEventListener('click', () =>
 
 document.querySelectorAll('a[href^="#"]').forEach(a =>
     a.addEventListener('click', e => {
-        const t = document.querySelector(a.getAttribute('href'));
+        const href = a.getAttribute('href');
+        if (!href || href === '#') { e.preventDefault(); return; }   // âncora vazia: não faz nada
+        const t = document.querySelector(href);
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     })
 );
-
-vid.addEventListener('error', () => vid.style.display = 'none');
 
 
 /* ════════════════════════════════════════════════════════════════
@@ -1734,18 +1962,11 @@ document.querySelectorAll('a[href="#destinos"]').forEach(a => {
         hidden = true;
         loader.classList.add('hidden');
     }
-    const vid = document.getElementById('bg-video');
-    if (vid) {
-        // Esconde quando o vídeo tem dados suficientes para tocar
-        vid.addEventListener('canplaythrough', hideLoader, { once: true });
-        vid.addEventListener('canplay', hideLoader, { once: true });
-        // iOS: loadeddata é suficiente
-        vid.addEventListener('loadeddata', hideLoader, { once: true });
-    }
-    // Fallback: esconde após 2.5s independente do vídeo
+    // Esconde quando o primeiro quadro do hero foi desenhado
+    document.addEventListener('hero-pronto', hideLoader, { once: true });
+    if (document.getElementById('hero')?.classList.contains('pronto')) hideLoader();
+    // Fallback: esconde após 2.5s independente do hero
     setTimeout(hideLoader, 2500);
-    // Se o vídeo já estiver pronto (cache)
-    if (vid && vid.readyState >= 2) hideLoader();
 })();
 
 function formShake(chipsId, errId) {
@@ -1816,13 +2037,58 @@ function formSubmit() {
         return;
     }
     document.getElementById('err-contato')?.classList.remove('visible');
-    [1,2,3].forEach(n => {
-        document.getElementById('step' + n)?.classList.remove('active');
-        const seg = document.getElementById('prog' + n);
-        if (seg) { seg.classList.remove('active'); seg.classList.add('done'); }
-    });
-    document.getElementById('formSuccess')?.classList.add('active');
+
+    // Envio real: cotacao.php manda por e-mail para contato@cruzeirista.com.br
+    const dados = new FormData();
+    const sel = id => document.querySelector('#' + id + ' .form-chip.selected')?.dataset.value || '';
+    dados.append('categoria',   sel('chips-categoria'));
+    dados.append('periodo',     document.getElementById('sel-periodo')?.value || '');
+    dados.append('pessoas',     document.getElementById('sel-pessoas')?.value || '');
+    dados.append('experiencia', sel('chips-experiencia'));
+    dados.append('prioridades', [...document.querySelectorAll('#chips-prioridade .form-chip.selected')].map(c => c.dataset.value).join(', '));
+    dados.append('nome', nome);
+    dados.append('whatsapp', whats);
+    dados.append('email', document.getElementById('inp-email')?.value.trim() || '');
+    dados.append('cidade', cidade);
+
+    const botao = document.querySelector('.btn-form-submit');
+    if (botao) { botao.disabled = true; botao.textContent = 'Enviando…'; }
+    const erro = document.getElementById('err-contato');
+    const falhou = () => {
+        if (botao) { botao.disabled = false; botao.textContent = 'Enviar cotação →'; }
+        if (erro) { erro.textContent = '⚠ Não conseguimos enviar agora. Tente de novo ou fale pelo WhatsApp.'; erro.classList.add('visible'); }
+    };
+    fetch('cotacao.php', { method: 'POST', body: dados })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(j => {
+            if (!j.ok) throw new Error(j.error || 'falha');
+            [1,2,3].forEach(n => {
+                document.getElementById('step' + n)?.classList.remove('active');
+                const seg = document.getElementById('prog' + n);
+                if (seg) { seg.classList.remove('active'); seg.classList.add('done'); }
+            });
+            document.getElementById('formSuccess')?.classList.add('active');
+        })
+        .catch(falhou);
 }
 </script>
+
+<!-- ══ WHATSAPP — acesso flutuante, presente em todas as páginas ═════ -->
+<style>
+.zap-flutuante{position:fixed;right:24px;bottom:24px;z-index:800;display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border-radius:999px;background:#25D366;color:#fff;font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.01em;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform 160ms cubic-bezier(.23,1,.32,1),box-shadow 160ms ease}
+.zap-flutuante svg{width:22px;height:22px;fill:currentColor;flex:none}
+.zap-flutuante:active{transform:scale(.97)}
+@media(hover:hover) and (pointer:fine){.zap-flutuante:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.32)}}
+@media(max-width:768px){.zap-flutuante{right:16px;bottom:16px;padding:11px 16px 11px 14px;font-size:13px}.zap-flutuante svg{width:20px;height:20px}}
+/* Home: no desktop, recolhe enquanto os cards de destino do hero estão na tela (o último card da direita
+   ocupa o canto); no celular, sobe para não cobrir o "Scroll para explorar". */
+#hero-wrapper ~ .zap-flutuante{transition:transform 160ms cubic-bezier(.23,1,.32,1),box-shadow 160ms ease,opacity 200ms ease}
+@media(min-width:901px){#hero-wrapper ~ .zap-flutuante.zap-recolhido{opacity:0;pointer-events:none}}
+@media(max-width:768px){#hero-wrapper ~ .zap-flutuante{bottom:84px}}
+</style>
+<a class="zap-flutuante" href="https://wa.me/551140409598" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span>Falar pelo WhatsApp</span>
+</a>
 </body>
 </html>
