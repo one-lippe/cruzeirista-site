@@ -1,0 +1,6 @@
+Créditos obrigatórios (licença Unsplash). Fotos baixadas em 15/09/2026 para a landing Caribe sem visto.
+
+cartagena.jpg: Foto por Ronin (https://unsplash.com/@roninkgd) no Unsplash. https://unsplash.com/photos/colorful-colonial-street-with-flowering-vines-0W1wIA6kEsk
+panama-casco-viejo.jpg: Foto por Kaori Hirakata (https://unsplash.com/@kcreepers) no Unsplash. https://unsplash.com/photos/a-row-of-buildings-with-balconies-and-trees-LV7a6u6SuTk
+
+As demais imagens da landing já eram do site: img/secoes/caribe-card.jpg (hero) e img/portos/aruba.jpg, curacao.jpg, bonaire.jpg.

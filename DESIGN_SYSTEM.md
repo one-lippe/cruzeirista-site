@@ -269,4 +269,26 @@ Ordem no CSS: regras base para desktop, depois `@media (max-width: …)` do maio
 
 > O que uma página precisou criar e não existia no sistema. Marcar com o nome da página e a data. Se outra página reaproveitar, a adição sobe para a seção correspondente acima.
 
-_(nenhuma até 15/09/2026)_
+### Landing Caribe sem visto (`caribe-sem-visto/index.html`, 15/09/2026)
+
+Escrita mobile-first (base para celular, `@media (min-width: …)` em 481, 641, 769, 901 e 1024). Casca herdada: cabeçalho, rodapé e WhatsApp copiados literalmente de `privacidade.html` (rodapé `#0a1628`, variante interna). Os componentes abaixo não existiam e foram criados nela.
+
+| Adição | O que é | Derivado de |
+|---|---|---|
+| `.passos` / `.passo` | Grade de 3 passos numerados: círculo teal 36px com o número (14px/700), título 18px/700, texto 15px cinza, borda superior `#e5e7eb`. 1 coluna no celular, 3 a partir de 769 | `.qs-pillar` (borda superior) + cor de ação |
+| `.etapas` / `.etapa` | Linha do tempo vertical: lista ordenada com linha de 1px à esquerda, marcador circular 36px de borda teal e fundo branco, título 18px/700, texto 15px. `max-width: 760px`. Não muda no desktop | nova |
+| `.nota` | Nota de rodapé de seção: 13px cinza, borda superior `#e5e7eb`, `max-width: 760px` | `.form-group-hint` |
+| `.escura` + `.bloco` | Seção de fundo `--darker` com grade de blocos de texto (título 17px/700 branco, texto 14px branco `.60`, borda superior branca `.12`). 1, 2 e 3 colunas em 0, 769 e 901 | `.quem-somos` + `.qs-pillar` |
+| `.fecho-escuro` | Frase de fechamento em fundo escuro: `clamp(18px, 2vw, 22px)` / 500 branco, `max-width: 640px` | nova |
+| `.panama-foto` | Foto larga dentro de seção: 220px de altura no celular, 360px no desktop, raio 16 a 18 | `.dest-hero-img` reduzida |
+| `.destino-card` | Card de destino com foto 200px e corpo (nome 20px/700, texto 14px). Grade 1, 2 e 4 colunas em 0, 640 e 1024 | `.ship-card` sem badge, sem rodapé |
+| `.bordo-card` | Cartão de lista em `#f5f6f8`, raio 18, título 16px/700, texto 15px. 2 colunas a partir de 769 | `.destaque` com fundo neutro |
+| `.pilares` / `.pilar` | Reprodução do `.qs-pillar` da home em página interna | `.qs-pillar` |
+| `.faq` / `.faq-item` | Acordeão nativo `<details>` / `<summary>`: pergunta 16 a 17px/600, resposta 15px cinza, divisor `#e5e7eb`, botão redondo 28px com "+" que gira 45° ao abrir. Sem JS | nova |
+| `.lp-hero` | Hero da landing: `min-height: 88vh`, conteúdo alinhado ao rodapé, dois botões (`.btn-teal` + `.btn-glass`) empilhados no celular e lado a lado a partir de 769 | `.dest-hero` + `.hero-buttons` da home |
+| `.form-privacidade` | Linha de privacidade sob o botão de envio: 13px cinza com link teal | nova |
+| `.credito` | Faixa de crédito antes do rodapé: fundo branco, borda superior, texto 13px centrado | nova |
+| `.form-select-wrap::after` | Seta do select desenhada com borda rotacionada em vez do caractere `⌄` da home | correção da home |
+| `.confirmar` / `.confirmar-bloco` | **Temporário.** Placeholder amarelo `#fff176` para as marcações `[CONFIRMAR]` da copy, inline ou em bloco tracejado. Sai da página antes da publicação e não vira sistema | nova |
+
+Fatos registrados, não decisões: a landing chama `../cotacao.php` com `categoria=caribe` para o e-mail sair rotulado como "Caribe sem visto"; o campo "Quantas pessoas viajam?" é numérico livre porque a copy não define opções.
