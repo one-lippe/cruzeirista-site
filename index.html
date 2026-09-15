@@ -146,6 +146,9 @@
                 box-shadow: 0 20px 60px rgba(0,0,0,.45);
             }
             .mobile-dest-grid.visible { pointer-events: auto; }
+            /* 15/09/2026: "#hero-ui > *" (pointer-events: auto) vencia o "none" acima e a grade
+               invisível bloqueava os toques nos botões do hero no celular. Só a grade visível recebe toque. */
+            #hero-ui > .mobile-dest-grid:not(.visible) { pointer-events: none; }
             .mobile-dest-items {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
