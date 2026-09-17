@@ -1,0 +1,19 @@
+Vídeos da landing Caribe sem visto. Originais em 14_LANDING_CARIBE_SEM_VISTO/MÍDIAS/ (licença de stock, uso da agência), reencodados em 16/09/2026 para web. Bloco das ilhas: 800x1000 (4:5, corte central), H.264, sem áudio, 7 a 11 s.
+
+aruba.mp4    <- ARUBA/flamingos-wading-on-a-tropical-beach-in-daylight-2025-12-17-12-04-11-utc.mov (0s a 11s), vertical
+bonaire.mp4  <- BONAIRE/caribbean-beach-at-kralendijk-in-bonaire-netherlan-2025-12-17-15-30-21-utc.mov (0s a 10,5s)
+curacao.mp4  <- CURACAO/colorful-willemstad-aerial-view-in-curacao-2025-12-17-15-03-52-utc.mov (0s a 7,2s)
+Os .jpg ao lado são o primeiro quadro de cada um (poster).
+
+Hero (16/09/2026), 1600x900, CRF 26, 8 s cada, saturação levemente elevada:
+hero-aruba.mp4    <- ARUBA/aruba-skyline-at-oranjestad-... (4s a 12s)
+hero-bonaire.mp4  <- BONAIRE/caribbean-cruise-at-kralendijk-... (1s a 9s; navio ao longe, não identificável)
+hero-curacao.mp4  <- CURACAO/curacao-netherlands-antilles-view-of-colorful-buil-... (3s a 11s)
+hero-klein.mp4    <- CURACAO/klein-curacao-at-willemstad-... (0s a 8s)
+
+Rota (seção das ilhas, versão mapa + cards, 16/09/2026), 1280x720, CRF 21, sem áudio:
+rota-panama.mp4     <- PANAMA/aerial-flyover-of-panama-city-showcasing-its-moder-... (2s a 11s)
+rota-cartagena.mp4  <- CARTAGENA/cartagena-skyline-at-cartagena-in-bolivar-colombia-... (0s a 5,9s)
+rota-aruba.mp4      <- ARUBA/flamingos-wading-on-a-tropical-beach-... (0s a 9s; recorte 16:9 do vídeo vertical, CRF 24)
+rota-curacao.mp4    <- CURACAO/colorful-willemstad-aerial-view-in-curacao-... (0s a 7,2s)
+rota-bonaire.mp4    <- BONAIRE/caribbean-beach-at-kralendijk-in-bonaire-... (0s a 10,5s)

@@ -230,6 +230,16 @@
             transition: color .2s;
         }
         .nav-link:hover { color: #fff; }
+        /* Botão do topo para a landing Caribe sem visto: pill teal, abre em nova aba (ícone) */
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 13px; font-weight: 600; color: #fff;
+            background: var(--teal); border-radius: 999px; padding: 9px 16px;
+            text-decoration: none; letter-spacing: .01em; line-height: 1;
+            transition: background .2s, transform .15s;
+        }
+        .nav-cta svg { width: 14px; height: 14px; flex: none; }
+        .nav-cta:hover { background: #0780a0; transform: translateY(-1px); }
         .nav-brand {
             position: absolute; left: 50%; transform: translateX(-50%);
             height: 38px; width: auto;
@@ -1035,7 +1045,7 @@
             <div class="nav-side">
                 <a href="#quem-somos" class="nav-link">Quem Somos</a>
                 <a href="#destinos" class="nav-link">Destinos</a>
-                <a href="caribe-sem-visto/" class="nav-link">Caribe sem visto</a>
+                <a href="caribe-sem-visto/" class="nav-cta" target="_blank" rel="noopener" aria-label="Caribe sem visto (abre em nova aba)">Caribe sem visto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
             </div>
             <svg class="nav-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
               <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>

@@ -1,0 +1,21 @@
+# Sistema / Finder
+.DS_Store
+**/.DS_Store
+._*
+
+# Originais pesados de foto (2 a 16 MB), fonte das versões web que o site usa.
+# Ficam no Drive, não no repositório.
+destinos/*.jpg
+destinos/*.JPG
+destinos/brasildd
+
+# Testes e rascunhos de hero (não fazem parte do site publicado)
+hero-canvas-teste.html
+cruzeirista-video-hero-v1.html
+
+# Arquivos temporários de editores e do sistema
+*.tmp
+*.bak
+*~
+.vscode/
+.idea/

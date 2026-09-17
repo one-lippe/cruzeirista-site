@@ -1,6 +1,14 @@
-Créditos obrigatórios (licença Unsplash). Fotos baixadas em 15/09/2026 para a landing Caribe sem visto.
+Créditos obrigatórios (licença Unsplash). Fotos da landing Caribe sem visto (cruzeirista.com.br/caribe-sem-visto). Baixadas em 15/09 e 16/09/2026.
+Nos arquivos hero-navio*.jpg e navio-mar.jpg o nome do navio pintado no casco foi removido na edição, porque a página não crava navio; no hero a foto está espelhada horizontalmente para o navio ficar à direita do texto.
 
 cartagena.jpg: Foto por Ronin (https://unsplash.com/@roninkgd) no Unsplash. https://unsplash.com/photos/colorful-colonial-street-with-flowering-vines-0W1wIA6kEsk
 panama-casco-viejo.jpg: Foto por Kaori Hirakata (https://unsplash.com/@kcreepers) no Unsplash. https://unsplash.com/photos/a-row-of-buildings-with-balconies-and-trees-LV7a6u6SuTk
-
-As demais imagens da landing já eram do site: img/secoes/caribe-card.jpg (hero) e img/portos/aruba.jpg, curacao.jpg, bonaire.jpg.
+aruba.jpg: Foto por Vera Wijermars | Feathering (https://unsplash.com/@feathering) no Unsplash. https://unsplash.com/photos/a-group-of-flamingos-walking-along-the-beach-0zBrUn8z8jk
+bonaire.jpg: Foto por Jesse van Vliet (https://unsplash.com/@jessevanvliet) no Unsplash. https://unsplash.com/photos/black-and-brown-turtle-under-water-GgHmp1pl20Q
+curacao.jpg: Foto por Cole Marshall (https://unsplash.com/@colemarshall) no Unsplash. https://unsplash.com/photos/a-row-of-colorful-buildings-on-the-side-of-a-body-of-water-cKbKFQa32Q4
+bordo-piscina.jpg: Foto por TravelPriceWatch (https://unsplash.com/@travelpricewatch) no Unsplash. https://unsplash.com/photos/blue-and-white-lounge-chairs-near-swimming-pool-TYyYq975Z6k
+bordo-proa.jpg: Foto por AO NURA (https://unsplash.com/@lafesta6720) no Unsplash. https://unsplash.com/photos/bow-of-a-ship-sailing-on-a-calm-blue-ocean--ybBN9gaERY
+panama-canal.jpg: Foto por Alex Pagliuca (https://unsplash.com/@alexanthony) no Unsplash. https://unsplash.com/photos/a-large-ship-docked-Vo64g7kwnEo
+panama-skyline.jpg: Foto por Armands Brants (https://unsplash.com/@armandsbrants) no Unsplash. https://unsplash.com/photos/a-large-body-of-water-with-a-city-in-the-background-Ejf16T81DpI
+navio-alto.jpg: Foto por Shai Pal (https://unsplash.com/@shaipal) no Unsplash. https://unsplash.com/photos/calendar-K_7Jy5PjaQc
+hero-navio.jpg / hero-navio-m.jpg / navio-mar.jpg (mesma foto, espelhada no hero): Foto por Marc Fanelli-Isla (https://unsplash.com/@marcfanelliisla) no Unsplash. https://unsplash.com/photos/a-cruise-ship-in-the-middle-of-the-ocean-GGH3oVUj8cM

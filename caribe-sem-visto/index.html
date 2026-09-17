@@ -3,200 +3,300 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js');</script>
 <title>Caribe sem visto americano | Cruzeirista</title>
 <link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
-<meta name="description" content="Aruba, Curaçao, Bonaire, Cartagena e Panamá num cruzeiro que sai do Panamá ou de Cartagena e não passa pelos Estados Unidos. O Cruzeirista explica a viagem passo a passo.">
+<meta name="description" content="Aruba, Bonaire e Curaçao num cruzeiro pelo sul do Caribe, com embarque pelo Panamá ou pela Colômbia e sem a barreira do visto americano. Deixe seu interesse com o Cruzeirista.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.cruzeirista.com.br/caribe-sem-visto/">
-<link rel="preload" as="image" href="../img/secoes/caribe-card.jpg">
+<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-aruba.jpg">
+<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-curacao.jpg">
 
 <meta property="og:type"        content="website">
 <meta property="og:url"         content="https://www.cruzeirista.com.br/caribe-sem-visto/">
 <meta property="og:title"       content="Caribe sem visto americano | Cruzeirista">
-<meta property="og:description" content="O roteiro sai do Panamá ou de Cartagena e não passa pelos Estados Unidos em nenhum momento. Nem no ar, nem no mar.">
-<meta property="og:image"       content="https://www.cruzeirista.com.br/img/secoes/caribe-card.jpg">
+<meta property="og:description" content="Descubra a sofisticação das Antilhas a bordo de um cruzeiro pelo sul do Caribe, sem a barreira do visto americano.">
+<meta property="og:image"       content="https://www.cruzeirista.com.br/img/caribe-sem-visto/hero-navio.jpg">
 <meta property="og:locale"      content="pt_BR">
 <meta property="og:site_name"   content="Cruzeirista">
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="Caribe sem visto americano | Cruzeirista">
-<meta name="twitter:description" content="Aruba, Curaçao, Bonaire, Cartagena e Panamá, sem entrevista no consulado e sem passar pelos Estados Unidos.">
-<meta name="twitter:image"       content="https://www.cruzeirista.com.br/img/secoes/caribe-card.jpg">
+<meta name="twitter:description" content="Aruba, Bonaire e Curaçao num cruzeiro com embarque pelo Panamá ou pela Colômbia.">
+<meta name="twitter:image"       content="https://www.cruzeirista.com.br/img/caribe-sem-visto/hero-navio.jpg">
 
 <style>
 /* ── Fundamentos: DESIGN_SYSTEM.md §1 ─────────────────────────────── */
 @font-face{font-family:'Geist';src:url('../fonts/Geist-VariableFont_wght.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:'Geist';src:url('../fonts/Geist-Italic-VariableFont_wght.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--dark:#1a2535;--darker:#0f1822;--white:#fff;--gray:#6b7280;--teal:#0891b2;--badge:#e05c2a;--linha:#e5e7eb}
+:root{--dark:#1a2535;--darker:#0f1822;--white:#fff;--gray:#6b7280;--teal:#0891b2;--badge:#e05c2a;--linha:#e5e7eb;--azul:#002860;--claro:#f5f6f8;--acento:#7dd3e6;--amarelo:#F7D66F}
 html{scroll-behavior:smooth}
 body{font-family:'Geist',sans-serif;background:#fff;color:var(--gray);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;display:block}
-section{scroll-margin-top:72px}
+section{scroll-margin-top:64px}
 
-/* ── Cabeçalho: variante das páginas internas, DESIGN_SYSTEM.md §9 ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(to bottom,rgba(5,14,26,.72) 0%,transparent 100%);transition:background .3s}
-nav.scrolled{background:#0f1822;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.nav-side{display:none;gap:32px}
-.nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.80);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+/* ── Cabeçalho: variante das páginas internas (§9) + menu do celular ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:linear-gradient(to bottom,rgba(5,14,26,.72) 0%,transparent 100%);transition:background .3s}
+nav.scrolled,nav.open{background:#0f1822;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav-esq{display:flex;align-items:center;gap:44px;min-width:0}
+.nav-side{display:none;align-items:center;gap:28px}
+.nav-dir{gap:24px}
+.nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.80);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;line-height:1;white-space:nowrap;transition:color .2s}
 .nav-link:hover,.nav-link[aria-current="page"]{color:#fff}
-.nav-brand{position:absolute;left:50%;transform:translateX(-50%);height:26px;width:auto;display:block}
+.nav-brand-link{display:block;line-height:0;flex:none}
+.nav-brand{height:26px;width:auto;display:block}
+.nav-mobile-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:8px;margin-left:auto;background:none;border:0;cursor:pointer;color:#fff}
+.nav-mobile-btn svg{width:24px;height:24px;display:block}
+.nav-mobile-btn .ico-fechar,nav.open .nav-mobile-btn .ico-abrir{display:none}
+nav.open .nav-mobile-btn .ico-fechar{display:block}
+.nav-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:#0f1822;padding:88px 24px 32px;flex-direction:column;gap:6px}
+nav.open+.nav-menu{display:flex}
+.nav-menu a{font-size:15px;font-weight:500;color:rgba(255,255,255,.85);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-cta{display:inline-flex;align-items:center;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;background:var(--teal);border-radius:999px;padding:11px 18px;text-decoration:none;transition:background .2s,transform .15s}
+.nav-cta:hover{background:#0780a0;transform:translateY(-1px)}
+.nav-menu a.nav-menu-cta{color:var(--acento)}
+.nav-menu a.nav-menu-site{margin-top:auto;border-bottom:0;color:rgba(255,255,255,.55);font-size:13px}
 @media(min-width:481px){.nav-brand{height:32px}}
-@media(min-width:769px){nav{padding:22px 48px}.nav-side{display:flex}}
+@media(min-width:769px){nav{padding:18px 48px}.nav-side{display:flex}.nav-brand{height:30px}.nav-mobile-btn,.nav-menu{display:none!important}}
+@media(min-width:769px) and (max-width:1023px){.nav-esq{gap:28px}.nav-side{gap:18px}.nav-link{font-size:12px}}
 
-/* ── Escala compartilhada: DESIGN_SYSTEM.md §3 e §4 ─────────────────── */
-.secao{padding:44px 16px}
-.miolo{max-width:1100px;margin:0 auto}
-.rotulo{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block}
-.titulo{font-size:clamp(28px,6vw,52px);font-weight:700;color:var(--darker);line-height:1.15;letter-spacing:-.02em;max-width:640px;margin-bottom:20px}
-.texto{font-size:16px;line-height:1.7;color:var(--gray);max-width:640px}
-.texto p+p{margin-top:14px}
-.escura .rotulo{color:rgba(255,255,255,.90)}
+/* ── Escala compartilhada: §3, §4 ───────────────────────────────────── */
+.secao{padding:56px 20px}
+.miolo{max-width:1140px;margin:0 auto}
+.rotulo{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:block}
+.titulo{font-size:clamp(28px,6.6vw,48px);font-weight:700;color:var(--darker);line-height:1.12;letter-spacing:-.02em;max-width:640px;margin-bottom:14px}
+.centro{text-align:center}.centro .titulo,.centro .texto{margin-left:auto;margin-right:auto}
+.texto{font-size:16px;line-height:1.65;color:var(--gray);max-width:560px}
+.escura .rotulo{color:rgba(255,255,255,.85)}
 .escura .titulo{color:#fff}
-.escura .texto{color:rgba(255,255,255,.72)}
-@media(min-width:481px){.secao{padding:56px 20px}}
-@media(min-width:769px){.secao{padding:80px 48px}.titulo{font-size:clamp(28px,4vw,52px)}}
+.escura .texto{color:rgba(255,255,255,.75)}
+@media(min-width:481px){.secao{padding:64px 24px}}
+@media(min-width:769px){.secao{padding:88px 48px}.titulo{font-size:clamp(28px,3.6vw,48px)}}
 
-/* ── Botões: DESIGN_SYSTEM.md §6 ───────────────────────────────────── */
-.btn{display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;padding:11px 26px;border-radius:999px;text-decoration:none;letter-spacing:.03em;transition:all .25s ease;border:none;cursor:pointer;font-family:inherit}
-.btn-glass{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18)}
-.btn-glass:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+/* ── Botões: §6 ────────────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;padding:14px 28px;border-radius:999px;text-decoration:none;letter-spacing:.02em;transition:all .25s ease;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
 .btn-teal{background:var(--teal);color:#fff}
-.btn-teal:hover{background:#0780a0;transform:translateY(-1px)}
-.btn-form-submit{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:100px;padding:14px 28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s,transform .15s}
-.btn-form-submit:hover{background:#0e7490;transform:translateY(-1px)}
-.btn-form-submit:disabled{opacity:.7;cursor:default;transform:none}
+.btn-teal:hover{background:#0780a0;transform:translateY(-2px)}
+.btn-glass{background:rgba(255,255,255,.12);color:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.22)}
+.btn-glass:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.btn-escuro{background:var(--darker);color:#fff}
+.btn-escuro:hover{background:#0f2c5f;transform:translateY(-2px)}
+.btn svg{width:16px;height:16px}
 
-/* ── Callout azul: .destaque das páginas legais, DESIGN_SYSTEM.md §7 ── */
-.destaque{background:#f0f9ff;border:1px solid #bae6fd;border-radius:14px;padding:16px 20px;font-size:15px;line-height:1.65;color:var(--darker);max-width:640px}
+/* ── 1 · Hero: um vídeo de fundo por vez, em sequência com fusão ────── */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#0a1628;color:#fff}
+.hero-fundo{position:absolute;inset:0;background:#0a1628}
+.hero-fundo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity 1.1s ease;filter:saturate(1.12) contrast(1.03);will-change:opacity}
+.hero-fundo video.is-on{opacity:1}
+/* Celular: vídeo de sangria total, gradiente forte embaixo para o texto. */
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.34) 0%,rgba(10,22,40,.05) 22%,rgba(10,22,40,.18) 44%,rgba(10,22,40,.80) 66%,rgba(10,22,40,.94) 100%)}
+.hero-conteudo{position:relative;z-index:2;width:100%;max-width:1140px;margin:0 auto;padding:300px 20px 48px}
+.hero h1{font-size:clamp(50px,14vw,104px);font-weight:700;line-height:.94;letter-spacing:-.03em;text-shadow:0 2px 20px rgba(0,0,0,.28)}
+.hero h1 em{font-style:normal;color:var(--amarelo)}
+.hero-texto{font-size:clamp(17px,1.7vw,20px);line-height:1.55;color:rgba(255,255,255,.92);max-width:540px;margin:26px 0 34px;text-shadow:0 1px 12px rgba(0,0,0,.25)}
+.hero-botoes{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hero-botoes .btn{width:250px}
+@media(min-width:481px){.hero-conteudo{padding:340px 24px 64px}}
+@media(min-width:769px){
+  .hero{min-height:min(100svh,860px);align-items:center}
+  .hero::after{background:linear-gradient(to right,rgba(5,14,26,.80) 0%,rgba(5,14,26,.55) 36%,rgba(5,14,26,.16) 60%,rgba(5,14,26,.04) 100%),linear-gradient(to top,rgba(5,14,26,.40) 0%,transparent 35%)}
+  .hero-conteudo{padding:150px 48px 100px}
+  .hero-botoes{flex-direction:row;gap:14px}
+  .hero-botoes .btn{width:auto}
+}
 
-/* ── Tela 1 · Hero: casca do .dest-hero das páginas de destino ──────── */
-.lp-hero{position:relative;width:100%;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:#050e1a}
-.lp-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.lp-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(5,14,26,.30) 0%,rgba(5,14,26,.10) 35%,rgba(5,14,26,.78) 100%)}
-.lp-hero-content{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:130px 16px 44px}
-.lp-hero-region{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.90);margin-bottom:12px;display:block}
-.lp-hero-title{font-size:clamp(40px,10vw,80px);font-weight:700;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.3);line-height:1.05;margin-bottom:16px;max-width:900px}
-.lp-hero-tagline{font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.82);max-width:560px;line-height:1.6;margin-bottom:28px}
-.lp-hero-buttons{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.lp-hero-buttons .btn{width:220px}
-@media(min-width:481px){.lp-hero-content{padding:140px 24px 48px}}
-@media(min-width:769px){.lp-hero-content{padding:160px 48px 56px}.lp-hero-title{font-size:clamp(40px,6vw,80px)}.lp-hero-buttons{flex-direction:row;gap:12px}.lp-hero-buttons .btn{width:auto}}
+/* ── 2 · Valor em três cards, como no rascunho ─────────────────────── */
+.valor{background:var(--claro);position:relative;overflow:hidden}
+.valor-fundo{position:absolute;inset:0;background:url('../img/caribe-sem-visto/panama-skyline.jpg') center 40%/cover no-repeat;opacity:.07;pointer-events:none}
+.valor .miolo{position:relative}
+.abc-titulo{font-size:clamp(36px,8vw,60px);font-weight:700;color:var(--azul);line-height:1.02;letter-spacing:-.02em;margin:0 auto}
+.abc-titulo span{display:block;font-size:.7em;font-weight:500;letter-spacing:-.01em;margin-top:6px}
+.cards{display:grid;grid-template-columns:1fr;gap:16px;margin-top:40px;text-align:left}
+.card{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:26px 24px;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s ease,box-shadow .3s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.10)}
+.card-icone{width:44px;height:44px;border-radius:12px;background:rgba(8,145,178,.10);color:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.card-icone svg{width:22px;height:22px}
+.card h3{font-size:18px;font-weight:700;color:var(--darker);line-height:1.25;margin-bottom:8px}
+.card p{font-size:14px;line-height:1.6;color:var(--gray)}
+@media(min-width:769px){.abc-titulo{font-size:clamp(40px,4.6vw,64px)}.cards{grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:52px}.card{padding:32px 28px}.card h3{font-size:19px}}
 
-/* ── Tela 2 · Passos numerados [ADIÇÃO, DESIGN_SYSTEM.md §12] ───────── */
-.passos{display:grid;grid-template-columns:1fr;gap:24px;margin:36px 0 32px}
-.passo{border-top:1px solid var(--linha);padding-top:22px}
-.passo-num{width:36px;height:36px;border-radius:50%;background:var(--teal);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.passo h3{font-size:18px;font-weight:700;color:var(--darker);line-height:1.25;margin-bottom:8px}
-.passo p{font-size:15px;line-height:1.6;color:var(--gray)}
-@media(min-width:769px){.passos{grid-template-columns:repeat(3,1fr);gap:40px;margin:48px 0 40px}}
+/* ── 3 · Rota: mapa que se desenha com a rolagem + cards que se empilham ── */
+.rota{background:#fff;padding-bottom:40px}
+.rota .ilhas-cabeca{text-align:center;margin-bottom:36px}
+.rota .abc-titulo{max-width:none}
+.rota-grade{display:grid;grid-template-columns:1fr;gap:28px;align-items:start}
+/* Mapa: painel claro, no padrão dos cards da página */
+.rota-mapa{position:relative;display:flex;flex-direction:column;border-radius:18px;background:#f5f6f8;border:1px solid var(--linha);padding:20px 16px 16px;overflow:hidden}
+.rota-mapa-titulo{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);text-align:center;margin-bottom:4px}
+.rota-svg{width:100%;height:auto;display:block;margin:auto 0}
+.rota-terra{fill:rgba(15,24,34,.06);stroke:rgba(15,24,34,.10);stroke-width:1}
+.rota-volta{fill:none;stroke:rgba(8,145,178,.35);stroke-width:1.5;stroke-dasharray:4 7;stroke-linecap:round}
+.rota-sombra{fill:none;stroke:rgba(15,24,34,.10);stroke-width:2.5;stroke-linecap:round}
+.rota-linha{fill:none;stroke:var(--teal);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 5px rgba(8,145,178,.35))}
+.rota-parada .rota-halo{opacity:0;transition:opacity .4s ease}
+.rota-parada .rota-anel{fill:#fff;stroke:#c5cbd3;stroke-width:1.5;transition:stroke .3s ease}
+.rota-parada .rota-ponto{fill:#c5cbd3;transition:fill .3s ease}
+.rota-parada text{font-family:'Geist',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:var(--gray);transition:fill .3s ease}
+.rota-parada.feita .rota-anel{stroke:var(--teal)}
+.rota-parada.feita .rota-ponto{fill:var(--teal)}
+.rota-parada.feita text{fill:var(--darker)}
+.rota-parada.ativa .rota-halo{opacity:1;animation:rota-pulso .6s cubic-bezier(.23,1,.32,1)}
+@keyframes rota-pulso{from{transform:scale(.4);transform-origin:center;opacity:0}to{transform:scale(1);opacity:1}}
+.rota-parada .rota-halo{transform-box:fill-box;transform-origin:center}
+.rota-parada.ativa .rota-anel{stroke:var(--darker)}
+.rota-parada.ativa .rota-ponto{fill:var(--darker)}
+.rota-parada.ativa text{fill:var(--darker)}
+.rota-navio circle{fill:var(--teal);stroke:#fff;stroke-width:3}
+.rota-legenda{margin-top:8px;font-size:12px;line-height:1.5;color:var(--gray);text-align:center}
+/* leitura de bordo: nome da parada ativa, coordenadas e rumo em mono, rosa dos ventos que gira com o navio */
+.bordo{display:none;grid-template-columns:1fr auto;align-items:center;gap:18px;margin-top:24px;padding:0 6px}
+.bordo-nome{font-size:clamp(28px,3vw,40px);font-weight:700;color:var(--azul);line-height:1;letter-spacing:-.02em}
+.bordo-nome.troca{animation:bordo-entra .5s cubic-bezier(.23,1,.32,1)}
+@keyframes bordo-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bordo-mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12.5px;letter-spacing:.08em;color:var(--gray);margin-top:10px;text-transform:uppercase}
+.bordo-mono b{font-weight:500;color:var(--darker)}
+.rosa{width:112px;height:112px;display:block}
+.rosa-aro{fill:#fff;stroke:var(--linha);stroke-width:1.5}
+.rosa-proa{fill:var(--darker)}
+.rosa-ticks line{stroke:#c5cbd3;stroke-width:1}
+.rosa-carta{transition:transform .35s cubic-bezier(.23,1,.32,1)}
+.rosa-agulha-n{fill:var(--teal)}
+.rosa-agulha-s{fill:#d9dee4}
+.rosa text{font-family:'Geist',sans-serif;font-size:11px;font-weight:600;fill:var(--gray)}
+.rosa-eixo{fill:#fff;stroke:var(--darker);stroke-width:2}
+/* Cards empilhados: cada um gruda um pouco abaixo do anterior; o anterior fica como barra de nome atrás. */
+/* Lista em coluna flex (sticky dentro de grid ficava preso à própria linha). A margem inferior de cada card cresce
+   para o primeiro (4, 3, 2, 1, 0 degraus): é ela que segura o degrau de cada card quando a lista acaba, então a
+   pilha sai da tela inteira, sem os cards se amontoarem. A margem superior negativa do seguinte devolve o fluxo.
+   O ::after é a folga depois do último card: a pilha fica parada enquanto o navio faz a volta até Colón no mapa. */
+.rota-cards{list-style:none;display:flex;flex-direction:column}
+.rota-cards::after{content:"";display:block;height:36vh}
+.rota-card{margin-bottom:calc((4 - var(--n)) * 44px)}
+.rota-card+.rota-card{margin-top:calc(22px - (5 - var(--n)) * 44px)}
+.rota-card{position:sticky;top:calc(72px + var(--n) * 44px);background:#fff;border:1px solid var(--linha);border-radius:18px;overflow:hidden;box-shadow:0 -6px 24px rgba(15,24,34,.08),0 12px 40px rgba(15,24,34,.10);will-change:opacity,transform}
+.rota-card-topo{position:relative;display:flex;align-items:center;height:52px;padding:0 20px;background:#f5f6f8;border-bottom:1px solid var(--linha)}
+/* só a bandeira do lugar, redonda, à esquerda: é o que identifica cada card na pilha */
+.rota-bandeira{display:block;width:30px;height:30px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #fff,0 1px 4px rgba(15,24,34,.18);flex:none}
+.rota-bandeira svg{width:100%;height:100%;display:block}
+.rota-card{--desf:0;--veu:0;--topo:52px}
+.rota-card.recuado::after{content:'';position:absolute;left:0;right:0;top:var(--topo);bottom:0;pointer-events:none;z-index:2;
+  background:rgba(15,24,34,calc(var(--veu) * .30));-webkit-backdrop-filter:blur(calc(var(--desf) * 4px));backdrop-filter:blur(calc(var(--desf) * 4px))}
+.rota-card.recuado .rota-card-topo::after{content:'';position:absolute;inset:0;pointer-events:none;background:rgba(15,24,34,calc(var(--veu) * .20));-webkit-backdrop-filter:blur(calc(var(--desf) * 4px));backdrop-filter:blur(calc(var(--desf) * 4px))}
+.rota-card-midia{aspect-ratio:16/10;background:#050e1a}
+.rota-card-midia video{width:100%;height:100%;object-fit:cover;display:block}
+.rota-card-texto{padding:22px 20px 26px}
+.rota-card-texto h3{font-size:clamp(20px,2.4vw,26px);font-weight:700;color:var(--darker);line-height:1.15;margin-bottom:10px}
+.rota-card-texto p{font-size:15px;line-height:1.6;color:var(--gray)}
+.rota-card-texto p+p{margin-top:10px}
+@media(min-width:641px){.rota-card-texto{padding:24px 26px 28px}.rota-card-topo{padding:0 24px}}
+@media(min-width:901px){
+  .rota .ilhas-cabeca{margin-bottom:48px}
+  .rota-grade{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px}
+  .rota-lado{position:sticky;top:96px}
+  .rota-mapa{min-height:372px;padding:26px 22px 18px}
+  .bordo{display:grid}
+  .rota-card{top:calc(96px + var(--n) * 48px)}
+  .rota-card-topo{height:56px}
+  .rota-card{--topo:56px}
+  .rota-cards::after{height:60vh}
+  .rota-card{margin-bottom:calc((4 - var(--n)) * 48px)}
+  .rota-card+.rota-card{margin-top:calc(28px - (5 - var(--n)) * 48px)}
+}
 
-/* ── Tela 3 · Linha do tempo [ADIÇÃO, DESIGN_SYSTEM.md §12] ─────────── */
-.etapas{list-style:none;max-width:760px;margin:32px 0 24px;position:relative}
-.etapas::before{content:'';position:absolute;left:17px;top:18px;bottom:18px;width:1px;background:var(--linha)}
-.etapa{position:relative;padding:0 0 28px 56px}
-.etapa:last-child{padding-bottom:0}
-.etapa-num{position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:#fff;border:1.5px solid var(--teal);color:var(--teal);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.etapa h3{font-size:18px;font-weight:700;color:var(--darker);line-height:1.25;margin:6px 0 8px}
-.etapa p{font-size:15px;line-height:1.65;color:var(--gray)}
-.nota{font-size:13px;line-height:1.6;color:var(--gray);max-width:760px;padding-top:20px;border-top:1px solid var(--linha)}
+/* ── 4 · Três passos com números grandes ───────────────────────────── */
+.passos{background:var(--claro)}
+.passos-grade{display:grid;grid-template-columns:1fr;gap:36px;margin-top:40px}
+.passo{position:relative;padding:34px 0 0 22px}
+.passo-num{font-size:104px;font-weight:700;line-height:.8;color:rgba(15,24,34,.07);letter-spacing:-.04em;position:absolute;left:-4px;top:0;pointer-events:none;user-select:none}
+.passo h3{position:relative;font-size:22px;font-weight:700;color:#0e7490;line-height:1.15;margin:0 0 10px}
+.passo p{position:relative;font-size:15px;line-height:1.6;color:var(--gray);max-width:30ch}
+/* Entrada em sequência (1, 2, 3): 300 ms, curva de saída do site, 80 ms entre os conjuntos. Só com JS. */
+html.js .passo{opacity:0;transform:translateY(14px);transition:opacity .3s cubic-bezier(.23,1,.32,1),transform .3s cubic-bezier(.23,1,.32,1)}
+html.js .passo:nth-child(2){transition-delay:.08s}
+html.js .passo:nth-child(3){transition-delay:.16s}
+html.js .passos.on .passo{opacity:1;transform:none}
+@media(min-width:769px){.passos-grade{grid-template-columns:1fr 1fr 1fr;gap:40px;margin-top:56px}.passo{padding:48px 0 0 28px}.passo-num{font-size:136px}.passo h3{font-size:24px}.passo p{font-size:16px}}
+@media(prefers-reduced-motion:reduce){html.js .passo{transform:none;transition:opacity .2s ease}}
 
-/* ── Tela 4 · Blocos em fundo escuro: derivado do .qs-pillar da home ── */
-.escura{background:var(--darker);position:relative;overflow:hidden}
-.panama-foto{width:100%;height:220px;object-fit:cover;border-radius:16px;margin:32px 0 36px}
-.blocos{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:36px}
-.bloco{border-top:1px solid rgba(255,255,255,.12);padding-top:24px}
-.bloco h3{font-size:17px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px;letter-spacing:-.01em}
-.bloco p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.60)}
-.fecho-escuro{font-size:clamp(18px,2vw,22px);font-weight:500;color:#fff;line-height:1.45;max-width:640px}
-@media(min-width:769px){.panama-foto{height:360px;border-radius:18px;margin:40px 0 48px}.blocos{grid-template-columns:repeat(2,1fr);gap:40px 48px;margin-bottom:48px}}
-@media(min-width:901px){.blocos{grid-template-columns:repeat(3,1fr)}}
+/* ── 5 · Panamá: faixa visual curta ────────────────────────────────── */
+.panama{position:relative;min-height:440px;display:flex;align-items:center;background:#0a1628;color:#fff;overflow:hidden;padding:64px 20px}
+.panama-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 45%}
+.panama::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,14,26,.86) 0%,rgba(5,14,26,.55) 55%,rgba(5,14,26,.20) 100%)}
+.panama .miolo{position:relative;z-index:2;width:100%}
+.panama .titulo{color:#fff;max-width:520px}
+.panama .texto{color:rgba(255,255,255,.82);max-width:520px}
+.panama .rotulo{color:var(--acento)}
+@media(min-width:769px){.panama{min-height:520px;padding:96px 48px}}
 
-/* ── Tela 5 · Card de destino: casca do .ship-card com foto e corpo ── */
-.destinos-grid{display:grid;grid-template-columns:1fr;gap:20px;margin:36px 0 28px}
-.destino-card{border-radius:18px;overflow:hidden;border:1px solid var(--linha);background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
-.destino-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.10)}
-.destino-card-img{width:100%;height:200px;object-fit:cover;background:#cce8f0}
-.destino-card-body{padding:22px 24px 26px;flex:1}
-.destino-card h3{font-size:20px;font-weight:700;color:var(--darker);line-height:1.2;margin-bottom:10px}
-.destino-card p{font-size:14px;line-height:1.65;color:var(--gray)}
-@media(min-width:640px){.destinos-grid{grid-template-columns:repeat(2,1fr);gap:24px}}
-@media(min-width:1024px){.destinos-grid{grid-template-columns:repeat(4,1fr);gap:24px;margin:48px 0 32px}}
-
-/* ── Tela 6 · Cartões de inclusão [ADIÇÃO, DESIGN_SYSTEM.md §12] ────── */
-.bordo-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:32px 0 28px}
-.bordo-card{background:#f5f6f8;border-radius:18px;padding:24px}
-.bordo-card h3{font-size:16px;font-weight:700;color:var(--darker);margin-bottom:10px}
-.bordo-card p{font-size:15px;line-height:1.65;color:var(--gray)}
-.bordo-cabines{max-width:640px;margin-bottom:28px}
-.bordo-cabines h3{font-size:18px;font-weight:700;color:var(--darker);margin-bottom:8px}
-.bordo-cabines p{font-size:15px;line-height:1.65;color:var(--gray)}
-@media(min-width:769px){.bordo-grid{grid-template-columns:repeat(2,1fr);gap:24px;margin:40px 0 36px}.bordo-card{padding:28px 32px}}
-
-/* ── Tela 7 · Pilares: .qs-pillar da home ──────────────────────────── */
-.pilares{display:grid;grid-template-columns:1fr;gap:24px;margin:36px 0 32px}
-.pilar{border-top:1px solid rgba(255,255,255,.12);padding-top:24px}
-.pilar h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-.01em}
-.pilar p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.55)}
-@media(min-width:769px){.pilares{grid-template-columns:repeat(3,1fr);gap:40px;margin:48px 0 40px}}
-
-/* ── Tela 8 · FAQ em acordeão [ADIÇÃO, DESIGN_SYSTEM.md §12] ───────── */
-.faq{max-width:760px;margin-top:32px;border-top:1px solid var(--linha)}
-.faq-item{border-bottom:1px solid var(--linha)}
-.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 0;font-size:16px;font-weight:600;color:var(--darker);line-height:1.4}
+/* ── 6 · Dúvidas frequentes (acordeão nativo) ──────────────────────── */
+.faq-secao{background:#fff}
+.faq{max-width:760px;margin:32px auto 0}
+.faq-item{border:1px solid var(--linha);border-radius:14px;background:#fff;margin-bottom:12px;box-shadow:0 2px 16px rgba(0,0,0,.04)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;font-size:16px;font-weight:600;color:var(--darker);line-height:1.4}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:'+';flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--linha);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:400;color:var(--teal);transition:transform .2s,background .2s;margin-top:-2px}
-.faq-item[open] summary::after{transform:rotate(45deg);background:#f0f9ff}
-.faq-item p{font-size:15px;line-height:1.7;color:var(--gray);padding:0 44px 20px 0}
-@media(min-width:769px){.faq-item summary{font-size:17px;padding:22px 0}}
+.faq-item summary::after{content:'';flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid #d1d5db;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1822' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") center/12px no-repeat;transition:transform .25s ease,border-color .2s}
+.faq-item[open] summary::after{transform:rotate(45deg);border-color:var(--teal)}
+.faq-item p{font-size:15px;line-height:1.65;color:var(--gray);padding:0 20px 20px}
+@media(min-width:769px){.faq-item summary{font-size:17px;padding:20px 24px}.faq-item p{padding:0 24px 22px}}
 
-/* ── Tela 9 · Formulário: DESIGN_SYSTEM.md §8 ───────────────────────── */
-.forms-section{background:#f5f6f8;display:flex;justify-content:center}
-.forms-wrapper{display:grid;grid-template-columns:1fr;gap:40px;max-width:540px;width:100%;align-items:center}
-.forms-copy-heading{font-size:clamp(28px,3.2vw,44px);font-weight:700;color:var(--darker);line-height:1.2;margin-bottom:20px}
-.forms-copy-text{font-size:16px;color:var(--gray);line-height:1.75}
-.forms-card{background:#fff;border:1px solid var(--linha);border-radius:24px;padding:28px 16px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.06)}
-.form-group{margin-bottom:24px}
-.form-group-label{font-size:14px;font-weight:600;color:var(--darker);margin-bottom:10px;display:block}
+/* ── 7 · Bloco azul de confiança, como no rascunho ─────────────────── */
+.confianca{background:var(--azul);color:#fff}
+.confianca-grade{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+.confianca-foto{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;background:#0a1628}
+.confianca-foto img{width:100%;height:100%;object-fit:cover}
+.confianca-chip{position:absolute;left:16px;bottom:16px;background:#fff;color:var(--darker);border-radius:12px;padding:12px 16px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.confianca-chip strong{display:block;font-size:14px;font-weight:700}
+.confianca-chip span{font-size:12px;color:var(--gray)}
+.confianca .titulo{color:#fff}
+.confianca .texto{color:rgba(255,255,255,.78)}
+.checks{list-style:none;margin-top:24px;display:grid;gap:12px}
+.checks li{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#fff}
+.checks li::before{content:'';flex:none;width:22px;height:22px;border-radius:50%;background:var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/12px no-repeat}
+@media(min-width:901px){.confianca-grade{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}.confianca-chip{left:24px;bottom:24px;padding:14px 20px}}
+
+/* ── 8 · Cadastro compacto: painel azul + formulário (§8) ──────────── */
+.cadastro{background:var(--claro)}
+.cadastro-card{max-width:1040px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.06);display:grid;grid-template-columns:1fr}
+.cadastro-copy{background:var(--azul);color:#fff;padding:36px 24px}
+.cadastro-copy h2{font-size:clamp(24px,3vw,32px);font-weight:700;line-height:1.2;margin-bottom:12px}
+.cadastro-copy p{font-size:15px;line-height:1.65;color:rgba(255,255,255,.78)}
+.cadastro-form{padding:28px 20px}
+.form-group{margin-bottom:20px}
+.form-group-label{font-size:13px;font-weight:600;color:var(--darker);margin-bottom:8px;display:block;letter-spacing:.02em}
 .form-row{display:grid;grid-template-columns:1fr;gap:16px}
 .form-row .form-group{margin-bottom:0}
-.form-row+.form-group,.form-row+.form-row{margin-top:24px}
+.form-row+.form-group,.form-row+.form-row{margin-top:20px}
 .form-select,.form-input{width:100%;padding:12px 16px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'Geist',sans-serif;color:var(--darker);background:#fff;outline:none;transition:border-color .18s;appearance:none;-webkit-appearance:none}
 .form-select-wrap{position:relative}
 .form-select-wrap::after{content:'';position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--gray);border-bottom:1.5px solid var(--gray);transform:translateY(-70%) rotate(45deg);pointer-events:none}
 .form-select:focus,.form-input:focus{border-color:var(--teal)}
 .form-input::placeholder{color:#9ca3af}
-.form-divider{border:none;border-top:1px solid var(--linha);margin:28px 0}
 .form-error-msg{font-size:12px;color:var(--badge);font-weight:500;margin-top:8px;display:none}
 .form-error-msg.visible{display:block}
-.form-nav{display:flex;flex-direction:column;gap:16px}
-.form-privacidade{font-size:13px;line-height:1.5;color:var(--gray)}
+.btn-form-submit{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:100px;padding:14px 28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s,transform .15s;margin-top:8px}
+.btn-form-submit:hover{background:#0e7490;transform:translateY(-1px)}
+.btn-form-submit:disabled{opacity:.7;cursor:default;transform:none}
+.form-privacidade{font-size:12px;line-height:1.5;color:var(--gray);margin-top:14px}
 .form-privacidade a{color:var(--teal);text-decoration:none;font-weight:500}
 .form-privacidade a:hover{text-decoration:underline}
 .form-success{display:none;text-align:center;padding:24px 0}
 .form-success.active{display:block}
 .form-success h3{font-size:22px;font-weight:700;color:var(--darker);margin-bottom:10px}
 .form-success p{font-size:15px;color:var(--gray);line-height:1.6}
-@media(min-width:481px){.forms-card{padding:32px 20px}}
-@media(min-width:641px){.form-row{grid-template-columns:1fr 1fr}.forms-card{padding:40px 32px}}
-@media(min-width:769px){.forms-section{padding:96px 24px}.forms-card{padding:48px}}
-@media(min-width:901px){.forms-wrapper{grid-template-columns:1fr minmax(0,540px);gap:72px;max-width:1100px}}
+@media(min-width:641px){.form-row{grid-template-columns:1fr 1fr}.cadastro-form{padding:36px 32px}.cadastro-copy{padding:44px 36px}}
+@media(min-width:901px){.cadastro-card{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.cadastro-copy{display:flex;flex-direction:column;justify-content:center;padding:48px 44px}.cadastro-form{padding:44px 48px}}
 
-/* ── Tela 10 · Crédito [ADIÇÃO, DESIGN_SYSTEM.md §12] ───────────────── */
-.credito{background:#fff;padding:32px 16px;border-top:1px solid var(--linha);text-align:center}
-.credito .miolo{max-width:760px}
-.credito p{font-size:13px;line-height:1.6;color:var(--gray)}
-@media(min-width:481px){.credito{padding:36px 20px}}
-@media(min-width:769px){.credito{padding:40px 48px}}
+/* ── 9 · Fecho tipográfico ─────────────────────────────────────────── */
+.fecho{background:#fff;text-align:center;padding:72px 20px}
+.fecho h2{font-size:clamp(28px,6.4vw,58px);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-transform:uppercase;color:var(--darker);max-width:820px;margin:0 auto 18px}
+.fecho p{font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:var(--gray);max-width:560px;margin:0 auto 28px}
+.fecho .link{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--teal);text-decoration:none}
+.fecho .link:hover{text-decoration:underline}
+@media(min-width:769px){.fecho{padding:104px 48px}}
 
-/* ── Placeholder [CONFIRMAR] (temporário, sai antes de publicar) ────── */
-.confirmar{display:inline;background:#fff176;color:#3b3300;font-weight:600;font-size:.92em;padding:2px 8px;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.confirmar-bloco{display:block;background:#fff176;color:#3b3300;font-weight:600;font-size:14px;line-height:1.55;padding:12px 16px;border-radius:12px;border:1px dashed #c9a800;max-width:760px}
-.confirmar-bloco+.confirmar-bloco{margin-top:12px}
-.escura .confirmar-bloco,.escura .confirmar{color:#3b3300}
-
-/* ── Rodapé: variante das páginas internas, DESIGN_SYSTEM.md §10 ──── */
+/* ── Rodapé: variante das páginas internas, §10 ────────────────────── */
 footer{background:#0a1628;padding:24px 20px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
 .ft-brand{height:22px;width:auto;display:block;opacity:.9}
 .ft-copy{font-size:12px;color:rgba(255,255,255,.4)}
@@ -210,342 +310,306 @@ footer{background:#0a1628;padding:24px 20px;display:flex;flex-direction:column;a
 .ft-social svg{width:16px;height:16px}
 @media(min-width:901px){footer{flex-direction:row;padding:28px 48px;gap:24px;text-align:left}.ft-brand{height:26px}.ft-right{flex-direction:row;gap:20px}}
 
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.destino-card,.faq-item summary::after{transition:none}}
+/* ── Reveal ao rolar ───────────────────────────────────────────────── */
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1)}
+html.js .rv.on{opacity:1;transform:none}
+.rv-2{transition-delay:.08s}.rv-3{transition-delay:.16s}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.js .rv{opacity:1;transform:none;transition:none}.btn,.card,.faq-item summary::after{transition:none}}
 </style>
 </head>
 <body>
 
 <nav id="nav" role="navigation" aria-label="Menu principal">
-<div class="nav-side"><a href="../index.html" class="nav-link">Início</a><a href="../index.html#destinos" class="nav-link">Destinos</a><a href="./" class="nav-link" aria-current="page">Caribe sem visto</a></div>
-<svg class="nav-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-label="Cruzeirista">
+<div class="nav-esq">
+<a href="../index.html" class="nav-brand-link" aria-label="Cruzeirista, ir para a página inicial">
+<svg class="nav-brand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.62 75.09" aria-hidden="true">
               <path fill="#ffffff" d="M376.29,47.22h3.33l-13.05-30.97-13.05,30.97h3.33l2.86-6.78h13.74l2.86,6.78ZM372.2,37.41h-11.22l5.59-13.31,5.63,13.31ZM351.29,19.75l1.02-3.03h-23.21l-1.02,3.03h10.45v27.47h3.33v-27.47h9.43ZM305.29,24.27c0-3.63,2.26-5.12,6.23-5.12,4.18,0,7.3,1.79,8.7,3.37v-3.63c-1.41-1.41-4.27-2.94-8.7-2.94-4.82,0-9.77,2.22-9.77,8.32,0,5.2,5.76,7.39,9.21,8.58,3.75,1.29,8.11,2.64,8.11,5.93s-2.13,5.76-7.68,5.76c-3.24,0-7.81-2.3-9.73-3.97v3.75c1.92,1.71,5.25,3.37,9.73,3.37,7.55,0,11.22-3.07,11.22-8.92s-6.1-7.58-9.98-8.96c-3.46-1.23-7.34-2.56-7.34-5.55M285.76,47.22h3.33v-30.89l-3.33,1.02v29.86ZM257.25,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM262.89,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.65-2.99,6.65-8.15,0-6.95-5.12-8.53-10.92-8.53M236.2,47.22h3.33v-30.89l-3.33,1.02v29.86ZM208.2,44.19v-10.71h11.65l1.02-2.99h-12.67v-10.88h14.33l1.02-3.03h-18.69v30.63h17.66l1.02-3.03h-15.36ZM193.96,47.22l-1.02-3.07h-18.77l18.94-27.56h-23.68l-1.02,3.07h18.81l-18.98,27.56h25.72ZM134.23,34.72c-.04,7.12,2.26,13.4,11.94,13.4s11.56-6.31,11.6-13.4v-18.39l-3.33,1.02v17.36c0,4.44-.77,10.41-8.28,10.41s-8.62-5.97-8.62-10.41v-18.39l-3.33,1.02v17.36ZM106.85,19.75h5.63c4.14,0,7.51,1.19,7.51,5.5s-3.37,5.5-7.51,5.5h-5.63v-11.01ZM112.48,16.72h-9v30.5h3.37v-13.44h6.36l9.3,13.91,2.56-2.09-8.32-12.2c3.84-.81,6.66-2.99,6.66-8.15,0-6.95-5.12-8.53-10.92-8.53M92.98,44.96v-4.31c-.34.43-3.58,4.18-9.21,4.18-7,0-12.54-5.84-12.54-12.88s5.55-12.88,12.54-12.88c5.97,0,9.26,4.22,9.26,4.22v-4.31c-4.48-3.2-9.26-2.99-9.26-2.99-8.79,0-15.96,7.17-15.96,15.96s7.17,15.95,15.96,15.95c0,0,4.78.21,9.21-2.94"/>
               <path fill="#ffffff" d="M31.98,27.81c2.3,0,4.17,1.87,4.17,4.17s-1.87,4.17-4.17,4.17-4.17-1.87-4.17-4.17,1.87-4.17,4.17-4.17M30.59,25.16c-.89.18-1.71.53-2.44,1.01l-8.91-8.91c2.41-2.09,5.34-3.6,8.57-4.3v-4.25c-4.38.78-8.34,2.77-11.53,5.6l-5.93-5.93-1.97,1.97,17.79,17.79c-.48.73-.83,1.56-1.01,2.44h-12.6c.24-3.34,1.31-6.44,3.02-9.1l-3.01-3.01c-2.42,3.47-3.93,7.62-4.19,12.11H0v2.78h25.16c.18.89.53,1.71,1.01,2.44l-8.91,8.91c-2.09-2.41-3.6-5.34-4.3-8.57h-4.25c.78,4.38,2.77,8.34,5.6,11.53l-5.93,5.93,1.97,1.97,17.79-17.79c.73.48,1.56.83,2.44,1.01v12.6c-3.34-.24-6.44-1.31-9.1-3.02l-3.01,3.01c3.47,2.42,7.62,3.93,12.11,4.2v8.38h2.78v-25.16c.89-.18,1.71-.53,2.44-1.01l8.91,8.91c-2.41,2.09-5.34,3.6-8.57,4.3v4.25c4.38-.78,8.34-2.77,11.53-5.6l5.93,5.93,1.97-1.97-17.79-17.79c.73-1.1,1.15-2.42,1.15-3.83s-.42-2.74-1.15-3.83l17.79-17.79-1.97-1.97-17.79,17.79c-.73-.48-1.56-.83-2.44-1.01v-12.6c3.34.23,6.44,1.31,9.1,3.02l3.01-3.01c-3.47-2.42-7.62-3.93-12.11-4.19V0h-2.78v25.16Z"/>
               <path fill="#ffffff" d="M258.08,61.92l.03-1.18-2.61.81-.03,1.18,2.61-.81ZM138.98,75.01l4.88-11.18-1.23-.38-3.65,8.67-3.63-8.67-1.24.38,4.88,11.18ZM147,74.83h1.23v-11.39l-1.23.38v11.01ZM158.26,71.22h-4.14l2.06-4.91,2.08,4.91ZM159.77,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.06l1.05,2.5ZM173.3,73.23v-3.63h-3.79l-.38,1.12h2.92v2.08c-.52.46-1.56,1.16-3.03,1.16-2.58,0-4.62-2.15-4.62-4.75s2-4.75,4.58-4.75c2.38,0,3.59,1.7,3.59,1.7v-1.63c-1.7-1.32-3.59-1.2-3.59-1.2-3.24,0-5.84,2.64-5.84,5.88s2.64,5.88,5.88,5.88c0,0,2.45.11,4.28-1.85M178.15,73.72v-3.95h4.29l.38-1.1h-4.67v-4.01h5.28l.38-1.12h-6.89v11.29h6.51l.38-1.12h-5.66ZM196.3,75.01v-11.53l-1.23.38v8.23l-8.27-8.67v11.42h1.23v-8.43l8.27,8.6ZM201.06,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.59-1.46v1.38c.71.63,1.93,1.24,3.59,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.7-.94-2.7-2.05M223.14,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM239.19,71.22h-4.14l2.06-4.91,2.08,4.91ZM240.7,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM248.39,63.59h-3.32v11.24h1.24v-4.95h2.34l3.43,5.13.94-.77-3.07-4.5c1.42-.3,2.45-1.1,2.45-3.01,0-2.56-1.89-3.14-4.03-3.14M246.32,64.7h2.08c1.53,0,2.77.44,2.77,2.03s-1.24,2.03-2.77,2.03h-2.08v-4.06ZM256.18,74.83h1.23v-11.39l-1.23.38v11.01ZM269.27,64.7l.38-1.12h-8.56l-.38,1.12h3.85v10.13h1.23v-10.13h3.48ZM272.95,74.83h1.23v-11.39l-1.23.38v11.01ZM284.3,71.8l-4.29-8.35-2.28,11.39h1.23l1.51-8.04,3.84,7.68,3.85-7.68,1.48,8.04h1.23l-2.25-11.42-4.31,8.38ZM300.36,71.22h-4.14l2.06-4.91,2.08,4.91ZM301.87,74.83h1.23l-4.81-11.42-4.81,11.42h1.23l1.05-2.5h5.07l1.05,2.5ZM306.95,66.37c0-1.34.83-1.89,2.3-1.89,1.54,0,2.69.66,3.21,1.24v-1.34c-.52-.52-1.57-1.08-3.21-1.08-1.78,0-3.6.82-3.6,3.07,0,1.92,2.12,2.72,3.4,3.16,1.38.47,2.99.97,2.99,2.19s-.79,2.12-2.83,2.12c-1.2,0-2.88-.85-3.58-1.46v1.38c.71.63,1.93,1.24,3.58,1.24,2.78,0,4.14-1.13,4.14-3.29s-2.25-2.8-3.68-3.3c-1.27-.46-2.71-.94-2.71-2.05"/>
             </svg>
-<div class="nav-side" style="justify-content:flex-end"><a href="../index.html#tematicos" class="nav-link">Temáticos</a><a href="../index.html#forms" class="nav-link">Faça uma cotação</a></div>
+</a>
+<div class="nav-side"><a href="#viagem" class="nav-link">A viagem</a><a href="#ilhas" class="nav-link">Ilhas</a><a href="#passos" class="nav-link">Como funciona</a><a href="#duvidas" class="nav-link">Dúvidas</a></div>
+</div>
+<div class="nav-side nav-dir"><a href="#contato" class="nav-cta">Quero conversar</a></div>
+<button class="nav-mobile-btn" id="nav-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu"><svg class="ico-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg><svg class="ico-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 </nav>
+<div class="nav-menu" id="nav-menu">
+    <a href="#viagem">A viagem</a>
+    <a href="#ilhas">Ilhas</a>
+    <a href="#passos">Como funciona</a>
+    <a href="#duvidas">Dúvidas</a>
+    <a href="#contato" class="nav-menu-cta">Quero conversar</a>
+</div>
 
 <main>
 
-<!-- ══ Tela 1 · Hero ══════════════════════════════════════════════════ -->
-<section class="lp-hero" id="hero" aria-labelledby="hero-titulo">
-    <img class="lp-hero-img" src="../img/secoes/caribe-card.jpg" alt="Mar do Caribe visto do alto" fetchpriority="high">
-    <div class="lp-hero-overlay"></div>
-    <div class="lp-hero-content">
-        <span class="lp-hero-region">Aruba, Curaçao, Bonaire, Cartagena e Panamá</span>
-        <h1 class="lp-hero-title" id="hero-titulo">Caribe sem visto americano</h1>
-        <p class="lp-hero-tagline">O roteiro sai do Panamá ou de Cartagena e não passa pelos Estados Unidos em nenhum momento. Nem no ar, nem no mar. Você viaja pelo Caribe sem entrevista no consulado, sem fila de agendamento e sem o risco de ouvir não.</p>
-        <div class="lp-hero-buttons">
-            <a href="#por-que-sem-visto" class="btn btn-teal">Entender como funciona</a>
-            <a href="https://wa.me/551140409598" class="btn btn-glass" target="_blank" rel="noopener">Falar com o Cruzeirista</a>
+<!-- ══ 1 · Hero ═══════════════════════════════════════════════════════ -->
+<header class="hero" id="topo">
+    <div class="hero-fundo" aria-hidden="true">
+        <video class="is-on" muted playsinline autoplay preload="auto" poster="../videos/caribe-sem-visto/hero-aruba.jpg" src="../videos/caribe-sem-visto/hero-aruba.mp4"></video>
+        <video muted playsinline preload="metadata" src="../videos/caribe-sem-visto/hero-bonaire.mp4"></video>
+        <video muted playsinline preload="metadata" src="../videos/caribe-sem-visto/hero-curacao.mp4"></video>
+        <video muted playsinline preload="metadata" src="../videos/caribe-sem-visto/hero-klein.mp4"></video>
+    </div>
+    <div class="hero-conteudo">
+        <h1>Caribe<br><em>sem visto</em></h1>
+        <p class="hero-texto">Siga pelo mar até as Antilhas e descubra ilhas que parecem feitas para surpreender. Cada parada, uma paisagem. Cada dia, um novo motivo para querer ficar.</p>
+        <div class="hero-botoes">
+            <a href="#ilhas" class="btn btn-teal">Explorar a viagem <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="#contato" class="btn btn-glass">Quero conversar</a>
         </div>
     </div>
-</section>
+</header>
 
-<!-- ══ Tela 2 · Por que sem visto ═════════════════════════════════════ -->
-<section class="secao" id="por-que-sem-visto" aria-labelledby="t2-titulo">
-    <div class="miolo">
-        <h2 class="titulo" id="t2-titulo">Por que essa viagem não precisa de visto americano</h2>
-        <div class="texto">
-            <p>A maioria dos cruzeiros pelo Caribe embarca em portos dos Estados Unidos. Por isso o visto americano vira a primeira barreira, antes mesmo de escolher o navio. Esse roteiro foi desenhado de outro jeito.</p>
-        </div>
-        <div class="passos">
-            <div class="passo">
-                <div class="passo-num" aria-hidden="true">1</div>
-                <h3>Você voa direto para o Panamá</h3>
-                <p>Voo saindo do Brasil sem conexão em território americano.</p>
-            </div>
-            <div class="passo">
-                <div class="passo-num" aria-hidden="true">2</div>
-                <h3>Você embarca em Colón ou em Cartagena</h3>
-                <p>Os dois portos ficam no Caribe, a poucas horas de voo do Brasil. O check-in é feito direto no porto.</p>
-            </div>
-            <div class="passo">
-                <div class="passo-num" aria-hidden="true">3</div>
-                <h3>O navio só faz escalas fora dos Estados Unidos</h3>
-                <p>Cartagena, Colón, Curaçao, Aruba e Bonaire. Nenhuma parada em solo americano.</p>
-            </div>
-        </div>
-        <div class="destaque">Sem visto americano não quer dizer sem documentação. Você precisa de passaporte válido, e Panamá e Colômbia têm regras próprias de entrada. A gente confere isso com você antes de qualquer decisão.</div>
-    </div>
-</section>
-
-<!-- ══ Tela 3 · Como funciona a viagem ════════════════════════════════ -->
-<section class="secao" id="como-funciona" aria-labelledby="t3-titulo" style="background:#f5f6f8">
-    <div class="miolo">
-        <h2 class="titulo" id="t3-titulo">Do Brasil ao navio, passo a passo</h2>
-        <div class="texto">
-            <p>Se você nunca fez cruzeiro, esse é o mapa da viagem inteira. Se já fez, aqui está o que muda nesse roteiro.</p>
-        </div>
-        <ol class="etapas">
-            <li class="etapa">
-                <div class="etapa-num" aria-hidden="true">1</div>
-                <h3>O voo</h3>
-                <p>Você sai de uma capital brasileira e chega à Cidade do Panamá. <span class="confirmar">[CONFIRMAR: o aéreo entra no pacote ou é orientado à parte]</span></p>
-            </li>
-            <li class="etapa">
-                <div class="etapa-num" aria-hidden="true">2</div>
-                <h3>A chegada</h3>
-                <p>Do aeroporto, o caminho até o porto de Colón leva cerca de uma hora e meia por terra. Muita gente aproveita para ficar uma ou duas noites na capital antes de embarcar. <span class="confirmar">[CONFIRMAR: o pacote prevê noite na Cidade do Panamá e transfer]</span></p>
-            </li>
-            <li class="etapa">
-                <div class="etapa-num" aria-hidden="true">3</div>
-                <h3>O embarque</h3>
-                <p>Check-in no porto, cabine liberada no mesmo dia e o navio zarpa no fim da tarde.</p>
-            </li>
-            <li class="etapa">
-                <div class="etapa-num" aria-hidden="true">4</div>
-                <h3>A navegação</h3>
-                <p>Entre 6 e 8 noites a bordo, conforme a saída. Escalas em Cartagena, Curaçao, Aruba e Bonaire, com dois dias inteiros de navegação para aproveitar o navio.</p>
-            </li>
-            <li class="etapa">
-                <div class="etapa-num" aria-hidden="true">5</div>
-                <h3>A volta</h3>
-                <p>Desembarque no mesmo porto de saída e voo de retorno ao Brasil, de novo sem passar pelos Estados Unidos.</p>
-            </li>
-        </ol>
-        <p class="nota">A ordem das escalas e a duração variam de acordo com a data. A gente confirma o roteiro exato da saída que você escolher. <span class="confirmar">[CONFIRMAR: calendário de saídas]</span></p>
-    </div>
-</section>
-
-<!-- ══ Tela 4 · Por que pelo Panamá (seção de destaque) ══════════════ -->
-<section class="secao escura" id="panama" aria-labelledby="t4-titulo">
-    <div class="miolo">
-        <h2 class="titulo" id="t4-titulo">O Panamá é o começo da viagem, não só o porto</h2>
-        <div class="texto">
-            <p>Fazer o Caribe pelo Panamá tem vantagens que vão além do visto. É um país pequeno, com voo direto do Brasil, dólar na carteira e uma capital que vale dias inteiros de descoberta.</p>
-        </div>
-        <img class="panama-foto" src="../img/caribe-sem-visto/panama-casco-viejo.jpg" alt="Varandas e fachadas restauradas do Casco Viejo, na Cidade do Panamá" loading="lazy">
-        <div class="blocos">
-            <div class="bloco">
-                <h3>Chegada sem escala nos Estados Unidos</h3>
-                <p>O voo do Brasil pousa direto na Cidade do Panamá. Você chega ao Caribe sem trocar de país no meio do caminho e sem depender de visto americano para a viagem inteira, ida e volta.</p>
-            </div>
-            <div class="bloco">
-                <h3>O Canal do Panamá</h3>
-                <p>Uma das obras mais importantes da engenharia moderna fica a minutos da capital. Ver um navio de carga atravessar as eclusas de Miraflores é programa de meio dia e costuma ser o momento que as pessoas mais contam quando voltam.</p>
-            </div>
-            <div class="bloco">
-                <h3>Casco Viejo</h3>
-                <p>O centro histórico da Cidade do Panamá é Patrimônio Mundial da Unesco: ruas de pedra, casarões coloniais restaurados, praças, cafés e restaurantes com vista para a baía e para o skyline moderno do outro lado.</p>
-            </div>
-            <div class="bloco">
-                <h3>Compras e gastronomia</h3>
-                <p>O Panamá é um dos principais centros de compras das Américas, com shoppings de grande porte na capital e a Zona Livre de Colón ao lado do porto de embarque. A cozinha mistura Caribe, Pacífico e influência de várias colônias: ceviche, peixe fresco, sancocho e café panamenho de altitude.</p>
-            </div>
-            <div class="bloco">
-                <h3>Praticidade no dia a dia</h3>
-                <p>A moeda em circulação é o dólar americano, o que simplifica a conta desde o primeiro dia. O clima é quente o ano inteiro e o fuso fica duas horas atrás de Brasília. <span class="confirmar">[CONFIRMAR: alguma exigência de entrada específica a destacar]</span></p>
-            </div>
-            <div class="bloco">
-                <h3>Antes ou depois do navio</h3>
-                <p>Como o embarque é em Colón, dá para chegar um ou dois dias antes e conhecer a capital com calma, ou ficar depois do desembarque. O Cruzeirista ajuda a montar esses dias extras. <span class="confirmar">[CONFIRMAR: pacote da OFB contempla noites extras]</span></p>
-            </div>
-        </div>
-        <p class="fecho-escuro">Sem o Panamá, não existiria Caribe sem visto americano. Com ele, a viagem ganha um destino a mais.</p>
-    </div>
-</section>
-
-<!-- ══ Tela 5 · Os destinos ═══════════════════════════════════════════ -->
-<section class="secao" id="destinos" aria-labelledby="t5-titulo">
-    <div class="miolo">
-        <h2 class="titulo" id="t5-titulo">Quatro escalas, quatro Caribes diferentes</h2>
-        <div class="destinos-grid">
-            <article class="destino-card">
-                <img class="destino-card-img" src="../img/caribe-sem-visto/cartagena.jpg" alt="Rua colonial de Cartagena com a catedral ao fundo" loading="lazy">
-                <div class="destino-card-body">
-                    <h3>Cartagena, Colômbia</h3>
-                    <p>Cidade murada, casarões coloridos e mar quente. É porto de embarque numa parte das saídas e escala nas outras, e em qualquer caso merece o dia inteiro em terra.</p>
-                </div>
+<!-- ══ 2 · Valor em três ideias ═══════════════════════════════════════ -->
+<section class="secao valor" id="viagem" aria-labelledby="t2">
+    <div class="valor-fundo" aria-hidden="true"></div>
+    <div class="miolo centro">
+        <h2 class="abc-titulo rv" id="t2">O ABC do Caribe<span>de um jeito mais simples</span></h2>
+        <div class="cards">
+            <article class="card rv">
+                <div class="card-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M12 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 12H3a9 9 0 0 0 18 0h-2M8 9h8"/></svg></div>
+                <h3>Embarque pela América Latina</h3>
+                <p>Há saídas de Colón ou Cartagena para descobrir o sul do Caribe com o mar como parte da viagem.</p>
             </article>
-            <article class="destino-card">
-                <img class="destino-card-img" src="../img/portos/curacao.jpg" alt="Fachadas coloridas de Willemstad, em Curaçao" loading="lazy">
-                <div class="destino-card-body">
-                    <h3>Curaçao</h3>
-                    <p>Willemstad tem a fachada mais fotografada do Caribe holandês, com prédios em tons pastel à beira do canal. Praias pequenas em enseadas e um dos melhores mergulhos de cilindro da região.</p>
-                </div>
+            <article class="card rv rv-2">
+                <div class="card-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0M12 3v6M8 9h8l-1 4H9z"/></svg></div>
+                <h3>Uma ilha nunca é igual à outra</h3>
+                <p>Aruba, Bonaire e Curaçao mostram que o Caribe tem mais de uma cor, mais de um ritmo e muito mais para descobrir.</p>
             </article>
-            <article class="destino-card">
-                <img class="destino-card-img" src="../img/portos/aruba.jpg" alt="Praia de areia clara e mar turquesa em Aruba" loading="lazy">
-                <div class="destino-card-body">
-                    <h3>Aruba</h3>
-                    <p>A "ilha feliz" tem vento constante, praias largas de areia clara e mar em tons de turquesa. Eagle Beach aparece com frequência entre as praias mais bonitas do mundo.</p>
-                </div>
-            </article>
-            <article class="destino-card">
-                <img class="destino-card-img" src="../img/portos/bonaire.jpg" alt="Mar raso e transparente de Bonaire" loading="lazy">
-                <div class="destino-card-body">
-                    <h3>Bonaire</h3>
-                    <p>Menor e mais tranquila, é referência mundial em snorkel e mergulho: o recife começa a poucos metros da areia, dentro de um parque marinho protegido.</p>
-                </div>
+            <article class="card rv rv-3">
+                <div class="card-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div>
+                <h3>Escolha com quem entende de cruzeiros</h3>
+                <p>A gente explica o roteiro, orienta sobre a documentação e ajuda você a decidir com clareza.</p>
             </article>
         </div>
-        <p class="nota" style="border-top:none;padding-top:0">Ordem das escalas conforme a saída. <span class="confirmar">[CONFIRMAR: ordem real por data]</span></p>
     </div>
 </section>
 
-<!-- ══ Tela 6 · A bordo ═══════════════════════════════════════════════ -->
-<section class="secao" id="a-bordo" aria-labelledby="t6-titulo" style="background:#fff;border-top:1px solid var(--linha)">
-    <div class="miolo">
-        <h2 class="titulo" id="t6-titulo">A vida no navio</h2>
-        <div class="texto">
-            <p>O roteiro é operado pela Royal Caribbean, uma das maiores companhias de cruzeiro do mundo. O navio varia de acordo com a saída, e a gente confirma qual é o da sua data.</p>
+<!-- ══ 3 · Ilhas ══════════════════════════════════════════════════════ -->
+<section class="secao rota" id="ilhas" aria-labelledby="t3">
+  <div class="miolo">
+    <div class="ilhas-cabeca">
+        <h2 class="abc-titulo" id="t3">Porto a porto,<br>ilha a ilha</h2>
+    </div>
+    <div class="rota-grade">
+      <div class="rota-lado">
+      <div class="rota-mapa" aria-hidden="true">
+        <p class="rota-mapa-titulo">2 opções de embarque</p>
+        <svg class="rota-svg" viewBox="0 0 600 275" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rota-brilho" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#0891b2" stop-opacity=".30"/><stop offset="1" stop-color="#0891b2" stop-opacity="0"/></radialGradient>
+            <filter id="rota-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- terra traçada do mapa da lâmina do fornecedor (Panamá, costa da Colômbia e da Venezuela, lago de Maracaibo) -->
+          <path class="rota-terra" fill-rule="evenodd" d="M599.6 270.7 L596.6 269.0 L180.5 269.0 L179.4 267.9 L179.0 260.2 L174.2 255.0 L172.5 250.3 L174.4 247.9 L180.5 247.5 L186.3 239.5 L198.6 228.5 L202.9 225.9 L210.6 225.1 L213.9 222.3 L215.1 215.4 L214.7 213.6 L210.0 209.8 L210.4 207.2 L216.9 194.3 L219.2 191.9 L224.0 191.0 L225.9 189.1 L226.3 186.9 L224.6 183.9 L225.5 182.6 L227.4 180.7 L231.3 179.4 L236.0 172.9 L238.6 172.9 L241.6 170.8 L245.9 173.8 L248.5 172.9 L253.3 174.7 L257.1 174.2 L259.1 172.3 L259.1 168.8 L261.0 167.3 L269.2 164.3 L285.6 163.5 L292.9 161.7 L298.1 157.9 L299.4 158.3 L307.5 155.7 L311.0 150.1 L312.1 151.2 L312.1 153.8 L314.9 156.6 L318.3 156.6 L321.1 152.5 L320.7 150.3 L317.2 146.9 L319.8 144.3 L319.4 138.3 L324.3 135.0 L329.9 135.0 L336.4 132.4 L338.8 130.1 L338.8 128.8 L344.1 124.3 L347.2 128.1 L355.3 132.4 L359.9 137.4 L359.9 139.6 L357.5 143.2 L349.1 148.6 L349.1 151.6 L347.2 153.6 L339.0 156.1 L334.7 156.1 L332.7 158.1 L331.9 165.4 L334.9 168.4 L334.9 169.7 L339.2 173.2 L339.2 179.6 L343.3 182.4 L345.4 182.0 L351.0 176.4 L360.5 172.1 L377.3 168.6 L382.5 166.0 L385.9 160.9 L393.7 164.8 L398.0 164.8 L400.8 160.7 L397.3 155.9 L397.3 153.3 L395.4 151.4 L393.3 151.0 L382.5 153.1 L380.5 150.3 L383.1 147.3 L383.1 143.9 L386.1 140.0 L389.4 136.8 L393.3 135.0 L395.8 136.3 L398.0 135.5 L401.7 137.8 L402.5 143.0 L401.2 146.0 L402.9 149.0 L402.5 153.3 L408.3 161.3 L417.4 161.3 L424.7 164.8 L440.2 163.9 L444.1 165.2 L451.6 174.9 L451.6 180.0 L448.6 183.1 L448.6 187.4 L452.3 191.9 L457.0 194.0 L470.8 194.0 L505.7 188.0 L516.4 187.6 L519.0 188.0 L521.8 193.0 L526.3 197.1 L536.7 203.9 L540.6 204.8 L544.0 203.1 L553.1 201.8 L556.1 198.3 L562.5 194.9 L569.0 193.6 L578.0 187.2 L582.3 182.0 L585.4 185.0 L590.1 186.3 L597.0 184.6 L599.6 182.0 Z M581.9 181.1 L577.6 178.1 L569.0 179.0 L566.6 176.2 L572.4 171.6 L576.7 174.2 L585.4 169.1 L587.7 173.6 L581.9 181.1 Z M336.6 239.5 L346.7 234.1 L349.1 231.7 L352.1 224.0 L348.7 208.9 L348.2 196.8 L344.6 194.5 L342.9 194.9 L331.9 205.9 L329.7 211.1 L325.0 215.8 L324.6 217.5 L325.4 221.4 L332.3 229.6 L332.7 237.3 L334.7 239.3 L336.6 239.5 Z M167.1 269.0 L129.6 269.0 L128.6 267.9 L129.9 266.2 L129.9 262.7 L123.8 258.0 L123.0 254.6 L119.5 249.0 L115.9 245.3 L112.4 244.4 L105.5 238.0 L101.7 236.7 L95.6 237.5 L88.7 241.0 L86.4 243.4 L85.5 245.9 L87.7 250.7 L87.2 253.3 L79.3 260.8 L68.9 263.4 L65.5 265.1 L62.0 269.0 L24.1 269.0 L9.0 265.1 L6.0 265.5 L3.9 267.7 L1.1 264.9 L4.1 260.6 L3.7 230.9 L4.7 229.8 L12.9 235.0 L18.1 233.2 L26.3 237.5 L34.5 243.6 L47.4 244.4 L50.4 243.6 L56.9 237.5 L65.9 232.8 L69.8 233.2 L74.5 228.5 L77.5 230.7 L81.0 230.7 L86.6 224.6 L93.9 219.5 L100.4 220.3 L104.7 224.6 L106.4 225.1 L125.8 225.9 L130.1 227.2 L141.7 234.1 L148.4 241.2 L149.2 243.8 L163.5 256.3 L165.2 261.0 L169.9 264.5 L167.1 269.0 Z"/>
+          <!-- ilhas ABC junto às paradas -->
+          <ellipse class="rota-terra" cx="393" cy="121" rx="9" ry="3.6" transform="rotate(-38 393 121)"/>
+          <ellipse class="rota-terra" cx="428" cy="131" rx="12" ry="4" transform="rotate(-28 428 131)"/>
+          <ellipse class="rota-terra" cx="453" cy="140" rx="5.5" ry="7.5" transform="rotate(18 453 140)"/>
+          <!-- ida: Colón e Cartagena pela costa até Bonaire, depois Aruba e Curaçao (ordem dos roteiros publicados pela companhia, conferida em 16/09/2026); volta de Curaçao a Colón: tracejada fixa e linha que se desenha depois do último card -->
+          <path class="rota-volta" d="M428 128 C400 26 140 62 72 215"/>
+          <path class="rota-linha" id="rota-linha-volta" d="M428 128 C400 26 140 62 72 215"/>
+          <path class="rota-sombra" d="M72 215 C120 200 175 182 227 172 C300 158 392 142 453 138 C445 118 410 106 393 118 C403 131 418 134 428 128"/>
+          <path class="rota-linha" id="rota-linha" d="M72 215 C120 200 175 182 227 172 C300 158 392 142 453 138 C445 118 410 106 393 118 C403 131 418 134 428 128"/>
+          <!-- paradas, na ordem da rota -->
+          <g class="rota-parada"><circle class="rota-halo" cx="72" cy="215" r="18" fill="url(#rota-brilho)"/><circle class="rota-anel" cx="72" cy="215" r="7"/><circle class="rota-ponto" cx="72" cy="215" r="3"/><text x="72" y="242" text-anchor="middle">Colón</text></g>
+          <g class="rota-parada"><circle class="rota-halo" cx="227" cy="172" r="18" fill="url(#rota-brilho)"/><circle class="rota-anel" cx="227" cy="172" r="7"/><circle class="rota-ponto" cx="227" cy="172" r="3"/><text x="227" y="158" text-anchor="middle">Cartagena</text></g>
+          <g class="rota-parada"><circle class="rota-halo" cx="453" cy="138" r="18" fill="url(#rota-brilho)"/><circle class="rota-anel" cx="453" cy="138" r="7"/><circle class="rota-ponto" cx="453" cy="138" r="3"/><text x="466" y="143" text-anchor="start">Bonaire</text></g>
+          <g class="rota-parada"><circle class="rota-halo" cx="393" cy="118" r="18" fill="url(#rota-brilho)"/><circle class="rota-anel" cx="393" cy="118" r="7"/><circle class="rota-ponto" cx="393" cy="118" r="3"/><text x="380" y="122" text-anchor="end">Aruba</text></g>
+          <g class="rota-parada"><circle class="rota-halo" cx="428" cy="128" r="18" fill="url(#rota-brilho)"/><circle class="rota-anel" cx="428" cy="128" r="7"/><circle class="rota-ponto" cx="428" cy="128" r="3"/><text x="438" y="112" text-anchor="start">Curaçao</text></g>
+          <g class="rota-navio" id="rota-navio" filter="url(#rota-glow)"><circle r="5.5"/></g>
+        </svg>
+        <p class="rota-legenda">Embarque em Colón ou em Cartagena. A ordem das escalas segue a saída escolhida.</p>
+      </div>
+      <!-- leitura de bordo: parada ativa, coordenadas, rumo e rosa dos ventos, tudo movido pela mesma rolagem -->
+      <div class="bordo" aria-hidden="true">
+        <div><div class="bordo-nome" id="bordo-nome">Colón</div><div class="bordo-mono"><b id="bordo-coord">9°21'N 79°54'W</b> · <span id="bordo-rumo">rumo 000°</span></div></div>
+        <svg class="rosa" viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="54" class="rosa-aro"/>
+          <path d="M60 2 l4 8 h-8z" class="rosa-proa"/>
+          <g class="rosa-carta" id="rosa-carta">
+            <g class="rosa-ticks"><line x1="60" y1="8" x2="60" y2="13" transform="rotate(0 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(10 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(20 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(30 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(40 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(50 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(60 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(70 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(80 60 60)"/><line x1="60" y1="8" x2="60" y2="13" transform="rotate(90 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(100 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(110 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(120 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(130 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(140 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(150 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(160 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(170 60 60)"/><line x1="60" y1="8" x2="60" y2="13" transform="rotate(180 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(190 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(200 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(210 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(220 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(230 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(240 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(250 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(260 60 60)"/><line x1="60" y1="8" x2="60" y2="13" transform="rotate(270 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(280 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(290 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(300 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(310 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(320 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(330 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(340 60 60)"/><line x1="60" y1="8" x2="60" y2="11" transform="rotate(350 60 60)"/></g>
+            <path d="M60 14 L66 60 L60 106 L54 60z" class="rosa-agulha-s"/>
+            <path d="M60 14 L66 60 L54 60z" class="rosa-agulha-n"/>
+            <text x="60" y="30" text-anchor="middle">N</text><text x="93" y="64" text-anchor="middle">L</text><text x="60" y="98" text-anchor="middle">S</text><text x="27" y="64" text-anchor="middle">O</text>
+          </g>
+          <circle cx="60" cy="60" r="3.5" class="rosa-eixo"/>
+        </svg>
+      </div>
+      </div>
+      <ol class="rota-cards">
+        <li class="rota-card" style="--n:0">
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Panamá"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#fff"/><rect x="30" width="30" height="20" fill="#d21034"/><rect y="20" width="30" height="20" fill="#005293"/><polygon points="15.0,3.5 16.6,7.8 21.2,8.0 17.6,10.8 18.8,15.3 15.0,12.7 11.2,15.3 12.4,10.8 8.8,8.0 13.4,7.8" fill="#005293"/><polygon points="45.0,23.5 46.6,27.8 51.2,28.0 47.6,30.8 48.8,35.3 45.0,32.7 41.2,35.3 42.4,30.8 38.8,28.0 43.4,27.8" fill="#d21034"/></svg></span></div>
+          <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-panama.jpg" src="../videos/caribe-sem-visto/rota-panama.mp4"></video></div>
+          <div class="rota-card-texto">
+            <h3>Colón, Panamá</h3>
+            <p>É em Colón, no litoral caribenho do Panamá, que muitas dessas viagens começam. O porto fica a uma curta viagem de carro da Cidade do Panamá, e o embarque acontece sem passar pelos Estados Unidos.</p>
+            <p>Quem chega com um dia de folga descobre que a capital vale a parada: as eclusas do Canal, as ruas do Casco Viejo e uma mesa sem pressa antes de subir a bordo. O embarque abre a porta; o Panamá pode virar mais um destino.</p>
+          </div>
+        </li>
+        <li class="rota-card" style="--n:1">
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Colômbia"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#fcd116"/><rect y="20" width="60" height="10" fill="#003893"/><rect y="30" width="60" height="10" fill="#ce1126"/></svg></span></div>
+          <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-cartagena.jpg" src="../videos/caribe-sem-visto/rota-cartagena.mp4"></video></div>
+          <div class="rota-card-texto">
+            <h3>Cartagena, Colômbia</h3>
+            <p>Cartagena é a outra porta de entrada e, em algumas saídas, também uma escala. A cidade murada guarda praças, sacadas floridas e fachadas em cores fortes que mudam de tom com a luz do fim do dia.</p>
+            <p>Entre o centro histórico e o mar, o ritmo é caribenho e colombiano ao mesmo tempo: música na rua, frutas em cada esquina e um pôr do sol que vale ver do alto das muralhas.</p>
+          </div>
+        </li>
+        <li class="rota-card" style="--n:2">
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Bonaire"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#fff"/><polygon points="0,0 42,0 0,28" fill="#f9d616"/><polygon points="60,40 60,6 9,40" fill="#012a87"/><circle cx="25" cy="18" r="7" fill="none" stroke="#000" stroke-width="1.6"/><polygon points="25.0,13.8 25.9,16.5 28.6,15.9 26.8,18.0 28.6,20.1 25.9,19.5 25.0,22.2 24.1,19.5 21.4,20.1 23.2,18.0 21.4,15.9 24.1,16.5" fill="#dc171d"/></svg></span></div>
+          <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-bonaire.jpg" src="../videos/caribe-sem-visto/rota-bonaire.mp4"></video></div>
+          <div class="rota-card-texto">
+            <h3>Bonaire</h3>
+            <p>Bonaire tem outro ritmo. A água transparente não é só cenário. Sob ela, recifes e peixes tropicais revelam por que a ilha atrai quem gosta de mergulho e snorkel.</p>
+            <p>Sua costa integra um parque marinho protegido. Mesmo para quem prefere ficar fora d’água, há muito para observar entre a orla de Kralendijk e os vários tons do mar. Bonaire convida a desacelerar para perceber cada detalhe.</p>
+          </div>
+        </li>
+        <li class="rota-card" style="--n:3">
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Aruba"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#418fde"/><rect y="30" width="60" height="2.2" fill="#f9d616"/><rect y="34.5" width="60" height="2.2" fill="#f9d616"/><polygon points="12,3 14.6,8.4 20,11 14.6,13.6 12,19 9.4,13.6 4,11 9.4,8.4" fill="#d21034" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></span></div>
+          <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-aruba.jpg" src="../videos/caribe-sem-visto/rota-aruba.mp4"></video></div>
+          <div class="rota-card-texto">
+            <h3>Aruba</h3>
+            <p>Em Aruba, o azul do mar disputa a atenção com a luz da ilha. Eagle Beach convida a estender o dia na areia branca, enquanto Oranjestad traz cor e movimento para além da praia.</p>
+            <p>E há um lado que surpreende: no Parque Nacional Arikok, a paisagem fica mais árida, rochosa e selvagem. É esse contraste que faz Aruba prender o olhar na chegada e continuar interessante depois da primeira foto.</p>
+          </div>
+        </li>
+        <li class="rota-card" style="--n:4">
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Curaçao"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#002b7f"/><rect y="25" width="60" height="5" fill="#f9e814"/><polygon points="9.0,3.8 9.8,5.9 12.0,6.0 10.3,7.4 10.9,9.6 9.0,8.3 7.1,9.6 7.7,7.4 6.0,6.0 8.2,5.9" fill="#fff"/><polygon points="18.0,8.8 19.3,12.2 22.9,12.4 20.1,14.7 21.1,18.2 18.0,16.2 14.9,18.2 15.9,14.7 13.1,12.4 16.7,12.2" fill="#fff"/></svg></span></div>
+          <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-curacao.jpg" src="../videos/caribe-sem-visto/rota-curacao.mp4"></video></div>
+          <div class="rota-card-texto">
+            <h3>Curaçao</h3>
+            <p>Em Curaçao, o Caribe também acontece nas ruas. As fachadas coloridas de Willemstad acompanham o porto e contam parte da história de uma cidade reconhecida pela UNESCO.</p>
+            <p>Pelo litoral, enseadas e praias trazem de volta o azul que se espera do Caribe. Essa combinação de arquitetura, cultura e mar dá à ilha uma personalidade própria e deixa vontade de descobrir o que existe depois da próxima esquina.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4 · Três passos ════════════════════════════════════════════════ -->
+<section class="secao passos" id="passos" aria-label="Três passos para a sua viagem">
+    <div class="miolo centro">
+        <div class="passos-grade" style="text-align:left">
+            <div class="passo"><span class="passo-num" aria-hidden="true">1</span><h3>Escolha do roteiro ideal</h3><p>Analisamos seu perfil para recomendar a melhor data e cabine no navio perfeito para você.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">2</span><h3>Orientação documental</h3><p>Checklist completo de tudo que você precisa levar, do passaporte às vacinas.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">3</span><h3>Planejamento da viagem</h3><p>Dicas de passeios, moeda e logística local para você aproveitar cada segundo no Caribe.</p></div>
         </div>
-        <div class="bordo-grid">
-            <div class="bordo-card">
-                <h3>O que costuma estar incluído</h3>
-                <p>Cabine, refeições nos restaurantes principais e buffet, café, chá e água, piscinas, academia, shows e a programação de entretenimento a bordo.</p>
-            </div>
-            <div class="bordo-card">
-                <h3>O que costuma ser à parte</h3>
-                <p>Bebidas alcoólicas e refrigerantes, restaurantes especiais, excursões nos portos, internet, spa e as taxas de serviço.</p>
-            </div>
-        </div>
-        <div class="bordo-cabines">
-            <h3>Cabines</h3>
-            <p>Interna, externa com janela, varanda e suíte. A escolha depende de quanto tempo você pretende passar na cabine e de quanto a vista importa para você. A gente te explica a diferença antes de decidir.</p>
-        </div>
-        <div class="destaque">Inclusões mudam conforme a tarifa e a companhia. O que vale é o que está na sua reserva, e a gente revisa isso com você. <span class="confirmar">[CONFIRMAR: inclusões oficiais do pacote OFB]</span></div>
     </div>
 </section>
 
-<!-- ══ Tela 7 · Como a gente ajuda ════════════════════════════════════ -->
-<section class="secao escura" id="como-ajudamos" aria-labelledby="t7-titulo">
+<!-- ══ 5 · Panamá ═════════════════════════════════════════════════════ -->
+<section class="panama escura" id="panama" aria-labelledby="t5">
+    <img class="panama-img" src="../img/caribe-sem-visto/panama-skyline.jpg" alt="" loading="lazy" aria-hidden="true">
     <div class="miolo">
-        <h2 class="titulo" id="t7-titulo">O que o Cruzeirista faz por você nessa viagem</h2>
-        <div class="pilares">
-            <div class="pilar">
-                <h3>Data e cabine</h3>
-                <p>A gente olha o calendário de saídas com você, explica o que muda entre as datas e ajuda a escolher a cabine que faz sentido para a sua viagem.</p>
-            </div>
-            <div class="pilar">
-                <h3>Documentação</h3>
-                <p>Passaporte, regras de entrada no Panamá e na Colômbia e exigências da companhia. A gente orienta o que conferir e quando conferir, para você embarcar sem susto.</p>
-            </div>
-            <div class="pilar">
-                <h3>Os dias em terra</h3>
-                <p>Dicas de passeio em cada escala, moeda, deslocamento no porto e o que vale reservar antes.</p>
-            </div>
-        </div>
-        <p class="confirmar-bloco">[CONFIRMAR: entra guia digital, checklist ou suporte durante a viagem? Só publicar o que existe]</p>
-        <p class="confirmar-bloco">[CONFIRMAR: OFB nomeada aqui como operadora? Ex.: "O pacote é operado pela OFB, operadora parceira do Cruzeirista."]</p>
+        <span class="rotulo rv">Panamá</span>
+        <h2 class="titulo rv" id="t5">Antes do Caribe, o Panamá.</h2>
+        <p class="texto rv rv-2">Se a sua saída for por Colón, a Cidade do Panamá pode virar mais um destino: a escala monumental do Canal, as ruas do Casco Viejo, uma mesa sem pressa. Vale conversar sobre chegar antes ou ficar depois do cruzeiro.</p>
     </div>
 </section>
 
-<!-- ══ Tela 8 · Dúvidas frequentes ════════════════════════════════════ -->
-<section class="secao" id="duvidas" aria-labelledby="t8-titulo">
-    <div class="miolo">
-        <h2 class="titulo" id="t8-titulo">Perguntas que a gente mais ouve sobre esse roteiro</h2>
-        <div class="faq">
+<!-- ══ 6 · Dúvidas ════════════════════════════════════════════════════ -->
+<section class="secao faq-secao" id="duvidas" aria-labelledby="t6">
+    <div class="miolo centro">
+        <h2 class="titulo rv" id="t6">Dúvidas frequentes</h2>
+        <div class="faq rv" style="text-align:left">
             <details class="faq-item">
                 <summary>Preciso de visto americano?</summary>
-                <p>Não. O roteiro embarca no Panamá ou na Colômbia e não toca território dos Estados Unidos em nenhum ponto, incluindo o voo.</p>
+                <p>Não, quando o voo e o itinerário não passam por território americano. Os roteiros desta campanha embarcam em Colón ou em Cartagena, e conferimos a rota completa com você antes de avançar.</p>
             </details>
             <details class="faq-item">
-                <summary>E de passaporte?</summary>
-                <p>Sim. Passaporte válido é obrigatório. A validade mínima exigida depende do país de entrada e da companhia, e a gente confirma a regra da sua saída antes do embarque. <span class="confirmar">[CONFIRMAR: regra vigente para Panamá e Colômbia]</span></p>
+                <summary>Preciso de passaporte ou de outros documentos?</summary>
+                <p>Sim. Passaporte válido, as regras de entrada do Panamá ou da Colômbia e as condições da companhia são conferidos para cada viajante e cada saída. Sem visto americano não significa sem documentos.</p>
             </details>
             <details class="faq-item">
-                <summary>Preciso de visto para o Panamá ou para a Colômbia?</summary>
-                <p>Brasileiros não precisam de visto de turismo para esses dois países. Ainda assim, cada um tem exigências próprias de entrada, e a gente revisa isso com você. <span class="confirmar">[CONFIRMAR: exigências vigentes]</span></p>
+                <summary>Como funciona o embarque?</summary>
+                <p>Você voa até o Panamá ou até Cartagena, com um voo escolhido para não passar pelos Estados Unidos, e faz o check-in no porto de Colón ou de Cartagena, conforme a saída.</p>
             </details>
             <details class="faq-item">
-                <summary>Onde fica o embarque?</summary>
-                <p>Em Colón, no Panamá, ou em Cartagena, na Colômbia, dependendo da saída. Os dois portos fazem o check-in direto no terminal.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Como chego até o porto?</summary>
-                <p>Você voa para a Cidade do Panamá e segue por terra até Colón, ou voa para Cartagena e o porto está na própria cidade. <span class="confirmar">[CONFIRMAR: transfer incluído]</span></p>
-            </details>
-            <details class="faq-item">
-                <summary>Vale chegar um dia antes?</summary>
-                <p>Vale, e a gente recomenda. Além de evitar correria no dia do embarque, você conhece a Cidade do Panamá ou Cartagena com calma.</p>
-            </details>
-            <details class="faq-item">
-                <summary>O que está incluído e o que pago a mais?</summary>
-                <p>Em geral cabine, refeições principais e entretenimento estão incluídos. Bebidas, restaurantes especiais, excursões, internet e taxas de serviço costumam ser à parte. O detalhe exato está na sua reserva.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Nunca fiz cruzeiro. Esse roteiro é bom para começar?</summary>
-                <p>É um dos mais indicados: viagem de 6 a 8 noites, mar geralmente calmo no sul do Caribe, escalas curtas entre si e muito tempo em terra.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Qual moeda eu levo?</summary>
-                <p>Dólar americano resolve no Panamá, no navio e nas ilhas. Na Colômbia a moeda é o peso, mas o dólar é aceito em boa parte do comércio turístico.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Posso ir com criança?</summary>
-                <p>Pode. A companhia tem programação infantil a bordo e as cabines comportam família. A gente orienta a configuração de cabine para o seu grupo.</p>
+                <summary>O que muda entre as saídas?</summary>
+                <p>A ordem das escalas, a duração, o porto de embarque e o que a tarifa inclui, como bebidas e aéreo. Ao apresentar uma saída, mostramos o roteiro exato e o que está ou não incluído.</p>
             </details>
         </div>
     </div>
 </section>
 
-<!-- ══ Tela 9 · Captação ══════════════════════════════════════════════ -->
-<section class="secao forms-section" id="contato" aria-labelledby="t9-titulo">
-    <div class="forms-wrapper">
-        <div class="forms-copy">
-            <h2 class="forms-copy-heading" id="t9-titulo">Quer entender as opções para a sua viagem?</h2>
-            <p class="forms-copy-text">Deixa seu contato e a equipe do Cruzeirista te chama para explicar datas, cabines e o passo a passo dessa viagem. Sem compromisso, no seu ritmo.</p>
+<!-- ══ 7 · Confiança ══════════════════════════════════════════════════ -->
+<section class="secao confianca" id="cruzeirista" aria-labelledby="t7">
+    <div class="miolo confianca-grade">
+        <figure class="confianca-foto rv">
+            <img src="../img/caribe-sem-visto/bordo-proa.jpg" alt="Proa de um navio de cruzeiro avançando sobre o mar azul, com o horizonte à frente" loading="lazy">
+            <figcaption class="confianca-chip"><strong>Atendimento humano</strong><span>Equipe Cruzeirista</span></figcaption>
+        </figure>
+        <div>
+            <h2 class="titulo rv" id="t7">Você não precisa planejar tudo sozinho.</h2>
+            <p class="texto rv rv-2">Conte ao Cruzeirista o que despertou sua vontade de ir. A gente apresenta as saídas, explica o que muda entre elas e acompanha você até a decisão.</p>
+            <ul class="checks rv rv-3">
+                <li>Atendimento humano, pelo WhatsApp</li>
+                <li>Orientação sobre saídas, cabines e documentação</li>
+            </ul>
         </div>
-        <div class="forms-card">
+    </div>
+</section>
+
+<!-- ══ 8 · Cadastro ═══════════════════════════════════════════════════ -->
+<section class="secao cadastro" id="contato" aria-labelledby="t8">
+    <div class="cadastro-card rv">
+        <div class="cadastro-copy">
+            <h2 id="t8">Seu Caribe pode começar por uma conversa.</h2>
+            <p>Deixe seu contato e a equipe do Cruzeirista conversa com você sobre os roteiros e por onde começar.</p>
+        </div>
+        <div class="cadastro-form">
             <form id="form-caribe" novalidate>
-                <div class="form-group">
-                    <label class="form-group-label" for="inp-nome">Nome</label>
-                    <input class="form-input" id="inp-nome" name="nome" type="text" autocomplete="name" required>
-                </div>
                 <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-group-label" for="inp-nome">Nome</label>
+                        <input class="form-input" id="inp-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required>
+                    </div>
                     <div class="form-group">
                         <label class="form-group-label" for="inp-whats">WhatsApp</label>
-                        <input class="form-input" id="inp-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-group-label" for="inp-email">E-mail</label>
-                        <input class="form-input" id="inp-email" name="email" type="email" autocomplete="email" inputmode="email">
+                        <input class="form-input" id="inp-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-group-label" for="inp-cidade">De qual cidade você sairia?</label>
-                        <input class="form-input" id="inp-cidade" name="cidade" type="text" autocomplete="address-level2" required>
+                        <label class="form-group-label" for="inp-email">E-mail</label>
+                        <input class="form-input" id="inp-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="seu@email.com">
                     </div>
                     <div class="form-group">
-                        <label class="form-group-label" for="inp-pessoas">Quantas pessoas viajam?</label>
-                        <input class="form-input" id="inp-pessoas" name="pessoas" type="number" min="1" step="1" inputmode="numeric">
+                        <label class="form-group-label" for="inp-cidade">Cidade de partida</label>
+                        <input class="form-input" id="inp-cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="De onde você sairia" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-group-label" for="sel-quando">Quando você pensa em viajar?</label>
+                    <label class="form-group-label" for="sel-quando">Previsão da viagem</label>
                     <div class="form-select-wrap">
                         <select class="form-select" id="sel-quando" name="periodo">
-                            <option value=""></option>
-                            <option>nos próximos 3 meses</option>
-                            <option>em até 6 meses</option>
-                            <option>em até 1 ano</option>
-                            <option>ainda não sei</option>
+                            <option value="">Ainda não decidi</option>
+                            <option>Nos próximos 3 meses</option>
+                            <option>Em até 6 meses</option>
+                            <option>Em até 1 ano</option>
                         </select>
                     </div>
                 </div>
                 <p class="form-error-msg" id="err-form"></p>
-                <hr class="form-divider">
-                <div class="form-nav">
-                    <button type="submit" class="btn-form-submit" id="btn-enviar">Quero entender as opções</button>
-                    <p class="form-privacidade">Seus dados são usados só para esse contato. <a href="../privacidade.html">Política de privacidade</a>.</p>
-                </div>
+                <button type="submit" class="btn-form-submit" id="btn-enviar">Quero descobrir meu Caribe</button>
+                <p class="form-privacidade">Seus dados serão usados para responder ao seu interesse nesta viagem. <a href="../privacidade.html">Política de Privacidade</a>.</p>
             </form>
             <div class="form-success" id="form-sucesso" role="status">
-                <h3>Recebemos seu contato.</h3>
-                <p>Em breve alguém da equipe do Cruzeirista te chama no WhatsApp para conversar sobre a sua viagem.</p>
+                <h3>Recebemos seu interesse.</h3>
+                <p>A equipe do Cruzeirista entrará em contato para conversar sobre a viagem.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══ Tela 10 · Crédito ══════════════════════════════════════════════ -->
-<section class="credito" id="credito" aria-label="Crédito">
-    <div class="miolo">
-        <p class="confirmar-bloco" style="margin:0 auto">[CONFIRMAR: formato do crédito ao governo do Panamá. Sugestão de linha: "Campanha realizada com apoio de [órgão], Panamá."]</p>
-    </div>
+<!-- ══ 9 · Fecho ══════════════════════════════════════════════════════ -->
+<section class="fecho" aria-labelledby="t9">
+    <h2 class="rv" id="t9">Seu Caribe pode estar mais perto do que você imagina</h2>
+    <p class="rv rv-2">Não deixe para depois o Caribe que você sempre imaginou. O caminho até lá começa por uma conversa.</p>
+    <a href="https://wa.me/551140409598" target="_blank" rel="noopener" class="link rv rv-3">Falar pelo WhatsApp <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </section>
 
 </main>
@@ -576,6 +640,124 @@ footer{background:#0a1628;padding:24px 20px;display:flex;flex-direction:column;a
 <script>
 window.addEventListener('scroll', () => { document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
 
+/* Menu do celular: botão alterna nav.open; qualquer link fecha. */
+(function () {
+    const nav = document.getElementById('nav'), btn = document.getElementById('nav-btn'), menu = document.getElementById('nav-menu');
+    if (!btn) return;
+    const fechar = () => { nav.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Abrir menu'); document.body.style.overflow = ''; };
+    btn.addEventListener('click', () => {
+        const aberto = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(aberto));
+        btn.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+        document.body.style.overflow = aberto ? 'hidden' : '';
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', fechar));
+})();
+
+/* Rota: os cards se empilham com position:sticky; a rolagem que traz cada card também desenha a linha
+   do mapa até a parada correspondente, move o marcador do navio e acende a parada. Só o vídeo do card
+   ativo reproduz. */
+(function () {
+    const sec = document.getElementById('ilhas'); if (!sec) return;
+    const linha = document.getElementById('rota-linha'), volta = document.getElementById('rota-linha-volta'), navio = document.getElementById('rota-navio');
+    const paradas = [...sec.querySelectorAll('.rota-parada')], cards = [...sec.querySelectorAll('.rota-card')];
+    const lista = sec.querySelector('.rota-cards'), videos = cards.map(c => c.querySelector('video'));
+    const bordoNome = document.getElementById('bordo-nome'), bordoCoord = document.getElementById('bordo-coord'), bordoRumo = document.getElementById('bordo-rumo'), rosaCarta = document.getElementById('rosa-carta');
+    const NOMES = ['Colón', 'Cartagena', 'Bonaire', 'Aruba', 'Curaçao'], COORDS = ["9°21'N 79°54'W", "10°24'N 75°31'W", "12°09'N 68°16'W", "12°31'N 70°02'W", "12°06'N 68°56'W"];
+    let rumo = 0, bordoIdx = -1;
+    const N = cards.length; if (!linha || N < 2) return;
+    const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const L = linha.getTotalLength();
+    const centros = paradas.map(g => { const c = g.querySelector('.rota-ponto'); return { x: +c.getAttribute('cx'), y: +c.getAttribute('cy') }; });
+    const comp = centros.map(c => { let melhor = 0, d0 = Infinity; for (let s = 0; s <= L; s += 1.5) { const q = linha.getPointAtLength(s); const d = (q.x - c.x) ** 2 + (q.y - c.y) ** 2; if (d < d0) { d0 = d; melhor = s; } } return melhor; });
+    linha.style.strokeDasharray = String(L);
+    const L2 = volta ? volta.getTotalLength() : 0; if (volta) { volta.style.strokeDasharray = String(L2); volta.style.strokeDashoffset = String(L2); }
+    let retorno = 0;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const tocando = new Set();
+    const tocar = v => { if (!v || tocando.has(v)) return; tocando.add(v); const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const pausar = v => { if (!v || !tocando.has(v)) return; tocando.delete(v); v.pause(); };
+    let chegada = [];
+    function medir() {
+        /* Alturas iguais (a do card mais alto), para o card anterior nunca escapar por baixo do seguinte. */
+        cards.forEach(c => { c.style.minHeight = ''; });
+        const maior = Math.max(...cards.map(c => c.scrollHeight));
+        cards.forEach(c => { c.style.minHeight = maior + 'px'; });
+        let y = lista.getBoundingClientRect().top + window.scrollY;
+        retorno = parseFloat(getComputedStyle(lista, '::after').height) || 0;
+        chegada = cards.map((c, i) => {
+            const cs = getComputedStyle(c), fixo = parseFloat(cs.top) || 0, v = y - fixo;
+            y += c.offsetHeight + (parseFloat(cs.marginBottom) || 0) + (i + 1 < N ? (parseFloat(getComputedStyle(cards[i + 1]).marginTop) || 0) : 0);
+            return v;
+        });
+    }
+    let ativo = -1;
+    function render() {
+        const y = window.scrollY;
+        let k = 0; while (k < N - 1 && y >= chegada[k + 1]) k++;
+        const frac = k < N - 1 ? clamp((y - chegada[k]) / Math.max(1, chegada[k + 1] - chegada[k]), 0, 1) : 0;
+        const P = y < chegada[0] ? 0 : clamp(k + frac, 0, N - 1);
+        const kk = Math.min(N - 2, Math.floor(P)), f = P - kk;
+        const len = comp[kk] + (comp[kk + 1] - comp[kk]) * f;
+        linha.style.strokeDashoffset = String(L - len);
+        /* volta: depois do último card, a folga da lista (::after) vira o trecho em que o navio retorna a Colón */
+        const v = (volta && retorno > 0 && y > chegada[N - 1]) ? clamp((y - chegada[N - 1]) / retorno, 0, 1) : 0;
+        const len2 = v * L2; if (volta) volta.style.strokeDashoffset = String(L2 - len2);
+        const trilho = v > 0 ? volta : linha, pos = v > 0 ? len2 : len;
+        const q = trilho.getPointAtLength(pos); navio.setAttribute('transform', 'translate(' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + ')');
+        const idx = f >= .97 ? kk + 1 : kk, chegou = v >= .97;
+        paradas.forEach((g, j) => { g.classList.toggle('feita', chegou ? j > 0 : j < idx); g.classList.toggle('ativa', chegou ? j === 0 : j === idx); });
+        /* leitura de bordo: rumo de chegada (olha só para trás na linha), nome e coordenadas da parada ativa */
+        const a = trilho.getPointAtLength(Math.max(0, pos - 5)), dx = q.x - a.x, dy = q.y - a.y;
+        if (Math.abs(dx) + Math.abs(dy) > .01) rumo = (Math.atan2(dx, -dy) * 180 / Math.PI + 360) % 360;
+        const bIdx = chegou ? 0 : idx;
+        if (bIdx !== bordoIdx) { bordoIdx = bIdx; if (bordoNome) { bordoNome.textContent = NOMES[bIdx]; bordoNome.classList.remove('troca'); void bordoNome.offsetWidth; bordoNome.classList.add('troca'); } if (bordoCoord) bordoCoord.textContent = COORDS[bIdx]; }
+        if (bordoRumo) bordoRumo.textContent = 'rumo ' + String(Math.round(rumo)).padStart(3, '0') + '°';
+        if (rosaCarta) rosaCarta.setAttribute('transform', 'rotate(' + (-rumo).toFixed(1) + ' 60 60)');
+        /* Fade na chegada: o card vai de 0 a 1 de opacidade (e sobe 28px) nos últimos 360px antes de grudar. */
+        cards.forEach((c, j) => {
+            if (j === 0) return;
+            const t = clamp((y - (chegada[j] - 360)) / 360, 0, 1), e = t * (2 - t);
+            c.style.opacity = (.04 + .96 * e).toFixed(3);
+            c.style.transform = reduz ? 'none' : 'translateY(' + (28 * (1 - e)).toFixed(1) + 'px)';
+            /* o card anterior recua na mesma janela do fade (360px) e termina no instante em que este gruda:
+               o desfoque cresce devagar e acelera no fim (t²); o véu escuro só entra nos últimos 45% e chega junto. */
+            const desf = t * t, veu = Math.pow(clamp((t - .55) / .45, 0, 1), 2);
+            const ant = cards[j - 1];
+            ant.classList.toggle('recuado', t > 0);
+            ant.style.setProperty('--desf', desf.toFixed(3));
+            ant.style.setProperty('--veu', veu.toFixed(3));
+        });
+        if (idx !== ativo) { ativo = idx; videos.forEach((v, j) => j === idx ? tocar(v) : pausar(v)); }
+    }
+    let agendado = false;
+    const pedir = () => { if (!agendado) { agendado = true; requestAnimationFrame(() => { render(); agendado = false; }); } };
+    window.addEventListener('scroll', pedir, { passive: true });
+    window.addEventListener('resize', () => { medir(); pedir(); });
+    window.addEventListener('load', () => { medir(); pedir(); });
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(ents => { ents.forEach(en => { if (!en.isIntersecting) { videos.forEach(pausar); ativo = -1; } else render(); }); }, { threshold: 0 }).observe(sec);
+    }
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) { tocando.clear(); ativo = -1; render(); } });
+    medir(); render();
+})();
+
+/* Três passos: entram em sequência (1, 2, 3) quando a seção aparece, uma vez por visita. */
+(function () {
+    const sec = document.getElementById('passos'); if (!sec) return;
+    if (!('IntersectionObserver' in window)) { sec.classList.add('on'); return; }
+    const io = new IntersectionObserver(ents => { ents.forEach(en => { if (en.isIntersecting) { sec.classList.add('on'); io.disconnect(); } }); }, { threshold: .25 });
+    io.observe(sec);
+})();
+
+/* Reveal ao rolar: uma vez só, desligado quando o navegador pede movimento reduzido. */
+(function () {
+    const itens = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { itens.forEach(e => e.classList.add('on')); return; }
+    const io = new IntersectionObserver((ents) => { ents.forEach(en => { if (en.isIntersecting) { en.target.classList.add('on'); io.unobserve(en.target); } }); }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    itens.forEach(e => io.observe(e));
+})();
+
 /* Formulário: mesmo mecanismo do cotacao.php da home (POST com FormData, resposta JSON).
    O PHP exige nome, whatsapp e cidade; categoria=caribe rotula o pedido como "Caribe sem visto" no e-mail. */
 (function () {
@@ -593,7 +775,7 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
         let ok = true;
         campos.forEach(c => { if (!c.value.trim()) { c.style.borderColor = '#e05c2a'; ok = false; } });
         if (!ok) {
-            erro.textContent = 'Preencha nome, WhatsApp e cidade para a gente te chamar.';
+            erro.textContent = 'Preencha nome, WhatsApp e cidade para a gente conversar com você.';
             erro.classList.add('visible');
             return;
         }
@@ -605,8 +787,7 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
         dados.append('whatsapp',  document.getElementById('inp-whats').value.trim());
         dados.append('email',     document.getElementById('inp-email').value.trim());
         dados.append('cidade',    document.getElementById('inp-cidade').value.trim());
-        dados.append('pessoas',   document.getElementById('inp-pessoas').value.trim());
-        dados.append('periodo',   document.getElementById('sel-quando').value);
+        dados.append('periodo',   document.getElementById('sel-quando').value || 'ainda não decidi');
 
         botao.disabled = true; botao.textContent = 'Enviando';
         const falhou = () => {
@@ -628,21 +809,31 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
 
 <!-- ══ WHATSAPP: acesso flutuante, presente em todas as páginas ═════ -->
 <style>
-.zap-flutuante{position:fixed;right:24px;bottom:24px;z-index:800;display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border-radius:999px;background:#25D366;color:#fff;font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.01em;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform 160ms cubic-bezier(.23,1,.32,1),box-shadow 160ms ease}
+.zap-flutuante{position:fixed;right:24px;bottom:24px;z-index:800;display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border-radius:999px;background:#25D366;color:#fff;font-family:inherit;font-size:14px;font-weight:600;letter-spacing:.01em;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform 160ms cubic-bezier(.23,1,.32,1),box-shadow 160ms ease,opacity 200ms ease}
 .zap-flutuante svg{width:22px;height:22px;fill:currentColor;flex:none}
 .zap-flutuante:active{transform:scale(.97)}
 @media(hover:hover) and (pointer:fine){.zap-flutuante:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.32)}}
-@media(max-width:768px){.zap-flutuante{right:16px;bottom:16px;padding:11px 16px 11px 14px;font-size:13px}.zap-flutuante svg{width:20px;height:20px}}
-/* Home: no desktop, recolhe enquanto os cards de destino do hero estão na tela (o último card da direita
-   ocupa o canto); no celular, sobe para não cobrir o "Scroll para explorar". */
-#hero-wrapper ~ .zap-flutuante{transition:transform 160ms cubic-bezier(.23,1,.32,1),box-shadow 160ms ease,opacity 200ms ease}
-@media(min-width:901px){#hero-wrapper ~ .zap-flutuante.zap-recolhido{opacity:0;pointer-events:none}}
-@media(max-width:768px){#hero-wrapper ~ .zap-flutuante{bottom:84px}}
+/* Landing: no celular vira só o ícone (56px) e, em qualquer tela, some sobre o formulário e o rodapé. */
+@media(max-width:768px){.zap-flutuante{right:16px;bottom:16px;width:56px;height:56px;padding:0;justify-content:center;border-radius:50%}.zap-flutuante svg{width:26px;height:26px}.zap-flutuante span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+.zap-flutuante.zap-oculto{opacity:0;pointer-events:none;transform:translateY(8px)}
 </style>
-<a class="zap-flutuante" href="https://wa.me/551140409598" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+<a class="zap-flutuante" id="zap" href="https://wa.me/551140409598" target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     <span>Falar pelo WhatsApp</span>
 </a>
+<script>
+/* Esconde o WhatsApp flutuante enquanto o formulário, o fecho ou o rodapé estão na tela. */
+(function () {
+    const zap = document.getElementById('zap'); if (!zap || !('IntersectionObserver' in window)) return;
+    const alvos = ['contato'].map(id => document.getElementById(id)).concat([document.querySelector('.fecho'), document.querySelector('footer')]).filter(Boolean);
+    const visiveis = new Set();
+    const io = new IntersectionObserver(ents => {
+        ents.forEach(en => { en.isIntersecting ? visiveis.add(en.target) : visiveis.delete(en.target); });
+        zap.classList.toggle('zap-oculto', visiveis.size > 0);
+    }, { threshold: 0.05 });
+    alvos.forEach(a => io.observe(a));
+})();
+</script>
 
 </body>
 </html>
