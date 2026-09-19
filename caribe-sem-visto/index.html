@@ -11,8 +11,7 @@
 <meta name="description" content="Aruba, Bonaire e Curaçao num cruzeiro pelo sul do Caribe, com embarque pelo Panamá ou pela Colômbia e sem a barreira do visto americano. Deixe seu interesse com o Cruzeirista.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.cruzeirista.com.br/caribe-sem-visto/">
-<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-aruba.jpg">
-<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-curacao.jpg">
+<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-aruba-aerea.jpg">
 
 <meta property="og:type"        content="website">
 <meta property="og:url"         content="https://www.cruzeirista.com.br/caribe-sem-visto/">
@@ -38,7 +37,7 @@ img{max-width:100%;display:block}
 section{scroll-margin-top:64px}
 
 /* ── Cabeçalho: variante das páginas internas (§9) + menu do celular ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:linear-gradient(to bottom,rgba(5,14,26,.72) 0%,transparent 100%);transition:background .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#0f1822;transition:background .3s}
 nav.scrolled,nav.open{background:#0f1822;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .nav-esq{display:flex;align-items:center;gap:44px;min-width:0}
 .nav-side{display:none;align-items:center;gap:28px}
@@ -54,9 +53,9 @@ nav.open .nav-mobile-btn .ico-fechar{display:block}
 .nav-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:#0f1822;padding:88px 24px 32px;flex-direction:column;gap:6px}
 nav.open+.nav-menu{display:flex}
 .nav-menu a{font-size:15px;font-weight:500;color:rgba(255,255,255,.85);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.nav-cta{display:inline-flex;align-items:center;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1;white-space:nowrap;color:#fff;background:var(--teal);border-radius:999px;padding:11px 18px;text-decoration:none;transition:background .2s,transform .15s}
-.nav-cta:hover{background:#0780a0;transform:translateY(-1px)}
-.nav-menu a.nav-menu-cta{color:var(--acento)}
+.nav-cta{display:inline-flex;align-items:center;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1;white-space:nowrap;color:var(--darker);background:var(--amarelo);border-radius:999px;padding:11px 18px;text-decoration:none;transition:background .2s,transform .15s}
+.nav-cta:hover{background:#f3cc55;transform:translateY(-1px)}
+.nav-menu a.nav-menu-cta{color:var(--amarelo)}
 .nav-menu a.nav-menu-site{margin-top:auto;border-bottom:0;color:rgba(255,255,255,.55);font-size:13px}
 @media(min-width:481px){.nav-brand{height:32px}}
 @media(min-width:769px){nav{padding:18px 48px}.nav-side{display:flex}.nav-brand{height:30px}.nav-mobile-btn,.nav-menu{display:none!important}}
@@ -91,17 +90,18 @@ nav.open+.nav-menu{display:flex}
 .hero-fundo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity 1.1s ease;filter:saturate(1.12) contrast(1.03);will-change:opacity}
 .hero-fundo video.is-on{opacity:1}
 /* Celular: vídeo de sangria total, gradiente forte embaixo para o texto. */
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,22,40,.34) 0%,rgba(10,22,40,.05) 22%,rgba(10,22,40,.18) 44%,rgba(10,22,40,.80) 66%,rgba(10,22,40,.94) 100%)}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,40,96,.88) 0%,rgba(0,40,96,.74) 26%,rgba(0,40,96,.42) 46%,rgba(0,40,96,0) 60%)}
 .hero-conteudo{position:relative;z-index:2;width:100%;max-width:1140px;margin:0 auto;padding:300px 20px 48px}
-.hero h1{font-size:clamp(50px,14vw,104px);font-weight:700;line-height:.94;letter-spacing:-.03em;text-shadow:0 2px 20px rgba(0,0,0,.28)}
+.hero h1{font-size:clamp(50px,14vw,104px);font-weight:700;line-height:.94;letter-spacing:-.03em;text-shadow:0 1px 3px rgba(0,0,0,.12),0 6px 24px rgba(0,0,0,.14)}
 .hero h1 em{font-style:normal;color:var(--amarelo)}
-.hero-texto{font-size:clamp(17px,1.7vw,20px);line-height:1.55;color:rgba(255,255,255,.92);max-width:540px;margin:26px 0 34px;text-shadow:0 1px 12px rgba(0,0,0,.25)}
+.hero-texto{font-size:clamp(17px,1.7vw,20px);line-height:1.55;color:rgba(255,255,255,.92);max-width:540px;margin:26px 0 34px;text-shadow:0 1px 2px rgba(0,0,0,.14),0 4px 14px rgba(0,0,0,.12)}
 .hero-botoes{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 .hero-botoes .btn{width:250px}
 @media(min-width:481px){.hero-conteudo{padding:340px 24px 64px}}
 @media(min-width:769px){
   .hero{min-height:min(100svh,860px);align-items:center}
-  .hero::after{background:linear-gradient(to right,rgba(5,14,26,.80) 0%,rgba(5,14,26,.55) 36%,rgba(5,14,26,.16) 60%,rgba(5,14,26,.04) 100%),linear-gradient(to top,rgba(5,14,26,.40) 0%,transparent 35%)}
+  /* vinheta linear da esquerda, com queda suave e sem forma aparente: cobre só a coluna do texto e some antes da metade da tela */
+  .hero::after{background:linear-gradient(to right,rgba(0,40,96,.64) 0%,rgba(0,40,96,.58) 22%,rgba(0,40,96,.44) 38%,rgba(0,40,96,.24) 48%,rgba(0,40,96,.09) 56%,rgba(0,40,96,0) 64%)}
   .hero-conteudo{padding:150px 48px 100px}
   .hero-botoes{flex-direction:row;gap:14px}
   .hero-botoes .btn{width:auto}
@@ -182,8 +182,8 @@ nav.open+.nav-menu{display:flex}
 .rota-bandeira svg{width:100%;height:100%;display:block}
 .rota-card{--desf:0;--veu:0;--topo:52px}
 .rota-card.recuado::after{content:'';position:absolute;left:0;right:0;top:var(--topo);bottom:0;pointer-events:none;z-index:2;
-  background:rgba(15,24,34,calc(var(--veu) * .30));-webkit-backdrop-filter:blur(calc(var(--desf) * 4px));backdrop-filter:blur(calc(var(--desf) * 4px))}
-.rota-card.recuado .rota-card-topo::after{content:'';position:absolute;inset:0;pointer-events:none;background:rgba(15,24,34,calc(var(--veu) * .20));-webkit-backdrop-filter:blur(calc(var(--desf) * 4px));backdrop-filter:blur(calc(var(--desf) * 4px))}
+  background:rgba(15,24,34,calc(var(--veu) * .05));-webkit-backdrop-filter:blur(calc(var(--desf) * 4px));backdrop-filter:blur(calc(var(--desf) * 4px))}
+.rota-card.recuado .rota-card-topo::after{content:'';position:absolute;inset:0;pointer-events:none;background:rgba(15,24,34,calc(var(--veu) * .05));-webkit-backdrop-filter:blur(calc(var(--desf) * 4px));backdrop-filter:blur(calc(var(--desf) * 4px))}
 .rota-card-midia{aspect-ratio:16/10;background:#050e1a}
 .rota-card-midia video{width:100%;height:100%;object-fit:cover;display:block}
 .rota-card-texto{padding:22px 20px 26px}
@@ -206,95 +206,207 @@ nav.open+.nav-menu{display:flex}
 }
 
 /* ── 4 · Três passos com números grandes ───────────────────────────── */
-.passos{background:var(--claro)}
-.passos-grade{display:grid;grid-template-columns:1fr;gap:36px;margin-top:40px}
-.passo{position:relative;padding:34px 0 0 22px}
-.passo-num{font-size:104px;font-weight:700;line-height:.8;color:rgba(15,24,34,.07);letter-spacing:-.04em;position:absolute;left:-4px;top:0;pointer-events:none;user-select:none}
-.passo h3{position:relative;font-size:22px;font-weight:700;color:#0e7490;line-height:1.15;margin:0 0 10px}
-.passo p{position:relative;font-size:15px;line-height:1.6;color:var(--gray);max-width:30ch}
+.passos{background:#fff}
+.passos-grade{display:grid;grid-template-columns:1fr;gap:44px;margin-top:8px}
+.passo{position:relative;padding:46px 0 0 34px}
+.passo-num{font-size:150px;font-weight:700;line-height:.8;color:#e9eaec;letter-spacing:-.04em;position:absolute;left:-6px;top:0;pointer-events:none;user-select:none}
+.passo h3{position:relative;font-size:30px;font-weight:700;color:#2b5f86;line-height:1.12;letter-spacing:-.01em;margin:0 0 16px}
+.passo p{position:relative;font-size:17px;line-height:1.45;color:#4b5563;max-width:30ch}
 /* Entrada em sequência (1, 2, 3): 300 ms, curva de saída do site, 80 ms entre os conjuntos. Só com JS. */
 html.js .passo{opacity:0;transform:translateY(14px);transition:opacity .3s cubic-bezier(.23,1,.32,1),transform .3s cubic-bezier(.23,1,.32,1)}
 html.js .passo:nth-child(2){transition-delay:.08s}
 html.js .passo:nth-child(3){transition-delay:.16s}
 html.js .passos.on .passo{opacity:1;transform:none}
-@media(min-width:769px){.passos-grade{grid-template-columns:1fr 1fr 1fr;gap:40px;margin-top:56px}.passo{padding:48px 0 0 28px}.passo-num{font-size:136px}.passo h3{font-size:24px}.passo p{font-size:16px}}
+@media(min-width:769px){.passos-grade{grid-template-columns:1fr 1fr 1fr;gap:48px;margin-top:24px}.passo{padding:62px 0 0 44px}.passo-num{font-size:220px;left:-8px}.passo h3{font-size:clamp(30px,2.9vw,42px)}.passo p{font-size:clamp(17px,1.4vw,20px)}}
+@media(min-width:1100px){.passos-grade{gap:64px}.passo{padding:70px 0 0 52px}.passo-num{font-size:250px}}
 @media(prefers-reduced-motion:reduce){html.js .passo{transform:none;transition:opacity .2s ease}}
 
-/* ── 5 · Panamá: faixa visual curta ────────────────────────────────── */
-.panama{position:relative;min-height:440px;display:flex;align-items:center;background:#0a1628;color:#fff;overflow:hidden;padding:64px 20px}
-.panama-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 45%}
-.panama::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(5,14,26,.86) 0%,rgba(5,14,26,.55) 55%,rgba(5,14,26,.20) 100%)}
-.panama .miolo{position:relative;z-index:2;width:100%}
-.panama .titulo{color:#fff;max-width:520px}
-.panama .texto{color:rgba(255,255,255,.82);max-width:520px}
-.panama .rotulo{color:var(--acento)}
-@media(min-width:769px){.panama{min-height:520px;padding:96px 48px}}
+/* ── 5 · Royal Caribbean: experiência a bordo do Grandeur ─────────── */
+.royal-shell{width:min(100% - 96px,1340px);margin-inline:auto}
+.royal-intro{position:relative;overflow:hidden;background:var(--claro);padding:clamp(52px,7vw,108px) 0 clamp(70px,8vw,112px)}
+.royal-intro-grid{position:relative;display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(36px,5vw,78px);align-items:center}
+.royal-brand-line{display:flex;align-items:center;gap:22px;margin-bottom:clamp(36px,5vw,70px)}
+.royal-brand-line img{width:176px;height:auto}
+.royal-brand-rule{width:1px;height:34px;background:#c5d2e1}
+.royal-brand-line span{color:var(--azul);font-size:12px;font-weight:700;line-height:1.35;letter-spacing:.16em;text-transform:uppercase}
+.royal-intro h2{max-width:650px;color:var(--azul);font-size:clamp(54px,6.3vw,92px);font-weight:750;line-height:.99;letter-spacing:-.065em}
+.royal-intro h2 span{color:var(--teal)}
+.royal-intro-copy{max-width:560px;margin:32px 0 0;color:#4f5b6b;font-size:clamp(17px,1.45vw,21px);line-height:1.62}
+.royal-ship-picture{position:relative;display:block;width:100%;aspect-ratio:1.5;border-radius:30px;overflow:hidden;background:#d4e4ed;box-shadow:0 28px 72px rgba(0,40,96,.11)}
+.royal-ship-picture img{width:100%;height:100%;object-fit:contain;object-position:center}
+.royal-moments{position:relative;height:200vh;background:var(--azul);color:var(--white)}
+.royal-moments-sticky{position:sticky;top:0;display:flex;align-items:center;height:100vh;height:100svh;padding:clamp(36px,5vh,56px) 0}
+.royal-moments-label{margin:0 0 24px;color:var(--amarelo);font-size:18px;font-weight:700;letter-spacing:-.015em;line-height:1.3}
+.royal-stage{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(42px,5vw,80px);align-items:center;min-height:538px;outline:none;will-change:opacity}
+.royal-stage:focus-visible{outline:2px solid var(--amarelo);outline-offset:12px;border-radius:12px}
+.royal-stage-copy{position:relative;z-index:2;padding:24px 0 0}
+.royal-stage h3{max-width:570px;color:var(--white);font-size:clamp(42px,4.6vw,66px);font-weight:700;line-height:1.05;letter-spacing:-.055em}
+.royal-stage-copy>p{max-width:470px;margin:27px 0 0;color:#d2e0e9;font-size:clamp(17px,1.35vw,20px);line-height:1.62}
+.royal-stage-actions{display:flex;align-items:center;gap:13px;margin-top:44px}
+.royal-arrow{display:grid;place-items:center;width:50px;height:50px;border:1px solid rgba(255,255,255,.38);border-radius:50%;color:var(--white);background:transparent;cursor:pointer;font-family:inherit;transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease,transform 150ms cubic-bezier(.23,1,.32,1)}
+.royal-arrow svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
+.royal-arrow:focus-visible,.royal-scene-tab:focus-visible{outline:2px solid var(--amarelo);outline-offset:4px}
+.royal-arrow:active{transform:scale(.95)}
+.royal-arrow:disabled{cursor:default;opacity:.28}
+.royal-stage-media{position:relative;min-width:0;padding:0 0 48px 30px;cursor:grab;touch-action:pan-y;user-select:none}
+.royal-stage-media:active{cursor:grabbing}
+.royal-main-photo{position:relative;overflow:hidden;width:100%;aspect-ratio:1.28;border-radius:28px;background:#244a6a}
+.royal-main-photo img,.royal-detail-photo img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.royal-detail-photo{position:absolute;left:-20px;bottom:0;width:38%;aspect-ratio:1.42;overflow:hidden;margin:0;border:7px solid var(--azul);border-radius:23px;background:#244a6a;box-shadow:0 15px 40px rgba(0,20,48,.25)}
+.royal-scene-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:35px}
+.royal-scene-tab{position:relative;border:0;border-top:1px solid rgba(255,255,255,.3);padding:18px 2px 3px;color:#a9c5d6;background:transparent;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.02em;text-align:left;transition:color 180ms ease}
+.royal-scene-tab::before{content:"";position:absolute;top:-2px;left:0;width:0;height:3px;border-radius:3px;background:var(--amarelo);transition:width 260ms cubic-bezier(.23,1,.32,1)}
+.royal-scene-tab[aria-current="true"]{color:var(--white)}
+.royal-scene-tab[aria-current="true"]::before{width:100%}
+.royal-scene-number{margin-right:10px;color:var(--amarelo);font-size:11px}
+.royal-drink-area{padding:clamp(74px,8vw,125px) 0 clamp(80px,8vw,118px);background:#fff}
+.royal-drink-card{display:grid;grid-template-columns:minmax(0,1.03fr) minmax(0,.97fr);min-height:475px;gap:0;align-items:center}
+.royal-drink-copy{padding:0 clamp(37px,5vw,76px) 0 0;align-self:center}
+.royal-drink-eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 25px;color:#5d471a;font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+.royal-drink-eyebrow svg{width:19px;height:19px;flex:none}
+.royal-drink-card h2{max-width:580px;color:var(--azul);font-size:clamp(39px,4.25vw,61px);font-weight:750;line-height:1.04;letter-spacing:-.06em}
+.royal-drink-copy>p:not(.royal-drink-eyebrow){max-width:580px;margin:26px 0 0;color:#433b2c;font-size:clamp(16px,1.2vw,18px);line-height:1.62}
+.royal-drink-image{position:relative;min-height:475px;overflow:visible;background:transparent}
+.royal-drink-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+/* palco do cartão 3D: painel azul-marinho com luz suave, o cartão gira em torno do eixo vertical conforme a seção atravessa a tela */
+.royal-drink-3d{background:transparent}
+/* sombra parada sob o cartão (a do renderizador girava junto e ficou estranha) */
+.royal-drink-3d::after{content:'';position:absolute;left:50%;bottom:8%;width:46%;height:7%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,40,96,.22) 0%,rgba(0,40,96,.10) 42%,rgba(0,40,96,0) 70%);filter:blur(2px);pointer-events:none;z-index:0}
+/* flutuação: o cartão sobe e desce 8px num ciclo de 6 s, bem lento; a sombra fica parada */
+@keyframes seapass-flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.royal-drink-3d model-viewer{animation:seapass-flutua 6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.royal-drink-3d model-viewer{animation:none}}
+.royal-drink-3d model-viewer{z-index:1}
+.royal-drink-3d model-viewer{position:absolute;inset:0;width:100%;height:100%;background:transparent;--poster-color:transparent}
+.royal-drink-badge{position:absolute;right:24px;bottom:22px;padding:14px 21px;border-radius:999px;color:var(--azul);background:var(--white);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 12px 30px rgba(0,40,96,.18)}
+.royal-drink-terms{max-width:950px;margin:19px 0 0;color:var(--gray);font-size:13px;line-height:1.55}
+@media(hover:hover) and (pointer:fine){.royal-scene-tab:hover{color:var(--white)}.royal-arrow:hover{background:var(--white);border-color:var(--white);color:var(--azul);transform:translateY(-2px)}}
+@media(max-width:1080px){.royal-intro-grid{gap:36px}.royal-brand-line{gap:13px}.royal-brand-line img{width:150px}.royal-stage{gap:35px}}
+@media(max-width:900px){.royal-intro-grid{grid-template-columns:1fr}.royal-intro-content{max-width:720px}.royal-brand-line{margin-bottom:44px}.royal-intro-copy{max-width:680px}}
+@media(max-width:780px){
+  .royal-shell{width:min(100% - 40px,620px)}
+  .royal-intro{padding:46px 0 69px}.royal-intro-grid{grid-template-columns:1fr}.royal-brand-line{margin-bottom:46px}.royal-intro h2{font-size:clamp(49px,11vw,75px)}.royal-intro-copy{margin-top:23px}.royal-ship-picture{aspect-ratio:1.5;border-radius:22px}
+  .royal-moments{height:auto;padding:70px 0 82px;overflow:hidden}.royal-moments-sticky{position:relative;height:auto;padding:0}.royal-stage{display:flex;flex-direction:column-reverse;align-items:stretch;gap:10px;min-height:0}.royal-stage-media{padding:0 0 26px 15px}.royal-main-photo{aspect-ratio:1.48;border-radius:22px}.royal-detail-photo{left:0;width:37%;border-width:5px;border-radius:17px}.royal-stage-copy{padding-top:18px}.royal-moments-label{margin-bottom:18px;font-size:16px}.royal-stage h3{font-size:clamp(36px,8.6vw,50px)}.royal-stage-copy>p{margin-top:12px;font-size:16px;line-height:1.48}.royal-stage-actions{margin-top:26px}.royal-arrow{width:44px;height:44px}.royal-scene-tabs{gap:10px;margin-top:24px}.royal-scene-tab{padding-top:15px;font-size:11px;line-height:1.3}.royal-scene-number{display:block;margin:0 0 4px}
+  .royal-drink-area{padding:70px 0 80px}.royal-drink-card{grid-template-columns:1fr}.royal-drink-copy{padding:0 0 32px}.royal-drink-image{min-height:440px}
+}
+@media(max-width:480px){.royal-brand-line img{width:128px}.royal-brand-line span{font-size:10px}.royal-brand-rule{height:29px}.royal-intro h2{font-size:clamp(48px,12vw,64px)}.royal-intro-copy{font-size:16px}.royal-stage h3{font-size:42px}.royal-stage-copy>p{font-size:16px}.royal-main-photo{aspect-ratio:1.16}.royal-detail-photo{width:43%}.royal-drink-card h2{font-size:42px}.royal-drink-image{min-height:400px}}
+@media(prefers-reduced-motion:reduce){.royal-arrow{transition:background-color 150ms ease,color 150ms ease,border-color 150ms ease}.royal-scene-tab::before{transition:none}}
 
-/* ── 6 · Dúvidas frequentes (acordeão nativo) ──────────────────────── */
-.faq-secao{background:#fff}
-.faq{max-width:760px;margin:32px auto 0}
-.faq-item{border:1px solid var(--linha);border-radius:14px;background:#fff;margin-bottom:12px;box-shadow:0 2px 16px rgba(0,0,0,.04)}
-.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;font-size:16px;font-weight:600;color:var(--darker);line-height:1.4}
+/* ── 6 · Panamá: banner em vídeo + ambiente editorial azul + faixa da Copa ── */
+.panama{background:#fff;color:#fff}
+/* o vídeo aparece inteiro: no celular o texto fica acima do quadro 16:9; no desktop o banner tem a proporção do vídeo e o texto sobrepõe à esquerda */
+.panama-banner{position:relative;overflow:hidden;background:#0f1f3d;display:flex;flex-direction:column}
+.panama-video{display:block;width:100%;aspect-ratio:16/9;height:auto;object-fit:cover}
+/* contraste só onde o texto fica: no desktop à esquerda, no celular em cima; o resto da cena fica limpo */
+.panama-banner::before{content:none}
+.panama-banner-texto{position:relative;z-index:2;width:100%;max-width:1140px;margin:0 auto;padding:40px 20px 28px}
+.panama-banner .rotulo{color:var(--amarelo)}
+.panama-banner .titulo{color:#fff;font-size:clamp(32px,7.4vw,56px);max-width:560px;margin-bottom:12px;text-shadow:0 2px 24px rgba(5,14,26,.35)}
+.panama-banner .texto{color:rgba(255,255,255,.9);font-size:clamp(16px,1.5vw,21px);max-width:440px;text-shadow:0 1px 16px rgba(5,14,26,.4)}
+.panama-corpo{background:var(--azul);padding:56px 20px 64px}
+.panama-grade{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+.panama-copy p{font-size:17px;line-height:1.65;color:rgba(255,255,255,.86);max-width:560px}
+.panama-copy p+p{margin-top:16px}
+.panama-copy h3{font-size:clamp(26px,2.75vw,37px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
+.panama-fotos{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:12px}
+.panama-foto{position:relative;margin:0;border-radius:16px;overflow:hidden;background:#0a1628;aspect-ratio:4/3}
+.panama-foto.grande{grid-column:1/3;aspect-ratio:16/9}
+.panama-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.panama-foto figcaption{position:absolute;left:14px;bottom:12px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.panama-copa{background:#fff;color:var(--gray);padding:40px 20px}
+.panama-copa .miolo{display:grid;grid-template-columns:1fr;gap:22px;align-items:center}
+.panama-copa-logo{height:38px;width:auto;display:block}
+.panama-copa p{font-size:15px;line-height:1.6;max-width:520px;color:var(--gray)}
+.panama-copa-foto{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:3/2;background:#e5e7eb}
+.panama-copa-foto img{width:100%;height:100%;object-fit:cover;display:block}
+@media(min-width:769px){
+  .panama-banner{display:block;aspect-ratio:16/9}
+  .panama-video{position:absolute;inset:0;height:100%}
+  .panama-banner::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(5,14,26,.74) 0%,rgba(5,14,26,.48) 30%,rgba(5,14,26,0) 56%)}
+  .panama-banner-texto{position:absolute;inset:0;height:100%;padding:0 48px;display:flex;flex-direction:column;justify-content:center}
+  .panama-corpo{padding:88px 48px 96px}
+  .panama-copa{padding:56px 48px}
+  .panama-copa .miolo{grid-template-columns:auto minmax(0,1fr) 280px;gap:40px}
+  .panama-copa-logo{height:44px}
+}
+@media(min-width:901px){
+  .panama-grade{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:64px}
+  .panama-copy p{font-size:18px}
+  .panama-fotos{gap:16px}
+}
+@media(prefers-reduced-motion:reduce){.panama-video{display:none}.panama-banner{aspect-ratio:16/9;background:#0f1f3d url('../videos/caribe-sem-visto/panama-banner.jpg') center/cover no-repeat}}
+
+/* ── 6 · Dúvidas frequentes: blocos abertos, amplos, como no rascunho ── */
+.faq-secao{background:var(--claro)}
+.faq{max-width:800px;margin:36px auto 0;display:grid;gap:16px}
+.faq-item{background:#fff;border-radius:16px;padding:0 26px;box-shadow:0 2px 18px rgba(15,24,34,.04)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:'';flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid #d1d5db;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1822' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E") center/12px no-repeat;transition:transform .25s ease,border-color .2s}
-.faq-item[open] summary::after{transform:rotate(45deg);border-color:var(--teal)}
-.faq-item p{font-size:15px;line-height:1.65;color:var(--gray);padding:0 20px 20px}
-@media(min-width:769px){.faq-item summary{font-size:17px;padding:20px 24px}.faq-item p{padding:0 24px 22px}}
+.faq-item h3{font-size:19px;font-weight:700;color:#2b5f86;line-height:1.3;margin:0}
+.faq-ico{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid #d1d5db;position:relative;transition:transform .25s cubic-bezier(.23,1,.32,1),border-color .2s}
+.faq-ico::before,.faq-ico::after{content:'';position:absolute;left:50%;top:50%;background:#2b5f86;transform:translate(-50%,-50%)}
+.faq-ico::before{width:12px;height:1.5px}
+.faq-ico::after{width:1.5px;height:12px}
+.faq-item[open] .faq-ico{transform:rotate(45deg);border-color:#2b5f86}
+.faq-item p{font-size:16px;line-height:1.6;color:#4b5563;margin:0;padding:0 44px 22px 0}
+@media(min-width:769px){.faq{margin-top:44px;gap:18px}.faq-item{padding:0 40px}.faq-item summary{padding:26px 0}.faq-item h3{font-size:22px}.faq-item p{font-size:17px;padding:0 48px 28px 0}}
 
-/* ── 7 · Bloco azul de confiança, como no rascunho ─────────────────── */
+/* ── 7 · Atendimento: bloco azul com presença, foto à esquerda e selo amarelo ── */
 .confianca{background:var(--azul);color:#fff}
-.confianca-grade{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
-.confianca-foto{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;background:#0a1628}
-.confianca-foto img{width:100%;height:100%;object-fit:cover}
-.confianca-chip{position:absolute;left:16px;bottom:16px;background:#fff;color:var(--darker);border-radius:12px;padding:12px 16px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-.confianca-chip strong{display:block;font-size:14px;font-weight:700}
-.confianca-chip span{font-size:12px;color:var(--gray)}
-.confianca .titulo{color:#fff}
-.confianca .texto{color:rgba(255,255,255,.78)}
-.checks{list-style:none;margin-top:24px;display:grid;gap:12px}
-.checks li{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#fff}
-.checks li::before{content:'';flex:none;width:22px;height:22px;border-radius:50%;background:var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/12px no-repeat}
-@media(min-width:901px){.confianca-grade{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}.confianca-chip{left:24px;bottom:24px;padding:14px 20px}}
+.confianca-grade{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+.confianca-foto{position:relative;margin:0 28px 0 0;border-radius:20px;background:#0a1628;aspect-ratio:1/1}
+.confianca-foto img{width:100%;height:100%;object-fit:cover;border-radius:18px;display:block}
+.confianca-selo{position:absolute;right:-28px;bottom:22px;background:var(--amarelo);color:var(--darker);border-radius:14px;padding:16px 22px;box-shadow:0 12px 32px rgba(0,0,0,.28);text-align:left;line-height:1.25}
+.confianca-selo strong{display:block;font-size:16px;font-weight:700}
+.confianca-selo span{display:block;font-size:16px;font-weight:500;margin-top:2px}
+.confianca .titulo{color:#fff;font-size:clamp(32px,6.8vw,50px);line-height:1.1;margin-bottom:18px}
+.confianca .texto{color:rgba(255,255,255,.86);font-size:17px;line-height:1.6;max-width:540px}
+.checks{list-style:none;margin-top:28px;display:grid;gap:14px}
+.checks li{display:flex;align-items:center;gap:14px;font-size:17px;font-weight:600;color:#fff}
+.checks li::before{content:'';flex:none;width:28px;height:28px;border-radius:50%;background:var(--amarelo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1822' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/16px no-repeat}
+@media(min-width:769px){.confianca.secao{padding:104px 48px}.confianca .texto{font-size:19px}.checks li{font-size:19px}.confianca-selo{padding:18px 26px}.confianca-selo strong{font-size:18px}.confianca-selo span{font-size:18px}}
+@media(min-width:901px){.confianca-grade{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}.confianca-foto{margin-right:40px;aspect-ratio:10/9}.confianca-selo{right:-40px;bottom:32px}}
 
-/* ── 8 · Cadastro compacto: painel azul + formulário (§8) ──────────── */
+/* ── 8 · Cadastro: painel azul amplo + campos, na escala do rascunho ── */
 .cadastro{background:var(--claro)}
-.cadastro-card{max-width:1040px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.06);display:grid;grid-template-columns:1fr}
-.cadastro-copy{background:var(--azul);color:#fff;padding:36px 24px}
-.cadastro-copy h2{font-size:clamp(24px,3vw,32px);font-weight:700;line-height:1.2;margin-bottom:12px}
-.cadastro-copy p{font-size:15px;line-height:1.65;color:rgba(255,255,255,.78)}
-.cadastro-form{padding:28px 20px}
-.form-group{margin-bottom:20px}
-.form-group-label{font-size:13px;font-weight:600;color:var(--darker);margin-bottom:8px;display:block;letter-spacing:.02em}
-.form-row{display:grid;grid-template-columns:1fr;gap:16px}
+.cadastro-card{max-width:1160px;margin:0 auto;background:#fff;border-radius:32px;overflow:hidden;box-shadow:0 16px 60px rgba(15,24,34,.08);display:grid;grid-template-columns:1fr}
+.cadastro-copy{background:var(--azul);color:#fff;padding:44px 28px}
+.cadastro-copy h2{font-size:clamp(28px,4.4vw,40px);font-weight:700;line-height:1.18;margin-bottom:16px}
+.cadastro-copy p{font-size:17px;line-height:1.6;color:rgba(255,255,255,.86)}
+.cadastro-form{padding:32px 24px}
+.form-group{margin-bottom:22px}
+.form-group-label{font-size:14px;font-weight:700;color:var(--darker);margin-bottom:10px;display:block;letter-spacing:.04em;text-transform:uppercase}
+.form-row{display:grid;grid-template-columns:1fr;gap:18px}
 .form-row .form-group{margin-bottom:0}
-.form-row+.form-group,.form-row+.form-row{margin-top:20px}
-.form-select,.form-input{width:100%;padding:12px 16px;border:1.5px solid #d1d5db;border-radius:12px;font-size:14px;font-family:'Geist',sans-serif;color:var(--darker);background:#fff;outline:none;transition:border-color .18s;appearance:none;-webkit-appearance:none}
+.form-row+.form-group,.form-row+.form-row{margin-top:22px}
+.form-select,.form-input{width:100%;padding:14px 18px;border:1.5px solid transparent;border-radius:8px;font-size:15px;font-family:'Geist',sans-serif;color:var(--darker);background:#eef0f2;outline:none;transition:border-color .18s,background .18s;appearance:none;-webkit-appearance:none}
 .form-select-wrap{position:relative}
-.form-select-wrap::after{content:'';position:absolute;right:16px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--gray);border-bottom:1.5px solid var(--gray);transform:translateY(-70%) rotate(45deg);pointer-events:none}
-.form-select:focus,.form-input:focus{border-color:var(--teal)}
+.form-select-wrap::after{content:'';position:absolute;right:18px;top:50%;width:8px;height:8px;border-right:1.5px solid var(--gray);border-bottom:1.5px solid var(--gray);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.form-select:focus,.form-input:focus{border-color:var(--teal);background:#fff}
 .form-input::placeholder{color:#9ca3af}
-.form-error-msg{font-size:12px;color:var(--badge);font-weight:500;margin-top:8px;display:none}
+.form-error-msg{font-size:13px;color:var(--badge);font-weight:500;margin-top:8px;display:none}
 .form-error-msg.visible{display:block}
-.btn-form-submit{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:100px;padding:14px 28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s,transform .15s;margin-top:8px}
-.btn-form-submit:hover{background:#0e7490;transform:translateY(-1px)}
+.btn-form-submit{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--azul);color:#fff;border:none;border-radius:8px;padding:18px 28px;font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .2s,transform .15s;margin-top:8px;box-shadow:0 10px 24px rgba(0,40,96,.22)}
+.btn-form-submit:hover{background:#0f2c5f;transform:translateY(-1px)}
 .btn-form-submit:disabled{opacity:.7;cursor:default;transform:none}
-.form-privacidade{font-size:12px;line-height:1.5;color:var(--gray);margin-top:14px}
+.form-privacidade{font-size:12px;line-height:1.5;color:var(--gray);margin-top:16px}
 .form-privacidade a{color:var(--teal);text-decoration:none;font-weight:500}
 .form-privacidade a:hover{text-decoration:underline}
 .form-success{display:none;text-align:center;padding:24px 0}
 .form-success.active{display:block}
 .form-success h3{font-size:22px;font-weight:700;color:var(--darker);margin-bottom:10px}
 .form-success p{font-size:15px;color:var(--gray);line-height:1.6}
-@media(min-width:641px){.form-row{grid-template-columns:1fr 1fr}.cadastro-form{padding:36px 32px}.cadastro-copy{padding:44px 36px}}
-@media(min-width:901px){.cadastro-card{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.cadastro-copy{display:flex;flex-direction:column;justify-content:center;padding:48px 44px}.cadastro-form{padding:44px 48px}}
+@media(min-width:641px){.form-row{grid-template-columns:1fr 1fr}.cadastro-form{padding:44px 40px}.cadastro-copy{padding:56px 44px}}
+@media(min-width:901px){.cadastro.secao{padding:104px 48px}.cadastro-card{grid-template-columns:minmax(0,.42fr) minmax(0,.58fr)}.cadastro-copy{display:flex;flex-direction:column;justify-content:center;padding:72px 56px}.cadastro-form{padding:64px 60px}}
 
-/* ── 9 · Fecho tipográfico ─────────────────────────────────────────── */
-.fecho{background:#fff;text-align:center;padding:72px 20px}
-.fecho h2{font-size:clamp(28px,6.4vw,58px);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-transform:uppercase;color:var(--darker);max-width:820px;margin:0 auto 18px}
-.fecho p{font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:var(--gray);max-width:560px;margin:0 auto 28px}
-.fecho .link{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--teal);text-decoration:none}
-.fecho .link:hover{text-decoration:underline}
-@media(min-width:769px){.fecho{padding:104px 48px}}
+/* ── 9 · Fecho: título grande, respiro e botão amarelo largo, como no rascunho ── */
+.fecho{background:#fff;text-align:center;padding:88px 20px 96px}
+.fecho h2{font-size:clamp(34px,7vw,70px);font-weight:700;line-height:1.06;letter-spacing:-.02em;text-transform:uppercase;color:#333;max-width:940px;margin:0 auto 32px}
+.fecho p{font-size:clamp(17px,1.8vw,24px);line-height:1.5;color:var(--gray);max-width:820px;margin:0 auto 48px}
+.btn-amarelo{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:var(--amarelo);color:var(--darker);border-radius:999px;padding:22px 40px;font-size:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;box-shadow:0 14px 34px rgba(247,214,111,.45);transition:transform .2s,box-shadow .2s;max-width:100%}
+.btn-amarelo svg{width:22px;height:22px;flex:none}
+.btn-amarelo:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(247,214,111,.55)}
+@media(min-width:769px){.fecho{padding:136px 48px 152px}.btn-amarelo{padding:30px 96px;font-size:21px}}
 
 /* ── Rodapé: variante das páginas internas, §10 ────────────────────── */
 footer{background:#0a1628;padding:24px 20px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:16px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
@@ -330,7 +442,7 @@ html.js .rv.on{opacity:1;transform:none}
 </a>
 <div class="nav-side"><a href="#viagem" class="nav-link">A viagem</a><a href="#ilhas" class="nav-link">Ilhas</a><a href="#passos" class="nav-link">Como funciona</a><a href="#duvidas" class="nav-link">Dúvidas</a></div>
 </div>
-<div class="nav-side nav-dir"><a href="#contato" class="nav-cta">Quero conversar</a></div>
+<div class="nav-side nav-dir"><a href="#contato" class="nav-cta">Quero falar com um especialista</a></div>
 <button class="nav-mobile-btn" id="nav-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu"><svg class="ico-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg><svg class="ico-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 </nav>
 <div class="nav-menu" id="nav-menu">
@@ -338,7 +450,7 @@ html.js .rv.on{opacity:1;transform:none}
     <a href="#ilhas">Ilhas</a>
     <a href="#passos">Como funciona</a>
     <a href="#duvidas">Dúvidas</a>
-    <a href="#contato" class="nav-menu-cta">Quero conversar</a>
+    <a href="#contato" class="nav-menu-cta">Quero falar com um especialista</a>
 </div>
 
 <main>
@@ -346,10 +458,8 @@ html.js .rv.on{opacity:1;transform:none}
 <!-- ══ 1 · Hero ═══════════════════════════════════════════════════════ -->
 <header class="hero" id="topo">
     <div class="hero-fundo" aria-hidden="true">
-        <video class="is-on" muted playsinline autoplay preload="auto" poster="../videos/caribe-sem-visto/hero-aruba.jpg" src="../videos/caribe-sem-visto/hero-aruba.mp4"></video>
-        <video muted playsinline preload="metadata" src="../videos/caribe-sem-visto/hero-bonaire.mp4"></video>
-        <video muted playsinline preload="metadata" src="../videos/caribe-sem-visto/hero-curacao.mp4"></video>
-        <video muted playsinline preload="metadata" src="../videos/caribe-sem-visto/hero-klein.mp4"></video>
+        <video class="is-on" muted playsinline autoplay preload="auto" poster="../videos/caribe-sem-visto/hero-aruba-aerea.jpg" src="../videos/caribe-sem-visto/hero-aruba-aerea.mp4"></video>
+        <video muted playsinline preload="metadata" poster="../videos/caribe-sem-visto/hero-aruba-eagle.jpg" src="../videos/caribe-sem-visto/hero-aruba-eagle.mp4"></video>
     </div>
     <div class="hero-conteudo">
         <h1>Caribe<br><em>sem visto</em></h1>
@@ -440,7 +550,7 @@ html.js .rv.on{opacity:1;transform:none}
       </div>
       <ol class="rota-cards">
         <li class="rota-card" style="--n:0">
-          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Panamá"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#fff"/><rect x="30" width="30" height="20" fill="#d21034"/><rect y="20" width="30" height="20" fill="#005293"/><polygon points="15.0,3.5 16.6,7.8 21.2,8.0 17.6,10.8 18.8,15.3 15.0,12.7 11.2,15.3 12.4,10.8 8.8,8.0 13.4,7.8" fill="#005293"/><polygon points="45.0,23.5 46.6,27.8 51.2,28.0 47.6,30.8 48.8,35.3 45.0,32.7 41.2,35.3 42.4,30.8 38.8,28.0 43.4,27.8" fill="#d21034"/></svg></span></div>
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Panamá"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="bnd-0"><circle cx="50" cy="50" r="50"/></clipPath></defs><g clip-path="url(#bnd-0)"><rect width="100" height="100" fill="#fff"/><rect x="50" width="50" height="50" fill="#d21034"/><rect y="50" width="50" height="50" fill="#005293"/><polygon points="26.0,13.0 29.2,21.6 38.4,22.0 31.2,27.7 33.6,36.5 26.0,31.5 18.4,36.5 20.8,27.7 13.6,22.0 22.8,21.6" fill="#005293"/><polygon points="74.0,61.0 77.2,69.6 86.4,70.0 79.2,75.7 81.6,84.5 74.0,79.5 66.4,84.5 68.8,75.7 61.6,70.0 70.8,69.6" fill="#d21034"/></g></svg></span></div>
           <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-panama.jpg" src="../videos/caribe-sem-visto/rota-panama.mp4"></video></div>
           <div class="rota-card-texto">
             <h3>Colón, Panamá</h3>
@@ -449,7 +559,7 @@ html.js .rv.on{opacity:1;transform:none}
           </div>
         </li>
         <li class="rota-card" style="--n:1">
-          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Colômbia"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#fcd116"/><rect y="20" width="60" height="10" fill="#003893"/><rect y="30" width="60" height="10" fill="#ce1126"/></svg></span></div>
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Colômbia"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="bnd-1"><circle cx="50" cy="50" r="50"/></clipPath></defs><g clip-path="url(#bnd-1)"><rect width="100" height="50" fill="#fcd116"/><rect y="50" width="100" height="25" fill="#003893"/><rect y="75" width="100" height="25" fill="#ce1126"/></g></svg></span></div>
           <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-cartagena.jpg" src="../videos/caribe-sem-visto/rota-cartagena.mp4"></video></div>
           <div class="rota-card-texto">
             <h3>Cartagena, Colômbia</h3>
@@ -458,7 +568,7 @@ html.js .rv.on{opacity:1;transform:none}
           </div>
         </li>
         <li class="rota-card" style="--n:2">
-          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Bonaire"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#fff"/><polygon points="0,0 42,0 0,28" fill="#f9d616"/><polygon points="60,40 60,6 9,40" fill="#012a87"/><circle cx="25" cy="18" r="7" fill="none" stroke="#000" stroke-width="1.6"/><polygon points="25.0,13.8 25.9,16.5 28.6,15.9 26.8,18.0 28.6,20.1 25.9,19.5 25.0,22.2 24.1,19.5 21.4,20.1 23.2,18.0 21.4,15.9 24.1,16.5" fill="#dc171d"/></svg></span></div>
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Bonaire"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="bnd-2"><circle cx="50" cy="50" r="50"/></clipPath></defs><g clip-path="url(#bnd-2)"><rect width="100" height="100" fill="#fff"/><polygon points="0,0 74,0 0,74" fill="#f9d616"/><polygon points="100,100 100,26 26,100" fill="#012a87"/><circle cx="44" cy="44" r="13" fill="none" stroke="#000" stroke-width="3"/><polygon points="44.0,36.0 46.0,40.5 50.9,40.0 48.0,44.0 50.9,48.0 46.0,47.5 44.0,52.0 42.0,47.5 37.1,48.0 40.0,44.0 37.1,40.0 42.0,40.5" fill="#dc171d"/></g></svg></span></div>
           <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-bonaire.jpg" src="../videos/caribe-sem-visto/rota-bonaire.mp4"></video></div>
           <div class="rota-card-texto">
             <h3>Bonaire</h3>
@@ -467,7 +577,7 @@ html.js .rv.on{opacity:1;transform:none}
           </div>
         </li>
         <li class="rota-card" style="--n:3">
-          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Aruba"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#418fde"/><rect y="30" width="60" height="2.2" fill="#f9d616"/><rect y="34.5" width="60" height="2.2" fill="#f9d616"/><polygon points="12,3 14.6,8.4 20,11 14.6,13.6 12,19 9.4,13.6 4,11 9.4,8.4" fill="#d21034" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></span></div>
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Aruba"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="bnd-3"><circle cx="50" cy="50" r="50"/></clipPath></defs><g clip-path="url(#bnd-3)"><rect width="100" height="100" fill="#418fde"/><rect y="66" width="100" height="6" fill="#f9d616"/><rect y="78" width="100" height="6" fill="#f9d616"/><polygon points="32,12 38,26 52,32 38,38 32,52 26,38 12,32 26,26" fill="#d21034" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></g></svg></span></div>
           <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-aruba.jpg" src="../videos/caribe-sem-visto/rota-aruba.mp4"></video></div>
           <div class="rota-card-texto">
             <h3>Aruba</h3>
@@ -476,7 +586,7 @@ html.js .rv.on{opacity:1;transform:none}
           </div>
         </li>
         <li class="rota-card" style="--n:4">
-          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Curaçao"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="60" height="40" fill="#002b7f"/><rect y="25" width="60" height="5" fill="#f9e814"/><polygon points="9.0,3.8 9.8,5.9 12.0,6.0 10.3,7.4 10.9,9.6 9.0,8.3 7.1,9.6 7.7,7.4 6.0,6.0 8.2,5.9" fill="#fff"/><polygon points="18.0,8.8 19.3,12.2 22.9,12.4 20.1,14.7 21.1,18.2 18.0,16.2 14.9,18.2 15.9,14.7 13.1,12.4 16.7,12.2" fill="#fff"/></svg></span></div>
+          <div class="rota-card-topo"><span class="rota-bandeira" role="img" aria-label="Bandeira: Curaçao"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="bnd-4"><circle cx="50" cy="50" r="50"/></clipPath></defs><g clip-path="url(#bnd-4)"><rect width="100" height="100" fill="#002b7f"/><rect y="60" width="100" height="12" fill="#f9e814"/><polygon points="26.0,16.0 28.0,21.3 33.6,21.5 29.2,25.0 30.7,30.5 26.0,27.4 21.3,30.5 22.8,25.0 18.4,21.5 24.0,21.3" fill="#fff"/><polygon points="44.0,27.0 47.2,35.6 56.4,36.0 49.2,41.7 51.6,50.5 44.0,45.5 36.4,50.5 38.8,41.7 31.6,36.0 40.8,35.6" fill="#fff"/></g></svg></span></div>
           <div class="rota-card-midia"><video muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/rota-curacao.jpg" src="../videos/caribe-sem-visto/rota-curacao.mp4"></video></div>
           <div class="rota-card-texto">
             <h3>Curaçao</h3>
@@ -493,20 +603,113 @@ html.js .rv.on{opacity:1;transform:none}
 <section class="secao passos" id="passos" aria-label="Três passos para a sua viagem">
     <div class="miolo centro">
         <div class="passos-grade" style="text-align:left">
-            <div class="passo"><span class="passo-num" aria-hidden="true">1</span><h3>Escolha do roteiro ideal</h3><p>Analisamos seu perfil para recomendar a melhor data e cabine no navio perfeito para você.</p></div>
-            <div class="passo"><span class="passo-num" aria-hidden="true">2</span><h3>Orientação documental</h3><p>Checklist completo de tudo que você precisa levar, do passaporte às vacinas.</p></div>
-            <div class="passo"><span class="passo-num" aria-hidden="true">3</span><h3>Planejamento da viagem</h3><p>Dicas de passeios, moeda e logística local para você aproveitar cada segundo no Caribe.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">1</span><h3>Escolha do<br>roteiro ideal</h3><p>Analisamos seu perfil para recomendar a melhor data e cabine no navio perfeito para você.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">2</span><h3>Orientação<br>documental</h3><p>Checklist completo de tudo que você precisa levar, do passaporte às vacinas.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">3</span><h3>Planejamento<br>da viagem</h3><p>Dicas de passeios, moeda e logística local para você aproveitar cada segundo no Caribe.</p></div>
         </div>
     </div>
 </section>
 
-<!-- ══ 5 · Panamá ═════════════════════════════════════════════════════ -->
-<section class="panama escura" id="panama" aria-labelledby="t5">
-    <img class="panama-img" src="../img/caribe-sem-visto/panama-skyline.jpg" alt="" loading="lazy" aria-hidden="true">
-    <div class="miolo">
-        <span class="rotulo rv">Panamá</span>
-        <h2 class="titulo rv" id="t5">Antes do Caribe, o Panamá.</h2>
-        <p class="texto rv rv-2">Se a sua saída for por Colón, a Cidade do Panamá pode virar mais um destino: a escala monumental do Canal, as ruas do Casco Viejo, uma mesa sem pressa. Vale conversar sobre chegar antes ou ficar depois do cruzeiro.</p>
+<!-- ══ 5 · Royal Caribbean: experiência a bordo ═══════════════════════ -->
+<section class="royal-intro" id="a-bordo" aria-labelledby="royal-title">
+    <div class="royal-shell royal-intro-grid">
+        <div class="royal-intro-content">
+            <div class="royal-brand-line">
+                <img src="../img/caribe-sem-visto/royal/royal-caribbean.svg" alt="Royal Caribbean" width="176" height="48" loading="lazy">
+                <div class="royal-brand-rule" aria-hidden="true"></div>
+                <span>Grandeur<br>of the Seas</span>
+            </div>
+            <h2 id="royal-title">O Caribe continua <span>a bordo.</span></h2>
+            <p class="royal-intro-copy">Entre uma ilha e outra, o Grandeur of the Seas mostra um jeito mais clássico de navegar com a Royal Caribbean. Encontre seu lugar ao sol, faça uma pausa com vista para o mar, descubra a programação da noite e brinde ao horizonte.</p>
+        </div>
+        <div class="royal-ship-picture">
+            <img src="../img/caribe-sem-visto/royal/grandeur-perfil.webp" alt="Grandeur of the Seas inteiro, visto de perfil no mar" width="2560" height="1707" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<section class="royal-moments" id="royal-moments" aria-labelledby="royal-moments-title">
+    <div class="royal-moments-sticky">
+        <div class="royal-shell">
+            <div class="royal-stage" id="royal-stage" tabindex="0" aria-label="Momentos a bordo">
+                <div class="royal-stage-copy">
+                    <h2 class="royal-moments-label" id="royal-moments-title">Aproveite cada momento</h2>
+                    <h3 id="royal-scene-title" aria-live="polite">O mar é seu cenário</h3>
+                    <p id="royal-scene-body">Comece pela piscina, escolha a calma do Solarium ou troque a espreguiçadeira pela parede de escalada. A vista muda, e o ritmo do dia é você quem decide.</p>
+                    <div class="royal-stage-actions">
+                        <button class="royal-arrow" type="button" id="royal-prev" aria-label="Ver momento anterior" disabled>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
+                        </button>
+                        <button class="royal-arrow" type="button" id="royal-next" aria-label="Ver próximo momento">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="royal-stage-media" id="royal-gesture-zone" aria-label="Galeria de imagens do Grandeur of the Seas">
+                    <div class="royal-main-photo">
+                        <img id="royal-scene-image" src="../img/caribe-sem-visto/royal/piscina-deck.jpg" alt="Deck da piscina externa do Grandeur of the Seas" width="960" height="540" loading="lazy">
+                    </div>
+                    <figure class="royal-detail-photo">
+                        <img id="royal-detail-image" src="../img/caribe-sem-visto/royal/parede-escalada.jpg" alt="Passageira na parede de escalada do navio" width="960" height="540" loading="lazy">
+                    </figure>
+                </div>
+            </div>
+            <div class="royal-scene-tabs" role="group" aria-label="Escolha um momento a bordo">
+                <button class="royal-scene-tab" type="button" data-index="0" aria-current="true"><span class="royal-scene-number">01</span> Sol e mar</button>
+                <button class="royal-scene-tab" type="button" data-index="1" aria-current="false"><span class="royal-scene-number">02</span> À mesa</button>
+                <button class="royal-scene-tab" type="button" data-index="2" aria-current="false"><span class="royal-scene-number">03</span> Depois do pôr do sol</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="royal-drink-area" aria-labelledby="royal-drink-title">
+    <div class="royal-shell">
+        <div class="royal-drink-card">
+            <div class="royal-drink-copy">
+                <p class="royal-drink-eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 4.5h12l-6 8-6-8Z"/><path d="M9.5 12.5v6.2M6.5 21h6"/><circle cx="17.4" cy="5.2" r="2.8"/><path d="m15.5 3.2 3.8 4M15.2 9.2l-2.6 3.6"/></svg>Pacote de bebidas</p>
+                <h2 id="royal-drink-title">Um brinde que já faz parte da viagem</h2>
+                <p>Em saídas participantes e cabines elegíveis, o pacote de bebidas já vem incluído. Para hóspedes com 18 anos ou mais, o Deluxe reúne coquetéis, cafés e outras bebidas. Para menores, o Refreshment oferece uma seleção sem álcool. Do primeiro café ao brinde da noite, há mais uma maneira de aproveitar o caminho.</p>
+            </div>
+            <div class="royal-drink-image royal-drink-3d">
+                <!-- teste 18/09: cartão SeaPass em 3D (glb) girando com a rolagem; o model-viewer é carregado no fim da página -->
+                <model-viewer id="seapass-3d" src="../models/caribe-sem-visto/seapass-grandeur.glb" alt="Cartão SeaPass, a chave da cabine e do consumo a bordo" camera-orbit="0deg 80deg 0.2m" field-of-view="24deg" interaction-prompt="none" disable-zoom disable-pan disable-tap touch-action="pan-y" exposure="1.05" shadow-intensity="0" loading="lazy" reveal="auto"></model-viewer>
+            </div>
+        </div>
+        <p class="royal-drink-terms">Oferta válida em saídas participantes e cabines elegíveis do Grandeur of the Seas. Cabines Garantidas não participam. Confira as condições da opção escolhida.</p>
+    </div>
+</section>
+
+<!-- ══ 6 · Panamá: banner em vídeo, ambiente do destino e apoio da Copa ══ -->
+<section class="panama" id="panama" aria-labelledby="t5">
+    <div class="panama-banner">
+        <video class="panama-video" id="panama-video" muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/panama-banner.jpg" src="../videos/caribe-sem-visto/panama-banner.mp4" aria-hidden="true"></video>
+        <div class="panama-banner-texto">
+            <span class="rotulo rv">Panamá</span>
+            <h2 class="titulo rv" id="t5">Panamá, o começo<br>de uma viagem maior</h2>
+            <p class="texto rv rv-2">Antes das Antilhas, um destino para descobrir.</p>
+        </div>
+    </div>
+    <div class="panama-corpo">
+        <div class="miolo panama-grade">
+            <div class="panama-copy rv">
+                <h3>Stopover no Panamá,<br>a viagem antes da viagem</h3>
+                <p>Voos de cidades brasileiras chegam à Cidade do Panamá. Na costa caribenha do país, Colón abre o caminho marítimo para as Antilhas. É uma rota que faz sentido para o embarque e também revela um lugar que merece tempo na viagem.</p>
+                <p>Para quem quiser chegar antes ou ficar depois do cruzeiro, o Panamá oferece muito a descobrir: ver o Canal em funcionamento, caminhar pelas ruas do Casco Antiguo e conhecer os sabores de uma capital onde muitas culturas se encontram. A viagem pode começar com uma história panamenha antes mesmo da primeira ilha.</p>
+            </div>
+            <div class="panama-fotos rv rv-2">
+                <figure class="panama-foto grande"><img src="../img/caribe-sem-visto/panama-cidade.jpg" alt="Vista aérea da Cidade do Panamá, com os prédios altos da orla e a baía ao fundo" loading="lazy"><figcaption>Cidade do Panamá</figcaption></figure>
+                <figure class="panama-foto"><img src="../img/caribe-sem-visto/panama-letreiro.jpg" alt="Letreiro colorido com a palavra Panamá na orla da Cidade do Panamá, com fonte em primeiro plano" loading="lazy"><figcaption>Orla da capital</figcaption></figure>
+                <figure class="panama-foto"><img src="../img/caribe-sem-visto/panama-canal.jpg" alt="Vista aérea das eclusas do Canal do Panamá, com o canal seguindo entre as colinas ao fundo" loading="lazy"><figcaption>Canal do Panamá</figcaption></figure>
+            </div>
+        </div>
+    </div>
+    <div class="panama-copa">
+        <div class="miolo">
+            <img class="panama-copa-logo rv" src="../img/caribe-sem-visto/copa-logo-positiva.png" alt="Copa Airlines" loading="lazy">
+            <p class="rv rv-2">A Copa Airlines opera voos diretos de cidades brasileiras para a Cidade do Panamá, uma opção de chegada para quem embarca em Colón.</p>
+            <figure class="panama-copa-foto rv rv-3"><img src="../img/caribe-sem-visto/copa-tocumen.jpg" alt="Aviões da Copa Airlines estacionados no Aeroporto Internacional de Tocumen, na Cidade do Panamá" loading="lazy"></figure>
+        </div>
     </div>
 </section>
 
@@ -515,39 +718,29 @@ html.js .rv.on{opacity:1;transform:none}
     <div class="miolo centro">
         <h2 class="titulo rv" id="t6">Dúvidas frequentes</h2>
         <div class="faq rv" style="text-align:left">
-            <details class="faq-item">
-                <summary>Preciso de visto americano?</summary>
-                <p>Não, quando o voo e o itinerário não passam por território americano. Os roteiros desta campanha embarcam em Colón ou em Cartagena, e conferimos a rota completa com você antes de avançar.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Preciso de passaporte ou de outros documentos?</summary>
-                <p>Sim. Passaporte válido, as regras de entrada do Panamá ou da Colômbia e as condições da companhia são conferidos para cada viajante e cada saída. Sem visto americano não significa sem documentos.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Como funciona o embarque?</summary>
-                <p>Você voa até o Panamá ou até Cartagena, com um voo escolhido para não passar pelos Estados Unidos, e faz o check-in no porto de Colón ou de Cartagena, conforme a saída.</p>
-            </details>
-            <details class="faq-item">
-                <summary>O que muda entre as saídas?</summary>
-                <p>A ordem das escalas, a duração, o porto de embarque e o que a tarifa inclui, como bebidas e aéreo. Ao apresentar uma saída, mostramos o roteiro exato e o que está ou não incluído.</p>
-            </details>
+            <details class="faq-item"><summary><h3>Preciso de visto americano?</h3><span class="faq-ico" aria-hidden="true"></span></summary><p>Não, para viajantes brasileiros nessas saídas. O embarque ocorre em Colón ou Cartagena e a viagem não passa pelos Estados Unidos.</p></details>
+            <details class="faq-item"><summary><h3>Preciso de passaporte?</h3><span class="faq-ico" aria-hidden="true"></span></summary><p>Sim. Nesta viagem, o passaporte precisa estar válido por pelo menos seis meses após o término do cruzeiro.</p></details>
+            <details class="faq-item"><summary><h3>Como funciona o embarque?</h3><span class="faq-ico" aria-hidden="true"></span></summary><p>Você chega à Cidade do Panamá e segue até Colón para embarcar. Nas saídas por Cartagena, o embarque acontece na própria cidade.</p></details>
+            <details class="faq-item"><summary><h3>O Cruzeirista orienta sobre a documentação?</h3><span class="faq-ico" aria-hidden="true"></span></summary><p>Sim. Orientamos você sobre os documentos e preparativos da saída escolhida, incluindo passaporte e eventuais exigências de saúde e entrada.</p></details>
+            <details class="faq-item"><summary><h3>O que está incluído na viagem?</h3><span class="faq-ico" aria-hidden="true"></span></summary><p>O cruzeiro inclui cabine, refeições principais e programação a bordo. Bebidas, restaurantes especiais, passeios, voos e traslados dependem do pacote. Você vê o que entra na sua opção antes de decidir.</p></details>
+            <details class="faq-item"><summary><h3>Para quem o Caribe sem visto faz mais sentido?</h3><span class="faq-ico" aria-hidden="true"></span></summary><p>É uma excelente escolha para quem planeja sua primeira viagem internacional de navio, seja em família, a dois ou com amigos. Com embarque pelo Panamá ou pela Colômbia, o roteiro reúne Aruba, Bonaire e Curaçao e permite descobrir o Caribe sem a barreira do visto americano. Entre as ilhas, os dias de navegação também fazem parte da experiência.</p></details>
         </div>
     </div>
 </section>
 
-<!-- ══ 7 · Confiança ══════════════════════════════════════════════════ -->
+<!-- ══ 7 · Atendimento ════════════════════════════════════════════════ -->
 <section class="secao confianca" id="cruzeirista" aria-labelledby="t7">
     <div class="miolo confianca-grade">
         <figure class="confianca-foto rv">
-            <img src="../img/caribe-sem-visto/bordo-proa.jpg" alt="Proa de um navio de cruzeiro avançando sobre o mar azul, com o horizonte à frente" loading="lazy">
-            <figcaption class="confianca-chip"><strong>Atendimento humano</strong><span>Equipe Cruzeirista</span></figcaption>
+            <img src="../img/caribe-sem-visto/atendimento.jpg" alt="Mulher sorrindo ao telefone em um escritório, em atendimento" loading="lazy">
+            <figcaption class="confianca-selo"><strong>Fale com um</strong><span>Especialista Cruzeirista</span></figcaption>
         </figure>
         <div>
-            <h2 class="titulo rv" id="t7">Você não precisa planejar tudo sozinho.</h2>
-            <p class="texto rv rv-2">Conte ao Cruzeirista o que despertou sua vontade de ir. A gente apresenta as saídas, explica o que muda entre elas e acompanha você até a decisão.</p>
+            <h2 class="titulo rv" id="t7">Você não precisa planejar tudo sozinho</h2>
+            <p class="texto rv rv-2">Entre a vontade de conhecer as Antilhas e o dia de embarcar, há escolhas importantes. O Cruzeirista explica as opções de roteiro e cabine, esclarece suas dúvidas e ajuda você a decidir com mais tranquilidade.</p>
             <ul class="checks rv rv-3">
-                <li>Atendimento humano, pelo WhatsApp</li>
-                <li>Orientação sobre saídas, cabines e documentação</li>
+                <li>Saídas, roteiros e cabines explicados com clareza</li>
+                <li>Orientação sobre documentação e embarque</li>
             </ul>
         </div>
     </div>
@@ -557,8 +750,8 @@ html.js .rv.on{opacity:1;transform:none}
 <section class="secao cadastro" id="contato" aria-labelledby="t8">
     <div class="cadastro-card rv">
         <div class="cadastro-copy">
-            <h2 id="t8">Seu Caribe pode começar por uma conversa.</h2>
-            <p>Deixe seu contato e a equipe do Cruzeirista conversa com você sobre os roteiros e por onde começar.</p>
+            <h2 id="t8">Receba opções para planejar seu Caribe sem visto</h2>
+            <p>Deixe seu contato para conhecer as possibilidades de viagem e tirar suas primeiras dúvidas com o Cruzeirista.</p>
         </div>
         <div class="cadastro-form">
             <form id="form-caribe" novalidate>
@@ -572,15 +765,9 @@ html.js .rv.on{opacity:1;transform:none}
                         <input class="form-input" id="inp-whats" name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-group-label" for="inp-email">E-mail</label>
-                        <input class="form-input" id="inp-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="seu@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-group-label" for="inp-cidade">Cidade de partida</label>
-                        <input class="form-input" id="inp-cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="De onde você sairia" required>
-                    </div>
+                <div class="form-group">
+                    <label class="form-group-label" for="inp-email">E-mail</label>
+                    <input class="form-input" id="inp-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="seu@email.com">
                 </div>
                 <div class="form-group">
                     <label class="form-group-label" for="sel-quando">Previsão da viagem</label>
@@ -594,7 +781,7 @@ html.js .rv.on{opacity:1;transform:none}
                     </div>
                 </div>
                 <p class="form-error-msg" id="err-form"></p>
-                <button type="submit" class="btn-form-submit" id="btn-enviar">Quero descobrir meu Caribe</button>
+                <button type="submit" class="btn-form-submit" id="btn-enviar">Quero receber minhas opções</button>
                 <p class="form-privacidade">Seus dados serão usados para responder ao seu interesse nesta viagem. <a href="../privacidade.html">Política de Privacidade</a>.</p>
             </form>
             <div class="form-success" id="form-sucesso" role="status">
@@ -608,8 +795,8 @@ html.js .rv.on{opacity:1;transform:none}
 <!-- ══ 9 · Fecho ══════════════════════════════════════════════════════ -->
 <section class="fecho" aria-labelledby="t9">
     <h2 class="rv" id="t9">Seu Caribe pode estar mais perto do que você imagina</h2>
-    <p class="rv rv-2">Não deixe para depois o Caribe que você sempre imaginou. O caminho até lá começa por uma conversa.</p>
-    <a href="https://wa.me/551140409598" target="_blank" rel="noopener" class="link rv rv-3">Falar pelo WhatsApp <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="rv rv-2">Não deixe para depois o sonho de navegar pelas águas mais azuis do mundo e viver o Caribe que você sempre imaginou.</p>
+    <a href="#contato" class="btn-amarelo rv rv-3">Quero falar com um especialista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </section>
 
 </main>
@@ -652,6 +839,34 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
         document.body.style.overflow = aberto ? 'hidden' : '';
     });
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', fechar));
+})();
+
+/* Hero: um clipe por vez, em sequência com fusão de 1,1 s; o seguinte só baixa inteiro quando o anterior começa a tocar.
+   Toca só com o hero na tela, retoma ao voltar à aba e um vigia religa se o navegador pausar. Com movimento reduzido
+   ou um clipe só, o primeiro fica em loop. (Reescrito em 18/09: o script da sequência não estava no arquivo e o hero
+   parava no último quadro do primeiro clipe.) */
+(function () {
+    const hero = document.querySelector('.hero'), vs = [...document.querySelectorAll('.hero-fundo video')];
+    if (!hero || !vs.length) return;
+    const FUSAO = 1.1; let atual = 0, trocando = false, ativo = true;
+    const tocar = v => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const preparar = j => { const v = vs[j]; if (v.getAttribute('preload') !== 'auto') { v.setAttribute('preload', 'auto'); v.load(); } };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || vs.length === 1) { vs[0].loop = true; tocar(vs[0]); return; }
+    function proximo() {
+        if (trocando) return; trocando = true;
+        const de = vs[atual], para = vs[(atual + 1) % vs.length];
+        try { para.currentTime = 0; } catch (e) {}
+        tocar(para); para.classList.add('is-on');
+        setTimeout(() => { de.classList.remove('is-on'); de.pause(); atual = (atual + 1) % vs.length; trocando = false; preparar((atual + 1) % vs.length); }, FUSAO * 1000);
+    }
+    vs.forEach(v => {
+        v.addEventListener('timeupdate', () => { if (v === vs[atual] && !trocando && v.duration && v.currentTime >= v.duration - FUSAO) proximo(); });
+        v.addEventListener('ended', () => { if (v === vs[atual] && !trocando) proximo(); });
+    });
+    preparar(1); tocar(vs[0]);
+    if ('IntersectionObserver' in window) new IntersectionObserver(ents => { ents.forEach(en => { ativo = en.isIntersecting; if (ativo) tocar(vs[atual]); else vs.forEach(v => v.pause()); }); }, { threshold: .05 }).observe(hero);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && ativo) tocar(vs[atual]); });
+    setInterval(() => { if (ativo && !document.hidden && !trocando && vs[atual].paused) tocar(vs[atual]); }, 1500);
 })();
 
 /* Rota: os cards se empilham com position:sticky; a rolagem que traz cada card também desenha a linha
@@ -750,6 +965,117 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
     io.observe(sec);
 })();
 
+/* Royal Caribbean: a rolagem escolhe a cena; cada troca usa um fade curto e autônomo. */
+(function () {
+    const media = '../img/caribe-sem-visto/royal/';
+    const scenes = [
+        {
+            title: 'O mar é seu cenário',
+            body: 'Comece pela piscina, escolha a calma do Solarium ou troque a espreguiçadeira pela parede de escalada. A vista muda, e o ritmo do dia é você quem decide.',
+            main: 'piscina-deck.jpg', mainAlt: 'Deck da piscina externa do Grandeur of the Seas',
+            detail: 'parede-escalada.jpg', detailAlt: 'Passageira na parede de escalada do navio'
+        },
+        {
+            title: 'O horizonte também vem à mesa',
+            body: 'O restaurante principal abre grandes janelas para o mar. No Windjammer, a refeição segue em clima informal. Para quem quiser mudar o programa, há restaurantes de especialidade à parte.',
+            main: 'restaurante-principal.jpg', mainAlt: 'Restaurante principal em dois níveis do Grandeur of the Seas',
+            detail: 'windjammer.jpg', detailAlt: 'Passageiros se servindo no buffet Windjammer'
+        },
+        {
+            title: 'Quando o sol se põe, a viagem muda de tom',
+            body: 'Há noites de espetáculo no teatro, música no Schooner Bar e cinema ao ar livre no deck da piscina. Escolha como prolongar o dia antes da próxima ilha.',
+            main: 'teatro-palladium.jpg', mainAlt: 'Teatro Palladium a bordo do Grandeur of the Seas',
+            detail: 'centrum-piano.webp', detailAlt: 'Centrum do navio, com piano e elevadores panorâmicos'
+        }
+    ];
+    const stage = document.getElementById('royal-stage');
+    const moments = document.getElementById('royal-moments');
+    const zone = document.getElementById('royal-gesture-zone');
+    const tabs = [...document.querySelectorAll('.royal-scene-tab')];
+    const prev = document.getElementById('royal-prev');
+    const next = document.getElementById('royal-next');
+    if (!stage || !moments || !zone || !prev || !next || !tabs.length) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const desktop = matchMedia('(min-width: 781px)');
+    const anchors = [.08,.5,.92];
+    let current = 0, changing = false, pending = null, pointerStart = null, requested = 0, sectionTop = 0, scrollTravel = 1;
+
+    function render(index) {
+        const scene = scenes[index];
+        document.getElementById('royal-scene-title').textContent = scene.title;
+        document.getElementById('royal-scene-body').textContent = scene.body;
+        const main = document.getElementById('royal-scene-image'), detail = document.getElementById('royal-detail-image');
+        main.src = media + scene.main; main.alt = scene.mainAlt;
+        detail.src = media + scene.detail; detail.alt = scene.detailAlt;
+        current = index;
+        tabs.forEach((tab,i) => tab.setAttribute('aria-current', String(i === index)));
+        prev.disabled = index === 0; next.disabled = index === scenes.length - 1;
+    }
+    async function show(index) {
+        const target = Math.max(0,Math.min(scenes.length - 1,index));
+        if (target === current && !changing) return;
+        pending = target;
+        if (changing) return;
+        changing = true;
+        while (pending !== null) {
+            let nextScene = pending; pending = null;
+            if (nextScene === current) continue;
+            if (reduce.matches || !stage.animate) { render(nextScene); continue; }
+            const out = stage.animate([{opacity:Number(getComputedStyle(stage).opacity)},{opacity:0}],{duration:180,easing:'cubic-bezier(0.77,0,0.175,1)',fill:'forwards'});
+            await out.finished.catch(() => {});
+            if (pending !== null) { nextScene = pending; pending = null; }
+            render(nextScene);
+            const into = stage.animate([{opacity:0},{opacity:1}],{duration:300,easing:'cubic-bezier(0.77,0,0.175,1)',fill:'forwards'});
+            out.cancel(); await into.finished.catch(() => {}); into.cancel();
+        }
+        changing = false;
+    }
+    function measureScroll() {
+        sectionTop = scrollY + moments.getBoundingClientRect().top;
+        scrollTravel = Math.max(1,moments.offsetHeight - innerHeight);
+    }
+    function sceneFromScroll() {
+        const progress = Math.max(0,Math.min(1,(scrollY - sectionTop) / scrollTravel));
+        if (progress < .3) return 0;
+        if (progress < .7) return 1;
+        return 2;
+    }
+    function syncScroll() {
+        if (!desktop.matches) return;
+        const target = sceneFromScroll();
+        if (target === requested) return;
+        requested = target; show(target);
+    }
+    function scrollToScene(index) {
+        const target = Math.max(0,Math.min(scenes.length - 1,index));
+        requested = target;
+        scrollTo({top:sectionTop + scrollTravel * anchors[target],behavior:'auto'});
+        show(target);
+    }
+    function activate(index) { desktop.matches ? scrollToScene(index) : show(index); }
+    prev.addEventListener('click',() => activate(current - 1));
+    next.addEventListener('click',() => activate(current + 1));
+    tabs.forEach(tab => tab.addEventListener('click',() => activate(Number(tab.dataset.index))));
+    stage.addEventListener('keydown',event => {
+        if (event.key === 'ArrowRight') { event.preventDefault(); activate(current + 1); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); activate(current - 1); }
+    });
+    zone.addEventListener('pointerdown',event => { if (pointerStart === null) pointerStart = {x:event.clientX,y:event.clientY,id:event.pointerId}; });
+    zone.addEventListener('pointerup',event => {
+        if (!pointerStart || event.pointerId !== pointerStart.id) return;
+        const dx = event.clientX - pointerStart.x, dy = event.clientY - pointerStart.y; pointerStart = null;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.2) activate(current + (dx < 0 ? 1 : -1));
+    });
+    zone.addEventListener('pointercancel',() => { pointerStart = null; });
+    addEventListener('scroll',syncScroll,{passive:true});
+    addEventListener('resize',() => { measureScroll(); requested = current; syncScroll(); });
+    desktop.addEventListener('change',() => { measureScroll(); requested = current; syncScroll(); });
+    measureScroll(); requested = desktop.matches ? sceneFromScroll() : current;
+    if (requested !== current) render(requested);
+    scenes.slice(1).flatMap(scene => [scene.main,scene.detail]).forEach(filename => { const image = new Image(); image.src = media + filename; });
+    addEventListener('load',() => { measureScroll(); syncScroll(); },{once:true});
+})();
+
 /* Reveal ao rolar: uma vez só, desligado quando o navegador pede movimento reduzido. */
 (function () {
     const itens = document.querySelectorAll('.rv');
@@ -758,8 +1084,19 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
     itens.forEach(e => io.observe(e));
 })();
 
+/* Vídeo do Panamá: toca só quando o banner está na tela, sem áudio; com movimento reduzido fica o pôster. */
+(function () {
+    const v = document.getElementById('panama-video'); if (!v) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const tocar = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    if (!('IntersectionObserver' in window)) { tocar(); return; }
+    new IntersectionObserver(ents => { ents.forEach(en => { if (en.isIntersecting) tocar(); else v.pause(); }); }, { threshold: .15 }).observe(v);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && v.paused && v.getBoundingClientRect().bottom > 0) tocar(); });
+})();
+
 /* Formulário: mesmo mecanismo do cotacao.php da home (POST com FormData, resposta JSON).
-   O PHP exige nome, whatsapp e cidade; categoria=caribe rotula o pedido como "Caribe sem visto" no e-mail. */
+   Campos do rascunho (nome, WhatsApp, e-mail, previsão); "cidade" saiu em 18/09. O cotacao.php atual ainda exige
+   cidade: ajustar o PHP na etapa de publicação. categoria=caribe rotula o pedido como "Caribe sem visto" no e-mail. */
 (function () {
     const form   = document.getElementById('form-caribe');
     const botao  = document.getElementById('btn-enviar');
@@ -767,7 +1104,7 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
     const rotuloBotao = botao.textContent;
     if (!form) return;
 
-    const campos = ['inp-nome', 'inp-whats', 'inp-cidade'].map(id => document.getElementById(id));
+    const campos = ['inp-nome', 'inp-whats'].map(id => document.getElementById(id));
     campos.forEach(c => c.addEventListener('input', () => { c.style.borderColor = ''; erro.classList.remove('visible'); }));
 
     form.addEventListener('submit', e => {
@@ -775,7 +1112,7 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
         let ok = true;
         campos.forEach(c => { if (!c.value.trim()) { c.style.borderColor = '#e05c2a'; ok = false; } });
         if (!ok) {
-            erro.textContent = 'Preencha nome, WhatsApp e cidade para a gente conversar com você.';
+            erro.textContent = 'Preencha nome e WhatsApp para a gente conversar com você.';
             erro.classList.add('visible');
             return;
         }
@@ -786,7 +1123,6 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
         dados.append('nome',      document.getElementById('inp-nome').value.trim());
         dados.append('whatsapp',  document.getElementById('inp-whats').value.trim());
         dados.append('email',     document.getElementById('inp-email').value.trim());
-        dados.append('cidade',    document.getElementById('inp-cidade').value.trim());
         dados.append('periodo',   document.getElementById('sel-quando').value || 'ainda não decidi');
 
         botao.disabled = true; botao.textContent = 'Enviando';
@@ -821,6 +1157,48 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     <span>Falar pelo WhatsApp</span>
 </a>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+<script>
+/* Cartão SeaPass 3D: a rolagem gira o cartão. Progresso 0 quando a seção entra por baixo, 1 quando sai por cima;
+   no meio da tela o cartão está de frente. Quatro voltas por passagem (Lippe pediu bem mais que a rolagem). Com movimento reduzido, fica parado de frente. */
+(function () {
+    const mv = document.getElementById('seapass-3d'), sec = mv && mv.closest('.royal-drink-area'); if (!mv || !sec) return;
+    const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    let inclina = 0, alvo = 0, animando = false, balanco = 0, lado = 0;
+    function render() {
+        const r = sec.getBoundingClientRect(), h = innerHeight;
+        const p = clamp((h - r.top) / (h + r.height), 0, 1);
+        const theta = (reduz ? -18 : (p - .5) * 360 * 4) + lado;
+        mv.cameraOrbit = theta.toFixed(2) + 'deg ' + (80 + inclina + balanco).toFixed(2) + 'deg 0.2m';
+    }
+    /* balanço automático: inclinação lenta para cima e para baixo (±3°) e um leve vai e vem lateral (±2°), só com a seção na tela */
+    let visivel = false, t0 = performance.now();
+    function balancar(agora) {
+        if (!visivel || reduz) return;
+        const t = (agora - t0) / 1000;
+        balanco = Math.sin(t * 2 * Math.PI / 7) * 3;
+        lado = Math.sin(t * 2 * Math.PI / 11 + 1.3) * 2;
+        render(); requestAnimationFrame(balancar);
+    }
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(ents => { ents.forEach(en => { const antes = visivel; visivel = en.isIntersecting; if (visivel && !antes) requestAnimationFrame(balancar); }); }, { threshold: 0 }).observe(sec);
+    } else { visivel = true; requestAnimationFrame(balancar); }
+    let ag = false; const pedir = () => { if (!ag) { ag = true; requestAnimationFrame(() => { render(); ag = false; }); } };
+    /* hover: o mouse acima do centro inclina o cartão para cima, abaixo inclina para baixo (até 7°), com amortecimento */
+    function amortecer() {
+        inclina += (alvo - inclina) * .08;
+        if (Math.abs(alvo - inclina) < .02) { inclina = alvo; animando = false; render(); return; }
+        render(); requestAnimationFrame(amortecer);
+    }
+    const acordar = () => { if (!animando) { animando = true; requestAnimationFrame(amortecer); } };
+    const palco = mv.parentElement;
+    palco.addEventListener('mousemove', e => { if (reduz) return; const b = palco.getBoundingClientRect(); const y = (e.clientY - b.top) / b.height; alvo = (y - .5) * 14; acordar(); });
+    palco.addEventListener('mouseleave', () => { alvo = 0; acordar(); });
+    window.addEventListener('scroll', pedir, { passive: true }); window.addEventListener('resize', pedir);
+    mv.addEventListener('load', render); render();
+})();
+</script>
 <script>
 /* Esconde o WhatsApp flutuante enquanto o formulário, o fecho ou o rodapé estão na tela. */
 (function () {

@@ -12,3 +12,15 @@ panama-canal.jpg: Foto por Alex Pagliuca (https://unsplash.com/@alexanthony) no 
 panama-skyline.jpg: Foto por Armands Brants (https://unsplash.com/@armandsbrants) no Unsplash. https://unsplash.com/photos/a-large-body-of-water-with-a-city-in-the-background-Ejf16T81DpI
 navio-alto.jpg: Foto por Shai Pal (https://unsplash.com/@shaipal) no Unsplash. https://unsplash.com/photos/calendar-K_7Jy5PjaQc
 hero-navio.jpg / hero-navio-m.jpg / navio-mar.jpg (mesma foto, espelhada no hero): Foto por Marc Fanelli-Isla (https://unsplash.com/@marcfanelliisla) no Unsplash. https://unsplash.com/photos/a-cruise-ship-in-the-middle-of-the-ocean-GGH3oVUj8cM
+atendimento.jpg: Foto por Vitaly Gariev (https://unsplash.com/@silverkblack) no Unsplash. https://unsplash.com/photos/a-woman-sitting-at-a-desk-talking-on-a-cell-phone-Svtm7NvhWrY
+
+Bloco 02 (18/09/2026):
+copa-tocumen.jpg: HP-9925CMP Copa Airlines Boeing 737 MAX 9 at Tocumen International Airport, fotografia de Wilfredor, CC0 (domínio público), Wikimedia Commons. https://commons.wikimedia.org/wiki/File:HP-9925CMP_Copa_Airlines_Boeing_737_MAX_9_at_Tocumen_International_Airport_01.jpg (original 8256×5504, reduzida para 1600 de largura).
+copa-logo-positiva.png / copa-logo-negativa.png: marca oficial da Copa Airlines, cópia de 14_LANDING_CARIBE_SEM_VISTO/ASSETS/LOGOS/, sem alteração.
+panama-cidade.jpg, panama-cidade-2.jpg, panama-letreiro.jpg, panama-canal.jpg: quadros extraídos dos vídeos licenciados em 14_LANDING_CARIBE_SEM_VISTO/MÍDIAS/PANAMA/ (aerial-flyover-of-panama-city... aos 18 s; drone-shot-of-panama-city... aos 22 s; panama-city-landmark-sign-and-fountain-in-oceanfront... aos 4 s; panama-city-aerial-v29-drone-flyover-industrial... aos 2 s, quadro que mostra as eclusas do Canal, identificação visual a confirmar).
+
+Bloco Royal Caribbean (18/09/2026):
+royal/*: cópias para web do acervo organizado em 14_LANDING_CARIBE_SEM_VISTO/MÍDIAS/GRANDEUR_OF_THE_SEAS/. A procedência de cada imagem está documentada no arquivo 00_INDICE_IMAGENS.md desse acervo.
+royal/grandeur-perfil.webp: Royal Caribbean Incentives, https://www.royalcaribbeanincentives.com/content/uploads/grandeur-of-the-seas-sailing.webp.
+royal/restaurante-principal.jpg: versão web em JPEG, 1920 px e qualidade 92, produzida a partir do upscale feito por Lippe (GRANDEUR_GASTRONOMIA_RESTAURANTE-PRINCIPAL_upscayl_3x_high-fidelity-4x.png).
+royal/royal-caribbean.svg: marca oficial da Royal Caribbean, copiada de 14_LANDING_CARIBE_SEM_VISTO/ASSETS/LOGOS/, sem alteração visual.
