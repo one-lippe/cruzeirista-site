@@ -89,7 +89,8 @@ nav.open+.nav-menu{display:flex}
 .hero-fundo video.is-on{opacity:1}
 /* TESTE 23/09: vídeo espelhado, navio apontando para o lado oposto no mesmo lugar. Rollback: tirar hero--espelho do <header>. */
 .hero--espelho .hero-fundo video{transform:scaleX(-1)}
-/* Sem véu nem degradê sobre o vídeo (Lippe, 23/09): o navio fica fora do texto pelo enquadramento (script do hero), não por contraste. */
+/* Sem véu sobre o vídeo inteiro: o navio fica fora do texto pelo enquadramento (script do hero). No desktop há só um degradê
+   linear da borda esquerda até logo depois do título (bloco ≥ 769 abaixo); no celular o texto fica sobre azul sólido. */
 .hero-conteudo{position:relative;z-index:2;width:100%;max-width:1140px;margin:0 auto;padding:300px 20px 48px}
 .hero h1{font-size:clamp(50px,14vw,104px);font-weight:700;line-height:.94;letter-spacing:-.03em;text-shadow:0 1px 3px rgba(0,0,0,.12),0 6px 24px rgba(0,0,0,.14)}
 .hero h1 em{font-style:normal;color:var(--amarelo)}
@@ -103,6 +104,10 @@ nav.open+.nav-menu{display:flex}
 @media(min-width:769px){
   .hero{min-height:min(100svh,860px);align-items:center}
   .hero-conteudo{padding:150px 48px 100px}
+  /* degradê linear em azul-marinho que nasce na borda esquerda e morre um pouco depois do fim de "visto" (Lippe, 23/09,
+     com referência). --tx = onde o texto começa (margem da coluna de 1140); o zero fica ~130px depois do título */
+  .hero{--tx:max(48px,calc(50% - 522px))}
+  .hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(to right,rgba(0,40,96,.62) 0,rgba(0,40,96,.52) calc(var(--tx) + 60px),rgba(0,40,96,.36) calc(var(--tx) + 300px),rgba(0,40,96,.16) calc(var(--tx) + 480px),rgba(0,40,96,.05) calc(var(--tx) + 560px),rgba(0,40,96,0) calc(var(--tx) + 600px))}
   .hero-botoes{flex-direction:row;gap:14px}
   .hero-botoes .btn{width:auto}
 }
