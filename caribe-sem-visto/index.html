@@ -11,7 +11,7 @@
 <meta name="description" content="Aruba, Bonaire e Curaçao num cruzeiro pelo sul do Caribe, com embarque pelo Panamá ou pela Colômbia e sem a barreira do visto americano. Deixe seu interesse com o Cruzeirista.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.cruzeirista.com.br/caribe-sem-visto/">
-<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-aruba-aerea.jpg">
+<link rel="preload" as="image" href="../videos/caribe-sem-visto/hero-navio.jpg">
 
 <meta property="og:type"        content="website">
 <meta property="og:url"         content="https://www.cruzeirista.com.br/caribe-sem-visto/">
@@ -78,8 +78,6 @@ nav.open+.nav-menu{display:flex}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:600;padding:14px 28px;border-radius:999px;text-decoration:none;letter-spacing:.02em;transition:all .25s ease;border:none;cursor:pointer;font-family:inherit;white-space:nowrap}
 .btn-teal{background:var(--teal);color:#fff}
 .btn-teal:hover{background:#0780a0;transform:translateY(-2px)}
-.btn-glass{background:rgba(255,255,255,.12);color:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.22)}
-.btn-glass:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
 .btn-escuro{background:var(--darker);color:#fff}
 .btn-escuro:hover{background:#0f2c5f;transform:translateY(-2px)}
 .btn svg{width:16px;height:16px}
@@ -89,22 +87,32 @@ nav.open+.nav-menu{display:flex}
 .hero-fundo{position:absolute;inset:0;background:#0a1628}
 .hero-fundo video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity 1.1s ease;filter:saturate(1.12) contrast(1.03);will-change:opacity}
 .hero-fundo video.is-on{opacity:1}
-/* Celular: vídeo de sangria total, gradiente forte embaixo para o texto. */
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,40,96,.88) 0%,rgba(0,40,96,.74) 26%,rgba(0,40,96,.42) 46%,rgba(0,40,96,0) 60%)}
+/* TESTE 23/09: vídeo espelhado, navio apontando para o lado oposto no mesmo lugar. Rollback: tirar hero--espelho do <header>. */
+.hero--espelho .hero-fundo video{transform:scaleX(-1)}
+/* Sem véu nem degradê sobre o vídeo (Lippe, 23/09): o navio fica fora do texto pelo enquadramento (script do hero), não por contraste. */
 .hero-conteudo{position:relative;z-index:2;width:100%;max-width:1140px;margin:0 auto;padding:300px 20px 48px}
 .hero h1{font-size:clamp(50px,14vw,104px);font-weight:700;line-height:.94;letter-spacing:-.03em;text-shadow:0 1px 3px rgba(0,0,0,.12),0 6px 24px rgba(0,0,0,.14)}
 .hero h1 em{font-style:normal;color:var(--amarelo)}
 .hero-texto{font-size:clamp(17px,1.7vw,20px);line-height:1.55;color:rgba(255,255,255,.92);max-width:540px;margin:26px 0 34px;text-shadow:0 1px 2px rgba(0,0,0,.14),0 4px 14px rgba(0,0,0,.12)}
 .hero-botoes{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
 .hero-botoes .btn{width:250px}
+/* "Explorar a viagem" em amarelo com texto escuro, como o "Quero falar com um especialista" do menu (Lippe, 23/09) */
+.hero-botoes .btn-teal{background:var(--amarelo);color:var(--darker)}
+.hero-botoes .btn-teal:hover{background:#f3cc55}
 @media(min-width:481px){.hero-conteudo{padding:340px 24px 64px}}
 @media(min-width:769px){
   .hero{min-height:min(100svh,860px);align-items:center}
-  /* vinheta linear da esquerda, com queda suave e sem forma aparente: cobre só a coluna do texto e some antes da metade da tela */
-  .hero::after{background:linear-gradient(to right,rgba(0,40,96,.64) 0%,rgba(0,40,96,.58) 22%,rgba(0,40,96,.44) 38%,rgba(0,40,96,.24) 48%,rgba(0,40,96,.09) 56%,rgba(0,40,96,0) 64%)}
   .hero-conteudo{padding:150px 48px 100px}
   .hero-botoes{flex-direction:row;gap:14px}
   .hero-botoes .btn{width:auto}
+}
+
+/* Celular e tablet em pé: o vídeo vira uma faixa no alto (--banda) com o navio inteiro, e o texto fica abaixo,
+   sobre o azul do mar do próprio vídeo na altura em que a faixa termina (#155a95, medido nos frames). Sem degradê. */
+@media(max-width:768px){
+  .hero{background:#155a95;align-items:flex-start;--banda:clamp(340px,46svh,440px)}
+  .hero-fundo{bottom:auto;height:var(--banda);overflow:hidden}
+  .hero-conteudo{padding-top:calc(var(--banda) + 28px)}
 }
 
 /* ── 2 · Valor em três cards, como no rascunho ─────────────────────── */
@@ -114,13 +122,16 @@ nav.open+.nav-menu{display:flex}
 .abc-titulo{font-size:clamp(36px,8vw,60px);font-weight:700;color:var(--azul);line-height:1.02;letter-spacing:-.02em;margin:0 auto}
 .abc-titulo span{display:block;font-size:.7em;font-weight:500;letter-spacing:-.01em;margin-top:6px}
 .cards{display:grid;grid-template-columns:1fr;gap:16px;margin-top:40px;text-align:left}
-.card{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:26px 24px;box-shadow:0 2px 16px rgba(0,0,0,.05);transition:transform .3s ease,box-shadow .3s ease}
-.card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.10)}
-.card-icone{width:44px;height:44px;border-radius:12px;background:rgba(8,145,178,.10);color:var(--teal);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.card-icone svg{width:22px;height:22px}
-.card h3{font-size:18px;font-weight:700;color:var(--darker);line-height:1.25;margin-bottom:8px}
-.card p{font-size:14px;line-height:1.6;color:var(--gray)}
-@media(min-width:769px){.abc-titulo{font-size:clamp(40px,4.6vw,64px)}.cards{grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:52px}.card{padding:32px 28px}.card h3{font-size:19px}}
+/* card com foto vertical: imagem de sangria total e texto no pé, sobre degradê azul-marinho só onde o texto está */
+.card{position:relative;overflow:hidden;border-radius:18px;aspect-ratio:4/5;background:var(--azul);box-shadow:0 2px 16px rgba(0,0,0,.08);transition:transform .3s ease,box-shadow .3s ease;isolation:isolate}
+.card-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:-2;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,24,58,.92) 0%,rgba(0,24,58,.80) 26%,rgba(0,24,58,.42) 48%,rgba(0,24,58,0) 66%)}
+.card-texto{position:absolute;left:0;right:0;bottom:0;padding:24px 22px 24px}
+.card h3{font-size:21px;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.01em;margin-bottom:8px;text-wrap:balance;text-shadow:0 1px 2px rgba(0,0,0,.18)}
+.card p{font-size:15px;line-height:1.55;color:rgba(255,255,255,.88);max-width:34ch}
+@media(hover:hover){.card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,.16)}.card:hover .card-foto{transform:scale(1.04)}}
+@media(min-width:481px) and (max-width:768px){.card{aspect-ratio:3/2}.card-texto{padding:28px 28px}}
+@media(min-width:769px){.abc-titulo{font-size:clamp(40px,4.6vw,64px)}.cards{grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:52px}.card{aspect-ratio:3/4}.card-texto{padding:28px 26px 30px}.card h3{font-size:clamp(20px,1.8vw,23px)}}
 
 /* ── 3 · Rota: mapa que se desenha com a rolagem + cards que se empilham ── */
 .rota{background:#fff;padding-bottom:40px}
@@ -211,13 +222,14 @@ nav.open+.nav-menu{display:flex}
 .passo{position:relative;padding:46px 0 0 34px}
 .passo-num{font-size:150px;font-weight:700;line-height:.8;color:#e9eaec;letter-spacing:-.04em;position:absolute;left:-6px;top:0;pointer-events:none;user-select:none}
 .passo h3{position:relative;font-size:30px;font-weight:700;color:#2b5f86;line-height:1.12;letter-spacing:-.01em;margin:0 0 16px}
+.passo-quebra{display:none}
 .passo p{position:relative;font-size:17px;line-height:1.45;color:#4b5563;max-width:30ch}
 /* Entrada em sequência (1, 2, 3): 300 ms, curva de saída do site, 80 ms entre os conjuntos. Só com JS. */
 html.js .passo{opacity:0;transform:translateY(14px);transition:opacity .3s cubic-bezier(.23,1,.32,1),transform .3s cubic-bezier(.23,1,.32,1)}
 html.js .passo:nth-child(2){transition-delay:.08s}
 html.js .passo:nth-child(3){transition-delay:.16s}
 html.js .passos.on .passo{opacity:1;transform:none}
-@media(min-width:769px){.passos-grade{grid-template-columns:1fr 1fr 1fr;gap:48px;margin-top:24px}.passo{padding:62px 0 0 44px}.passo-num{font-size:220px;left:-8px}.passo h3{font-size:clamp(30px,2.9vw,42px)}.passo p{font-size:clamp(17px,1.4vw,20px)}}
+@media(min-width:769px){.passo-quebra{display:block}.passos-grade{grid-template-columns:1fr 1fr 1fr;gap:48px;margin-top:24px}.passo{padding:62px 0 0 44px}.passo-num{font-size:220px;left:-8px}.passo h3{font-size:clamp(30px,2.9vw,42px)}.passo p{font-size:clamp(17px,1.4vw,20px)}}
 @media(min-width:1100px){.passos-grade{gap:64px}.passo{padding:70px 0 0 52px}.passo-num{font-size:250px}}
 @media(prefers-reduced-motion:reduce){html.js .passo{transform:none;transition:opacity .2s ease}}
 
@@ -300,11 +312,11 @@ html.js .passos.on .passo{opacity:1;transform:none}
 /* contraste só onde o texto fica: no desktop à esquerda, no celular em cima; o resto da cena fica limpo */
 .panama-banner::before{content:none}
 .panama-banner-texto{position:relative;z-index:2;width:100%;max-width:1140px;margin:0 auto;padding:40px 20px 28px}
-.panama-banner .rotulo{color:var(--amarelo)}
 .panama-banner .titulo{color:#fff;font-size:clamp(32px,7.4vw,56px);max-width:560px;margin-bottom:12px;text-shadow:0 2px 24px rgba(5,14,26,.35)}
 .panama-banner .texto{color:rgba(255,255,255,.9);font-size:clamp(16px,1.5vw,21px);max-width:440px;text-shadow:0 1px 16px rgba(5,14,26,.4)}
 .panama-corpo{background:var(--azul);padding:56px 20px 64px}
 .panama-grade{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+.panama-copy strong{font-weight:600;color:#fff}
 .panama-copy p{font-size:17px;line-height:1.65;color:rgba(255,255,255,.86);max-width:560px}
 .panama-copy p+p{margin-top:16px}
 .panama-copy h3{font-size:clamp(26px,2.75vw,37px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
@@ -426,7 +438,7 @@ footer{background:#0a1628;padding:24px 20px;display:flex;flex-direction:column;a
 html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.23,1,.32,1),transform .6s cubic-bezier(.23,1,.32,1)}
 html.js .rv.on{opacity:1;transform:none}
 .rv-2{transition-delay:.08s}.rv-3{transition-delay:.16s}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.js .rv{opacity:1;transform:none;transition:none}.btn,.card,.faq-item summary::after{transition:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}html.js .rv{opacity:1;transform:none;transition:none}.btn,.card,.card-foto,.faq-item summary::after{transition:none}}
 </style>
 </head>
 <body>
@@ -456,17 +468,17 @@ html.js .rv.on{opacity:1;transform:none}
 <main>
 
 <!-- ══ 1 · Hero ═══════════════════════════════════════════════════════ -->
-<header class="hero" id="topo">
+<header class="hero hero--espelho" id="topo">
     <div class="hero-fundo" aria-hidden="true">
-        <video class="is-on" muted playsinline autoplay preload="auto" poster="../videos/caribe-sem-visto/hero-aruba-aerea.jpg" src="../videos/caribe-sem-visto/hero-aruba-aerea.mp4"></video>
-        <video muted playsinline preload="metadata" poster="../videos/caribe-sem-visto/hero-aruba-eagle.jpg" src="../videos/caribe-sem-visto/hero-aruba-eagle.mp4"></video>
+        <!-- um clipe só (navio, 8 s), em dois elementos: o script faz a fusão de um para o outro no fim, e o loop não pula -->
+        <video class="is-on" muted playsinline autoplay preload="auto" poster="../videos/caribe-sem-visto/hero-navio.jpg" src="../videos/caribe-sem-visto/hero-navio.mp4"></video>
+        <video muted playsinline preload="metadata" poster="../videos/caribe-sem-visto/hero-navio.jpg" src="../videos/caribe-sem-visto/hero-navio.mp4"></video>
     </div>
     <div class="hero-conteudo">
         <h1>Caribe<br><em>sem visto</em></h1>
         <p class="hero-texto">Siga pelo mar até as Antilhas e descubra ilhas que parecem feitas para surpreender. Cada parada, uma paisagem. Cada dia, um novo motivo para querer ficar.</p>
         <div class="hero-botoes">
             <a href="#ilhas" class="btn btn-teal">Explorar a viagem <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a href="#contato" class="btn btn-glass">Quero conversar</a>
         </div>
     </div>
 </header>
@@ -478,19 +490,25 @@ html.js .rv.on{opacity:1;transform:none}
         <h2 class="abc-titulo rv" id="t2">O ABC do Caribe<span>de um jeito mais simples</span></h2>
         <div class="cards">
             <article class="card rv">
-                <div class="card-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M12 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5 12H3a9 9 0 0 0 18 0h-2M8 9h8"/></svg></div>
-                <h3>Embarque pela América Latina</h3>
-                <p>Há saídas de Colón ou Cartagena para descobrir o sul do Caribe com o mar como parte da viagem.</p>
+                <img class="card-foto" src="../img/caribe-sem-visto/abc-panama-cidade.jpg" alt="Torre espiralada da Cidade do Panamá vista entre folhas de palmeira" loading="lazy" style="object-position:78% 30%">
+                <div class="card-texto">
+                    <h3>Embarque pela América Latina</h3>
+                    <p>Há saídas de Colón ou Cartagena para descobrir o sul do Caribe com o mar como parte da viagem.</p>
+                </div>
             </article>
             <article class="card rv rv-2">
-                <div class="card-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0M12 3v6M8 9h8l-1 4H9z"/></svg></div>
-                <h3>Uma ilha nunca é igual à outra</h3>
-                <p>Aruba, Bonaire e Curaçao mostram que o Caribe tem mais de uma cor, mais de um ritmo e muito mais para descobrir.</p>
+                <img class="card-foto" src="../img/caribe-sem-visto/abc-aruba.jpg" alt="Praia de Aruba vista do alto, com hotéis, coqueiros e mar turquesa" loading="lazy" style="object-position:50% 50%">
+                <div class="card-texto">
+                    <h3>Uma ilha nunca é igual à outra</h3>
+                    <p>Aruba, Bonaire e Curaçao mostram que o Caribe tem mais de uma cor, mais de um ritmo e muito mais para descobrir.</p>
+                </div>
             </article>
             <article class="card rv rv-3">
-                <div class="card-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div>
-                <h3>Escolha com quem entende de cruzeiros</h3>
-                <p>A gente explica o roteiro, orienta sobre a documentação e ajuda você a decidir com clareza.</p>
+                <img class="card-foto" src="../img/caribe-sem-visto/abc-varanda.jpg" alt="Mulher na varanda de um navio olhando o pôr do sol sobre o mar" loading="lazy" style="object-position:80% 50%">
+                <div class="card-texto">
+                    <h3>Escolha com quem entende de cruzeiros</h3>
+                    <p>A gente explica o roteiro, orienta sobre a documentação e ajuda você a decidir com clareza.</p>
+                </div>
             </article>
         </div>
     </div>
@@ -599,17 +617,6 @@ html.js .rv.on{opacity:1;transform:none}
   </div>
 </section>
 
-<!-- ══ 4 · Três passos ════════════════════════════════════════════════ -->
-<section class="secao passos" id="passos" aria-label="Três passos para a sua viagem">
-    <div class="miolo centro">
-        <div class="passos-grade" style="text-align:left">
-            <div class="passo"><span class="passo-num" aria-hidden="true">1</span><h3>Escolha do<br>roteiro ideal</h3><p>Analisamos seu perfil para recomendar a melhor data e cabine no navio perfeito para você.</p></div>
-            <div class="passo"><span class="passo-num" aria-hidden="true">2</span><h3>Orientação<br>documental</h3><p>Checklist completo de tudo que você precisa levar, do passaporte às vacinas.</p></div>
-            <div class="passo"><span class="passo-num" aria-hidden="true">3</span><h3>Planejamento<br>da viagem</h3><p>Dicas de passeios, moeda e logística local para você aproveitar cada segundo no Caribe.</p></div>
-        </div>
-    </div>
-</section>
-
 <!-- ══ 5 · Royal Caribbean: experiência a bordo ═══════════════════════ -->
 <section class="royal-intro" id="a-bordo" aria-labelledby="royal-title">
     <div class="royal-shell royal-intro-grid">
@@ -685,7 +692,6 @@ html.js .rv.on{opacity:1;transform:none}
     <div class="panama-banner">
         <video class="panama-video" id="panama-video" muted loop playsinline preload="metadata" poster="../videos/caribe-sem-visto/panama-banner.jpg" src="../videos/caribe-sem-visto/panama-banner.mp4" aria-hidden="true"></video>
         <div class="panama-banner-texto">
-            <span class="rotulo rv">Panamá</span>
             <h2 class="titulo rv" id="t5">Panamá, o começo<br>de uma viagem maior</h2>
             <p class="texto rv rv-2">Antes das Antilhas, um destino para descobrir.</p>
         </div>
@@ -694,8 +700,8 @@ html.js .rv.on{opacity:1;transform:none}
         <div class="miolo panama-grade">
             <div class="panama-copy rv">
                 <h3>Stopover no Panamá,<br>a viagem antes da viagem</h3>
-                <p>Voos de cidades brasileiras chegam à Cidade do Panamá. Na costa caribenha do país, Colón abre o caminho marítimo para as Antilhas. É uma rota que faz sentido para o embarque e também revela um lugar que merece tempo na viagem.</p>
-                <p>Para quem quiser chegar antes ou ficar depois do cruzeiro, o Panamá oferece muito a descobrir: ver o Canal em funcionamento, caminhar pelas ruas do Casco Antiguo e conhecer os sabores de uma capital onde muitas culturas se encontram. A viagem pode começar com uma história panamenha antes mesmo da primeira ilha.</p>
+                <p>Voos de cidades brasileiras chegam à <strong>Cidade do Panamá</strong>. Na costa caribenha do país, <strong>Colón abre o caminho marítimo para as Antilhas</strong>. É uma rota que faz sentido para o embarque e também revela <strong>um lugar que merece tempo na viagem</strong>.</p>
+                <p>Para quem quiser <strong>chegar antes ou ficar depois do cruzeiro</strong>, o Panamá oferece muito a descobrir: ver o <strong>Canal</strong> em funcionamento, caminhar pelas ruas do <strong>Casco Antiguo</strong> e conhecer os sabores de uma capital onde muitas culturas se encontram. A viagem pode começar com uma história panamenha antes mesmo da primeira ilha.</p>
             </div>
             <div class="panama-fotos rv rv-2">
                 <figure class="panama-foto grande"><img src="../img/caribe-sem-visto/panama-cidade.jpg" alt="Vista aérea da Cidade do Panamá, com os prédios altos da orla e a baía ao fundo" loading="lazy"><figcaption>Cidade do Panamá</figcaption></figure>
@@ -732,7 +738,7 @@ html.js .rv.on{opacity:1;transform:none}
 <section class="secao confianca" id="cruzeirista" aria-labelledby="t7">
     <div class="miolo confianca-grade">
         <figure class="confianca-foto rv">
-            <img src="../img/caribe-sem-visto/atendimento.jpg" alt="Mulher sorrindo ao telefone em um escritório, em atendimento" loading="lazy">
+            <img src="../img/caribe-sem-visto/atendimento-mapa.jpg" alt="Mulher sorrindo ao telefone numa mesa de trabalho, com um mapa-múndi na parede" loading="lazy" style="object-position:50% 86%">
             <figcaption class="confianca-selo"><strong>Fale com um</strong><span>Especialista Cruzeirista</span></figcaption>
         </figure>
         <div>
@@ -742,6 +748,17 @@ html.js .rv.on{opacity:1;transform:none}
                 <li>Saídas, roteiros e cabines explicados com clareza</li>
                 <li>Orientação sobre documentação e embarque</li>
             </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ══ 7b · Três passos (depois do atendimento, antes do formulário) ══ -->
+<section class="secao passos" id="passos" aria-label="Três passos para a sua viagem">
+    <div class="miolo centro">
+        <div class="passos-grade" style="text-align:left">
+            <div class="passo"><span class="passo-num" aria-hidden="true">1</span><h3>Escolha <span class="passo-quebra"></span>da saída<br>e da cabine</h3><p>Analisamos seu perfil para encontrar a melhor data e cabine para você viver este Caribe do seu jeito.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">2</span><h3>Orientação<br>documental</h3><p>Checklist completo de tudo que você precisa levar, do passaporte às vacinas.</p></div>
+            <div class="passo"><span class="passo-num" aria-hidden="true">3</span><h3>Planejamento<br>da viagem</h3><p>Dicas de passeios, moeda e logística local para você aproveitar cada segundo no Caribe.</p></div>
         </div>
     </div>
 </section>
@@ -841,6 +858,42 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', fechar));
 })();
 
+/* Hero: enquadramento do vídeo do navio para ele ficar fora do texto: à direita no desktop, acima no celular.
+   No celular o vídeo é uma faixa no alto e o texto fica abaixo dela (CSS), então lá só centra o navio na faixa.
+   NAVIO = caixa do navio no quadro, medida no primeiro e no último frame, da popa à proa e do mastro à linha d'água
+   (x 36,8 a 62,3%, y 43 a 56,7%).
+   Amplia só o mínimo necessário além do cover; sem JS fica o cover centrado do CSS. */
+(function () {
+    const hero = document.querySelector('.hero'); if (!hero) return;
+    const fundo = hero.querySelector('.hero-fundo'), vs = [...fundo.querySelectorAll('video')], txt = [...hero.querySelectorAll('.hero-conteudo > *')];
+    const ESP = hero.classList.contains('hero--espelho'); /* vídeo espelhado: a caixa do navio espelha junto */
+    const AR = 1948 / 1064, NX0 = ESP ? 1 - .623 : .368, NX1 = ESP ? 1 - .368 : .623, NY0 = .43, NY1 = .567, FOLGA = 48, TOPO = 72, ZMAX = 1.35;
+    /* caixas das linhas de texto e dos botões (a caixa do h1 ocupa a coluna inteira e não serve de medida) */
+    const linhas = () => txt.flatMap(e => { if (e.matches('.hero-botoes')) return [...e.children].map(c => c.getBoundingClientRect()); const r = document.createRange(); r.selectNodeContents(e); return [...r.getClientRects()]; });
+    function encaixar() {
+        const h = hero.getBoundingClientRect(), W = h.width, H = h.height; if (!W || !H || !txt.length) return;
+        const r = linhas();
+        const dir = Math.max(...r.map(b => b.right)) - h.left;
+        let w, x, y;
+        if (W >= 769) {
+            /* navio à direita do texto: amplia o necessário, no máximo 35% além do cover (Lippe: "um pouco"),
+               com o quadro ancorado à esquerda, e nunca deixa o navio passar da borda direita */
+            const cover = Math.max(W, H * AR);
+            w = Math.max(cover, Math.min((dir + FOLGA) / NX0, cover * ZMAX, (W - 24) / NX1));
+            x = Math.min(0, W - 24 - NX1 * w); y = (H - w / AR) / 2;
+        } else {
+            /* faixa no alto (altura da .hero-fundo): navio inteiro com ~72% da largura, centrado na parte visível abaixo do menu */
+            const B = fundo.getBoundingClientRect().height;
+            w = Math.max(W, B * AR, .72 * W / (NX1 - NX0)); const hv = w / AR;
+            x = W / 2 - (NX0 + NX1) / 2 * w;
+            y = Math.min(0, Math.max(B - hv, (TOPO + B) / 2 + 10 - (NY0 + NY1) / 2 * hv));
+        }
+        vs.forEach(v => { Object.assign(v.style, { width: w + 'px', height: w / AR + 'px', left: x + 'px', top: y + 'px', right: 'auto', bottom: 'auto' }); });
+    }
+    addEventListener('resize', encaixar); encaixar();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(encaixar);
+})();
+
 /* Hero: um clipe por vez, em sequência com fusão de 1,1 s; o seguinte só baixa inteiro quando o anterior começa a tocar.
    Toca só com o hero na tela, retoma ao voltar à aba e um vigia religa se o navegador pausar. Com movimento reduzido
    ou um clipe só, o primeiro fica em loop. (Reescrito em 18/09: o script da sequência não estava no arquivo e o hero
@@ -922,10 +975,11 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
         const q = trilho.getPointAtLength(pos); navio.setAttribute('transform', 'translate(' + q.x.toFixed(1) + ' ' + q.y.toFixed(1) + ')');
         const idx = f >= .97 ? kk + 1 : kk, chegou = v >= .97;
         paradas.forEach((g, j) => { g.classList.toggle('feita', chegou ? j > 0 : j < idx); g.classList.toggle('ativa', chegou ? j === 0 : j === idx); });
-        /* leitura de bordo: rumo de chegada (olha só para trás na linha), nome e coordenadas da parada ativa */
+        /* leitura de bordo: rumo de chegada (olha só para trás na linha), nome e coordenadas da parada ativa.
+           Na volta o navio e o mapa retornam a Colón, mas a leitura fica em Curaçao, com o rumo de chegada (Lippe, 23/09). */
         const a = trilho.getPointAtLength(Math.max(0, pos - 5)), dx = q.x - a.x, dy = q.y - a.y;
-        if (Math.abs(dx) + Math.abs(dy) > .01) rumo = (Math.atan2(dx, -dy) * 180 / Math.PI + 360) % 360;
-        const bIdx = chegou ? 0 : idx;
+        if (v === 0 && Math.abs(dx) + Math.abs(dy) > .01) rumo = (Math.atan2(dx, -dy) * 180 / Math.PI + 360) % 360;
+        const bIdx = idx;
         if (bIdx !== bordoIdx) { bordoIdx = bIdx; if (bordoNome) { bordoNome.textContent = NOMES[bIdx]; bordoNome.classList.remove('troca'); void bordoNome.offsetWidth; bordoNome.classList.add('troca'); } if (bordoCoord) bordoCoord.textContent = COORDS[bIdx]; }
         if (bordoRumo) bordoRumo.textContent = 'rumo ' + String(Math.round(rumo)).padStart(3, '0') + '°';
         if (rosaCarta) rosaCarta.setAttribute('transform', 'rotate(' + (-rumo).toFixed(1) + ' 60 60)');

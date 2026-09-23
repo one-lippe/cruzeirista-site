@@ -12,7 +12,7 @@ panama-canal.jpg: Foto por Alex Pagliuca (https://unsplash.com/@alexanthony) no 
 panama-skyline.jpg: Foto por Armands Brants (https://unsplash.com/@armandsbrants) no Unsplash. https://unsplash.com/photos/a-large-body-of-water-with-a-city-in-the-background-Ejf16T81DpI
 navio-alto.jpg: Foto por Shai Pal (https://unsplash.com/@shaipal) no Unsplash. https://unsplash.com/photos/calendar-K_7Jy5PjaQc
 hero-navio.jpg / hero-navio-m.jpg / navio-mar.jpg (mesma foto, espelhada no hero): Foto por Marc Fanelli-Isla (https://unsplash.com/@marcfanelliisla) no Unsplash. https://unsplash.com/photos/a-cruise-ship-in-the-middle-of-the-ocean-GGH3oVUj8cM
-atendimento.jpg: Foto por Vitaly Gariev (https://unsplash.com/@silverkblack) no Unsplash. https://unsplash.com/photos/a-woman-sitting-at-a-desk-talking-on-a-cell-phone-Svtm7NvhWrY
+atendimento-mapa.jpg (desde 23/09/2026 no lugar de atendimento.jpg, que saiu da pasta; nome novo para o navegador não servir a foto antiga do cache), indicada por Lippe: 14_LANDING_CARIBE_SEM_VISTO/ASSETS/i-can-help-you-book-your-flight-beautiful-sales-representative-travel-agency-taking-call-from-client-giving-information-about-package-tour-vacation.jpg (3540×5310), versão web 1200×1800 JPEG 80. Procedência e licença não registradas aqui. Imagem ilustrativa; não retrata a equipe do Cruzeirista. Até 23/09 a seção usava atendimento.jpg, foto Unsplash de Vitaly Gariev (https://unsplash.com/photos/a-woman-sitting-at-a-desk-talking-on-a-cell-phone-Svtm7NvhWrY), que continua no histórico do git.
 
 Bloco 02 (18/09/2026):
 copa-tocumen.jpg: HP-9925CMP Copa Airlines Boeing 737 MAX 9 at Tocumen International Airport, fotografia de Wilfredor, CC0 (domínio público), Wikimedia Commons. https://commons.wikimedia.org/wiki/File:HP-9925CMP_Copa_Airlines_Boeing_737_MAX_9_at_Tocumen_International_Airport_01.jpg (original 8256×5504, reduzida para 1600 de largura).
@@ -24,3 +24,8 @@ royal/*: cópias para web do acervo organizado em 14_LANDING_CARIBE_SEM_VISTO/M�
 royal/grandeur-perfil.webp: Royal Caribbean Incentives, https://www.royalcaribbeanincentives.com/content/uploads/grandeur-of-the-seas-sailing.webp.
 royal/restaurante-principal.jpg: versão web em JPEG, 1920 px e qualidade 92, produzida a partir do upscale feito por Lippe (GRANDEUR_GASTRONOMIA_RESTAURANTE-PRINCIPAL_upscayl_3x_high-fidelity-4x.png).
 royal/royal-caribbean.svg: marca oficial da Royal Caribbean, copiada de 14_LANDING_CARIBE_SEM_VISTO/ASSETS/LOGOS/, sem alteração visual.
+
+ABC do Caribe com fotos (23/09/2026), versões web (1000 px de largura, JPEG 80) de 14_LANDING_CARIBE_SEM_VISTO/ASSETS/ABC_CARIBE_PREVIA_2026-09-23/:
+abc-panama-cidade.jpg: Foto da F&F Tower na Cidade do Panamá por Juan Domenech (https://unsplash.com/@ja_domenech) no Unsplash. https://unsplash.com/photos/rDcj3QStC8o. A imagem não mostra Colón nem o porto de embarque.
+abc-aruba.jpg (card do meio, desde 23/09 à tarde; substituiu abc-ilhas.jpg, a foto Unsplash de Satyawan Narinedhat, que saiu da página): versão web (1800 px de largura, JPEG 80) de 14_LANDING_CARIBE_SEM_VISTO/MÍDIAS/ARUBA/tropical-beachfront-resort-on-an-island-paradise-2026-09-23-02-14-46-utc.jpg, indicada por Lippe. Mesmo acervo dos vídeos de Aruba; a licença do arquivo não está registrada aqui.
+abc-varanda.jpg (terceiro card, desde 23/09 à tarde; substituiu abc-conversa.jpg, a foto Unsplash de Nahima Aparicio, que saiu da página): 14_LANDING_CARIBE_SEM_VISTO/ASSETS/varandanavio.png (1254×1254) em JPEG 82, indicada por Lippe. Procedência e licença não registradas aqui.
