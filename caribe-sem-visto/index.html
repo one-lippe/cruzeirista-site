@@ -1154,8 +1154,8 @@ window.addEventListener('scroll', () => { document.getElementById('nav')?.classL
 })();
 
 /* Formulário: mesmo mecanismo do cotacao.php da home (POST com FormData, resposta JSON).
-   Campos do rascunho (nome, WhatsApp, e-mail, previsão); "cidade" saiu em 18/09. O cotacao.php atual ainda exige
-   cidade: ajustar o PHP na etapa de publicação. categoria=caribe rotula o pedido como "Caribe sem visto" no e-mail. */
+   Campos do rascunho (nome, WhatsApp, e-mail, previsão); "cidade" saiu em 18/09 e o cotacao.php
+   não a exige quando categoria=caribe (ajuste feito na publicação, 23/09). categoria=caribe rotula o pedido como "Caribe sem visto" no e-mail. */
 (function () {
     const form   = document.getElementById('form-caribe');
     const botao  = document.getElementById('btn-enviar');

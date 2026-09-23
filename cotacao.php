@@ -27,7 +27,8 @@ $whatsapp    = limpa($_POST['whatsapp']    ?? '');
 $email       = trim($_POST['email']        ?? '');
 $cidade      = limpa($_POST['cidade']      ?? '');
 
-if ($nome === '' || $whatsapp === '' || $cidade === '') {
+// 23/09/2026: a landing Caribe sem visto (categoria=caribe) não pede cidade; na home ela continua obrigatória.
+if ($nome === '' || $whatsapp === '' || ($cidade === '' && $categoria !== 'caribe')) {
     http_response_code(422); echo json_encode(['ok' => false, 'error' => 'campos_obrigatorios']); exit;
 }
 if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) { $email = ''; }
@@ -53,7 +54,7 @@ $corpo  = "Novo pedido de cotação recebido pelo site do Cruzeirista:\n\n";
 $corpo .= "Nome...........: " . $nome . "\n";
 $corpo .= "WhatsApp.......: " . $whatsapp . "\n";
 $corpo .= "E-mail.........: " . $ou($email) . "\n";
-$corpo .= "Cidade.........: " . $cidade . "\n\n";
+$corpo .= "Cidade.........: " . $ou($cidade) . "\n\n";
 $corpo .= "Tipo de cruzeiro: " . $rot($categoria) . "\n";
 $corpo .= "Quando.........: " . $ou($periodo) . "\n";
 $corpo .= "Pessoas........: " . $ou($pessoas) . "\n";
